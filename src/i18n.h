@@ -68,6 +68,8 @@
 #define _(String) (String)
 #define sgettext(msgid) \
   (strrchr ((msgid), '|') + 1)
+#define ngettext(msgid, msgid_plur, n) \
+  ((n) >= 2 ? (msgid_plur) : (msgid))
 #endif
 
 #define CCOLOR_BOLD             500
