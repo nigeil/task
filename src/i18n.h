@@ -58,8 +58,16 @@
 #ifdef HAVE_GETTEXT
 #include <libintl.h>
 #define _(String) gettext (String)
+#define sgettext(msgid) \
+  ({ const char *__msgid = (msgid);            \
+     char *__msgstr = gettext (__msgid);       \
+     if (__msgval == __msgid)                  \
+       __msgval = strrchr (__msgid, '|') + 1;  \
+     __msgval; })
 #else
 #define _(String) (String)
+#define sgettext(msgid) \
+  (strrchr ((msgid), '|') + 1)
 #endif
 
 #define CCOLOR_BOLD             500
