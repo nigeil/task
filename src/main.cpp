@@ -57,6 +57,12 @@ int main (int argc, const char** argv)
   srand (tv.tv_usec);
 #endif
 
+#ifdef HAVE_GETTEXT
+  setlocale (LC_ALL, "");
+  bindtextdomain (PACKAGE, TASK_LOCALEDIR);
+  textdomain (PACKAGE);
+#endif
+
   int status = 0;
 
   if (argc == 2 && !strcmp (argv[1], "--version"))

@@ -55,6 +55,13 @@
 #include <it-IT.h>
 #endif
 
+#ifdef HAVE_GETTEXT
+#include <libintl.h>
+#define _(String) gettext (String)
+#else
+#define _(String) (String)
+#endif
+
 #define CCOLOR_BOLD             500
 #define CCOLOR_UNDERLINE        501
 #define CCOLOR_ON               502
