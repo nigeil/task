@@ -196,7 +196,6 @@
 
 // commands/Cmd*
 #define STRING_CMD_CONFLICT          "informe personalizado '{1}' en conflicto con comando interno de taskwarrior."
-#define STRING_CMD_VERSION_USAGE     "Muestra el número de versión de taskwarrior"
 #define STRING_CMD_VERSION_USAGE2    "Muestra el número de versión (solamente) de taskwarrior"
 #define STRING_CMD_VERSION_MIT       "Taskwarrior solamente se puede copiar bajo los términos de la licencia MIT, que se pueden encontrar en el conjunto de código fuente de taskwarrior."
 

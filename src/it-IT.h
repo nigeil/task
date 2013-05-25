@@ -195,7 +195,6 @@
 
 // commands/Cmd*
 #define STRING_CMD_CONFLICT          "Report personalizzato '{1}' provoca conflitto con un comando standard."
-#define STRING_CMD_VERSION_USAGE     "Mostra il numero di versione di taskwarrior"
 #define STRING_CMD_VERSION_USAGE2    "Mostra solo il numero di versione di taskwarrior"
 #define STRING_CMD_VERSION_MIT       "Taskwarrior può essere copiato solo nei termini della licenza MIT, reperibile nei sorgenti di taskwarrior."
 #define STRING_CMD_VERSION_DOCS      "La documentazione di taskwarrior è consultabile con 'man task', 'man taskrc', 'man task-tutorial', 'man task-color', 'man task-sync', 'man task-faq' o presso http://taskwarrior.org"
