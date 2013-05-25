@@ -118,9 +118,9 @@ int main (int argc, const char** argv)
     std::cout << (context.color () ? bold.colorize (PACKAGE_STRING)
                                    : PACKAGE_STRING)
               << " shell\n\n"
-              << STRING_CMD_SHELL_HELP1 << '\n'
-              << STRING_CMD_SHELL_HELP2 << '\n'
-              << STRING_CMD_SHELL_HELP3 << "\n\n";
+              << _("Enter any task command (such as 'list'), or hit 'Enter'.") << '\n'
+              << _("There is no need to include the 'task' command itself.") << '\n'
+              << _("Enter 'quit' (or 'bye', 'exit') to end the session.") << "\n\n";
   }
 
   // Make a copy because context.clear will delete them.
@@ -197,7 +197,7 @@ int main (int argc, const char** argv)
 
     catch (...)
     {
-      std::cerr << STRING_UNKNOWN_ERROR << '\n';
+      std::cerr << _("Unknown error.") << '\n';
       return -2;
     }
   }
