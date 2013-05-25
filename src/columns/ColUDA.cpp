@@ -117,7 +117,7 @@ void ColumnUDA::measure (Task& task, unsigned int& minimum, unsigned int& maximu
     }
   }
   else
-    throw format (STRING_COLUMN_BAD_FORMAT, _name, _style);
+    throw format (_("Unrecognized column format '{1}.{2}'"), _name, _style);
 }
 
 ////////////////////////////////////////////////////////////////////////////////

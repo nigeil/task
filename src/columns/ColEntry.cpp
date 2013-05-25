@@ -32,7 +32,8 @@
 ColumnEntry::ColumnEntry ()
 {
   _name  = "entry";
-  _label = STRING_COLUMN_LABEL_ADDED;
+  // TRANSLATORS: Task added.
+  _label = _("Added");
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -54,8 +55,8 @@ void ColumnEntry::setStyle (const std::string& value)
   _style = value;
 
   if (_style == "age" &&
-      _label == STRING_COLUMN_LABEL_ADDED)
-    _label = STRING_COLUMN_LABEL_AGE;
+      _label == _("Added"))
+    _label = _("Age");
 }
 
 ////////////////////////////////////////////////////////////////////////////////

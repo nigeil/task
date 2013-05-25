@@ -32,7 +32,8 @@
 ColumnWait::ColumnWait ()
 {
   _name      = "wait";
-  _label     = STRING_COLUMN_LABEL_WAIT;
+  // TRANSLATORS: Column label.
+  _label     = _("Wait");
 }
 
 ////////////////////////////////////////////////////////////////////////////////

@@ -39,7 +39,7 @@ ColumnMask::ColumnMask ()
   _name       = "mask";
   _type       = "string";
   _style      = "default";
-  _label      = STRING_COLUMN_LABEL_MASK;
+  _label      = _("Mask");
   _modifiable = false;
 
   _styles.push_back ("default");
@@ -65,7 +65,7 @@ void ColumnMask::measure (Task& task, unsigned int& minimum, unsigned int& maxim
   minimum = maximum = task.get ("mask").length ();
 
   if (_style != "default")
-    throw format (STRING_COLUMN_BAD_FORMAT, _name, _style);
+    throw format (_("Unrecognized column format '{1}.{2}'"), _name, _style);
 }
 
 ////////////////////////////////////////////////////////////////////////////////

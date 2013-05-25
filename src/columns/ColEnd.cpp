@@ -32,7 +32,8 @@
 ColumnEnd::ColumnEnd ()
 {
   _name  = "end";
-  _label = STRING_COLUMN_LABEL_COMPLETE;
+  // TRANSLATORS: Task completed.
+  _label = _("Completed");
 }
 
 ////////////////////////////////////////////////////////////////////////////////

@@ -43,7 +43,8 @@ ColumnRecur::ColumnRecur ()
   _type  = "string";
 
   _style = "duration";
-  _label = STRING_COLUMN_LABEL_RECUR;
+  // TRANSLATORS: Short for "reccurence frequency"
+  _label = _("Recur");
 
   _styles.push_back ("duration");
   _styles.push_back ("indicator");
@@ -70,7 +71,7 @@ void ColumnRecur::setStyle (const std::string& value)
 {
   _style = value;
 
-  if (_style == "indicator" && _label == STRING_COLUMN_LABEL_RECUR)
+  if (_style == "indicator" && _label == _("Recur"))
     _label = _label.substr (0, context.config.get ("recurrence.indicator").length ());
 }
 
@@ -89,7 +90,7 @@ void ColumnRecur::measure (Task& task, unsigned int& minimum, unsigned int& maxi
       minimum = maximum = context.config.get ("recurrence.indicator").length ();
   }
   else
-    throw format (STRING_COLUMN_BAD_FORMAT, _name, _style);
+    throw format (_("Unrecognized column format '{1}.{2}'"), _name, _style);
 }
 
 ////////////////////////////////////////////////////////////////////////////////

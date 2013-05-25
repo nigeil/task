@@ -32,7 +32,8 @@
 ColumnModified::ColumnModified ()
 {
   _name  = "modified";
-  _label = STRING_COLUMN_LABEL_MOD;
+  // TRANSLATORS: Task modified.
+  _label = _("Modified");
 }
 
 ////////////////////////////////////////////////////////////////////////////////

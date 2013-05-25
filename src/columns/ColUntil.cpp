@@ -32,7 +32,7 @@
 ColumnUntil::ColumnUntil ()
 {
   _name      = "until";
-  _label     = STRING_COLUMN_LABEL_UNTIL;
+  _label     = _("Until");
 }
 
 ////////////////////////////////////////////////////////////////////////////////

@@ -39,7 +39,7 @@ ColumnIMask::ColumnIMask ()
   _name       = "imask";
   _type       = "number";
   _style      = "number";
-  _label      = STRING_COLUMN_LABEL_MASK_IDX;
+  _label      = _("Mask Index");
   _modifiable = false;
 
   _styles.push_back ("number");
@@ -66,7 +66,7 @@ void ColumnIMask::measure (Task& task, unsigned int& minimum, unsigned int& maxi
 
   if (_style != "default" &&
       _style != "number")
-    throw format (STRING_COLUMN_BAD_FORMAT, _name, _style);
+    throw format (_("Unrecognized column format '{1}.{2}'"), _name, _style);
 }
 
 ////////////////////////////////////////////////////////////////////////////////

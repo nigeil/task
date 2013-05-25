@@ -38,7 +38,7 @@ ColumnUrgency::ColumnUrgency ()
   _name  = "urgency";
   _type  = "number";
   _style = "real";
-  _label = STRING_COLUMN_LABEL_URGENCY;
+  _label = _("Urgency");
 
   _styles.push_back ("real");
   _styles.push_back ("integer");
@@ -67,7 +67,7 @@ void ColumnUrgency::measure (Task& task, unsigned int& minimum, unsigned int& ma
   }
 
   else
-    throw format (STRING_COLUMN_BAD_FORMAT, _name, _style);
+    throw format (_("Unrecognized column format '{1}.{2}'"), _name, _style);
 }
 
 ////////////////////////////////////////////////////////////////////////////////

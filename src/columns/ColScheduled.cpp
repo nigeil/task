@@ -39,7 +39,8 @@ extern Context context;
 ColumnScheduled::ColumnScheduled ()
 {
   _name      = "scheduled";
-  _label     = STRING_COLUMN_LABEL_SCHED;
+  // TRANSLATORS: Task scheduled.
+  _label     = _("Scheduled");
 
   _styles.push_back ("countdown");
 
@@ -66,8 +67,8 @@ void ColumnScheduled::setStyle (const std::string& value)
 {
   _style = value;
 
-  if (_style == "countdown" && _label == STRING_COLUMN_LABEL_DUE)
-    _label = STRING_COLUMN_LABEL_COUNT;
+  if (_style == "countdown" && _label == _("Due"))
+    _label = _("Count");
 }
 
 ////////////////////////////////////////////////////////////////////////////////

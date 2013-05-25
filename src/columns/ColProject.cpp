@@ -40,15 +40,18 @@ ColumnProject::ColumnProject ()
   _name  = "project";
   _type  = "string";
   _style = "full";
-  _label = STRING_COLUMN_LABEL_PROJECT;
+  _label = _("Project");
 
   _styles.push_back ("full");
   _styles.push_back ("parent");
   _styles.push_back ("indented");
 
-  _examples.push_back (STRING_COLUMN_EXAMPLES_PROJ);
-  _examples.push_back (STRING_COLUMN_EXAMPLES_PAR);
-  _examples.push_back (STRING_COLUMN_EXAMPLES_IND);
+  // TRANSLATORS: Sample project.
+  _examples.push_back (_("home.garden"));
+  // TRANSLATORS: Sample parent project.
+  _examples.push_back (_("home"));
+  // TRANSLATORS: Sample indented project.
+  _examples.push_back (_("  home.garden"));
 
   _hyphenate = context.config.getBoolean ("hyphenate");
 }
@@ -83,7 +86,7 @@ void ColumnProject::measure (Task& task, unsigned int& minimum, unsigned int& ma
   else if (_style != "default"  &&
            _style != "full"     &&
            _style != "indented")
-    throw format (STRING_COLUMN_BAD_FORMAT, _name, _style);
+    throw format (_("Unrecognized column format '{1}.{2}'"), _name, _style);
 
   minimum = longestWord (project);
   maximum = utf8_width (project);

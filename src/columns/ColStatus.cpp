@@ -39,13 +39,13 @@ ColumnStatus::ColumnStatus ()
   _name  = "status";
   _type  = "string";
   _style = "long";
-  _label = STRING_COLUMN_LABEL_STATUS;
+  _label = _("Status");
 
   _styles.push_back ("long");
   _styles.push_back ("short");
 
-  _examples.push_back (STRING_COLUMN_LABEL_STAT_PE);
-  _examples.push_back (STRING_COLUMN_LABEL_STAT_P);
+  _examples.push_back (_("Pending"));
+  _examples.push_back (_("P"));
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -66,8 +66,9 @@ void ColumnStatus::setStyle (const std::string& value)
 {
   _style = value;
 
-  if (_style == "short" && _label == STRING_COLUMN_LABEL_STATUS)
-    _label = STRING_COLUMN_LABEL_STAT;
+  if (_style == "short" && _label == _("Status"))
+    // TRANSLATORS: Short for "status".
+    _label = _("St");
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -80,20 +81,24 @@ void ColumnStatus::measure (Task& task, unsigned int& minimum, unsigned int& max
       _style == "long")
   {
     if (status == Task::pending)
-      minimum = maximum = utf8_width (STRING_COLUMN_LABEL_STAT_PE);
+      // TRANSLATORS: Task pending.
+      minimum = maximum = utf8_width (_("Pending"));
     else if (status == Task::deleted)
-      minimum = maximum = utf8_width (STRING_COLUMN_LABEL_STAT_DE);
+      // TRANSLATORS: Task deleted.
+      minimum = maximum = utf8_width (_("Deleted"));
     else if (status == Task::waiting)
-      minimum = maximum = utf8_width (STRING_COLUMN_LABEL_STAT_WA);
+      // TRANSLATORS: Task waiting.
+      minimum = maximum = utf8_width (_("Waiting"));
     else if (status == Task::completed)
-      minimum = maximum = utf8_width (STRING_COLUMN_LABEL_STAT_CO);
+      minimum = maximum = utf8_width (_("Completed"));
     else if (status == Task::recurring)
-      minimum = maximum = utf8_width (STRING_COLUMN_LABEL_STAT_RE);
+      // TRANSLATORS: Task recurring.
+      minimum = maximum = utf8_width (_("Recurring"));
   }
   else if (_style == "short")
     minimum = maximum = 1;
   else
-    throw format (STRING_COLUMN_BAD_FORMAT, _name, _style);
+    throw format (_("Unrecognized column format '{1}.{2}'"), _name, _style);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -109,20 +114,20 @@ void ColumnStatus::render (
   if (_style == "default" ||
       _style == "long")
   {
-         if (status == Task::pending)   value = STRING_COLUMN_LABEL_STAT_PE;
-    else if (status == Task::completed) value = STRING_COLUMN_LABEL_STAT_CO;
-    else if (status == Task::deleted)   value = STRING_COLUMN_LABEL_STAT_DE;
-    else if (status == Task::waiting)   value = STRING_COLUMN_LABEL_STAT_WA;
-    else if (status == Task::recurring) value = STRING_COLUMN_LABEL_STAT_RE;
+         if (status == Task::pending)   value = _("Pending");
+    else if (status == Task::completed) value = _("Completed");
+    else if (status == Task::deleted)   value = _("Deleted");
+    else if (status == Task::waiting)   value = _("Waiting");
+    else if (status == Task::recurring) value = _("Recurring");
   }
 
   else if (_style == "short")
   {
-         if (status == Task::pending)   value = STRING_COLUMN_LABEL_STAT_P;
-    else if (status == Task::completed) value = STRING_COLUMN_LABEL_STAT_C;
-    else if (status == Task::deleted)   value = STRING_COLUMN_LABEL_STAT_D;
-    else if (status == Task::waiting)   value = STRING_COLUMN_LABEL_STAT_W;
-    else if (status == Task::recurring) value = STRING_COLUMN_LABEL_STAT_R;
+         if (status == Task::pending)   value = /* TRANSLATORS: Task pending.   */ _("P");
+    else if (status == Task::completed) value = /* TRANSLATORS: Task completed. */ _("C");
+    else if (status == Task::deleted)   value = /* TRANSLATORS: Task deleted.   */ _("D");
+    else if (status == Task::waiting)   value = /* TRANSLATORS: Task waiting.   */ _("W");
+    else if (status == Task::recurring) value = /* TRANSLATORS: Task recurring. */ _("R");
   }
 
   lines.push_back (color.colorize (leftJustify (value, width)));

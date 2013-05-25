@@ -42,7 +42,7 @@ ColumnDescription::ColumnDescription ()
   _name  = "description";
   _type  = "string";
   _style = "combined";
-  _label = STRING_COLUMN_LABEL_DESC;
+  _label = _("Description");
 
   _styles.push_back ("combined");
   _styles.push_back ("desc");
@@ -55,11 +55,16 @@ ColumnDescription::ColumnDescription ()
     _dateformat = context.config.get ("dateformat");
 
   std::string t  = Date ().toString (_dateformat);
-  std::string d  = STRING_COLUMN_EXAMPLES_DESC;
-  std::string a1 = STRING_COLUMN_EXAMPLES_ANNO1;
-  std::string a2 = STRING_COLUMN_EXAMPLES_ANNO2;
-  std::string a3 = STRING_COLUMN_EXAMPLES_ANNO3;
-  std::string a4 = STRING_COLUMN_EXAMPLES_ANNO4;
+  // TRANSLATORS: Sample description.
+  std::string d  = _("Move your clothes down on to the lower peg");
+  // TRANSLATORS: Sample annotation #1.
+  std::string a1 = _("Immediately before your lunch");
+  // TRANSLATORS: Sample annotation #2.
+  std::string a2 = _("If you are playing in the match this afternoon");
+  // TRANSLATORS: Sample annotation #3.
+  std::string a3 = _("Before you write your letter home");
+  // TRANSLATORS: Sample annotation #4.
+  std::string a4 = _("If you're not getting your hair cut");
 
   _examples.push_back (d
                        + "\n  " + t + " " + a1
@@ -164,7 +169,7 @@ void ColumnDescription::measure (Task& task, unsigned int& minimum, unsigned int
   }
 
   else
-    throw format (STRING_COLUMN_BAD_FORMAT, _name, _style);
+    throw format (_("Unrecognized column format '{1}.{2}'"), _name, _style);
 }
 
 ////////////////////////////////////////////////////////////////////////////////

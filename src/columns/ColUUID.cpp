@@ -39,7 +39,7 @@ ColumnUUID::ColumnUUID ()
   _name       = "uuid";
   _type       = "string";
   _style      = "long";
-  _label      = STRING_COLUMN_LABEL_UUID;
+  _label      = _("UUID");
   _modifiable = false;
 
   _styles.push_back ("long");
@@ -67,7 +67,7 @@ void ColumnUUID::measure (Task&, unsigned int& minimum, unsigned int& maximum)
        if (_style == "default" || _style == "long") minimum = maximum = 36;
   else if (_style == "short")                       minimum = maximum = 8;
   else
-    throw format (STRING_COLUMN_BAD_FORMAT, _name, _style);
+    throw format (_("Unrecognized column format '{1}.{2}'"), _name, _style);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
