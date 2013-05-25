@@ -94,15 +94,6 @@
 #define INCLUDED_STRINGS
 #define L10N                                           // Localization complete.
 
-// Note that for English, the following two lines are not displayed.  For all
-// other localizations, these lines will appear in the output of the 'version'
-// and 'diagnostics' commands.
-//
-// DO NOT include a copyright in the translation.
-//
-#define STRING_LOCALIZATION_DESC     "Traduzione in Italiano"
-#define STRING_LOCALIZATION_AUTHOR   "Tradotto in Italiano da Tullio Facchinetti."
-
 // A3
 #define STRING_A3_ALTERNATE_RC       "Uso del file .taskrc alternativo {1}"
 #define STRING_A3_ALTERNATE_DATA     "Uso di data.location alternativa {1}"
@@ -195,12 +186,6 @@
 
 // commands/Cmd*
 #define STRING_CMD_CONFLICT          "Report personalizzato '{1}' provoca conflitto con un comando standard."
-#define STRING_CMD_VERSION_USAGE2    "Mostra solo il numero di versione di taskwarrior"
-#define STRING_CMD_VERSION_MIT       "Taskwarrior può essere copiato solo nei termini della licenza MIT, reperibile nei sorgenti di taskwarrior."
-#define STRING_CMD_VERSION_DOCS      "La documentazione di taskwarrior è consultabile con 'man task', 'man taskrc', 'man task-tutorial', 'man task-color', 'man task-sync', 'man task-faq' o presso http://taskwarrior.org"
-#define STRING_CMD_VERSION_BUILT     "{1} {2} generato per "
-#define STRING_CMD_VERSION_UNKNOWN   "sconosciuto"
-#define STRING_CMD_VERSION_COPY      "Copyright (C) 2006 - 2013 P. Beckingham, F. Hernandez."
 #define STRING_CMD_LOGO_USAGE        "Mostra il logo di Taskwarrior"
 #define STRING_CMD_LOGO_COLOR_REQ    "Il comando logo richiede l'abilitazione del supporto ai colori."
 #define STRING_CMD_EXEC_USAGE        "Esegue comandi e script esterni"

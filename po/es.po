@@ -1,5 +1,4 @@
 # Spanish translations for task package
-# Traductions françaises du paquet task.
 # Copyright 2006-2013, Paul Beckingham, Federico Hernandez.
 # This file is distributed under the same license as the task package.
 # Fidel Mato <fidel@iq.uva.es>, 2012-2013.
@@ -8,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: task 2.3.0\n"
 "Report-Msgid-Bugs-To: Taskwarrior team <support@taskwarrior.org>\n"
-"POT-Creation-Date: 2013-05-25 11:40+0200\n"
+"POT-Creation-Date: 2013-05-25 14:36-0400\n"
 "PO-Revision-Date: 2013-05-25 12:33+0200\n"
 "Last-Translator: Fidel Mato <fidel@iq.uva.es>\n"
 "Language-Team: Spanish\n"
@@ -18,6 +17,32 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
+#: ../src/commands/CmdVersion.cpp:66
+msgid ""
+"Documentation for taskwarrior can be found using 'man task', 'man taskrc', "
+"'man task-tutorial', 'man task-color', 'man task-sync', 'man task-faq' or at "
+"http://taskwarrior.org"
+msgstr "La documentación de taskwarrior se puede consultar usando 'man task', 'man taskrc', 'man task-tutorial', 'man task-color', 'man task-sync' y 'man task-faq' o en http://taskwarrior.org"
+
+#: ../src/commands/CmdVersion.cpp:128
+msgid "Shows only the taskwarrior version number"
+msgstr "Muestra el número de versión (solamente) de taskwarrior"
+
 #: ../src/commands/CmdVersion.cpp:45
 msgid "Shows the taskwarrior version number"
 msgstr "Muestra el número de versión de taskwarrior"
+
+#: ../src/commands/CmdVersion.cpp:60
+msgid ""
+"Taskwarrior may be copied only under the terms of the MIT license, which may "
+"be found in the taskwarrior source kit."
+msgstr "Taskwarrior solamente se puede copiar bajo los términos de la licencia MIT, que se pueden encontrar en el conjunto de código fuente de taskwarrior."
+
+#: ../src/commands/CmdVersion.cpp:96
+msgid "unknown"
+msgstr "desconocido"
+
+#: ../src/commands/CmdVersion.cpp:71
+msgid "{1} {2} built for "
+msgstr "{1} {2} construido para "
+

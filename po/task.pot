@@ -1,14 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright 2006-2013, Paul Beckingham, Federico Hernandez.
-# This file is distributed under the same license as the task package.
+# Copyright (C) YEAR 2006-2013, Paul Beckingham, Federico Hernandez.
+# This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: task 2.3.0\n"
+"Project-Id-Version: taskwarrior 2.3.0\n"
 "Report-Msgid-Bugs-To: Taskwarrior team <support@taskwarrior.org>\n"
-"POT-Creation-Date: 2013-05-25 11:40+0200\n"
+"POT-Creation-Date: 2013-05-25 15:04-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,4 +19,29 @@ msgstr ""
 
 #: ../src/commands/CmdVersion.cpp:45
 msgid "Shows the taskwarrior version number"
+msgstr ""
+
+#: ../src/commands/CmdVersion.cpp:60
+msgid ""
+"Taskwarrior may be copied only under the terms of the MIT license, which may "
+"be found in the taskwarrior source kit."
+msgstr ""
+
+#: ../src/commands/CmdVersion.cpp:66
+msgid ""
+"Documentation for taskwarrior can be found using 'man task', 'man taskrc', "
+"'man task-tutorial', 'man task-color', 'man task-sync', 'man task-faq' or at "
+"http://taskwarrior.org"
+msgstr ""
+
+#: ../src/commands/CmdVersion.cpp:71
+msgid "{1} {2} built for "
+msgstr ""
+
+#: ../src/commands/CmdVersion.cpp:96
+msgid "unknown"
+msgstr ""
+
+#: ../src/commands/CmdVersion.cpp:128 ../src/commands/CmdVersion.cpp:117
+msgid "Shows only the taskwarrior version number"
 msgstr ""

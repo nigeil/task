@@ -1,0 +1,28 @@
+For translators.
+
+
+Taskwarrior has a 'task.pot' file, which is the template from which new
+translations are created.  It gets out of date.  Refresh it using:
+
+  cd task.git/po
+  ./regen.sh
+
+This will be integrated into the makefile soon.
+
+
+Creating a new translation
+--------------------------
+
+  cd task.git/po
+  msginit -i task.pot -o xx.po
+  (add file to PO_FILES variable)
+
+
+Updating an existing translation
+--------------------------------
+
+  cd task.git/po
+  (edit xx.po)
+  make
+
+

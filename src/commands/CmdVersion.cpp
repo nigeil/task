@@ -57,18 +57,18 @@ int CmdVersion::execute (std::string& output)
   ViewText disclaimer;
   disclaimer.width (width);
   disclaimer.add (Column::factory ("string", ""));
-  disclaimer.set (disclaimer.addRow (), 0, STRING_CMD_VERSION_MIT);
+  disclaimer.set (disclaimer.addRow (), 0, _("Taskwarrior may be copied only under the terms of the MIT license, which may be found in the taskwarrior source kit."));
 
   // Create a table for the URL.
   ViewText link;
   link.width (width);
   link.add (Column::factory ("string", ""));
-  link.set (link.addRow (), 0, STRING_CMD_VERSION_DOCS);
+  link.set (link.addRow (), 0, _("Documentation for taskwarrior can be found using 'man task', 'man taskrc', 'man task-tutorial', 'man task-color', 'man task-sync', 'man task-faq' or at http://taskwarrior.org"));
 
   Color bold ("bold");
 
   out << "\n"
-      << format (STRING_CMD_VERSION_BUILT,
+      << format ( _("{1} {2} built for "),
                  (context.color () ? bold.colorize (PACKAGE) : PACKAGE),
                  (context.color () ? bold.colorize (VERSION) : VERSION))
 
@@ -93,28 +93,17 @@ int CmdVersion::execute (std::string& output)
 #elif defined (GNUHURD)
       << "gnu-hurd"
 #else
-      << STRING_CMD_VERSION_UNKNOWN
-#endif
-
-#if PACKAGE_LANGUAGE != LANGUAGE_EN_US
-      << " "
-      << STRING_LOCALIZATION_DESC
+      << _("unknown")
 #endif
 
       << "\n"
-      << STRING_CMD_VERSION_COPY
+      << "Copyright (C) 2006 - 2013 P. Beckingham, F. Hernandez."
       << "\n"
       << "\n"
       << disclaimer.render ()
       << "\n"
       << link.render ()
       << "\n";
-
-#if PACKAGE_LANGUAGE != LANGUAGE_EN_US
-  out << STRING_LOCALIZATION_AUTHOR
-      << "\n"
-      << "\n";
-#endif
 
   output = out.str ();
   return 0;
@@ -125,7 +114,7 @@ CmdCompletionVersion::CmdCompletionVersion ()
 {
   _keyword     = "_version";
   _usage       = "task          _version";
-  _description = STRING_CMD_VERSION_USAGE2;
+  _description = _("Shows only the taskwarrior version number");
   _read_only   = true;
   _displays_id = false;
 }

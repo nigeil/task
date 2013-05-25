@@ -125,7 +125,7 @@ find_package (Gettext)
 if (GETTEXT_FOUND)
   message ("-- Found gettext")
   set (HAVE_GETTEXT true)
-  set (TASK_LIBRARIES    ${TASK_LIBRARIES}    intl)
+  set (TASK_LIBRARIES ${TASK_LIBRARIES} intl)
 endif (GETTEXT_FOUND)
 
 # Set the package language.
