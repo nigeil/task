@@ -69,14 +69,16 @@ lists them and their defaults plus the CMAKE_INSTALL_PREFIX:
   TASK_DOCDIR           share/doc/task
   TASK_MAN1DIR          share/man/man1
   TASK_MAN5DIR          share/man/man5
+  TASK_LOCALEDIR        share/locale
 
 The corresponding TASK_* variables will be combined with CMAKE_INSTALL_PREFIX to
 get absolute installation directories:
 
-  CMAKE_INSTALL_PREFIX/TASK_BINDIR   /usr/local/bin
-  CMAKE_INSTALL_PREFIX/TASK_DOCDIR   /usr/local/share/doc/task
-  CMAKE_INSTALL_PREFIX/TASK_MAN1DIR  /usr/local/share/man/man1
-  CMAKE_INSTALL_PREFIX/TASK_MAN5DIR  /usr/local/share/man/man5
+  CMAKE_INSTALL_PREFIX/TASK_BINDIR    /usr/local/bin
+  CMAKE_INSTALL_PREFIX/TASK_DOCDIR    /usr/local/share/doc/task
+  CMAKE_INSTALL_PREFIX/TASK_MAN1DIR   /usr/local/share/man/man1
+  CMAKE_INSTALL_PREFIX/TASK_MAN5DIR   /usr/local/share/man/man5
+  CMAKE_INSTALL_PREFIX/TASK_LOCALEDIR /usr/local/share/locale
 
 
 Localizations
