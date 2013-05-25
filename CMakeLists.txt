@@ -9,10 +9,11 @@ set (HAVE_CMAKE true)
 project (task)
 set (PROJECT_VERSION "2.3.0")
 
-SET (TASK_MAN1DIR share/man/man1 CACHE STRING "Installation directory for man pages, section 1")
-SET (TASK_MAN5DIR share/man/man5 CACHE STRING "Installation directory for man pages, section 5")
-SET (TASK_DOCDIR  share/doc/task CACHE STRING "Installation directory for doc files")
-SET (TASK_BINDIR  bin            CACHE STRING "Installation directory for the binary")
+SET (TASK_MAN1DIR   share/man/man1 CACHE STRING "Installation directory for man pages, section 1")
+SET (TASK_MAN5DIR   share/man/man5 CACHE STRING "Installation directory for man pages, section 5")
+SET (TASK_DOCDIR    share/doc/task CACHE STRING "Installation directory for doc files")
+SET (TASK_LOCALEDIR share/locale   CACHE STRING "Installation directory for the locale files")
+SET (TASK_BINDIR    bin            CACHE STRING "Installation directory for the binary")
 
 if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
   set (LINUX true)
@@ -117,6 +118,14 @@ elseif (HAVE_UUID AND NOT HAVE_UUID_UNPARSE_LOWER)
 else (HAVE_UUID AND HAVE_UUID_UNPARSE_LOWER)
   message ("-- libuuid not found, using internal uuid")
 endif (HAVE_UUID AND HAVE_UUID_UNPARSE_LOWER)
+
+# find gettext
+message ("-- Looking for GNU gettext")
+find_package (Gettext)
+if (GETTEXT_FOUND)
+  message ("-- Found gettext")
+  set (HAVE_GETTEXT true)
+endif (GETTEXT_FOUND)
 
 # Set the package language.
 if (LANGUAGE)

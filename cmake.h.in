@@ -14,6 +14,7 @@
 
 /* Installation details */
 #define TASK_RCDIR "${CMAKE_INSTALL_PREFIX}/${TASK_DOCDIR}/rc"
+#define TASK_LOCALEDIR "${CMAKE_INSTALL_PREFIX}/${TASK_LOCALEDIR}"
 
 /* Localization */
 #define PACKAGE_LANGUAGE  ${PACKAGE_LANGUAGE}
@@ -48,6 +49,9 @@
 
 /* Found the Readline library */
 #cmakedefine HAVE_READLINE
+
+/* Found the gettext library */
+#cmakedefine HAVE_GETTEXT
 
 /* Found the pthread library */
 #cmakedefine HAVE_LIBPTHREAD
