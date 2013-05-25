@@ -43,7 +43,7 @@ void TransportShell::send(const std::string& source)
   std::vector<std::string>::const_iterator source_iter;
 
   if (_uri._path == "")
-    throw std::string (STRING_TRANSPORT_SHELL_NOPATH);
+    throw std::string (_("When using the 'sh+cp' protocol to copy multiple files, a path must be specified."));
 
   if (is_filelist(source))
   {
@@ -51,7 +51,7 @@ void TransportShell::send(const std::string& source)
     // Is there more than one file to transfer?
     // Then path has to end with a '/'
     if (sourcelist.size() > 1 && !_uri.is_directory())
-      throw format (STRING_TRANSPORT_URI_NODIR, _uri._path);
+      throw format (_("The uri '{1}' does not appear to be a directory."), _uri._path);
     for (source_iter = sourcelist.begin (); source_iter != sourcelist.end (); ++source_iter)
       _arguments.push_back (*source_iter);
   }
@@ -62,7 +62,7 @@ void TransportShell::send(const std::string& source)
   _arguments.push_back (_uri._path);
 
   if (execute ())
-    throw std::string (STRING_TRANSPORT_SHELL_FAIL);
+    throw std::string (_("shell command failed, see output above."));
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -72,7 +72,7 @@ void TransportShell::recv(std::string target)
   std::vector<std::string>::const_iterator paths_iter;
 
   if (_uri._path == "")
-    throw std::string (STRING_TRANSPORT_SHELL_NOPATH);
+    throw std::string (_("When using the 'sh+cp' protocol to copy multiple files, a path must be specified."));
 
   if (is_filelist(_uri._path))
   {
@@ -81,7 +81,7 @@ void TransportShell::recv(std::string target)
     // Is there more than one file to transfer?
     // Then target has to end with a '/'
     if (paths.size() > 1 && !is_directory(target))
-      throw format (STRING_TRANSPORT_URI_NODIR, target);
+      throw format (_("The uri '{1}' does not appear to be a directory."), target);
 
     for (paths_iter = paths.begin (); paths_iter != paths.end (); ++paths_iter)
       _arguments.push_back (*paths_iter);
@@ -94,7 +94,7 @@ void TransportShell::recv(std::string target)
   _arguments.push_back (target);
 
   if (execute ())
-    throw std::string (STRING_TRANSPORT_SHELL_FAIL);
+    throw std::string (_("shell command failed, see output above."));
 }
 
 ////////////////////////////////////////////////////////////////////////////////

@@ -276,7 +276,7 @@ static bool sort_compare (int left, int right)
       }
     }
     else
-      throw format (STRING_INVALID_SORT_COL, field);
+      throw format (_("The '{1}' column is not a valid sort field."), field);
   }
 
   return false;

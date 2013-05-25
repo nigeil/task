@@ -549,7 +549,7 @@ void TDB2::add (Task& task, bool add_to_backlog /* = true */)
   // If the tasks are loaded, then verify that this uuid is not already in
   // the file.
   if (!verifyUniqueUUID (task.get ("uuid")))
-    throw format (STRING_TDB2_UUID_NOT_UNIQUE, task.get ("uuid"));
+    throw format (_("Cannot add task because the uuid '{1}' is not unique."), task.get ("uuid"));
 
   // Add new task to either pending or completed.
   std::string status = task.get ("status");
@@ -643,7 +643,7 @@ void readTaskmods (std::vector <std::string> &input,
       stream >> ts;
 
       if (stream.fail ())
-        throw std::string (STRING_TDB2_UNDO_TIMESTAMP);
+        throw std::string (_("There was a problem reading the timestamp from the undo.data file."));
 
       // 'time' is the first line of a modification
       // thus we will (re)set the taskmod object
@@ -1046,7 +1046,7 @@ void TDB2::merge (const std::string& mergeFile)
     {
       mods.clear ();
       lmods.clear ();
-      throw std::string (STRING_TDB2_UP_TO_DATE);
+      throw std::string (_("Database is up-to-date, no merge required."));
     }
   }
   else // lit == l.end ()
@@ -1264,7 +1264,7 @@ void TDB2::revert ()
 {
   std::vector <std::string> u = undo.get_lines ();
   if (u.size () < 3)
-    throw std::string (STRING_TDB2_NO_UNDO);
+    throw std::string (_("There are no recorded transactions to undo."));
 
   // pop last tx
   u.pop_back (); // separator.
@@ -1306,8 +1306,8 @@ void TDB2::revert ()
     view.width (context.getWidth ());
     view.intraPadding (2);
     view.add (Column::factory ("string", ""));
-    view.add (Column::factory ("string", STRING_TDB2_UNDO_PRIOR));
-    view.add (Column::factory ("string", STRING_TDB2_UNDO_CURRENT));
+    view.add (Column::factory ("string", _("Prior Values")));
+    view.add (Column::factory ("string", _("Current Values")));
 
     Task after (current);
 
@@ -1502,9 +1502,9 @@ void TDB2::revert ()
 
   // Output displayed, now confirm.
   if (context.config.getBoolean ("confirmation") &&
-      !confirm (STRING_TDB2_UNDO_CONFIRM))
+      !confirm (_("The undo command is not reversible.  Are you sure you want to revert to the previous state?")))
   {
-    std::cout << STRING_CMD_CONFIG_NO_CHANGE << "\n";
+    std::cout << _("No changes made.") << "\n";
     return;
   }
 
@@ -1531,12 +1531,12 @@ void TDB2::revert ()
       if (prior != "")
       {
         *task = prior;
-        std::cout << STRING_TDB2_REVERTED << "\n";
+        std::cout << _("Modified task reverted.") << "\n";
       }
       else
       {
         p.erase (task);
-        std::cout << STRING_TDB2_REMOVED << "\n";
+        std::cout << _("Task removed.") << "\n";
       }
 
       // Rewrite files.
@@ -1569,14 +1569,14 @@ void TDB2::revert ()
           File::write (completed._file._data, c);
           File::write (pending._file._data, p);
           File::write (undo._file._data, u);
-          std::cout << STRING_TDB2_REVERTED << "\n";
+          std::cout << _("Modified task reverted.") << "\n";
           context.debug ("TDB::undo - task belongs in pending.data");
         }
         else
         {
           File::write (completed._file._data, c);
           File::write (undo._file._data, u);
-          std::cout << STRING_TDB2_REVERTED << "\n";
+          std::cout << _("Modified task reverted.") << "\n";
           context.debug ("TDB::undo - task belongs in completed.data");
         }
       }

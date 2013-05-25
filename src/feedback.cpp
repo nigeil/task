@@ -160,7 +160,7 @@ std::string taskDifferences (const Task& before, const Task& after)
   // Shouldn't just say nothing.
   if (out.str ().length () == 0)
     out << "  - "
-        << STRING_FEEDBACK_NOP
+        << _("No changes will be made.")
         << "\n";
 
   return out.str ();
@@ -281,7 +281,7 @@ std::string taskInfoDifferences (const Task& before, const Task& after, const st
 
   // Shouldn't just say nothing.
   if (out.str ().length () == 0)
-    out << STRING_FEEDBACK_WAS_NOP
+    out << _("No changes made.")
         << "\n";
 
   return out.str ();
@@ -366,10 +366,10 @@ void feedback_special_tags (const Task& task, const std::string& tag)
   {
     std::string msg;
     std::string explanation;
-         if (tag == "nocolor") msg = STRING_FEEDBACK_TAG_NOCOLOR;
-    else if (tag == "nonag")   msg = STRING_FEEDBACK_TAG_NONAG;
-    else if (tag == "nocal")   msg = STRING_FEEDBACK_TAG_NOCAL;
-    else if (tag == "next")    msg = STRING_FEEDBACK_TAG_NEXT;
+         if (tag == "nocolor") msg = _("The 'nocolor' special tag will disable color rules for this task.");
+    else if (tag == "nonag")   msg = _("The 'nonag' special tag will prevent nagging when this task is modified.");
+    else if (tag == "nocal")   msg = _("The 'nocal' special tag will keep this task off the 'calendar' report.");
+    else if (tag == "next")    msg = _("The 'next' special tag will boost the urgency of this task so it appears on the 'next' report.");
 
     if (msg.length ())
     {
@@ -453,7 +453,7 @@ std::string onProjectChange (Task& task, bool scope /* = true */)
   if (project != "")
   {
     if (scope)
-      msg << format (STRING_HELPER_PROJECT_CHANGE, project)
+      msg << format (_("The project '{1}' has changed."), project)
           << "  ";
 
     // Count pending and done tasks, for this project.
@@ -476,9 +476,9 @@ std::string onProjectChange (Task& task, bool scope /* = true */)
     else
       percentage = (count_done * 100 / (count_done + count_pending));
 
-    msg << format (STRING_HELPER_PROJECT_COMPL, project, percentage)
+    msg << format (_("Project '{1}' is {2}% complete"), project, percentage)
         << " "
-        << format (STRING_HELPER_PROJECT_REM, count_pending, count_pending + count_done);
+        << format (_("({1} of {2} tasks remaining)."), count_pending, count_pending + count_done);
   }
 
   return msg.str ();

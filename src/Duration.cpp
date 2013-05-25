@@ -504,7 +504,7 @@ void Duration::parse (const std::string& input)
   }
 
   if (_secs == 0)
-    throw ::format (STRING_DURATION_UNRECOGNIZED, input);
+    throw ::format (_("The duration '{1}' was not recognized as valid, with correct units like '3days'."), input);
 }
 
 ////////////////////////////////////////////////////////////////////////////////

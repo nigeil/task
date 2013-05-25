@@ -146,7 +146,7 @@ Date::Date (const std::string& input, const std::string& format /* = "m/d/Y" */)
   if (isEpoch (input))
     return;
 
-  throw ::format (STRING_DATE_INVALID_FORMAT, input, format);
+  throw ::format (_("'{1}' is not a valid date in the '{2}' format."), input, format);
 }
 
 ////////////////////////////////////////////////////////////////////////////////

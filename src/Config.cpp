@@ -448,7 +448,7 @@ void Config::load (const std::string& file, int nest /* = 1 */)
   Timer timer ("Config::load (" + file + ")");
 
   if (nest > 10)
-    throw std::string (STRING_CONFIG_OVERNEST);
+    throw std::string (_("Configuration file nested to more than 10 levels deep - this has to be a mistake."));
 
   // First time in, load the default values.
   if (nest == 1)
@@ -552,7 +552,7 @@ void Config::createDefaultRC (const std::string& rc, const std::string& data)
 
   // Write out the new file.
   if (! File::write (rc, contents.str ()))
-    throw format (STRING_CONFIG_BAD_WRITE, rc);
+    throw format (_("Could not write to '{1}'."), rc);
 }
 
 ////////////////////////////////////////////////////////////////////////////////

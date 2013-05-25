@@ -135,10 +135,10 @@ void Transport::expand_braces(const std::string& path,
     pos = path.find("{");
 
     if (pos == std::string::npos)
-      throw std::string (STRING_TRANSPORT_CURL_WILDCD);
+      throw std::string (_("When using the 'curl' protocol, wildcards are not supported."));
 
     if (!is_directory(sourceortarget))
-      throw format (STRING_TRANSPORT_URI_NODIR, sourceortarget);
+      throw format (_("The uri '{1}' does not appear to be a directory."), sourceortarget);
 
     std::string toSplit;
     std::string suffix;

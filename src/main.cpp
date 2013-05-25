@@ -86,7 +86,7 @@ int main (int argc, const char** argv)
 
     catch (...)
     {
-      std::cerr << STRING_UNKNOWN_ERROR << "\n";
+      std::cerr << _("Unknown error.") << "\n";
       status = -2;
     }
   }
