@@ -1,0 +1,5 @@
+set (PO_FILES fr.po)
+
+if (HAVE_GETTEXT)
+  GETTEXT_CREATE_TRANSLATIONS (task.pot ALL ${PO_FILES})
+endif (HAVE_GETTEXT)
