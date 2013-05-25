@@ -42,7 +42,7 @@ CmdVersion::CmdVersion ()
 {
   _keyword     = "version";
   _usage       = "task          version";
-  _description = STRING_CMD_VERSION_USAGE;
+  _description = _("Shows the taskwarrior version number");
   _read_only   = true;
   _displays_id = false;
 }

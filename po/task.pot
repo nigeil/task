@@ -1,0 +1,22 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright 2006-2013, Paul Beckingham, Federico Hernandez.
+# This file is distributed under the same license as the task package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: task 2.3.0\n"
+"Report-Msgid-Bugs-To: Taskwarrior team <support@taskwarrior.org>\n"
+"POT-Creation-Date: 2013-05-25 11:40+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../src/commands/CmdVersion.cpp:45
+msgid "Shows the taskwarrior version number"
+msgstr ""
