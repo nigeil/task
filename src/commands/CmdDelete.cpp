@@ -40,7 +40,7 @@ CmdDelete::CmdDelete ()
 {
   _keyword       = "delete";
   _usage         = "task <filter> delete <mods>";
-  _description   = STRING_CMD_DELETE_USAGE;
+  _description   = _("Deletes the specified task");
   _read_only     = false;
   _displays_id   = false;
   _needs_confirm = true;

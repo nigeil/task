@@ -37,7 +37,7 @@ CmdInstall::CmdInstall ()
 {
   _keyword     = "install";
   _usage       = "task          install <extension> [<extension> ...]";
-  _description = STRING_CMD_INSTALL_USAGE;
+  _description = _("Installs extensions and external scripts");
   _read_only   = true;
   _displays_id = false;
 }

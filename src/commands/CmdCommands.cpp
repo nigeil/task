@@ -40,7 +40,7 @@ CmdCompletionCommands::CmdCompletionCommands ()
 {
   _keyword     = "_commands";
   _usage       = "task          _commands";
-  _description = STRING_CMD_HCOMMANDS_USAGE;
+  _description = _("Generates a list of all commands, for autocompletion purposes");
   _read_only   = true;
   _displays_id = false;
 }
@@ -76,7 +76,7 @@ CmdZshCommands::CmdZshCommands ()
 {
   _keyword     = "_zshcommands";
   _usage       = "task          _zshcommands";
-  _description = STRING_CMD_ZSHCOMMANDS_USAGE;
+  _description = _("Generates a list of all commands, for zsh autocompletion purposes");
   _read_only   = true;
   _displays_id = false;
 }

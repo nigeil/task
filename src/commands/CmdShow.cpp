@@ -44,7 +44,7 @@ CmdShow::CmdShow ()
 {
   _keyword     = "show";
   _usage       = "task          show [all | substring]";
-  _description = STRING_CMD_SHOW;
+  _description = _("Shows all configuration variables or subset");
   _read_only   = true;
   _displays_id = false;
 }
@@ -59,7 +59,7 @@ int CmdShow::execute (std::string& output)
   // have already been handled.
   std::vector <std::string> words = context.a3.extract_words ();
   if (words.size () > 1)
-    throw std::string (STRING_CMD_SHOW_ARGS);
+    throw std::string (_("You can only specify 'all' or a search string."));
 
   int width = context.getWidth ();
 
@@ -262,8 +262,8 @@ int CmdShow::execute (std::string& output)
   // Create output view.
   ViewText view;
   view.width (width);
-  view.add (Column::factory ("string", STRING_CMD_SHOW_CONF_VAR));
-  view.add (Column::factory ("string", STRING_CMD_SHOW_CONF_VALUE));
+  view.add (Column::factory ("string", _("Config Variable")));
+  view.add (Column::factory ("string", _("Value")));
 
   Color error ("bold white on red");
   Color warning ("black on yellow");
@@ -383,7 +383,7 @@ int CmdShow::execute (std::string& output)
 
   if (all.size () == 0)
   {
-    out << STRING_CMD_SHOW_EMPTY << "\n";
+    out << _("Configuration error: .taskrc contains no entries.") << "\n";
     rc = 1;
   }
   else
@@ -391,10 +391,10 @@ int CmdShow::execute (std::string& output)
     Directory location (context.config.get ("data.location"));
 
     if (location._data == "")
-      out << STRING_CMD_SHOW_NO_LOCATION << "\n";
+      out << _("Configuration error: data.location not specified in .taskrc file.") << "\n";
 
     if (! location.exists ())
-      out << STRING_CMD_SHOW_LOC_EXIST << "\n";
+      out << _("Configuration error: data.location contains a directory name that doesn't exist, or is unreadable.") << "\n";
   }
 
   output = out.str ();
@@ -406,7 +406,7 @@ CmdShowRaw::CmdShowRaw ()
 {
   _keyword     = "_show";
   _usage       = "task          _show";
-  _description = STRING_CMD_SHOWRAW;
+  _description = _("Shows all configuration settings in a machine-readable format");
   _read_only   = true;
   _displays_id = false;
 }

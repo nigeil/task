@@ -39,7 +39,7 @@ CmdLog::CmdLog ()
 {
   _keyword     = "log";
   _usage       = "task          log <mods>";
-  _description = STRING_CMD_LOG_USAGE;
+  _description = _("Adds a new task that is already completed");
   _read_only   = false;
   _displays_id = false;
 }
@@ -57,10 +57,10 @@ int CmdLog::execute (std::string& output)
 
   // Recurring tasks get a special status.
   if (task.has ("recur"))
-    throw std::string (STRING_CMD_LOG_NO_RECUR);
+    throw std::string (_("You cannot log recurring tasks."));
 
   if (task.has ("wait"))
-    throw std::string (STRING_CMD_LOG_NO_WAITING);
+    throw std::string (_("You cannot log waiting tasks."));
 
   context.tdb2.add (task);
   if (context.verbose ("project"))
@@ -69,7 +69,7 @@ int CmdLog::execute (std::string& output)
 
   if (context.verbose ("affected") ||
       context.config.getBoolean ("echo.command")) // Deprecated 2.0
-    output = std::string (STRING_CMD_LOG_LOGGED) + "\n";
+    output = std::string (_("Logged task.")) + "\n";
 
   return rc;
 }

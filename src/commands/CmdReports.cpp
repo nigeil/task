@@ -40,7 +40,7 @@ CmdReports::CmdReports ()
 {
   _keyword     = "reports";
   _usage       = "task          reports";
-  _description = STRING_CMD_REPORTS_USAGE;
+  _description = _("Lists all supported reports");
   _read_only   = true;
   _displays_id = false;
 }
@@ -85,8 +85,8 @@ int CmdReports::execute (std::string& output)
   std::stringstream out;
   ViewText view;
   view.width (context.getWidth ());
-  view.add (Column::factory ("string", STRING_CMD_REPORTS_REPORT));
-  view.add (Column::factory ("string", STRING_CMD_REPORTS_DESC));
+  view.add (Column::factory ("string", _("Report")));
+  view.add (Column::factory ("string", _("Description")));
 
   // If an alternating row color is specified, notify the table.
   if (context.color ())
@@ -107,7 +107,7 @@ int CmdReports::execute (std::string& output)
   out << optionalBlankLine ()
       << view.render ()
       << optionalBlankLine ()
-      << format (STRING_CMD_REPORTS_SUMMARY, reports.size ())
+      << format (_("{1} reports"), reports.size ())
       << "\n";
 
   output = out.str ();

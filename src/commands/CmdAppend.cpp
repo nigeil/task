@@ -40,7 +40,7 @@ CmdAppend::CmdAppend ()
 {
   _keyword     = "append";
   _usage       = "task <filter> append <mods>";
-  _description = STRING_CMD_APPEND_USAGE;
+  _description = _("Appends text to an existing task description");
   _read_only   = false;
   _displays_id = false;
 }
@@ -93,7 +93,7 @@ int CmdAppend::execute (std::string& output)
       {
         std::vector <Task> siblings = context.tdb2.siblings (*task);
         if (siblings.size () &&
-            confirm (STRING_CMD_APPEND_CONFIRM_R))
+            confirm (_("This is a recurring task.  Do you want to append to all pending recurrences of this same task?")))
         {
           std::vector <Task>::iterator sibling;
           for (sibling = siblings.begin (); sibling != siblings.end (); ++sibling)

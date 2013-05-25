@@ -39,7 +39,7 @@ CmdStop::CmdStop ()
 {
   _keyword     = "stop";
   _usage       = "task <filter> stop <mods>";
-  _description = STRING_CMD_STOP_USAGE;
+  _description = _("Removes the 'start' time from a task");
   _read_only   = false;
   _displays_id = false;
 }
@@ -55,7 +55,7 @@ int CmdStop::execute (std::string& output)
   filter (filtered);
   if (filtered.size () == 0)
   {
-    context.footnote (STRING_FEEDBACK_NO_TASKS_SP);
+    context.footnote (_("No tasks specified."));
     return 1;
   }
 

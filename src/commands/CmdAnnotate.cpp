@@ -40,7 +40,7 @@ CmdAnnotate::CmdAnnotate ()
 {
   _keyword     = "annotate";
   _usage       = "task <filter> annotate <mods>";
-  _description = STRING_CMD_ANNO_USAGE;
+  _description = _("Adds an annotation to an existing task");
   _read_only   = false;
   _displays_id = false;
 }
@@ -56,14 +56,14 @@ int CmdAnnotate::execute (std::string& output)
   filter (filtered);
   if (filtered.size () == 0)
   {
-    context.footnote (STRING_FEEDBACK_NO_TASKS_SP);
+    context.footnote (_("No tasks specified."));
     return 1;
   }
 
   // Apply the command line modifications to the new task.
   A3 modifications = context.a3.extract_modifications ();
   if (!modifications.size ())
-    throw std::string (STRING_CMD_MODIFY_NEED_TEXT);
+    throw std::string (_("Additional text must be provided."));
 
   // Accumulated project change notifications.
   std::map <std::string, std::string> projectChanges;
@@ -93,7 +93,7 @@ int CmdAnnotate::execute (std::string& output)
       {
         std::vector <Task> siblings = context.tdb2.siblings (*task);
         if (siblings.size () &&
-            confirm (STRING_CMD_ANNO_CONFIRM_R))
+            confirm (_("This is a recurring task.  Do you want to annotate all pending recurrences of this same task?")))
         {
           std::vector <Task>::iterator sibling;
           for (sibling = siblings.begin (); sibling != siblings.end (); ++sibling)
@@ -114,7 +114,7 @@ int CmdAnnotate::execute (std::string& output)
     }
     else
     {
-      std::cout << STRING_CMD_ANNO_NO << "\n";
+      std::cout << _("Task not annotated.") << "\n";
       rc = 1;
       if (_permission_quit)
         break;

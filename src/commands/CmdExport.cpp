@@ -37,7 +37,7 @@ CmdExport::CmdExport ()
 {
   _keyword     = "export";
   _usage       = "task <filter> export";
-  _description = STRING_CMD_EXPORT_USAGE;
+  _description = _("Exports tasks in JSON format");
   _read_only   = true;
   _displays_id = true;
 }

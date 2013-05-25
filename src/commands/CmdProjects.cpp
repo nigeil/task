@@ -42,7 +42,7 @@ CmdProjects::CmdProjects ()
 {
   _keyword     = "projects";
   _usage       = "task <filter> projects";
-  _description = STRING_CMD_PROJECTS_USAGE;
+  _description = _("Shows all project names used");
   _read_only   = true;
   _displays_id = false;
 }
@@ -136,7 +136,7 @@ int CmdProjects::execute (std::string& output)
       }
       int row = view.addRow ();
       view.set (row, 0, (project->first == ""
-                          ? STRING_CMD_PROJECTS_NONE
+                          ? _("(none)")
                           : indentProject (project->first, "  ", '.')));
       view.set (row, 1, project->second);
       view.set (row, 2, none[project->first]);
@@ -177,7 +177,7 @@ CmdCompletionProjects::CmdCompletionProjects ()
 {
   _keyword     = "_projects";
   _usage       = "task <filter> _projects";
-  _description = STRING_CMD_PROJECTS_USAGE_2;
+  _description = _("Shows only a list of all project names used");
   _read_only   = true;
   _displays_id = false;
 }

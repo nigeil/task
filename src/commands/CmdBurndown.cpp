@@ -417,11 +417,11 @@ std::string Chart::render ()
   if (graph_height < 5 ||     // a 4-line graph is essentially unreadable.
       graph_width < 2)        // A single-bar graph is useless.
   {
-    return std::string (STRING_CMD_BURN_TOO_SMALL) + "\n";
+    return std::string (_("Terminal window too small to draw a graph.")) + "\n";
   }
 
   if (max_value == 0)
-    context.footnote (STRING_FEEDBACK_NO_MATCH);
+    context.footnote (_("No matches."));
 
   // Create a grid, folded into a string.
   grid = "";
@@ -432,12 +432,12 @@ std::string Chart::render ()
   std::string full_title;
   switch (period)
   {
-  case 'D': full_title = STRING_CMD_BURN_DAILY;   break;
-  case 'W': full_title = STRING_CMD_BURN_WEEKLY;  break;
-  case 'M': full_title = STRING_CMD_BURN_MONTHLY; break;
+  case 'D': full_title = _("Daily");   break;
+  case 'W': full_title = _("Weekly");  break;
+  case 'M': full_title = _("Monthly"); break;
   }
 
-  full_title += std::string (" ") + STRING_CMD_BURN_TITLE;
+  full_title += std::string (" ") + _("Burndown");
 
   if (title.length ())
   {
@@ -956,7 +956,7 @@ void Chart::calculateRates (std::vector <time_t>& sequence)
   }
   else
   {
-    completion = STRING_CMD_BURN_NO_CONVERGE;
+    completion = _("No convergence");
   }
 }
 
@@ -965,7 +965,7 @@ CmdBurndownMonthly::CmdBurndownMonthly ()
 {
   _keyword     = "burndown.monthly";
   _usage       = "task <filter> burndown.monthly";
-  _description = STRING_CMD_BURN_USAGE_M;
+  _description = _("Shows a graphical burndown chart, by month");
   _read_only   = true;
   _displays_id = false;
 }
@@ -993,7 +993,7 @@ CmdBurndownWeekly::CmdBurndownWeekly ()
 {
   _keyword     = "burndown.weekly";
   _usage       = "task <filter> burndown.weekly";
-  _description = STRING_CMD_BURN_USAGE_W;
+  _description = _("Shows a graphical burndown chart, by week");
   _read_only   = true;
   _displays_id = false;
 }
@@ -1021,7 +1021,7 @@ CmdBurndownDaily::CmdBurndownDaily ()
 {
   _keyword     = "burndown.daily";
   _usage       = "task <filter> burndown.daily";
-  _description = STRING_CMD_BURN_USAGE_D;
+  _description = _("Shows a graphical burndown chart, by day");
   _read_only   = true;
   _displays_id = false;
 }

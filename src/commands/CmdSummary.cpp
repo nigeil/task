@@ -44,7 +44,7 @@ CmdSummary::CmdSummary ()
 {
   _keyword     = "summary";
   _usage       = "task <filter> summary";
-  _description = STRING_CMD_SUMMARY_USAGE;
+  _description = _("Shows a report of task status by project");
   _read_only   = true;
   _displays_id = false;
 }
@@ -154,7 +154,7 @@ int CmdSummary::execute (std::string& output)
 
       int row = view.addRow ();
       view.set (row, 0, (i->first == ""
-                          ? STRING_CMD_SUMMARY_NONE
+                          ? _("(none)")
                           : indentProject (i->first, "  ", '.')));
 
       view.set (row, 1, countPending[i->first]);

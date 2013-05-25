@@ -40,7 +40,7 @@ CmdCompletionAliases::CmdCompletionAliases ()
 {
   _keyword     = "_aliases";
   _usage       = "task          _aliases";
-  _description = STRING_CMD_ALIASES_USAGE;
+  _description = _("Generates a list of all aliases, for autocompletion purposes");
   _read_only   = true;
   _displays_id = false;
 }

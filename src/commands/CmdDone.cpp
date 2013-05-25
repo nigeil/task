@@ -40,7 +40,7 @@ CmdDone::CmdDone ()
 {
   _keyword     = "done";
   _usage       = "task <filter> done <mods>";
-  _description = STRING_CMD_DONE_USAGE;
+  _description = _("Marks the specified task as completed");
   _read_only   = false;
   _displays_id = false;
 }
@@ -56,7 +56,7 @@ int CmdDone::execute (std::string& output)
   filter (filtered);
   if (filtered.size () == 0)
   {
-    context.footnote (STRING_FEEDBACK_NO_TASKS_SP);
+    context.footnote (_("No tasks specified."));
     return 1;
   }
 

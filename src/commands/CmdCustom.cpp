@@ -70,7 +70,7 @@ int CmdCustom::execute (std::string& output)
   split (labels, reportLabels, ',');
 
   if (columns.size () != labels.size () && labels.size () != 0)
-    throw format (STRING_CMD_CUSTOM_MISMATCH, _keyword);
+    throw format (_("There are different numbers of columns and labels for report '{1}'."), _keyword);
 
   std::map <std::string, std::string> columnLabels;
   if (labels.size ())

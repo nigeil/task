@@ -44,7 +44,7 @@ CmdStats::CmdStats ()
 {
   _keyword     = "stats";
   _usage       = "task <filter> stats";
-  _description = STRING_CMD_STATS_USAGE;
+  _description = _("Shows task database statistics");
   _read_only   = true;
   _displays_id = false;
 }

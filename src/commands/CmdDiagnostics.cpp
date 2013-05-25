@@ -50,7 +50,7 @@ CmdDiagnostics::CmdDiagnostics ()
 {
   _keyword     = "diagnostics";
   _usage       = "task          diagnostics";
-  _description = STRING_CMD_DIAG_USAGE;
+  _description = _("Platform, build and environment details");
   _read_only   = true;
   _displays_id = false;
 }
@@ -69,7 +69,7 @@ int CmdDiagnostics::execute (std::string& output)
       << bold.colorize (PACKAGE_STRING)
       << "\n";
 
-  out << "   " << STRING_CMD_DIAG_PLATFORM << ": "
+  out << "   " << _("Platform") << ": "
       <<
 #if defined (DARWIN)
          "Darwin"
@@ -189,12 +189,12 @@ int CmdDiagnostics::execute (std::string& output)
       << "\n\n";
 
   // Config: .taskrc found, readable, writable
-  out << bold.colorize (STRING_CMD_DIAG_CONFIG)
+  out << bold.colorize (_("Configuration"))
       << "\n"
       << "       File: " << context.config._original_file._data << " "
       << (context.config._original_file.exists ()
-           ? STRING_CMD_DIAG_FOUND
-           : STRING_CMD_DIAG_MISSING)
+           ? _("(found)")
+           : _("(missing)"))
       << ", " << context.config._original_file.size () << " " << "bytes"
       << ", mode "
       << std::setbase (8)
@@ -205,8 +205,8 @@ int CmdDiagnostics::execute (std::string& output)
   File location (context.config.get ("data.location"));
   out << "       Data: " << location._data << " "
       << (location.exists ()
-           ? STRING_CMD_DIAG_FOUND
-           : STRING_CMD_DIAG_MISSING)
+           ? _("(found)")
+           : _("(missing)"))
       << ", " << (location.is_directory () ? "dir" : "?")
       << ", mode "
       << std::setbase (8)
@@ -215,14 +215,14 @@ int CmdDiagnostics::execute (std::string& output)
 
   out << "    Locking: "
       << (context.config.getBoolean ("locking")
-           ? STRING_CMD_DIAG_ENABLED
-           : STRING_CMD_DIAG_DISABLED)
+           ? _("Enabled")
+           : _("Disabled"))
       << "\n";
 
   out << "         GC: "
       << (context.config.getBoolean ("gc")
-           ? STRING_CMD_DIAG_ENABLED
-           : STRING_CMD_DIAG_DISABLED)
+           ? _("Enabled")
+           : _("Disabled"))
       << "\n";
 
   // Determine rc.editor/$EDITOR/$VISUAL.
@@ -255,7 +255,7 @@ int CmdDiagnostics::execute (std::string& output)
       << "\n\n";
 
   // External commands.
-  out << bold.colorize (STRING_CMD_DIAG_EXTERNAL)
+  out << bold.colorize (_("External Utilities"))
       << "\n";
   {
     std::vector <std::string> matches;
@@ -270,8 +270,8 @@ int CmdDiagnostics::execute (std::string& output)
       if (p)
         out << "        scp: "
             << (r.match (buffer)
-                 ? STRING_CMD_DIAG_FOUND
-                 : STRING_CMD_DIAG_MISSING)
+                 ? _("(found)")
+                 : _("(missing)"))
             << "\n";
     }
 
@@ -287,7 +287,7 @@ int CmdDiagnostics::execute (std::string& output)
         matches.clear ();
         r.match (matches, buffer);
         out << "      rsync: "
-            << (matches.size () ? matches[0] : STRING_CMD_DIAG_MISSING)
+            << (matches.size () ? matches[0] : _("(missing)"))
             << "\n";
       }
     }
@@ -304,7 +304,7 @@ int CmdDiagnostics::execute (std::string& output)
         matches.clear ();
         r.match (matches, buffer);
         out << "       curl: "
-            << (matches.size () ? matches[0] :  STRING_CMD_DIAG_MISSING)
+            << (matches.size () ? matches[0] :  _("(missing)"))
             << "\n";
       }
     }
@@ -313,7 +313,7 @@ int CmdDiagnostics::execute (std::string& output)
   }
 
   // Generate 1000 UUIDs and verify they are all unique.
-  out << bold.colorize (STRING_CMD_DIAG_TESTS)
+  out << bold.colorize (_("Tests"))
       << "\n";
   {
     out << "   UUID gen: ";
@@ -324,7 +324,7 @@ int CmdDiagnostics::execute (std::string& output)
       id = uuid ();
       if (std::find (uuids.begin (), uuids.end (), id) != uuids.end ())
       {
-        out << format (STRING_CMD_DIAG_UUID_BAD, i) << "\n";
+        out << format (_("Failed - duplicate UUID at iteration {1}"), i) << "\n";
         break;
       }
       else
@@ -332,12 +332,12 @@ int CmdDiagnostics::execute (std::string& output)
     }
 
     if (uuids.size () >= 1000)
-      out << STRING_CMD_DIAG_UUID_GOOD << "\n";
+      out << _("1000 unique UUIDs generated.") << "\n";
 
     // Determine terminal details.
     const char* term = getenv ("TERM");
     out << "      $TERM: "
-        << (term ? term : STRING_CMD_DIAG_NONE)
+        << (term ? term : _("-none-"))
         << " ("
         << context.getWidth ()
         << "x"

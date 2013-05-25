@@ -40,7 +40,7 @@ CmdStart::CmdStart ()
 {
   _keyword     = "start";
   _usage       = "task <filter> start <mods>";
-  _description = STRING_CMD_START_USAGE;
+  _description = _("Marks specified task as started");
   _read_only   = false;
   _displays_id = false;
 }
@@ -56,7 +56,7 @@ int CmdStart::execute (std::string& output)
   filter (filtered);
   if (filtered.size () == 0)
   {
-    context.footnote (STRING_FEEDBACK_NO_TASKS_SP);
+    context.footnote (_("No tasks specified."));
     return 1;
   }
 
@@ -99,7 +99,7 @@ int CmdStart::execute (std::string& output)
       }
       else
       {
-        std::cout << STRING_CMD_START_NO << "\n";
+        std::cout << _("Task not started.") << "\n";
         rc = 1;
         if (_permission_quit)
           break;

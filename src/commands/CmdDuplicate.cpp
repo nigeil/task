@@ -40,7 +40,7 @@ CmdDuplicate::CmdDuplicate ()
 {
   _keyword     = "duplicate";
   _usage       = "task <filter> duplicate <mods>";
-  _description = STRING_CMD_DUPLICATE_USAGE;
+  _description = _("Duplicates the specified tasks");
   _read_only   = false;
   _displays_id = false;
 }
@@ -56,7 +56,7 @@ int CmdDuplicate::execute (std::string& output)
   filter (filtered);
   if (filtered.size () == 0)
   {
-    context.footnote (STRING_FEEDBACK_NO_TASKS_SP);
+    context.footnote (_("No tasks specified."));
     return 1;
   }
 
@@ -84,7 +84,7 @@ int CmdDuplicate::execute (std::string& output)
       dup.remove ("until");
       dup.remove ("imask");
 
-      std::cout << format (STRING_CMD_DUPLICATE_NON_REC, task->id)
+      std::cout << format (_("Note: task {1} was a recurring task.  The duplicated task is not."), task->id)
           << "\n";
     }
 
@@ -93,7 +93,7 @@ int CmdDuplicate::execute (std::string& output)
     {
       dup.remove ("mask");
 
-      std::cout << format (STRING_CMD_DUPLICATE_REC, task->id)
+      std::cout << format (_("Note: task {1} was a parent recurring task.  The duplicated task is too."), task->id)
           << "\n";
     }
 

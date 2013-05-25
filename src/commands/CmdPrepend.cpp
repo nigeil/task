@@ -40,7 +40,7 @@ CmdPrepend::CmdPrepend ()
 {
   _keyword     = "prepend";
   _usage       = "task <filter> prepend <mods>";
-  _description = STRING_CMD_PREPEND_USAGE;
+  _description = _("Prepends text to an existing task description");
   _read_only   = false;
   _displays_id = false;
 }
@@ -93,7 +93,7 @@ int CmdPrepend::execute (std::string& output)
       {
         std::vector <Task> siblings = context.tdb2.siblings (*task);
         if (siblings.size () &&
-            confirm (STRING_CMD_PREPEND_CONFIRM_R))
+            confirm (_("This is a recurring task.  Do you want to prepend to all pending recurrences of this same task?")))
         {
           std::vector <Task>::iterator sibling;
           for (sibling = siblings.begin (); sibling != siblings.end (); ++sibling)
@@ -114,7 +114,7 @@ int CmdPrepend::execute (std::string& output)
     }
     else
     {
-      std::cout << STRING_CMD_PREPEND_NO << "\n";
+      std::cout << _("Task not prepended.") << "\n";
       rc = 1;
       if (_permission_quit)
         break;

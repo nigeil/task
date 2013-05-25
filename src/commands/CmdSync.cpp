@@ -43,7 +43,7 @@ CmdSync::CmdSync ()
 {
   _keyword     = "synchronize";
   _usage       = "task          synchronize";
-  _description = STRING_CMD_SYNC_USAGE;
+  _description = _("Synchronizes data with the Task Server");
   _read_only   = false;
   _displays_id = false;
 }
@@ -62,21 +62,21 @@ int CmdSync::execute (std::string& output)
   std::string connection = context.config.get ("taskd.server");
   if (connection == "" ||
       connection.rfind (':') == std::string::npos)
-    throw std::string (STRING_CMD_SYNC_NO_SERVER);
+    throw std::string (_("Task Server is not configured."));
 
   // Obtain credentials.
   std::string credentials_string = context.config.get ("taskd.credentials");
   if (credentials_string == "")
-    throw std::string (STRING_CMD_SYNC_BAD_CRED);
+    throw std::string (_("Task Server credentials malformed."));
 
   std::vector <std::string> credentials;
   split (credentials, credentials_string, "/");
   if (credentials.size () != 3)
-    throw std::string (STRING_CMD_SYNC_BAD_CRED);
+    throw std::string (_("Task Server credentials malformed."));
 
   std::string certificate = context.config.get ("taskd.certificate");
   if (certificate == "")
-    throw std::string (STRING_CMD_SYNC_BAD_CERT);
+    throw std::string (_("Task Server certificate missing."));
 
   // Read backlog.data.
   std::string payload = "";
@@ -107,7 +107,7 @@ int CmdSync::execute (std::string& output)
 
   request.setPayload (payload);
 
-  out << format (STRING_CMD_SYNC_PROGRESS, connection)
+  out << format (_("Syncing with {1}"), connection)
       << "\n";
 
   Msg response;

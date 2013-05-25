@@ -44,7 +44,7 @@ CmdCalendar::CmdCalendar ()
 {
   _keyword     = "calendar";
   _usage       = "task          calendar [due|<month> <year>|<year>] [y]";
-  _description = STRING_CMD_CAL_USAGE;
+  _description = _("Shows a calendar, with due tasks marked");
   _read_only   = true;
   _displays_id = true;
 }
@@ -129,7 +129,7 @@ int CmdCalendar::execute (std::string& output)
     {
       argMonth = strtol (arg->c_str (), NULL, 10);
       if (argMonth < 1 || argMonth > 12)
-        throw format (STRING_CMD_CAL_BAD_MONTH, *arg);
+        throw format (_("Argument '{1}' is not a valid month."), *arg);
     }
 
     // "January" etc.
@@ -137,11 +137,11 @@ int CmdCalendar::execute (std::string& output)
     {
       argMonth = Date::monthOfYear (matches[0]);
       if (argMonth == -1)
-        throw format (STRING_CMD_CAL_BAD_MONTH, *arg);
+        throw format (_("Argument '{1}' is not a valid month."), *arg);
     }
 
     else
-      throw format (STRING_CMD_CAL_BAD_ARG, *arg);
+      throw format (_("Could not recognize argument '{1}'."), *arg);
   }
 
   // Supported combinations:
@@ -356,8 +356,8 @@ int CmdCalendar::execute (std::string& output)
 
       ViewText holTable;
       holTable.width (context.getWidth ());
-      holTable.add (Column::factory ("string", STRING_CMD_CAL_LABEL_DATE));
-      holTable.add (Column::factory ("string", STRING_CMD_CAL_LABEL_HOL));
+      holTable.add (Column::factory ("string", _("Date")));
+      holTable.add (Column::factory ("string", _("Holiday")));
 
       std::vector <std::string>::iterator it;
       std::map <time_t, std::vector<std::string> > hm; // we need to store multiple holidays per day

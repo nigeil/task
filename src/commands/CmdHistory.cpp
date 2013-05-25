@@ -40,7 +40,7 @@ CmdHistoryMonthly::CmdHistoryMonthly ()
 {
   _keyword     = "history.monthly";
   _usage       = "task <filter> history.monthly";
-  _description = STRING_CMD_HISTORY_USAGE_M;
+  _description = _("Shows a report of task history, by month");
   _read_only   = true;
   _displays_id = false;
 }
@@ -168,7 +168,7 @@ int CmdHistoryMonthly::execute (std::string& output)
     if (context.color ())
       row_color = Color (Color::nocolor, Color::nocolor, false, true, false);
 
-    view.set (row, 1, STRING_CMD_HISTORY_AVERAGE, row_color);
+    view.set (row, 1, _("Average"), row_color);
     view.set (row, 2, totalAdded     / (view.rows () - 2), row_color);
     view.set (row, 3, totalCompleted / (view.rows () - 2), row_color);
     view.set (row, 4, totalDeleted   / (view.rows () - 2), row_color);
@@ -182,7 +182,7 @@ int CmdHistoryMonthly::execute (std::string& output)
         << "\n";
   else
   {
-    context.footnote (STRING_FEEDBACK_NO_TASKS);
+    context.footnote (_("No tasks."));
     rc = 1;
   }
 
@@ -195,7 +195,7 @@ CmdHistoryAnnual::CmdHistoryAnnual ()
 {
   _keyword     = "history.annual";
   _usage       = "task <filter> history.annual";
-  _description = STRING_CMD_HISTORY_USAGE_A;
+  _description = _("Shows a report of task history, by year");
   _read_only   = true;
   _displays_id = false;
 }
@@ -319,7 +319,7 @@ int CmdHistoryAnnual::execute (std::string& output)
     if (context.color ())
       row_color = Color (Color::nocolor, Color::nocolor, false, true, false);
 
-    view.set (row, 0, STRING_CMD_HISTORY_AVERAGE, row_color);
+    view.set (row, 0, _("Average"), row_color);
     view.set (row, 1, totalAdded     / (view.rows () - 2), row_color);
     view.set (row, 2, totalCompleted / (view.rows () - 2), row_color);
     view.set (row, 3, totalDeleted   / (view.rows () - 2), row_color);
@@ -333,7 +333,7 @@ int CmdHistoryAnnual::execute (std::string& output)
         << "\n";
   else
   {
-    context.footnote (STRING_FEEDBACK_NO_TASKS);
+    context.footnote (_("No tasks."));
     rc = 1;
   }
 
@@ -346,7 +346,7 @@ CmdGHistoryMonthly::CmdGHistoryMonthly ()
 {
   _keyword     = "ghistory.monthly";
   _usage       = "task <filter> ghistory.monthly";
-  _description = STRING_CMD_GHISTORY_USAGE_M;
+  _description = _("Shows a graphical report of task history, by month");
   _read_only   = true;
   _displays_id = false;
 }
@@ -539,7 +539,7 @@ CmdGHistoryAnnual::CmdGHistoryAnnual ()
 {
   _keyword     = "ghistory.annual";
   _usage       = "task <filter> ghistory.annual";
-  _description = STRING_CMD_GHISTORY_USAGE_A;
+  _description = _("Shows a graphical report of task history, by year");
   _read_only   = true;
   _displays_id = false;
 }

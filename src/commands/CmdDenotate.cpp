@@ -40,7 +40,7 @@ CmdDenotate::CmdDenotate ()
 {
   _keyword     = "denotate";
   _usage       = "task <filter> denotate <pattern>";
-  _description = STRING_CMD_DENO_USAGE;
+  _description = _("Deletes an annotation");
   _read_only   = false;
   _displays_id = false;
 }

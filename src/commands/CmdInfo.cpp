@@ -42,7 +42,7 @@ CmdInfo::CmdInfo ()
 {
   _keyword     = "information";
   _usage       = "task <filter> information";
-  _description = STRING_CMD_INFO_USAGE;
+  _description = _("Shows all data and metadata");
   _read_only   = true;
 
   // This is inaccurate, but it does prevent a GC.  While this doesn't make a
@@ -64,7 +64,7 @@ int CmdInfo::execute (std::string& output)
 
   if (! filtered.size ())
   {
-    context.footnote (STRING_FEEDBACK_NO_MATCH);
+    context.footnote (_("No matches."));
     rc = 1;
   }
 
@@ -91,8 +91,8 @@ int CmdInfo::execute (std::string& output)
   {
     ViewText view;
     view.width (context.getWidth ());
-    view.add (Column::factory ("string", STRING_COLUMN_LABEL_NAME));
-    view.add (Column::factory ("string", STRING_COLUMN_LABEL_VALUE));
+    view.add (Column::factory ("string", _("Name")));
+    view.add (Column::factory ("string", _("Value")));
 
     // If an alternating row color is specified, notify the table.
     if (context.color ())
@@ -106,7 +106,7 @@ int CmdInfo::execute (std::string& output)
 
     // id
     int row = view.addRow ();
-    view.set (row, 0, STRING_COLUMN_LABEL_ID);
+    view.set (row, 0, _("ID"));
     view.set (row, 1, (task->id ? format (task->id) : "-"));
 
     std::string status = ucFirst (Task::statusToText (task->getStatus ()));
@@ -128,19 +128,19 @@ int CmdInfo::execute (std::string& output)
                    + ann->second;
 
     row = view.addRow ();
-    view.set (row, 0, STRING_COLUMN_LABEL_DESC);
+    view.set (row, 0, _("Description"));
     view.set (row, 1, description, c);
 
     // status
     row = view.addRow ();
-    view.set (row, 0, STRING_COLUMN_LABEL_STATUS);
+    view.set (row, 0, _("Status"));
     view.set (row, 1, status);
 
     // project
     if (task->has ("project"))
     {
       row = view.addRow ();
-      view.set (row, 0, STRING_COLUMN_LABEL_PROJECT);
+      view.set (row, 0, _("Project"));
       view.set (row, 1, task->get ("project"));
     }
 
@@ -148,7 +148,7 @@ int CmdInfo::execute (std::string& output)
     if (task->has ("priority"))
     {
       row = view.addRow ();
-      view.set (row, 0, STRING_COLUMN_LABEL_PRIORITY);
+      view.set (row, 0, _("Priority"));
       view.set (row, 1, task->get ("priority"));
     }
 
@@ -190,7 +190,7 @@ int CmdInfo::execute (std::string& output)
     if (task->has ("recur"))
     {
       row = view.addRow ();
-      view.set (row, 0, STRING_COLUMN_LABEL_RECUR_L);
+      view.set (row, 0, _("Recurrence"));
       view.set (row, 1, task->get ("recur"));
     }
 
@@ -198,7 +198,7 @@ int CmdInfo::execute (std::string& output)
     if (task->has ("until"))
     {
       row = view.addRow ();
-      view.set (row, 0, STRING_CMD_INFO_UNTIL);
+      view.set (row, 0, _("Until"));
       view.set (row, 1, Date (task->get_date ("until")).toString (dateformat));
     }
 
@@ -206,7 +206,7 @@ int CmdInfo::execute (std::string& output)
     if (task->getStatus () == Task::recurring)
     {
       row = view.addRow ();
-      view.set (row, 0, STRING_COLUMN_LABEL_MASK);
+      view.set (row, 0, _("Mask"));
       view.set (row, 1, task->get ("mask"));
     }
 
@@ -214,12 +214,12 @@ int CmdInfo::execute (std::string& output)
     {
       // parent
       row = view.addRow ();
-      view.set (row, 0, STRING_COLUMN_LABEL_PARENT);
+      view.set (row, 0, _("Parent task"));
       view.set (row, 1, task->get ("parent"));
 
       // imask
       row = view.addRow ();
-      view.set (row, 0, STRING_COLUMN_LABEL_MASK_IDX);
+      view.set (row, 0, _("Mask Index"));
       view.set (row, 1, task->get ("imask"));
     }
 
@@ -227,7 +227,7 @@ int CmdInfo::execute (std::string& output)
     if (task->has ("due"))
     {
       row = view.addRow ();
-      view.set (row, 0, STRING_COLUMN_LABEL_DUE);
+      view.set (row, 0, _("Due"));
       view.set (row, 1, Date (task->get_date ("due")).toString (dateformat));
     }
 
@@ -235,7 +235,7 @@ int CmdInfo::execute (std::string& output)
     if (task->has ("wait"))
     {
       row = view.addRow ();
-      view.set (row, 0, STRING_COLUMN_LABEL_WAITING);
+      view.set (row, 0, _("Waiting until"));
       view.set (row, 1, Date (task->get_date ("wait")).toString (dateformat));
     }
 
@@ -251,7 +251,7 @@ int CmdInfo::execute (std::string& output)
     if (task->has ("start"))
     {
       row = view.addRow ();
-      view.set (row, 0, STRING_COLUMN_LABEL_START);
+      view.set (row, 0, _("Start"));
       view.set (row, 1, Date (task->get_date ("start")).toString (dateformat));
     }
 
@@ -259,7 +259,7 @@ int CmdInfo::execute (std::string& output)
     if (task->has ("end"))
     {
       row = view.addRow ();
-      view.set (row, 0, STRING_COLUMN_LABEL_END);
+      view.set (row, 0, _("End"));
       view.set (row, 1, Date (task->get_date ("end")).toString (dateformat));
     }
 

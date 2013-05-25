@@ -40,7 +40,7 @@ CmdModify::CmdModify ()
 {
   _keyword     = "modify";
   _usage       = "task <filter> modify <mods>";
-  _description = STRING_CMD_MODIFY_USAGE1;
+  _description = _("Modifies the existing task with provided arguments.");
   _read_only   = false;
   _displays_id = false;
 }
@@ -119,7 +119,7 @@ int CmdModify::execute (std::string& output)
         {
           std::vector <Task> siblings = context.tdb2.siblings (*task);
           if (siblings.size () &&
-              confirm (STRING_CMD_MODIFY_RECUR))
+              confirm (_("This is a recurring task.  Do you want to modify all pending recurrences of this same task?")))
           {
             std::vector <Task>::iterator sibling;
             for (sibling = siblings.begin (); sibling != siblings.end (); ++sibling)
@@ -143,7 +143,7 @@ int CmdModify::execute (std::string& output)
         {
           std::vector <Task> children = context.tdb2.children (*task);
           if (children.size () &&
-              confirm (STRING_CMD_MODIFY_RECUR))
+              confirm (_("This is a recurring task.  Do you want to modify all pending recurrences of this same task?")))
           {
             std::vector <Task>::iterator child;
             for (child = children.begin (); child != children.end (); ++child)
