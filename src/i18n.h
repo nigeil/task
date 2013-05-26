@@ -40,6 +40,7 @@
 #define INCLUDED_I18N
 
 #include <cmake.h>
+#include <string.h>
 
 // Translators:
 //   Add more, as appropriate.
@@ -60,7 +61,7 @@
 #define _(String) gettext (String)
 #define sgettext(msgid) \
   ({ const char *__msgid = (msgid);            \
-     char *__msgstr = gettext (__msgid);       \
+     const char *__msgval = gettext (__msgid); \
      if (__msgval == __msgid)                  \
        __msgval = strrchr (__msgid, '|') + 1;  \
      __msgval; })
