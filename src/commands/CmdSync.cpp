@@ -186,27 +186,27 @@ int CmdSync::execute (std::string& output)
 
         // Present a clear status message.
         if (upload_count == 0 && download_count == 0)
-          context.footnote (STRING_CMD_SYNC_SUCCESS0);
+          context.footnote (_("Sync successful."));
         else if (upload_count == 0 && download_count > 0)
-          context.footnote (format (STRING_CMD_SYNC_SUCCESS2, download_count));
+          context.footnote (format (_("Sync successful.  {1} changes downloaded."), download_count));
         else if (upload_count > 0 && download_count == 0)
-          context.footnote (format (STRING_CMD_SYNC_SUCCESS1, upload_count));
+          context.footnote (format (_("Sync successful.  {1} changes uploaded."), upload_count));
         else if (upload_count > 0 && download_count > 0)
-          context.footnote (format (STRING_CMD_SYNC_SUCCESS3, upload_count, download_count));
+          context.footnote (format (_("Sync successful.  {1} changes uploaded, {2} changes downloaded."), upload_count, download_count));
       }
     }
     else if (code == "201")
     {
-      context.footnote (STRING_CMD_SYNC_SUCCESS_NOP);
+      context.footnote (_("Sync successful.  No changes."));
     }
     else if (code == "430")
     {
-      context.error (STRING_CMD_SYNC_FAIL_ACCOUNT);
+      context.error (_("Sync failed.  Either your credentials are incorrect, or your Task Server account is not enabled."));
       status = 2;
     }
     else
     {
-      context.error (format (STRING_CMD_SYNC_FAIL_ERROR,
+      context.error (format (_("Sync failed.  The Task Server returned error: {1} {2}"),
                              code,
                              response.get ("status")));
       status = 2;
@@ -232,7 +232,7 @@ int CmdSync::execute (std::string& output)
   //   - No signal/cable
   else
   {
-    context.error (STRING_CMD_SYNC_FAIL_CONNECT);
+    context.error (_("Sync failed.  Could not connect to the Task Server."));
     status = 1;
   }
 
@@ -252,7 +252,7 @@ int CmdSync::execute (std::string& output)
 
 #else
   // Without GnuTLS found at compile time, there is no working sync command.
-  throw std::string (STRING_CMD_SYNC_NO_TLS);
+  throw std::string (_("Taskwarrior was built without GnuTLS support.  Sync is not available."));
 #endif
   return status;
 }
@@ -267,7 +267,7 @@ bool CmdSync::send (
 #ifdef HAVE_LIBGNUTLS
   std::string::size_type colon = to.rfind (':');
   if (colon == std::string::npos)
-    throw format (STRING_CMD_SYNC_BAD_SERVER, to);
+    throw format (_("Sync failed.  Malformed configuration setting '{1}'"), to);
 
   std::string server = to.substr (0, colon);
   std::string port = to.substr (colon + 1);

@@ -327,20 +327,20 @@ int CmdShow::execute (std::string& output)
 
     if (context.color ())
       out << "  "
-          << format (STRING_CMD_SHOW_DIFFER_COLOR, warning.colorize ("color"))
+          << format (_("These are highlighted in {1} above."), warning.colorize ("color"))
           << "\n\n";
   }
 
   // Display the unrecognized variables.
   if (issue_error)
   {
-    out << STRING_CMD_SHOW_UNREC << "\n";
+    out << _("Your .taskrc file contains these unrecognized variables:") << "\n";
 
     for (i = unrecognized.begin (); i != unrecognized.end (); ++i)
       out << "  " << *i << "\n";
 
     if (context.color ())
-      out << "\n" << format (STRING_CMD_SHOW_DIFFER_COLOR, error.colorize ("color"));
+      out << "\n" << format (_("These are highlighted in {1} above."), error.colorize ("color"));
 
     out << "\n\n";
   }

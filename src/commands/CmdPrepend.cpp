@@ -128,7 +128,7 @@ int CmdPrepend::execute (std::string& output)
       context.footnote (i->second);
 
   context.tdb2.commit ();
-  feedback_affected (count == 1 ? STRING_CMD_PREPEND_1 : STRING_CMD_PREPEND_N, count);
+  feedback_affected (count == 1 ? _("Prepended {1} task.") : _("Prepended {1} tasks."), count);
   return rc;
 }
 

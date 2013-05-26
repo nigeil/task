@@ -79,7 +79,7 @@ int CmdModify::execute (std::string& output)
       if (task->has ("recur")  &&
           !task->has ("due")   &&
           !before.has ("due"))
-        throw std::string (STRING_CMD_MODIFY_NO_DUE);
+        throw std::string (_("You cannot specify a recurring task without a due date."));
 
       if (before.has ("recur") &&
           before.has ("due")   &&
@@ -129,7 +129,7 @@ int CmdModify::execute (std::string& output)
               updateRecurrenceMask (*sibling);
               dependencyChainOnModify (alternate, *sibling);
               ++count;
-              feedback_affected (STRING_CMD_MODIFY_TASK_R, *sibling);
+              feedback_affected (_("Modifying recurring task {1} '{2}'."), *sibling);
               feedback_unblocked (*sibling);
               context.tdb2.modify (*sibling);
               if (context.verbose ("project"))
@@ -156,14 +156,14 @@ int CmdModify::execute (std::string& output)
               if (context.verbose ("project"))
                 projectChanges[child->get ("project")] = onProjectChange (alternate, *child);
               ++count;
-              feedback_affected (STRING_CMD_MODIFY_TASK_R, *child);
+              feedback_affected (_("Modifying recurring task {1} '{2}'."), *child);
             }
           }
         }
       }
       else
       {
-        std::cout << STRING_CMD_MODIFY_NO << "\n";
+        std::cout << _("Task not modified.") << "\n";
         rc = 1;
         if (_permission_quit)
           break;
@@ -178,7 +178,7 @@ int CmdModify::execute (std::string& output)
       context.footnote (i->second);
 
   context.tdb2.commit ();
-  feedback_affected (count == 1 ? STRING_CMD_MODIFY_1 : STRING_CMD_MODIFY_N, count);
+  feedback_affected (count == 1 ? _("Modified {1} task.") : _("Modified {1} tasks."), count);
   return rc;
 }
 

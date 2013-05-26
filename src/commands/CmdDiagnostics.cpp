@@ -92,18 +92,18 @@ int CmdDiagnostics::execute (std::string& output)
 #elif defined (GNUHURD)
          "GNU/Hurd"
 #else
-         STRING_CMD_DIAG_UNKNOWN
+         _("<unknown>")
 #endif
       << "\n\n";
 
   // Compiler.
-  out << bold.colorize (STRING_CMD_DIAG_COMPILER)
+  out << bold.colorize (_("Compiler"))
       << "\n"
 #ifdef __VERSION__
-      << "    " << STRING_CMD_DIAG_VERSION << ": "
+      << "    " << _("Version") << ": "
       << __VERSION__ << "\n"
 #endif
-      << "       " << STRING_CMD_DIAG_CAPS << ":"
+      << "       " << _("Caps") << ":"
 #ifdef __STDC__
       << " +stdc"
 #endif
@@ -131,14 +131,14 @@ int CmdDiagnostics::execute (std::string& output)
       << " +vp" << sizeof (void*)
       << "\n\n";
 
-  out << bold.colorize (STRING_CMD_DIAG_FEATURES)
+  out << bold.colorize (_("Build Features"))
       << "\n"
 
   // Build date.
-      << "      " << STRING_CMD_DIAG_BUILT << ": " << __DATE__ << " " << __TIME__ << "\n"
-      << "     " << STRING_CMD_DIAG_COMMIT << ": " << COMMIT << "\n"
+      << "      " << _("Built") << ": " << __DATE__ << " " << __TIME__ << "\n"
+      << "     " << _("Commit") << ": " << COMMIT << "\n"
       << "      CMake: " << CMAKE_VERSION << "\n"
-      << "       " << STRING_CMD_DIAG_CAPS << ":"
+      << "       " << _("Caps") << ":"
 #ifdef HAVE_LIBPTHREAD
       << " +pthreads"
 #else
@@ -360,18 +360,18 @@ int CmdDiagnostics::execute (std::string& output)
     }
 
     out << "       Dups: "
-        << format (STRING_CMD_DIAG_UUID_SCAN, all.size ())
+        << format (_("Scanned {1} tasks for duplicate UUIDs:"), all.size ())
         << "\n";
 
     if (dups.size ())
     {
       std::vector <std::string>::iterator d;
       for (d = dups.begin (); d != dups.end (); ++d)
-        out << "             " << format (STRING_CMD_DIAG_UUID_DUP, *d) << "\n";
+        out << "             " << format (_("Found duplicate {1}"), *d) << "\n";
     }
     else
     {
-      out << "             " << STRING_CMD_DIAG_UUID_NO_DUP
+      out << "             " << _("No duplicates found")
           << "\n";
     }
   }

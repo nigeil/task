@@ -516,16 +516,16 @@ void Context::shadow ()
     // Check for dangerous shadow file settings.
     std::string location = config.get ("data.location");
     if (shadow_file._data == location + "/pending.data")
-      throw std::string (STRING_CONTEXT_SHADOW_P);
+      throw std::string (_("Configuration variable 'shadow.file' is set to " "overwrite your pending tasks.  Please change it."));
 
     if (shadow_file._data == location + "/completed.data")
-      throw std::string (STRING_CONTEXT_SHADOW_C);
+      throw std::string (_("Configuration variable 'shadow.file' is set to " "overwrite your completed tasks.  Please change it."));
 
     if (shadow_file._data == location + "/undo.data")
-      throw std::string (STRING_CONTEXT_SHADOW_U);
+      throw std::string (_("Configuration variable 'shadow.file' is set to " "overwrite your undo log.  Please change it."));
 
     if (shadow_file._data == location + "/backlog.data")
-      throw std::string (STRING_CONTEXT_SHADOW_B);
+      throw std::string (_("Configuration variable 'shadow.file' is set to " "overwrite your backlog file.  Please change it."));
 
     // Compose the command.  Put the rc overrides up front, so that they may
     // be overridden by rc.shadow.command.
@@ -545,7 +545,7 @@ void Context::shadow ()
     // Optionally display a notification that the shadow file was updated.
     // TODO Convert to a verbosity token.
     if (config.getBoolean ("shadow.notify"))
-      footnote (format (STRING_CONTEXT_SHADOW_UPDATE, shadow_file._data));
+      footnote (format (_("[Shadow file '{1}' updated.]"), shadow_file._data));
   }
 }
 
@@ -585,8 +585,8 @@ void Context::createDefaultConfig ()
   if (! rc_file.exists ())
   {
     if (config.getBoolean ("confirmation") &&
-        !confirm (format (STRING_CONTEXT_CREATE_RC, home_dir, rc_file._data)))
-      throw std::string (STRING_CONTEXT_NEED_RC);
+        !confirm (format (_("A configuration file could not be found in {1}nnWould you like a sample {2} created, so taskwarrior can proceed?"), home_dir, rc_file._data)))
+      throw std::string (_("Cannot proceed without rc file."));
 
     config.createDefaultRC (rc_file, data_dir._original);
   }

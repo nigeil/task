@@ -42,7 +42,7 @@ CmdUDAs::CmdUDAs ()
 {
   _keyword     = "udas";
   _usage       = "task          udas";
-  _description = STRING_CMD_UDAS_USAGE;
+  _description = _("Shows all the defined UDA details");
   _read_only   = true;
   _displays_id = false;
 }
@@ -81,12 +81,12 @@ int CmdUDAs::execute (std::string& output)
     // possible default value, and finally the usage count.
     ViewText view;
     view.width (context.getWidth ());
-    view.add (Column::factory ("string", STRING_COLUMN_LABEL_UDA));
-    view.add (Column::factory ("string", STRING_COLUMN_LABEL_TYPE));
-    view.add (Column::factory ("string", STRING_COLUMN_LABEL_LABEL));
-    view.add (Column::factory ("string", STRING_COLUMN_LABEL_VALUES));
-    view.add (Column::factory ("string", STRING_COLUMN_LABEL_DEFAULT));
-    view.add (Column::factory ("string", STRING_COLUMN_LABEL_UDACOUNT));
+    view.add (Column::factory ("string", _("Name")));
+    view.add (Column::factory ("string", _("Type")));
+    view.add (Column::factory ("string", _("Label")));
+    view.add (Column::factory ("string", _("Allowed Values")));
+    view.add (Column::factory ("string", _("Default")));
+    view.add (Column::factory ("string", _("Usage Count")));
 
     std::vector <std::string>::iterator uda;
     for (uda = udas.begin (); uda != udas.end (); ++uda)
@@ -118,13 +118,13 @@ int CmdUDAs::execute (std::string& output)
         << view.render ()
         << optionalBlankLine ()
         << (udas.size () == 1
-              ? format (STRING_CMD_UDAS_SUMMARY,  udas.size ())
-              : format (STRING_CMD_UDAS_SUMMARY2, udas.size ()))
+              ? format (_("{1} UDA defined"),  udas.size ())
+              : format (_("{1} UDAs defined"), udas.size ()))
         << "\n";
   }
   else
   {
-    out << STRING_CMD_UDAS_NO << "\n";
+    out << _("No UDAs defined.") << "\n";
     rc = 1;
   }
 
@@ -145,8 +145,8 @@ int CmdUDAs::execute (std::string& output)
     // Display the orphans and their counts.
     ViewText orphanView;
     orphanView.width (context.getWidth ());
-    orphanView.add (Column::factory ("string", STRING_COLUMN_LABEL_ORPHAN));
-    orphanView.add (Column::factory ("string", STRING_COLUMN_LABEL_UDACOUNT));
+    orphanView.add (Column::factory ("string", _("Orphan UDA")));
+    orphanView.add (Column::factory ("string", _("Usage Count")));
 
     std::map <std::string, int>::iterator o;
     for (o = orphans.begin (); o != orphans.end (); ++o)
@@ -160,8 +160,8 @@ int CmdUDAs::execute (std::string& output)
         << orphanView.render ()
         << optionalBlankLine ()
         << (udas.size () == 1
-              ? format (STRING_CMD_UDAS_ORPHAN,  orphans.size ())
-              : format (STRING_CMD_UDAS_ORPHANS, orphans.size ()))
+              ? format (_("{1} Orphan UDA"),  orphans.size ())
+              : format (_("{1} Orphan UDAs"), orphans.size ()))
         << "\n";
   }
 
@@ -174,7 +174,7 @@ CmdCompletionUDAs::CmdCompletionUDAs ()
 {
   _keyword     = "_udas";
   _usage       = "task          _udas";
-  _description = STRING_CMD_UDAS_COMPL_USAGE;
+  _description = _("Shows the defined UDAs for completion purposes");
   _read_only   = true;
   _displays_id = false;
 }

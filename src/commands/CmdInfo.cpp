@@ -164,7 +164,7 @@ int CmdInfo::execute (std::string& output)
           message << it->id << " " << it->get ("description") << "\n";
 
         row = view.addRow ();
-        view.set (row, 0, STRING_CMD_INFO_BLOCKED);
+        view.set (row, 0, _("This task blocked by"));
         view.set (row, 1, message.str ());
       }
     }
@@ -181,7 +181,7 @@ int CmdInfo::execute (std::string& output)
           message << it->id << " " << it->get ("description") << "\n";
 
         row = view.addRow ();
-        view.set (row, 0, STRING_CMD_INFO_BLOCKING);
+        view.set (row, 0, _("This task is blocking"));
         view.set (row, 1, message.str ());
       }
     }
@@ -243,7 +243,7 @@ int CmdInfo::execute (std::string& output)
     if (task->has ("scheduled"))
     {
       row = view.addRow ();
-      view.set (row, 0, STRING_COLUMN_LABEL_SCHED);
+      view.set (row, 0, _("Scheduled"));
       view.set (row, 1, Date (task->get_date ("scheduled")).toString (dateformat));
     }
 
@@ -272,19 +272,19 @@ int CmdInfo::execute (std::string& output)
       join (allTags, " ", tags);
 
       row = view.addRow ();
-      view.set (row, 0, STRING_COLUMN_LABEL_TAGS);
+      view.set (row, 0, _("Tags"));
       view.set (row, 1, allTags);
     }
 
     // uuid
     row = view.addRow ();
-    view.set (row, 0, STRING_COLUMN_LABEL_UUID);
+    view.set (row, 0, _("UUID"));
     std::string uuid = task->get ("uuid");
     view.set (row, 1, uuid);
 
     // entry
     row = view.addRow ();
-    view.set (row, 0, STRING_COLUMN_LABEL_ENTERED);
+    view.set (row, 0, _("Entered"));
     Date dt (task->get_date ("entry"));
     std::string entry = dt.toString (dateformat);
 
@@ -300,14 +300,14 @@ int CmdInfo::execute (std::string& output)
 
     // Task::urgency
     row = view.addRow ();
-    view.set (row, 0, STRING_COLUMN_LABEL_URGENCY);
+    view.set (row, 0, _("Urgency"));
     view.set (row, 1, trimLeft (format (task->urgency (), 4, 4)));
 
     // modified
     if (task->has ("modified"))
     {
       row = view.addRow ();
-      view.set (row, 0, STRING_CMD_INFO_MODIFIED);
+      view.set (row, 0, _("Last modified"));
 
       Date mod (task->get_date ("modified"));
 
@@ -368,8 +368,8 @@ int CmdInfo::execute (std::string& output)
     }
 
     journal.width (context.getWidth ());
-    journal.add (Column::factory ("string", STRING_COLUMN_LABEL_DATE));
-    journal.add (Column::factory ("string", STRING_CMD_INFO_MODIFICATION));
+    journal.add (Column::factory ("string", _("Date")));
+    journal.add (Column::factory ("string", _("Modification")));
 
     if (context.config.getBoolean ("journal.info") &&
         undo.size () > 3)

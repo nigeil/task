@@ -60,7 +60,7 @@ int CmdTimesheet::execute (std::string& output)
   // What day of the week does the user consider the first?
   int weekStart = Date::dayOfWeek (context.config.get ("weekstart"));
   if (weekStart != 0 && weekStart != 1)
-    throw std::string (STRING_DATE_BAD_WEEKSTART);
+    throw std::string (_("The 'weekstart' configuration variable may only contain 'Sunday' or 'Monday'."));
 
   // Determine the date of the first day of the most recent report.
   Date today;
@@ -96,9 +96,9 @@ int CmdTimesheet::execute (std::string& output)
     ViewText completed;
     completed.width (context.getWidth ());
     completed.add (Column::factory ("string",       "   "));
-    completed.add (Column::factory ("string",       STRING_COLUMN_LABEL_PROJECT));
-    completed.add (Column::factory ("string.right", STRING_COLUMN_LABEL_DUE));
-    completed.add (Column::factory ("string",       STRING_COLUMN_LABEL_DESC));
+    completed.add (Column::factory ("string",       _("Project")));
+    completed.add (Column::factory ("string.right", _("Due")));
+    completed.add (Column::factory ("string",       _("Description")));
 
     std::vector <Task>::iterator task;
     for (task = all.begin (); task != all.end (); ++task)
@@ -143,7 +143,7 @@ int CmdTimesheet::execute (std::string& output)
       }
     }
 
-    out << "  " << format (STRING_CMD_TIMESHEET_DONE, completed.rows ()) << "\n";
+    out << "  " << format (_("Completed ({1} tasks)"), completed.rows ()) << "\n";
 
     if (completed.rows ())
       out << completed.render ()
@@ -153,9 +153,9 @@ int CmdTimesheet::execute (std::string& output)
     ViewText started;
     started.width (context.getWidth ());
     started.add (Column::factory ("string",       "   "));
-    started.add (Column::factory ("string",       STRING_COLUMN_LABEL_PROJECT));
-    started.add (Column::factory ("string.right", STRING_COLUMN_LABEL_DUE));
-    started.add (Column::factory ("string",       STRING_COLUMN_LABEL_DESC));
+    started.add (Column::factory ("string",       _("Project")));
+    started.add (Column::factory ("string.right", _("Due")));
+    started.add (Column::factory ("string",       _("Description")));
 
     for (task = all.begin (); task != all.end (); ++task)
     {
@@ -200,7 +200,7 @@ int CmdTimesheet::execute (std::string& output)
       }
     }
 
-    out << "  " << format (STRING_CMD_TIMESHEET_STARTED, started.rows ()) << "\n";
+    out << "  " << format (_("Started ({1} tasks)"), started.rows ()) << "\n";
 
     if (started.rows ())
       out << started.render ()

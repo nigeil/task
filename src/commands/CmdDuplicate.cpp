@@ -134,7 +134,7 @@ int CmdDuplicate::execute (std::string& output)
       context.footnote (i->second);
 
   context.tdb2.commit ();
-  feedback_affected (count == 1 ? STRING_CMD_DUPLICATE_1 : STRING_CMD_DUPLICATE_N, count);
+  feedback_affected (count == 1 ? _("Duplicated {1} task.") : _("Duplicated {1} tasks."), count);
   return rc;
 }
 

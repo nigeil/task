@@ -91,8 +91,8 @@ int CmdTags::execute (std::string& output)
     // Render a list of tags names from the map.
     ViewText view;
     view.width (context.getWidth ());
-    view.add (Column::factory ("string", STRING_COLUMN_LABEL_TAG));
-    view.add (Column::factory ("string.right", STRING_COLUMN_LABEL_COUNT));
+    view.add (Column::factory ("string", _("Tag")));
+    view.add (Column::factory ("string.right", _("Count")));
 
     Color bold ("bold");
     bool special = false;
@@ -116,14 +116,14 @@ int CmdTags::execute (std::string& output)
         << optionalBlankLine ();
 
     if (unique.size () == 1)
-      context.footnote (STRING_CMD_TAGS_SINGLE);
+      context.footnote (_("1 tag"));
     else
-      context.footnote (format (STRING_CMD_TAGS_PLURAL, unique.size ()));
+      context.footnote (format (_("{1} tags"), unique.size ()));
 
     if (quantity == 1)
-      context.footnote (STRING_FEEDBACK_TASKS_SINGLE);
+      context.footnote (_("(1 task)"));
     else
-      context.footnote (format (STRING_FEEDBACK_TASKS_PLURAL, quantity));
+      context.footnote (format (_("({1} tasks)"), quantity));
 
     out << "\n";
   }

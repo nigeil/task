@@ -96,12 +96,12 @@ int CmdHistoryMonthly::execute (std::string& output)
   // Now build the view.
   ViewText view;
   view.width (context.getWidth ());
-  view.add (Column::factory ("string",       STRING_CMD_HISTORY_YEAR));
-  view.add (Column::factory ("string",       STRING_CMD_HISTORY_MONTH));
-  view.add (Column::factory ("string.right", STRING_CMD_HISTORY_ADDED));
-  view.add (Column::factory ("string.right", STRING_CMD_HISTORY_COMP));
-  view.add (Column::factory ("string.right", STRING_CMD_HISTORY_DEL));
-  view.add (Column::factory ("string.right", STRING_CMD_HISTORY_NET));
+  view.add (Column::factory ("string",       _("Year")));
+  view.add (Column::factory ("string",       _("Month")));
+  view.add (Column::factory ("string.right", _("Added")));
+  view.add (Column::factory ("string.right", _("Completed")));
+  view.add (Column::factory ("string.right", _("Deleted")));
+  view.add (Column::factory ("string.right", _("Net")));
 
   int totalAdded     = 0;
   int totalCompleted = 0;
@@ -250,11 +250,11 @@ int CmdHistoryAnnual::execute (std::string& output)
   // Now build the view.
   ViewText view;
   view.width (context.getWidth ());
-  view.add (Column::factory ("string",       STRING_CMD_HISTORY_YEAR));
-  view.add (Column::factory ("string.right", STRING_CMD_HISTORY_ADDED));
-  view.add (Column::factory ("string.right", STRING_CMD_HISTORY_COMP));
-  view.add (Column::factory ("string.right", STRING_CMD_HISTORY_DEL));
-  view.add (Column::factory ("string.right", STRING_CMD_HISTORY_NET));
+  view.add (Column::factory ("string",       _("Year")));
+  view.add (Column::factory ("string.right", _("Added")));
+  view.add (Column::factory ("string.right", _("Completed")));
+  view.add (Column::factory ("string.right", _("Deleted")));
+  view.add (Column::factory ("string.right", _("Net")));
 
   int totalAdded     = 0;
   int totalCompleted = 0;
@@ -403,9 +403,9 @@ int CmdGHistoryMonthly::execute (std::string& output)
   // Now build the view.
   ViewText view;
   view.width (context.getWidth ());
-  view.add (Column::factory ("string",            STRING_CMD_GHISTORY_YEAR));
-  view.add (Column::factory ("string",            STRING_CMD_GHISTORY_MONTH));
-  view.add (Column::factory ("string.left_fixed", STRING_CMD_GHISTORY_NUMBER));
+  view.add (Column::factory ("string",            _("Year")));
+  view.add (Column::factory ("string",            _("Month")));
+  view.add (Column::factory ("string.left_fixed", _("Number Added/Completed/Deleted")));
 
   Color color_add    (context.config.get ("color.history.add"));
   Color color_done   (context.config.get ("color.history.done"));
@@ -514,10 +514,10 @@ int CmdGHistoryMonthly::execute (std::string& output)
         << "\n";
 
     if (context.color ())
-      out << format (STRING_CMD_HISTORY_LEGEND,
-                     color_add.colorize (STRING_CMD_HISTORY_ADDED),
-                     color_done.colorize (STRING_CMD_HISTORY_COMP),
-                     color_delete.colorize (STRING_CMD_HISTORY_DEL))
+      out << format (_("Legend: {1}, {2}, {3}"),
+                     color_add.colorize (_("Added")),
+                     color_done.colorize (_("Completed")),
+                     color_delete.colorize (_("Deleted")))
           << optionalBlankLine ()
           << "\n";
     else
@@ -596,8 +596,8 @@ int CmdGHistoryAnnual::execute (std::string& output)
   // Now build the view.
   ViewText view;
   view.width (context.getWidth ());
-  view.add (Column::factory ("string",            STRING_CMD_GHISTORY_YEAR));
-  view.add (Column::factory ("string.left_fixed", STRING_CMD_GHISTORY_NUMBER));
+  view.add (Column::factory ("string",            _("Year")));
+  view.add (Column::factory ("string.left_fixed", _("Number Added/Completed/Deleted")));
 
   Color color_add    (context.config.get ("color.history.add"));
   Color color_done   (context.config.get ("color.history.done"));
@@ -704,10 +704,10 @@ int CmdGHistoryAnnual::execute (std::string& output)
         << "\n";
 
     if (context.color ())
-      out << format (STRING_CMD_HISTORY_LEGEND,
-                     color_add.colorize (STRING_CMD_HISTORY_ADDED),
-                     color_done.colorize (STRING_CMD_HISTORY_COMP),
-                     color_delete.colorize (STRING_CMD_HISTORY_DEL))
+      out << format (_("Legend: {1}, {2}, {3}"),
+                     color_add.colorize (_("Added")),
+                     color_done.colorize (_("Completed")),
+                     color_delete.colorize (_("Deleted")))
           << optionalBlankLine ()
           << "\n";
     else

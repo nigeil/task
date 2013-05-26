@@ -105,7 +105,7 @@ int CmdDone::execute (std::string& output)
       }
       else
       {
-        std::cout << STRING_CMD_DONE_NO << "\n";
+        std::cout << _("Task not completed.") << "\n";
         rc = 1;
         if (_permission_quit)
           break;
@@ -113,7 +113,7 @@ int CmdDone::execute (std::string& output)
     }
     else
     {
-      std::cout << format (STRING_CMD_DONE_NOTPEND,
+      std::cout << format (_("Task {1} '{2}' is neither pending nor waiting."),
                            task->id,
                            task->get ("description"))
                 << "\n";
@@ -128,7 +128,7 @@ int CmdDone::execute (std::string& output)
       context.footnote (i->second);
 
   context.tdb2.commit ();
-  feedback_affected (count == 1 ? STRING_CMD_DONE_1 : STRING_CMD_DONE_N, count);
+  feedback_affected (count == 1 ? _("Completed {1} task.") : _("Completed {1} tasks."), count);
   return rc;
 }
 

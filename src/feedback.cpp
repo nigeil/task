@@ -98,7 +98,7 @@ std::string taskDifferences (const Task& before, const Task& after)
   std::vector <std::string>::iterator name;
   for (name = beforeOnly.begin (); name != beforeOnly.end (); ++name)
     out << "  - "
-        << format (STRING_FEEDBACK_DELETED, ucFirst (*name))
+        << format (_("{1} will be deleted."), ucFirst (*name))
         << "\n";
 
   for (name = afterOnly.begin (); name != afterOnly.end (); ++name)
@@ -111,12 +111,12 @@ std::string taskDifferences (const Task& before, const Task& after)
       join (to, ", ", deps_after);
 
       out << "  - "
-          << format (STRING_FEEDBACK_DEP_SET, to)
+          << format (_("Dependencies will be set to '{1}'."), to)
           << "\n";
     }
     else
       out << "  - "
-          << format (STRING_FEEDBACK_ATT_SET,
+          << format (_("{1} will be set to '{2}'."),
                      ucFirst (*name),
                      renderAttribute (*name, after.get (*name)))
           << "\n";
@@ -144,12 +144,12 @@ std::string taskDifferences (const Task& before, const Task& after)
         join (to, ", ", deps_after);
 
         out << "  - "
-            << format (STRING_FEEDBACK_DEP_MOD, from, to)
+            << format (_("Dependencies will be changed from '{1}' to '{2}'."), from, to)
             << "\n";
       }
       else
         out << "  - "
-            << format (STRING_FEEDBACK_ATT_MOD,
+            << format (_("{1} will be changed from '{2}' to '{3}'."),
                        ucFirst (*name),
                        renderAttribute (*name, before.get (*name)),
                        renderAttribute (*name, after.get (*name)))
@@ -196,23 +196,23 @@ std::string taskInfoDifferences (const Task& before, const Task& after, const st
         std::string from;
         join (from, ", ", deps_before);
 
-        out << format (STRING_FEEDBACK_DEP_DEL, from)
+        out << format (_("Dependencies '{1}' deleted."), from)
             << "\n";
     }
     else if (name->substr (0, 11) == "annotation_")
     {
-      out << format (STRING_FEEDBACK_ANN_DEL, before.get (*name))
+      out << format (_("Annotation '{1}' deleted."), before.get (*name))
           << "\n";
     }
     else if (*name == "start")
     {
-      out << format (STRING_FEEDBACK_ATT_DEL_DUR, ucFirst (*name),
+      out << format (_("{1} deleted (duration: {2})."), ucFirst (*name),
                      Duration(current_timestamp - last_timestamp).formatPrecise())
           << "\n";
     }
     else
     {
-      out << format (STRING_FEEDBACK_ATT_DEL, ucFirst (*name))
+      out << format (_("{1} deleted."), ucFirst (*name))
           << "\n";
     }
   }
@@ -226,12 +226,12 @@ std::string taskInfoDifferences (const Task& before, const Task& after, const st
       std::string to;
       join (to, ", ", deps_after);
 
-      out << format (STRING_FEEDBACK_DEP_WAS_SET, to)
+      out << format (_("Dependencies set to '{1}'."), to)
           << "\n";
     }
     else if (name->substr (0, 11) == "annotation_")
     {
-      out << format (STRING_FEEDBACK_ANN_ADD, after.get (*name))
+      out << format (_("Annotation of '{1}' added."), after.get (*name))
           << "\n";
     }
     else
@@ -239,7 +239,7 @@ std::string taskInfoDifferences (const Task& before, const Task& after, const st
       if (*name == "start")
           last_timestamp = current_timestamp;
 
-      out << format (STRING_FEEDBACK_ATT_WAS_SET,
+      out << format (_("{1} set to '{2}'."),
                      ucFirst (*name),
                      renderAttribute (*name, after.get (*name), dateformat))
           << "\n";
@@ -263,16 +263,16 @@ std::string taskInfoDifferences (const Task& before, const Task& after, const st
         std::string to;
         join (to, ", ", deps_after);
 
-        out << format (STRING_FEEDBACK_DEP_WAS_MOD, from, to)
+        out << format (_("Dependencies changed from '{1}' to '{2}'."), from, to)
             << "\n";
       }
       else if (name->substr (0, 11) == "annotation_")
       {
-        out << format (STRING_FEEDBACK_ANN_WAS_MOD, after.get (*name))
+        out << format (_("Annotation changed to '{1}'."), after.get (*name))
             << "\n";
       }
       else
-        out << format (STRING_FEEDBACK_ATT_WAS_MOD,
+        out << format (_("{1} changed from '{2}' to '{3}'."),
                        ucFirst (*name),
                        renderAttribute (*name, before.get (*name), dateformat),
                        renderAttribute (*name, after.get (*name), dateformat))
@@ -408,14 +408,14 @@ void feedback_unblocked (const Task& task)
       if (blocking.size () == 0)
       {
         if (i->id)
-          std::cout << format (STRING_FEEDBACK_UNBLOCKED,
+          std::cout << format (_("Unblocked {1} '{2}'."),
                                i->id,
                                i->get ("description"))
                     << "\n";
         else
         {
           std::string uuid = i->get ("uuid");
-          std::cout << format (STRING_FEEDBACK_UNBLOCKED,
+          std::cout << format (_("Unblocked {1} '{2}'."),
                                i->get ("uuid"),
                                i->get ("description"))
                     << "\n";
@@ -505,7 +505,7 @@ std::string onExpiration (Task& task)
   std::stringstream msg;
 
   if (context.verbose ("affected"))
-    msg << format (STRING_FEEDBACK_EXPIRED, task.id, task.get ("description"));
+    msg << format (_("Task {1} '{2}' expired and was deleted."), task.id, task.get ("description"));
 
   return msg.str ();
 }

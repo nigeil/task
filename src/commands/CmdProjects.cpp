@@ -111,12 +111,12 @@ int CmdProjects::execute (std::string& output)
     // Render a list of project names from the map.
     ViewText view;
     view.width (context.getWidth ());
-    view.add (Column::factory ("string",       STRING_COLUMN_LABEL_PROJECT));
-    view.add (Column::factory ("string.right", STRING_COLUMN_LABEL_TASKS));
-    view.add (Column::factory ("string.right", STRING_CMD_PROJECTS_PRI_N));
-    view.add (Column::factory ("string.right", STRING_CMD_PROJECTS_PRI_L));
-    view.add (Column::factory ("string.right", STRING_CMD_PROJECTS_PRI_M));
-    view.add (Column::factory ("string.right", STRING_CMD_PROJECTS_PRI_H));
+    view.add (Column::factory ("string",       _("Project")));
+    view.add (Column::factory ("string.right", _("Tasks")));
+    view.add (Column::factory ("string.right", _("Pri:None")));
+    view.add (Column::factory ("string.right", _("Pri:L")));
+    view.add (Column::factory ("string.right", _("Pri:M")));
+    view.add (Column::factory ("string.right", _("Pri:H")));
 
     std::vector <std::string> processed;
     std::map <std::string, int>::iterator project;
@@ -154,12 +154,12 @@ int CmdProjects::execute (std::string& output)
         << view.render ()
         << optionalBlankLine ()
         << (number_projects == 1
-              ? format (STRING_CMD_PROJECTS_SUMMARY,  number_projects)
-              : format (STRING_CMD_PROJECTS_SUMMARY2, number_projects))
+              ? format (_("{1} project"),  number_projects)
+              : format (_("{1} projects"), number_projects))
         << " "
         << (quantity == 1
-              ? format (STRING_CMD_PROJECTS_TASK,  quantity)
-              : format (STRING_CMD_PROJECTS_TASKS, quantity))
+              ? format (_("({1} task)"),  quantity)
+              : format (_("({1} tasks)"), quantity))
         << "\n";
   }
   else
