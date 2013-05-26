@@ -177,14 +177,14 @@ std::string Taskmod::toString ()
   assert (_bAfterSet);
 
   std::stringstream stream;
-  stream << STRING_TASKMOD_TIME << _timestamp << "\n";
+  stream << _("time ") << _timestamp << "\n";
 
   if (_bBeforeSet)
   {
-    stream << STRING_TASKMOD_OLD << _before.composeF4();
+    stream << _("old ") << _before.composeF4();
   }
 
-  stream << STRING_TASKMOD_NEW << _after.composeF4();
+  stream << _("new ") << _after.composeF4();
   stream << "---\n";
 
   return stream.str ();

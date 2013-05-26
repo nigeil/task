@@ -58,7 +58,7 @@ int CmdHelp::execute (std::string& output)
   int row = view.addRow ();
   view.set (row, 0, _("Usage:"));
   view.set (row, 1, "task");
-  view.set (row, 2, _("Runs rc.default.command, if specified.")); // STRING_CMD_HELP_USAGE_DESC
+  view.set (row, 2, _("Runs rc.default.command, if specified."));
 
   // Obsolete method of getting a list of all commands.
   std::vector <std::string> all;

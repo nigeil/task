@@ -1436,7 +1436,7 @@ void Task::validate (bool applyDefault /* = true */)
     if (priority != "H" &&
         priority != "M" &&
         priority != "L")
-      throw format (STRING_TASK_VALID_PRIORITY, priority);
+      throw format (_("Priority values may be 'H', 'M' or 'L', not '{1}'."), priority);
   }
 }
 

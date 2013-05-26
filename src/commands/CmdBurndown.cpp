@@ -458,9 +458,12 @@ std::string Chart::render ()
   }
 
   // Legend.
-  grid.replace (LOC (graph_height / 2 - 1, width - 10), 10, "DD " + leftJustify (STRING_CMD_BURN_DONE,    7));
-  grid.replace (LOC (graph_height / 2,     width - 10), 10, "SS " + leftJustify (STRING_CMD_BURN_STARTED, 7));
-  grid.replace (LOC (graph_height / 2 + 1, width - 10), 10, "PP " + leftJustify (STRING_CMD_BURN_PENDING, 7));
+  // TRANSLATORS: Keep these status descriptions to 7 or fewer characters.
+  grid.replace (LOC (graph_height / 2 - 1, width - 10), 10, "DD " + leftJustify (_("Done"),    7));
+  // TRANSLATORS: Keep these status descriptions to 7 or fewer characters.
+  grid.replace (LOC (graph_height / 2,     width - 10), 10, "SS " + leftJustify (_("Started"), 7));
+  // TRANSLATORS: Keep these status descriptions to 7 or fewer characters.
+  grid.replace (LOC (graph_height / 2 + 1, width - 10), 10, "PP " + leftJustify (_("Pending"), 7));
 
   // Determine y-axis labelling.
   std::vector <int> labels;

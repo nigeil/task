@@ -947,7 +947,8 @@ void TDB2::merge (const std::string& mergeFile)
               // which one is newer?
               if (tmod_r > tmod_l)
               {
-                std::cout << format (STRING_TDB2_REMOTE_CHANGE,
+                // TRANSLATORS: Please use arbitrary, but fixed width before {1}. 
+                std::cout << format (_("Found remote change to        {1}  \"{2}\""),
                                      (context.color () ? colorChanged.colorize (uuid) : uuid),
                                      cutOff (tmod_r.getBefore ().get ("description"), 10))
                           << "\n";
@@ -963,7 +964,8 @@ void TDB2::merge (const std::string& mergeFile)
               }
               else
               {
-                std::cout << format (STRING_TDB2_LOCAL_CHANGE,
+                // TRANSLATORS: Please use arbitrary, but fixed width before {1}. 
+                std::cout << format (_("Retaining local changes to    {1}  \"{2}\""),
                                      (context.color () ? colorChanged.colorize (uuid) : uuid),
                                      cutOff (tmod_l.getBefore ().get ("description"), 10))
                           << "\n";
@@ -1149,7 +1151,8 @@ void TDB2::merge (const std::string& mergeFile)
             if (it->find ("uuid:\"" + uuid) != std::string::npos)
             {
               // Update the pending record.
-              std::cout << format (STRING_TDB2_REMOTE_CHANGE,
+              // TRANSLATORS: Please use arbitrary, but fixed width before {1}. 
+              std::cout << format (_("Found remote change to        {1}  \"{2}\""),
                                    (context.color () ? colorChanged.colorize (uuid) : uuid),
                                    cutOff (tmod.getBefore ().get ("description"), 10))
                         << "\n";
@@ -1184,7 +1187,8 @@ void TDB2::merge (const std::string& mergeFile)
 
         if (!found)
         {
-          std::cout << format (STRING_TDB2_MISSING,
+          // TRANSLATORS: Please use arbitrary, but fixed width before {1}. 
+          std::cout << format (_("Missing                       {1}  \"{2}\""),
                                (context.color () ? colorRejected.colorize (uuid) : uuid),
                                cutOff (tmod.getBefore ().get ("description"), 10))
                     << "\n";
@@ -1210,7 +1214,8 @@ void TDB2::merge (const std::string& mergeFile)
 
         if (!found)
         {
-          std::cout << format (STRING_TDB2_MERGING,
+          // TRANSLATORS: Please use arbitrary, but fixed width before {1}. 
+          std::cout << format (_("Merging new remote task       {1}  \"{2}\""),
                                (context.color () ? colorAdded.colorize (uuid) : uuid),
                                cutOff (tmod.getAfter ().get ("description"), 10))
                     << "\n";
@@ -1298,7 +1303,7 @@ void TDB2::revert ()
   if (context.config.get ("undo.style") == "side")
   {
     std::cout << "\n"
-              << format (STRING_TDB2_LAST_MOD, lastChange.toString ())
+              << format (_("The last modification was made {1}"), lastChange.toString ())
               << "\n";
 
     // Attributes are all there is, so figure the different attribute names
@@ -1408,12 +1413,14 @@ void TDB2::revert ()
     view.add (Column::factory ("string", ""));
 
     int row = view.addRow ();
-    view.set (row, 0, STRING_TDB2_DIFF_PREV, color_red);
-    view.set (row, 1, STRING_TDB2_DIFF_PREV_DESC, color_red);
+    // TRANSLATORS: Pad to same width as '+++ current state '.
+    view.set (row, 0, _("--- previous state"), color_red);
+    view.set (row, 1, _("Undo will restore this state"), color_red);
 
     row = view.addRow ();
-    view.set (row, 0, STRING_TDB2_DIFF_CURR, color_green);  // Note trailing space.
-    view.set (row, 1, format (STRING_TDB2_DIFF_CURR_DESC,
+    // TRANSLATORS: Pad to same width as '--- previous state'.
+    view.set (row, 0, _("+++ current state "), color_green);  // Note trailing space.
+    view.set (row, 1, format (_("Change made {1}"),
                               lastChange.toString (context.config.get ("dateformat"))),
                       color_green);
 
@@ -1515,7 +1522,7 @@ void TDB2::revert ()
   if (uuidAtt != std::string::npos)
     uuid = current.substr (uuidAtt, 43); // 43 = uuid:"..."
   else
-    throw std::string (STRING_TDB2_MISSING_UUID);
+    throw std::string (_("Cannot locate UUID in task to undo."));
 
   // load pending.data
   std::vector <std::string> p = pending.get_lines ();
@@ -1597,7 +1604,8 @@ void TDB2::revert ()
 
   // Perhaps user hand-edited the data files?
   // Perhaps the task was in completed.data, which was still in file format 3?
-  std::cout << format (STRING_TDB2_MISSING_TASK, uuid.substr (6, 36))
+  // TRANSLATORS: Please use arbitrary, but fixed width before {1}. 
+  std::cout << format (_("Task with UUID {1} not found in data."), uuid.substr (6, 36))
             << "\n"
             << _("No undo possible.")
             << "\n";

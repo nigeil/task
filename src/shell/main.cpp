@@ -60,11 +60,17 @@ int main (int argc, const char** argv)
   srand (tv.tv_usec);
 #endif
 
+  std::string usage = _(
+    "Usage: tasksh [<commands-file>]    Execute task commands inside <commands-file> if given,\n" \
+    "                                   or otherwise, start interactive task shell.\n" \
+    "       tasksh --version            Print task version.\n" \
+    "       tasksh --help               Print this help.\n");
+
   bool read_from_file = false;
 
   if (argc > 2)
   {
-    std::cout << STRING_SHELL_USAGE << "\n";
+    std::cout << usage << "\n";
     return -1;
   }
   else if (argc == 2)
@@ -76,7 +82,7 @@ int main (int argc, const char** argv)
     }
     else if (!strcmp (argv[1], "--help"))
     {
-      std::cout << STRING_SHELL_USAGE << "\n";
+      std::cout << usage << "\n";
       return 0;
     }
     else
@@ -85,8 +91,9 @@ int main (int argc, const char** argv)
       File input_file = File (argv[1]);
       if (!input_file.exists ())
       {
-        std::cout << STRING_SHELL_NO_FILE;
-        std::cout << STRING_SHELL_USAGE << "\n";
+        std::cout << _("Input file does not exist.") << "\n";
+        std::cout << usage << "\n";
+
         return -1;
       }
 
@@ -118,9 +125,10 @@ int main (int argc, const char** argv)
     std::cout << (context.color () ? bold.colorize (PACKAGE_STRING)
                                    : PACKAGE_STRING)
               << " shell\n\n"
-              << _("Enter any task command (such as 'list'), or hit 'Enter'.") << '\n'
-              << _("There is no need to include the 'task' command itself.") << '\n'
-              << _("Enter 'quit' (or 'bye', 'exit') to end the session.") << "\n\n";
+              << _("Enter any task command (such as 'list'), or hit 'Enter'.\n" \
+                   "There is no need to include the 'task' command itself.\n" \
+                   "Enter 'quit' (or 'bye', 'exit') to end the session.\n")
+              << "\n";
   }
 
   // Make a copy because context.clear will delete them.
