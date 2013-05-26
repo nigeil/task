@@ -517,10 +517,6 @@
 #define STRING_CMD_BURN_DONE         "Hechas"              // Must be 7 or fewer characters
 #define STRING_CMD_BURN_PENDING      "Pend."               // Must be 7 or fewer characters
 #define STRING_CMD_BURN_NO_CONVERGE  "No converge"
-#define STRING_CMD_HELP_USAGE        "Muestra este texto de ayuda al uso"
-#define STRING_CMD_HELP_USAGE_LABEL  "Uso:"
-#define STRING_CMD_HELP_USAGE_DESC   "Lanza rc.default.command, si está especificado."
-#define STRING_CMD_HELP_ALIASED      "Es alias de '{1}'"
 #define STRING_CMD_CAL_USAGE         "Muestra un calendario con las tareas fechadas resaltadas"
 #define STRING_CMD_CAL_BAD_MONTH     "El argumento '{1}' no es un mes válido."
 #define STRING_CMD_CAL_BAD_ARG       "No se pudo reconocer el argumento '{1}'."
@@ -880,112 +876,6 @@
  y 
   "  task add -- project:Casa necesita programación\n" 
   "  task add -- project:Home needs scheduling\n" */
- #define STRING_CMD_HELP_TEXT \
-  "La documentación de Taskwarrior se puede consultar usando 'man task', 'man taskrc'" \
-  "man task-tutorial', 'man task-color', 'man task-faq', 'man task-synch o en " \
-  "http://taskwarrior.org\n" \
-  "\n" \
-  "La forma general para los comandos es:\n" \
-  "  task [<filter>] <command> [<mods>]\n" \
-  "\n" \
-  "<filter> consiste en cero o más restricciones sobre qué tareas seleccionar, " \
-  "como en:\n" \
-  "  task                                      <command> <mods>\n" \
-  "  task 28                                   <command> <mods>\n" \
-  "  task +weekend                             <command> <mods>\n" \
-  "  task project:Home due.before:today        <command> <mods>\n" \
-  "  task ebeeab00-ccf8-464b-8b58-f7f2d606edfb <command> <mods>\n" \
-  "\n" \
-  "Por defecto, los elementos filtro son combinados con un operador 'and' implícito, pero " \
-  "'or' y 'xor' también se pueden usar, siempre que se incluyan paréntesis:\n" \
-  "  task '(/[Cc]at|[Dd]og/ or /[0-9]+/)'      <command> <mods>\n" \
-  "\n" \
-  "Un filtro puede dirigirse a tareas específicas mediante números ID o UUID. Para especificar " \
-  "múltiples tareas use una de estas formas:\n" \
-  "  task 1,2,3                                    delete\n" \
-  "  task 1-3                                      info\n" \
-  "  task 1,2-5,19                                 modify pri:H\n" \
-  "  task 4-7 ebeeab00-ccf8-464b-8b58-f7f2d606edfb info\n" \
-  "\n" \
-  "<mods> consiste en cero o más cambios para aplicar a las tareas seleccionadas, " \
-  "como en:\n" \
-  "  task <filter> <command> project:Home\n" \
-  "  task <filter> <command> +weekend +garden due:tomorrow\n" \
-  "  task <filter> <command> Description/annotation text\n" \
-  "\n" \
-  "Las marcas son palabras arbitrarias, en cualquier número:\n" \
-  "  +marca     El + significa añade la marca\n" \
-  "  -marca     El - significa quita la marca\n" \
-  "\n" \
-  "Son atributos internos:\n" \
-  "  description:    Texto descriptivo de la tarea\n" \
-  "  status:         Estatus de la tarea - pendiente, completada, eliminada, esperando\n" \
-  "  project:        Nombre del proyecto\n" \
-  "  priority:       Prioridad\n" \
-  "  due:            Fecha de vencimiento\n" \
-  "  recur:          Frecuencia de recurrencia\n" \
-  "  until:          Fecha de caducidad de la tarea\n" \
-  "  limit:          Número de filas deseado en un informe, o 'page'\n" \
-  "  wait:           Fecha en la que la tarea se transforma en pendiente\n" \
-  "  entry:          Fecha en la que la tarea fue creada\n" \
-  "  end:            Fecha en la que la tarea fue completada/eliminada\n" \
-  "  start:          Fecha en la que la tarea fue comenzada\n" \
-  "  scheduled:      Fecha programada para que la tarea comience\n" \
-  "  depends:        Otras tareas de las que esta tarea depende\n" \
-  "\n" \
-  "Los modificadores de atributos hacen a los filtros más precisos. Modificadores soportados son:\n" \
-  "  before     (sinónimos under, below)\n" \
-  "  after      (sinónimos over, above)\n" \
-  "  none\n" \
-  "  any\n" \
-  "  is         (sinónimo equals)\n" \
-  "  isnt       (sinónimo not)\n" \
-  "  has        (sinónimo contains)\n" \
-  "  hasnt\n" \
-  "  startswith (sinónimo left)\n" \
-  "  endswith   (sinónimo right)\n" \
-  "  word\n" \
-  "  noword\n" \
-  "\n" \
-  "Soporte de expresiones algebraicas alternativas:\n" \
-  "  and  or  xor            Operadores lógicos\n" \
-  "  <  <=  =  !=  >=  >     Operadores relacionales\n" \
-  "  (  )                    Precedencia\n" \
-  "\n" \
-  "  task due.before:eom priority.not:L   list\n" \
-  "  task '(due < eom or priority != L)'  list\n" \
-  "\n" \
-  "El archivo .taskrc por defecto puede ser sobreescrito mediante:\n" \
-  "  task ... rc:<alternate file> ...\n" \
-  "  task ... rc:~/.alt_taskrc ...\n" \
-  "\n" \
-  "Los valores en .taskrc (u otro) pueden ser sobreescritos mediante:\n" \
-  "  task ... rc.<name>=<value> ...\n" \
-  "  task rc.color=off list\n" \
-  "\n" \
-  "Cualquier nombre de comando o atributo puede ser abreviado mientras permanezca único:\n" \
-  "  task list project:Home\n" \
-  "  task li       pro:Home\n" \
-  "\n" \
-  "Algunas descripciones de tarea necesitan ser escapadas debido al entorno de comandos:\n" \
-  "  task add \"quoted ' quote\"\n" \
-  "  task add escaped \\' quote\n" \
-  "\n" \
-  "El argumento -- indica a taskwarrior que trate todos los restantes argumentos como descripción, incluso " \
-  "aunque de otra manera hubieran sido argumentos o marcas:\n" \
-  "  task add -- project:Home needs scheduling\n" \
-  "\n" \
-  "Muchos caracteres tienen significado especial para el entorno de comandos, incluyendo:\n" \
-  "  $ ! ' \" ( ) ; \\ ` * ? { } [ ] < > | & % # ~\n" \
-  "\n"
-
-/*
-  To be included later, before the 'precendence' line.
- 
-  "  +  -                    Addition, subtraction\n" \
-  "  !                       Inversion\n" \
-  "  ~  !~                   Match, no match\n" \
-*/
 
 // util
 #define STRING_UTIL_CONFIRM_YN       " (yes/no) "
