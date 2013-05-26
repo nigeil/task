@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: task 2.3.0\n"
 "Report-Msgid-Bugs-To: Taskwarrior team <support@taskwarrior.org>\n"
-"POT-Creation-Date: 2013-05-26 12:24-0400\n"
+"POT-Creation-Date: 2013-05-26 15:48-0400\n"
 "PO-Revision-Date: 2013-05-25 12:33+0200\n"
 "Last-Translator: Fidel Mato <fidel@iq.uva.es>\n"
 "Language-Team: Spanish\n"
@@ -33,8 +33,55 @@ msgstr ""
 msgid " in {1} at line {2}"
 msgstr ""
 
+#: ../src/commands/CmdEdit.cpp:186
+msgid ""
+"# -----------------  ----------------------------------------------------\n"
+msgstr ""
+
+#: ../src/commands/CmdEdit.cpp:216 ../src/commands/CmdEdit.cpp:215
+msgid ""
+"# Annotations look like this: <date> -- <text> and there can be any number "
+"of them.\n"
+"# The ' -- ' separator between the date and text field should not be "
+"removed.\n"
+"# A \"blank slot\" for adding an annotation follows for your convenience.\n"
+msgstr ""
+
+#: ../src/commands/CmdEdit.cpp:185
+msgid "# Name               Editable details\n"
+msgstr ""
+
+#: ../src/commands/CmdEdit.cpp:184
+msgid ""
+"# Name               Editable details\n"
+"# -----------------  ----------------------------------------------------\n"
+msgstr ""
+
+#: ../src/commands/CmdEdit.cpp:167
+msgid ""
+"# The 'task <id> edit' command allows you to modify all aspects of a task\n"
+"# using a text editor.  Below is a representation of all the task details.\n"
+"# Modify what you wish, and when you save and quit your editor,\n"
+"# taskwarrior will read this file, determine what changed, and apply\n"
+"# those changes.  If you exit your editor without saving or making\n"
+"# modifications, taskwarrior will do nothing.\n"
+"#\n"
+"# Lines that begin with # represent data you cannot change, like ID.\n"
+"# If you get too creative with your editing, taskwarrior will send you\n"
+"# back to the editor to try again.\n"
+"#\n"
+"# Should you find yourself in an endless loop, re-editing the same file,\n"
+"# just quit the editor without making any changes.  Taskwarrior will\n"
+"# notice this and stop the editing.\n"
+"#\n"
+msgstr ""
+
 #: ../src/Date.cpp:149
 msgid "'{1}' is not a valid date in the '{2}' format."
+msgstr ""
+
+#: ../src/commands/CmdTags.cpp:124
+msgid "(1 task)"
 msgstr ""
 
 #: ../src/commands/CmdDiagnostics.cpp:196
@@ -59,14 +106,34 @@ msgstr ""
 msgid "({1} of {2} tasks remaining)."
 msgstr ""
 
+#: ../src/commands/CmdProjects.cpp:161
+msgid "({1} task)"
+msgstr ""
+
+#: ../src/commands/CmdProjects.cpp:162 ../src/commands/CmdTags.cpp:126
+msgid "({1} tasks)"
+msgstr ""
+
 #: ../src/commands/CmdColumns.cpp:99
 msgid ""
 "* Means default format, and therefore optional.  For example, 'due' and 'due."
 "formatted' are equivalent."
 msgstr ""
 
+#: ../src/TDB2.cpp:1422
+msgid "+++ current state "
+msgstr ""
+
+#: ../src/TDB2.cpp:1417
+msgid "--- previous state"
+msgstr ""
+
 #: ../src/commands/CmdDiagnostics.cpp:340
 msgid "-none-"
+msgstr ""
+
+#: ../src/commands/CmdTags.cpp:119
+msgid "1 tag"
 msgstr ""
 
 #: ../src/commands/CmdDiagnostics.cpp:335
@@ -81,7 +148,7 @@ msgstr ""
 msgid "256-color usage (supports underline):"
 msgstr ""
 
-#: ../src/DOM.cpp:132
+#: ../src/DOM.cpp:132 ../src/commands/CmdDiagnostics.cpp:95
 #, fuzzy
 msgid "<unknown>"
 msgstr "desconocido"
@@ -90,11 +157,18 @@ msgstr "desconocido"
 msgid "A \"blank slot\" for adding an annotation follows for your convenience."
 msgstr ""
 
+#: ../src/Context.cpp:588
+msgid ""
+"A configuration file could not be found in {1}nnWould you like a sample {2} "
+"created, so taskwarrior can proceed?"
+msgstr ""
+
 #: ../src/Task.cpp:1422
 msgid "A recurring task must also have a 'due' date."
 msgstr ""
 
-#: ../src/commands/CmdEdit.cpp:548
+#: ../src/commands/CmdEdit.cpp:548 ../src/commands/CmdEdit.cpp:550
+#: ../src/commands/CmdEdit.cpp:549
 msgid "A recurring task must have a due date."
 msgstr ""
 
@@ -104,6 +178,11 @@ msgstr ""
 
 #: ../src/Task.cpp:1416
 msgid "A task must have a description."
+msgstr ""
+
+#: ../src/commands/CmdHistory.cpp:101 ../src/commands/CmdHistory.cpp:254
+#: ../src/commands/CmdHistory.cpp:518 ../src/commands/CmdHistory.cpp:708
+msgid "Added"
 msgstr ""
 
 #: ../src/commands/CmdAnnotate.cpp:66 ../src/commands/CmdAppend.cpp:66
@@ -140,6 +219,10 @@ msgstr ""
 msgid "All supported columns and formatting styles"
 msgstr ""
 
+#: ../src/commands/CmdUDAs.cpp:87
+msgid "Allowed Values"
+msgstr ""
+
 #: ../src/text.cpp:557
 msgid "Ambiguous {1} '{2}' - could be either of "
 msgstr ""
@@ -166,12 +249,29 @@ msgstr ""
 msgid "Annotating task {1} '{2}'."
 msgstr ""
 
+#: ../src/feedback.cpp:204
+msgid "Annotation '{1}' deleted."
+msgstr ""
+
+#: ../src/feedback.cpp:271
+#, fuzzy
+msgid "Annotation changed to '{1}'."
+msgstr "Es alias de '{1}'"
+
 #: ../src/Task.cpp:581
 msgid "Annotation is missing a description: {1}"
 msgstr ""
 
 #: ../src/Task.cpp:578
 msgid "Annotation is missing an entry date: {1}"
+msgstr ""
+
+#: ../src/feedback.cpp:234
+msgid "Annotation of '{1}' added."
+msgstr ""
+
+#: ../src/commands/CmdStats.cpp:186
+msgid "Annotations"
 msgstr ""
 
 #: ../src/commands/CmdEdit.cpp:214
@@ -226,6 +326,18 @@ msgstr ""
 msgid "Average"
 msgstr ""
 
+#: ../src/commands/CmdStats.cpp:275
+msgid "Average desc length"
+msgstr ""
+
+#: ../src/commands/CmdStats.cpp:268
+msgid "Average time pending"
+msgstr ""
+
+#: ../src/commands/CmdSummary.cpp:125
+msgid "Avg age"
+msgstr ""
+
 #: ../src/commands/CmdColor.cpp:143
 msgid "Basic colors"
 msgstr ""
@@ -234,11 +346,27 @@ msgstr ""
 msgid "Before you write your letter home"
 msgstr ""
 
+#: ../src/commands/CmdStats.cpp:198
+msgid "Blocked tasks"
+msgstr ""
+
+#: ../src/commands/CmdStats.cpp:202
+msgid "Blocking tasks"
+msgstr ""
+
+#: ../src/commands/CmdDiagnostics.cpp:134
+msgid "Build Features"
+msgstr ""
+
+#: ../src/commands/CmdDiagnostics.cpp:138
+msgid "Built"
+msgstr ""
+
 #: ../src/commands/CmdBurndown.cpp:440
 msgid "Burndown"
 msgstr ""
 
-#: ../src/Config.cpp:515
+#: ../src/Config.cpp:515 ../src/Config.cpp:513
 msgid "Can only include files with absolute paths, not '{1}'"
 msgstr ""
 
@@ -250,6 +378,14 @@ msgstr ""
 msgid "Cannot add task because the uuid '{1}' is not unique."
 msgstr ""
 
+#: ../src/TDB2.cpp:1525
+msgid "Cannot locate UUID in task to undo."
+msgstr ""
+
+#: ../src/Context.cpp:589
+msgid "Cannot proceed without rc file."
+msgstr ""
+
 #: ../src/commands/CmdPull.cpp:78
 msgid "Cannot pull files when the source and destination are the same."
 msgstr ""
@@ -258,16 +394,36 @@ msgstr ""
 msgid "Cannot push files when the source and destination are the same."
 msgstr ""
 
-#: ../src/commands/CmdEdit.cpp:493
+#: ../src/commands/CmdEdit.cpp:493 ../src/commands/CmdEdit.cpp:495
+#: ../src/commands/CmdEdit.cpp:494
 msgid "Cannot remove a due date from a recurring task."
 msgstr ""
 
-#: ../src/commands/CmdEdit.cpp:378
+#: ../src/commands/CmdEdit.cpp:378 ../src/commands/CmdEdit.cpp:380
+#: ../src/commands/CmdEdit.cpp:379
 msgid "Cannot remove creation date."
 msgstr ""
 
-#: ../src/commands/CmdEdit.cpp:362
+#: ../src/commands/CmdEdit.cpp:362 ../src/commands/CmdEdit.cpp:364
+#: ../src/commands/CmdEdit.cpp:363
 msgid "Cannot remove description."
+msgstr ""
+
+#: ../src/commands/CmdEdit.cpp:426 ../src/commands/CmdEdit.cpp:425
+msgid "Cannot set a done date on a pending task."
+msgstr ""
+
+#: ../src/commands/CmdDiagnostics.cpp:106
+#: ../src/commands/CmdDiagnostics.cpp:141
+msgid "Caps"
+msgstr ""
+
+#: ../src/commands/CmdStats.cpp:158
+msgid "Category"
+msgstr ""
+
+#: ../src/TDB2.cpp:1423
+msgid "Change made {1}"
 msgstr ""
 
 #: ../src/commands/CmdConfig.cpp:43
@@ -296,12 +452,42 @@ msgstr ""
 msgid "Command prevented from running."
 msgstr ""
 
+#: ../src/commands/CmdDiagnostics.cpp:139
+msgid "Commit"
+msgstr ""
+
+#: ../src/commands/CmdDiagnostics.cpp:100
+msgid "Compiler"
+msgstr ""
+
+#: ../src/commands/CmdSummary.cpp:126
+msgid "Complete"
+msgstr ""
+
 #: ../src/commands/CmdDone.cpp:79
 msgid "Complete task {1} '{2}'?"
 msgstr ""
 
+#: ../src/commands/CmdHistory.cpp:102 ../src/commands/CmdHistory.cpp:255
+#: ../src/commands/CmdHistory.cpp:519 ../src/commands/CmdHistory.cpp:709
+#: ../src/commands/CmdStats.cpp:174
+msgid "Completed"
+msgstr ""
+
+#: ../src/commands/CmdTimesheet.cpp:146
+msgid "Completed ({1} tasks)"
+msgstr ""
+
 #: ../src/commands/CmdDone.cpp:98
 msgid "Completed task {1} '{2}'."
+msgstr ""
+
+#: ../src/commands/CmdDone.cpp:131
+msgid "Completed {1} task."
+msgstr ""
+
+#: ../src/commands/CmdDone.cpp:131
+msgid "Completed {1} tasks."
 msgstr ""
 
 #: ../src/commands/CmdShow.cpp:265
@@ -335,7 +521,7 @@ msgstr ""
 msgid "Configuration error: {1} contains an unrecognized value '{2}'."
 msgstr ""
 
-#: ../src/Config.cpp:451
+#: ../src/Config.cpp:451 ../src/Config.cpp:449
 msgid ""
 "Configuration file nested to more than 10 levels deep - this has to be a "
 "mistake."
@@ -343,6 +529,30 @@ msgstr ""
 
 #: ../src/A3.cpp:457
 msgid "Configuration override rc.{1}:{2}"
+msgstr ""
+
+#: ../src/Context.cpp:528
+msgid ""
+"Configuration variable 'shadow.file' is set to overwrite your backlog file.  "
+"Please change it."
+msgstr ""
+
+#: ../src/Context.cpp:522
+msgid ""
+"Configuration variable 'shadow.file' is set to overwrite your completed "
+"tasks.  Please change it."
+msgstr ""
+
+#: ../src/Context.cpp:519
+msgid ""
+"Configuration variable 'shadow.file' is set to overwrite your pending "
+"tasks.  Please change it."
+msgstr ""
+
+#: ../src/Context.cpp:525
+msgid ""
+"Configuration variable 'shadow.file' is set to overwrite your undo log.  "
+"Please change it."
 msgstr ""
 
 #: ../src/Task.cpp:948 ../src/Task.cpp:966
@@ -358,11 +568,11 @@ msgid "Could not parse uri '{1}', wrong usage of single quotes."
 msgstr ""
 
 #: ../src/TDB2.cpp:701 ../src/TDB2.cpp:713 ../src/TDB2.cpp:1078
-#: ../src/TDB2.cpp:1081
+#: ../src/TDB2.cpp:1081 ../src/TDB2.cpp:1080 ../src/TDB2.cpp:1083
 msgid "Could not read '{1}'."
 msgstr ""
 
-#: ../src/Config.cpp:512
+#: ../src/Config.cpp:512 ../src/Config.cpp:510
 msgid "Could not read include file '{1}'."
 msgstr ""
 
@@ -379,11 +589,16 @@ msgid "Could not run '{1}': {2}.  Are you out of system resources?"
 msgstr ""
 
 #: ../src/TDB2.cpp:1232 ../src/TDB2.cpp:1236 ../src/TDB2.cpp:1254
+#: ../src/TDB2.cpp:1237 ../src/TDB2.cpp:1241 ../src/TDB2.cpp:1259
 msgid "Could not write '{1}'."
 msgstr ""
 
-#: ../src/Config.cpp:555
+#: ../src/Config.cpp:555 ../src/Config.cpp:553
 msgid "Could not write to '{1}'."
+msgstr ""
+
+#: ../src/commands/CmdTags.cpp:95
+msgid "Count"
 msgstr ""
 
 #: ../src/commands/CmdCount.cpp:41
@@ -394,7 +609,8 @@ msgstr ""
 msgid "Created task {1}."
 msgstr ""
 
-#: ../src/commands/CmdEdit.cpp:373
+#: ../src/commands/CmdEdit.cpp:373 ../src/commands/CmdEdit.cpp:375
+#: ../src/commands/CmdEdit.cpp:374
 msgid "Creation date modified."
 msgstr ""
 
@@ -402,7 +618,7 @@ msgstr ""
 msgid "Curl failed, see output above."
 msgstr ""
 
-#: ../src/TDB2.cpp:1311
+#: ../src/TDB2.cpp:1311 ../src/TDB2.cpp:1316
 msgid "Current Values"
 msgstr ""
 
@@ -422,8 +638,30 @@ msgstr ""
 msgid "Daily"
 msgstr ""
 
-#: ../src/commands/CmdMerge.cpp:99 ../src/TDB2.cpp:1050
+#: ../src/commands/CmdStats.cpp:159
+msgid "Data"
+msgstr ""
+
+#: ../src/commands/CmdStats.cpp:206
+msgid "Data size"
+msgstr ""
+
+#: ../src/commands/CmdMerge.cpp:99 ../src/TDB2.cpp:1050 ../src/TDB2.cpp:1052
 msgid "Database is up-to-date, no merge required."
+msgstr ""
+
+#: ../src/commands/CmdInfo.cpp:371
+msgid "Date"
+msgstr ""
+
+#: ../src/commands/CmdUDAs.cpp:88
+msgid "Default"
+msgstr ""
+
+#: ../src/commands/CmdHistory.cpp:103 ../src/commands/CmdHistory.cpp:256
+#: ../src/commands/CmdHistory.cpp:520 ../src/commands/CmdHistory.cpp:710
+#: ../src/commands/CmdStats.cpp:178
+msgid "Deleted"
 msgstr ""
 
 #: ../src/commands/CmdDelete.cpp:167
@@ -452,10 +690,39 @@ msgstr ""
 msgid "Denotate task {1} '{2}'?"
 msgstr ""
 
-#: ../src/commands/CmdEdit.cpp:250
+#: ../src/commands/CmdDenotate.cpp:150
+msgid "Denotated {1} task."
+msgstr ""
+
+#: ../src/commands/CmdDenotate.cpp:150
+msgid "Denotated {1} tasks."
+msgstr ""
+
+#: ../src/feedback.cpp:199
+msgid "Dependencies '{1}' deleted."
+msgstr ""
+
+#: ../src/feedback.cpp:266
+msgid "Dependencies changed from '{1}' to '{2}'."
+msgstr ""
+
+#: ../src/feedback.cpp:229
+msgid "Dependencies set to '{1}'."
+msgstr ""
+
+#: ../src/commands/CmdEdit.cpp:250 ../src/commands/CmdEdit.cpp:252
+#: ../src/commands/CmdEdit.cpp:251
 msgid ""
 "Dependencies should be a comma-separated list of task IDs/UUIDs or ID "
 "ranges, with no spaces."
+msgstr ""
+
+#: ../src/feedback.cpp:147
+msgid "Dependencies will be changed from '{1}' to '{2}'."
+msgstr ""
+
+#: ../src/feedback.cpp:114
+msgid "Dependencies will be set to '{1}'."
 msgstr ""
 
 #: ../src/legacy.cpp:66
@@ -466,12 +733,18 @@ msgstr ""
 msgid "Deprecated sort field '{1}' used.  Please modify this to '{2}'."
 msgstr ""
 
-#: ../src/commands/CmdReports.cpp:89
+#: ../src/commands/CmdReports.cpp:89 ../src/commands/CmdTimesheet.cpp:101
+#: ../src/commands/CmdTimesheet.cpp:158
 msgid "Description"
 msgstr ""
 
-#: ../src/commands/CmdEdit.cpp:358
+#: ../src/commands/CmdEdit.cpp:358 ../src/commands/CmdEdit.cpp:360
+#: ../src/commands/CmdEdit.cpp:359
 msgid "Description modified."
+msgstr ""
+
+#: ../src/commands/CmdDenotate.cpp:138
+msgid "Did not find any matching annotation to be deleted for '{1}'."
 msgstr ""
 
 #: ../src/commands/CmdDiagnostics.cpp:219
@@ -710,11 +983,22 @@ msgstr ""
 "taskrc', 'man task-tutorial', 'man task-color', 'man task-sync' y 'man task-"
 "faq' o en http://taskwarrior.org"
 
+#: ../src/commands/CmdBurndown.cpp:462
+msgid "Done"
+msgstr ""
+
+#: ../src/commands/CmdTimesheet.cpp:100 ../src/commands/CmdTimesheet.cpp:157
+msgid "Due"
+msgstr ""
+
 #: ../src/commands/CmdEdit.cpp:476 ../src/commands/CmdEdit.cpp:482
+#: ../src/commands/CmdEdit.cpp:478 ../src/commands/CmdEdit.cpp:484
+#: ../src/commands/CmdEdit.cpp:477 ../src/commands/CmdEdit.cpp:483
 msgid "Due date modified."
 msgstr ""
 
-#: ../src/commands/CmdEdit.cpp:497
+#: ../src/commands/CmdEdit.cpp:497 ../src/commands/CmdEdit.cpp:499
+#: ../src/commands/CmdEdit.cpp:498
 msgid "Due date removed."
 msgstr ""
 
@@ -726,15 +1010,25 @@ msgstr ""
 msgid "Duplicated task {1} '{2}'."
 msgstr ""
 
+#: ../src/commands/CmdDuplicate.cpp:137
+msgid "Duplicated {1} task."
+msgstr ""
+
+#: ../src/commands/CmdDuplicate.cpp:137
+msgid "Duplicated {1} tasks."
+msgstr ""
+
 #: ../src/commands/CmdDuplicate.cpp:43
 msgid "Duplicates the specified tasks"
 msgstr ""
 
-#: ../src/commands/CmdEdit.cpp:795
+#: ../src/commands/CmdEdit.cpp:795 ../src/commands/CmdEdit.cpp:797
+#: ../src/commands/CmdEdit.cpp:796
 msgid "Editing complete."
 msgstr ""
 
-#: ../src/commands/CmdEdit.cpp:805
+#: ../src/commands/CmdEdit.cpp:805 ../src/commands/CmdEdit.cpp:807
+#: ../src/commands/CmdEdit.cpp:806
 msgid "Edits were detected."
 msgstr ""
 
@@ -751,8 +1045,17 @@ msgstr ""
 msgid "Enabled"
 msgstr ""
 
-#: ../src/commands/CmdEdit.cpp:303
+#: ../src/commands/CmdEdit.cpp:303 ../src/commands/CmdEdit.cpp:305
+#: ../src/commands/CmdEdit.cpp:304
 msgid "End"
+msgstr ""
+
+#: ../src/commands/CmdEdit.cpp:421 ../src/commands/CmdEdit.cpp:420
+msgid "End date modified."
+msgstr ""
+
+#: ../src/commands/CmdEdit.cpp:432 ../src/commands/CmdEdit.cpp:431
+msgid "End date removed."
 msgstr ""
 
 #: ../src/shell/main.cpp:123
@@ -763,11 +1066,23 @@ msgstr ""
 msgid "Enter any task command (such as 'list'), or hit 'Enter'."
 msgstr ""
 
+#: ../src/shell/main.cpp:128
+msgid ""
+"Enter any task command (such as 'list'), or hit 'Enter'.\n"
+"There is no need to include the 'task' command itself.\n"
+"Enter 'quit' (or 'bye', 'exit') to end the session.\n"
+msgstr ""
+
+#: ../src/commands/CmdInfo.cpp:287
+msgid "Entered"
+msgstr ""
+
 #: ../src/TLSClient.cpp:112
 msgid "Error initializing TLS."
 msgstr ""
 
-#: ../src/commands/CmdEdit.cpp:822
+#: ../src/commands/CmdEdit.cpp:822 ../src/commands/CmdEdit.cpp:824
+#: ../src/commands/CmdEdit.cpp:823
 msgid "Error: "
 msgstr ""
 
@@ -823,8 +1138,20 @@ msgstr ""
 msgid "Failed - duplicate UUID at iteration {1}"
 msgstr ""
 
+#: ../src/commands/CmdDenotate.cpp:124
+msgid "Found annotation '{1}' and deleted it."
+msgstr ""
+
+#: ../src/commands/CmdDiagnostics.cpp:370
+msgid "Found duplicate {1}"
+msgstr ""
+
 #: ../src/E9.cpp:212
 msgid "Found extra operands."
+msgstr ""
+
+#: ../src/TDB2.cpp:951 ../src/TDB2.cpp:1155
+msgid "Found remote change to        {1}  \"{2}\""
 msgstr ""
 
 #: ../src/commands/CmdAliases.cpp:43
@@ -851,6 +1178,10 @@ msgstr ""
 msgid "If you are playing in the match this afternoon"
 msgstr ""
 
+#: ../src/commands/CmdEdit.cpp:176
+msgid "If you get too creative with your editing, taskwarrior will send you"
+msgstr ""
+
 #: ../src/columns/ColDescription.cpp:67
 msgid "If you're not getting your hair cut"
 msgstr ""
@@ -871,6 +1202,10 @@ msgstr ""
 msgid "Imports JSON files"
 msgstr ""
 
+#: ../src/shell/main.cpp:94
+msgid "Input file does not exist."
+msgstr ""
+
 #: ../src/commands/CmdInstall.cpp:40
 msgid "Installs extensions and external scripts"
 msgstr ""
@@ -887,11 +1222,20 @@ msgstr ""
 msgid "Inverted range 'high-low' instead of 'low-high'"
 msgstr ""
 
+#: ../src/commands/CmdUDAs.cpp:86
+msgid "Label"
+msgstr ""
+
+#: ../src/commands/CmdInfo.cpp:310
+msgid "Last modified"
+msgstr ""
+
 #: ../src/commands/CmdEdit.cpp:49
 msgid "Launches an editor to modify a task directly"
 msgstr ""
 
-#: ../src/commands/CmdEdit.cpp:791
+#: ../src/commands/CmdEdit.cpp:791 ../src/commands/CmdEdit.cpp:793
+#: ../src/commands/CmdEdit.cpp:792
 msgid "Launching '{1}' now..."
 msgstr ""
 
@@ -899,8 +1243,16 @@ msgstr ""
 msgid "Legend: + added, X completed, - deleted"
 msgstr ""
 
+#: ../src/commands/CmdHistory.cpp:517 ../src/commands/CmdHistory.cpp:707
+msgid "Legend: {1}, {2}, {3}"
+msgstr ""
+
 #: ../src/Task.cpp:722
 msgid "Line too short."
+msgstr ""
+
+#: ../src/commands/CmdEdit.cpp:175
+msgid "Lines that begin with # represent data you cannot change, like ID."
 msgstr ""
 
 #: ../src/commands/CmdConfig.cpp:180
@@ -931,7 +1283,7 @@ msgstr ""
 msgid "Malformed UUID."
 msgstr ""
 
-#: ../src/Config.cpp:518
+#: ../src/Config.cpp:518 ../src/Config.cpp:516
 msgid "Malformed entry '{1}' in config file."
 msgstr ""
 
@@ -955,8 +1307,16 @@ msgstr ""
 msgid "Merges the remote files with the local files"
 msgstr ""
 
+#: ../src/TDB2.cpp:1218
+msgid "Merging new remote task       {1}  \"{2}\""
+msgstr ""
+
 #: ../src/A3.cpp:1268 ../src/A3.cpp:1296
 msgid "Mismatched parentheses in expression"
+msgstr ""
+
+#: ../src/TDB2.cpp:1191
+msgid "Missing                       {1}  \"{2}\""
 msgstr ""
 
 #: ../src/Task.cpp:713
@@ -971,9 +1331,22 @@ msgstr ""
 msgid "Missing tag brackets."
 msgstr ""
 
+#: ../src/commands/CmdInfo.cpp:372
+msgid "Modification"
+msgstr ""
+
 #: ../src/TDB2.cpp:1535 ../src/TDB2.cpp:1573 ../src/TDB2.cpp:1580
-#: ../src/TDB2.cpp:1589
+#: ../src/TDB2.cpp:1589 ../src/TDB2.cpp:1542 ../src/TDB2.cpp:1587
+#: ../src/TDB2.cpp:1596
 msgid "Modified task reverted."
+msgstr ""
+
+#: ../src/commands/CmdModify.cpp:181
+msgid "Modified {1} task."
+msgstr ""
+
+#: ../src/commands/CmdModify.cpp:181
+msgid "Modified {1} tasks."
 msgstr ""
 
 #: ../src/commands/CmdModify.cpp:43
@@ -984,8 +1357,20 @@ msgstr ""
 msgid "Modify task {1} '{2}'?"
 msgstr ""
 
+#: ../src/commands/CmdEdit.cpp:170
+msgid "Modify what you wish, and when you save and quit your editor,"
+msgstr ""
+
+#: ../src/commands/CmdModify.cpp:132 ../src/commands/CmdModify.cpp:159
+msgid "Modifying recurring task {1} '{2}'."
+msgstr ""
+
 #: ../src/commands/CmdModify.cpp:111
 msgid "Modifying task {1} '{2}'."
+msgstr ""
+
+#: ../src/commands/CmdHistory.cpp:100 ../src/commands/CmdHistory.cpp:407
+msgid "Month"
 msgstr ""
 
 #: ../src/commands/CmdBurndown.cpp:437
@@ -996,8 +1381,24 @@ msgstr ""
 msgid "Move your clothes down on to the lower peg"
 msgstr ""
 
+#: ../src/commands/CmdUDAs.cpp:84
+msgid "Name"
+msgstr ""
+
+#: ../src/commands/CmdHistory.cpp:104 ../src/commands/CmdHistory.cpp:257
+msgid "Net"
+msgstr ""
+
+#: ../src/commands/CmdStats.cpp:236
+msgid "Newest task"
+msgstr ""
+
+#: ../src/commands/CmdUDAs.cpp:127
+msgid "No UDAs defined."
+msgstr ""
+
 #: ../src/commands/CmdConfig.cpp:162 ../src/feedback.cpp:284
-#: ../src/TDB2.cpp:1508
+#: ../src/TDB2.cpp:1508 ../src/TDB2.cpp:1515
 msgid "No changes made."
 msgstr ""
 
@@ -1009,15 +1410,21 @@ msgstr ""
 msgid "No command specified - assuming 'information'."
 msgstr ""
 
-#: ../src/commands/CmdBurndown.cpp:959
+#: ../src/commands/CmdBurndown.cpp:959 ../src/commands/CmdBurndown.cpp:962
 msgid "No convergence"
 msgstr ""
 
-#: ../src/commands/CmdEdit.cpp:793
+#: ../src/commands/CmdDiagnostics.cpp:374
+msgid "No duplicates found"
+msgstr ""
+
+#: ../src/commands/CmdEdit.cpp:793 ../src/commands/CmdEdit.cpp:795
+#: ../src/commands/CmdEdit.cpp:794
 msgid "No editing performed."
 msgstr ""
 
-#: ../src/commands/CmdEdit.cpp:836
+#: ../src/commands/CmdEdit.cpp:836 ../src/commands/CmdEdit.cpp:838
+#: ../src/commands/CmdEdit.cpp:837
 msgid "No edits were detected."
 msgstr ""
 
@@ -1056,7 +1463,7 @@ msgstr ""
 msgid "No tasks."
 msgstr ""
 
-#: ../src/TDB2.cpp:1602
+#: ../src/TDB2.cpp:1602 ../src/TDB2.cpp:1610
 msgid "No undo possible."
 msgstr ""
 
@@ -1078,7 +1485,8 @@ msgid ""
 "directory, or create a 'push.default.uri' entry in your .taskrc file."
 msgstr ""
 
-#: ../src/commands/CmdEdit.cpp:551
+#: ../src/commands/CmdEdit.cpp:551 ../src/commands/CmdEdit.cpp:553
+#: ../src/commands/CmdEdit.cpp:552
 msgid "Not a valid recurrence duration."
 msgstr ""
 
@@ -1091,12 +1499,30 @@ msgstr ""
 msgid "Note: task {1} was a recurring task.  The duplicated task is not."
 msgstr ""
 
-#: ../src/commands/CmdEdit.cpp:602
+#: ../src/commands/CmdHistory.cpp:408 ../src/commands/CmdHistory.cpp:600
+msgid "Number Added/Completed/Deleted"
+msgstr ""
+
+#: ../src/commands/CmdStats.cpp:231
+msgid "Oldest task"
+msgstr ""
+
+#: ../src/commands/CmdUDAs.cpp:148
+msgid "Orphan UDA"
+msgstr ""
+
+#: ../src/commands/CmdEdit.cpp:602 ../src/commands/CmdEdit.cpp:604
+#: ../src/commands/CmdEdit.cpp:603
 msgid "Parent UUID modified."
 msgstr ""
 
-#: ../src/commands/CmdEdit.cpp:607
+#: ../src/commands/CmdEdit.cpp:607 ../src/commands/CmdEdit.cpp:609
+#: ../src/commands/CmdEdit.cpp:608
 msgid "Parent UUID removed."
+msgstr ""
+
+#: ../src/commands/CmdStats.cpp:162 ../src/commands/CmdBurndown.cpp:466
+msgid "Pending"
 msgstr ""
 
 #: ../src/commands/CmdDelete.cpp:83 ../src/commands/CmdDelete.cpp:87
@@ -1115,6 +1541,14 @@ msgstr ""
 msgid "Prepend to task {1} '{2}'?"
 msgstr ""
 
+#: ../src/commands/CmdPrepend.cpp:131
+msgid "Prepended {1} task."
+msgstr ""
+
+#: ../src/commands/CmdPrepend.cpp:131
+msgid "Prepended {1} tasks."
+msgstr ""
+
 #: ../src/commands/CmdPrepend.cpp:104
 msgid "Prepending to recurring task {1} '{2}'."
 msgstr ""
@@ -1127,20 +1561,47 @@ msgstr ""
 msgid "Prepends text to an existing task description"
 msgstr ""
 
-#: ../src/TDB2.cpp:1310
+#: ../src/commands/CmdProjects.cpp:119
+msgid "Pri:H"
+msgstr ""
+
+#: ../src/commands/CmdProjects.cpp:117
+msgid "Pri:L"
+msgstr ""
+
+#: ../src/commands/CmdProjects.cpp:118
+msgid "Pri:M"
+msgstr ""
+
+#: ../src/commands/CmdProjects.cpp:116
+msgid "Pri:None"
+msgstr ""
+
+#: ../src/TDB2.cpp:1310 ../src/TDB2.cpp:1315
 msgid "Prior Values"
 msgstr ""
 
-#: ../src/commands/CmdEdit.cpp:340
+#: ../src/commands/CmdEdit.cpp:340 ../src/commands/CmdEdit.cpp:342
+#: ../src/commands/CmdEdit.cpp:341
 msgid "Priority deleted."
 msgstr ""
 
-#: ../src/commands/CmdEdit.cpp:334
+#: ../src/commands/CmdEdit.cpp:334 ../src/commands/CmdEdit.cpp:336
+#: ../src/commands/CmdEdit.cpp:335
 msgid "Priority modified."
+msgstr ""
+
+#: ../src/Task.cpp:1439
+msgid "Priority values may be 'H', 'M' or 'L', not '{1}'."
 msgstr ""
 
 #: ../src/A3.cpp:460
 msgid "Problem with override: {1}"
+msgstr ""
+
+#: ../src/commands/CmdProjects.cpp:114 ../src/commands/CmdSummary.cpp:123
+#: ../src/commands/CmdTimesheet.cpp:99 ../src/commands/CmdTimesheet.cpp:156
+msgid "Project"
 msgstr ""
 
 #: ../src/feedback.cpp:479
@@ -1148,12 +1609,18 @@ msgstr ""
 msgid "Project '{1}' is {2}% complete"
 msgstr ""
 
-#: ../src/commands/CmdEdit.cpp:321
+#: ../src/commands/CmdEdit.cpp:321 ../src/commands/CmdEdit.cpp:323
+#: ../src/commands/CmdEdit.cpp:322
 msgid "Project deleted."
 msgstr ""
 
-#: ../src/commands/CmdEdit.cpp:316
+#: ../src/commands/CmdEdit.cpp:316 ../src/commands/CmdEdit.cpp:318
+#: ../src/commands/CmdEdit.cpp:317
 msgid "Project modified."
+msgstr ""
+
+#: ../src/commands/CmdStats.cpp:194
+msgid "Projects"
 msgstr ""
 
 #: ../src/commands/CmdPull.cpp:44
@@ -1168,12 +1635,22 @@ msgstr ""
 msgid "Record not recognized as format 4."
 msgstr ""
 
-#: ../src/commands/CmdEdit.cpp:541
+#: ../src/commands/CmdEdit.cpp:541 ../src/commands/CmdEdit.cpp:543
+#: ../src/commands/CmdEdit.cpp:542
 msgid "Recurrence modified."
 msgstr ""
 
-#: ../src/commands/CmdEdit.cpp:555
+#: ../src/commands/CmdEdit.cpp:555 ../src/commands/CmdEdit.cpp:557
+#: ../src/commands/CmdEdit.cpp:556
 msgid "Recurrence removed."
+msgstr ""
+
+#: ../src/commands/CmdStats.cpp:170
+msgid "Recurring"
+msgstr ""
+
+#: ../src/commands/CmdSummary.cpp:124
+msgid "Remaining"
 msgstr ""
 
 #: ../src/commands/CmdStop.cpp:42
@@ -1184,6 +1661,10 @@ msgstr ""
 msgid "Report"
 msgstr ""
 
+#: ../src/TDB2.cpp:968
+msgid "Retaining local changes to    {1}  \"{2}\""
+msgstr ""
+
 #: ../src/commands/CmdUndo.cpp:39
 msgid "Reverts the most recent change to a task"
 msgstr ""
@@ -1192,31 +1673,47 @@ msgstr ""
 msgid "Runs rc.default.command, if specified."
 msgstr "Lanza rc.default.command, si está especificado."
 
+#: ../src/commands/CmdDiagnostics.cpp:363
+msgid "Scanned {1} tasks for duplicate UUIDs:"
+msgstr ""
+
+#: ../src/commands/CmdInfo.cpp:246
+msgid "Scheduled"
+msgstr ""
+
 #: ../src/commands/CmdEdit.cpp:446 ../src/commands/CmdEdit.cpp:452
+#: ../src/commands/CmdEdit.cpp:448 ../src/commands/CmdEdit.cpp:454
+#: ../src/commands/CmdEdit.cpp:447 ../src/commands/CmdEdit.cpp:453
 msgid "Scheduled date modified."
 msgstr ""
 
-#: ../src/commands/CmdEdit.cpp:460
+#: ../src/commands/CmdEdit.cpp:460 ../src/commands/CmdEdit.cpp:462
+#: ../src/commands/CmdEdit.cpp:461
 msgid "Scheduled date removed."
 msgstr ""
 
-#: ../src/commands/CmdEdit.cpp:199
+#: ../src/commands/CmdEdit.cpp:199 ../src/commands/CmdEdit.cpp:201
+#: ../src/commands/CmdEdit.cpp:200
 msgid "Separate the tags with spaces, like this: tag1 tag2"
+msgstr ""
+
+#: ../src/commands/CmdEdit.cpp:179
+msgid "Should you find yourself in an endless loop, re-editing the same file,"
 msgstr ""
 
 #: ../src/commands/CmdCalendar.cpp:47
 msgid "Shows a calendar, with due tasks marked"
 msgstr ""
 
-#: ../src/commands/CmdBurndown.cpp:1024
+#: ../src/commands/CmdBurndown.cpp:1024 ../src/commands/CmdBurndown.cpp:1027
 msgid "Shows a graphical burndown chart, by day"
 msgstr ""
 
-#: ../src/commands/CmdBurndown.cpp:968
+#: ../src/commands/CmdBurndown.cpp:968 ../src/commands/CmdBurndown.cpp:971
 msgid "Shows a graphical burndown chart, by month"
 msgstr ""
 
-#: ../src/commands/CmdBurndown.cpp:996
+#: ../src/commands/CmdBurndown.cpp:996 ../src/commands/CmdBurndown.cpp:999
 msgid "Shows a graphical burndown chart, by week"
 msgstr ""
 
@@ -1260,6 +1757,10 @@ msgstr ""
 msgid "Shows all project names used"
 msgstr ""
 
+#: ../src/commands/CmdUDAs.cpp:45
+msgid "Shows all the defined UDA details"
+msgstr ""
+
 #: ../src/commands/CmdProjects.cpp:180
 msgid "Shows only a list of all project names used"
 msgstr ""
@@ -1300,6 +1801,10 @@ msgstr ""
 msgid "Shows the UUIDs of matching tasks, as a list"
 msgstr ""
 
+#: ../src/commands/CmdUDAs.cpp:177
+msgid "Shows the defined UDAs for completion purposes"
+msgstr ""
+
 #: ../src/commands/CmdVersion.cpp:45
 msgid "Shows the taskwarrior version number"
 msgstr "Muestra el número de versión de taskwarrior"
@@ -1313,15 +1818,26 @@ msgid "Specify the name of a config variable to modify."
 msgstr ""
 
 #: ../src/commands/CmdEdit.cpp:390 ../src/commands/CmdEdit.cpp:396
+#: ../src/commands/CmdEdit.cpp:392 ../src/commands/CmdEdit.cpp:398
+#: ../src/commands/CmdEdit.cpp:391 ../src/commands/CmdEdit.cpp:397
 msgid "Start date modified."
 msgstr ""
 
-#: ../src/commands/CmdEdit.cpp:404
+#: ../src/commands/CmdEdit.cpp:404 ../src/commands/CmdEdit.cpp:406
+#: ../src/commands/CmdEdit.cpp:405
 msgid "Start date removed."
 msgstr ""
 
 #: ../src/commands/CmdStart.cpp:78
 msgid "Start task {1} '{2}'?"
+msgstr ""
+
+#: ../src/commands/CmdBurndown.cpp:464
+msgid "Started"
+msgstr ""
+
+#: ../src/commands/CmdTimesheet.cpp:203
+msgid "Started ({1} tasks)"
 msgstr ""
 
 #: ../src/commands/CmdStart.cpp:125
@@ -1352,6 +1868,48 @@ msgstr ""
 msgid "Supported Formats"
 msgstr ""
 
+#: ../src/commands/CmdStats.cpp:214
+msgid "Sync backlog transactions"
+msgstr ""
+
+#: ../src/commands/CmdSync.cpp:235
+msgid "Sync failed.  Could not connect to the Task Server."
+msgstr ""
+
+#: ../src/commands/CmdSync.cpp:204
+msgid ""
+"Sync failed.  Either your credentials are incorrect, or your Task Server "
+"account is not enabled."
+msgstr ""
+
+#: ../src/commands/CmdSync.cpp:270
+msgid "Sync failed.  Malformed configuration setting '{1}'"
+msgstr ""
+
+#: ../src/commands/CmdSync.cpp:209
+msgid "Sync failed.  The Task Server returned error: {1} {2}"
+msgstr ""
+
+#: ../src/commands/CmdSync.cpp:189
+msgid "Sync successful."
+msgstr ""
+
+#: ../src/commands/CmdSync.cpp:200
+msgid "Sync successful.  No changes."
+msgstr ""
+
+#: ../src/commands/CmdSync.cpp:191
+msgid "Sync successful.  {1} changes downloaded."
+msgstr ""
+
+#: ../src/commands/CmdSync.cpp:195
+msgid "Sync successful.  {1} changes uploaded, {2} changes downloaded."
+msgstr ""
+
+#: ../src/commands/CmdSync.cpp:193
+msgid "Sync successful.  {1} changes uploaded."
+msgstr ""
+
 #: ../src/commands/CmdSync.cpp:46
 msgid "Synchronizes data with the Task Server"
 msgstr ""
@@ -1368,6 +1926,14 @@ msgstr ""
 msgid "TASKRC override: {1}"
 msgstr ""
 
+#: ../src/commands/CmdTags.cpp:94
+msgid "Tag"
+msgstr ""
+
+#: ../src/commands/CmdInfo.cpp:275
+msgid "Tags"
+msgstr ""
+
 #: ../src/commands/CmdSync.cpp:79
 msgid "Task Server certificate missing."
 msgstr ""
@@ -1380,6 +1946,18 @@ msgstr ""
 msgid "Task Server is not configured."
 msgstr ""
 
+#: ../src/commands/CmdStats.cpp:247
+msgid "Task added every"
+msgstr ""
+
+#: ../src/commands/CmdStats.cpp:254
+msgid "Task completed every"
+msgstr ""
+
+#: ../src/commands/CmdStats.cpp:261
+msgid "Task deleted every"
+msgstr ""
+
 #: ../src/commands/CmdAnnotate.cpp:120
 msgid "Task not annotated."
 msgstr ""
@@ -1388,12 +1966,24 @@ msgstr ""
 msgid "Task not appended."
 msgstr ""
 
+#: ../src/commands/CmdDone.cpp:108
+msgid "Task not completed."
+msgstr ""
+
 #: ../src/commands/CmdDelete.cpp:143
 msgid "Task not deleted."
 msgstr ""
 
+#: ../src/commands/CmdDenotate.cpp:130
+msgid "Task not denotated."
+msgstr ""
+
 #: ../src/commands/CmdDuplicate.cpp:123
 msgid "Task not duplicated."
+msgstr ""
+
+#: ../src/commands/CmdModify.cpp:166
+msgid "Task not modified."
 msgstr ""
 
 #: ../src/commands/CmdPrepend.cpp:117
@@ -1408,12 +1998,28 @@ msgstr ""
 msgid "Task not stopped."
 msgstr ""
 
-#: ../src/TDB2.cpp:1540
+#: ../src/TDB2.cpp:1540 ../src/TDB2.cpp:1547
 msgid "Task removed."
+msgstr ""
+
+#: ../src/commands/CmdStats.cpp:240
+msgid "Task used for"
+msgstr ""
+
+#: ../src/TDB2.cpp:1608
+msgid "Task with UUID {1} not found in data."
 msgstr ""
 
 #: ../src/commands/CmdStart.cpp:110
 msgid "Task {1} '{2}' already started."
+msgstr ""
+
+#: ../src/feedback.cpp:508
+msgid "Task {1} '{2}' expired and was deleted."
+msgstr ""
+
+#: ../src/commands/CmdDone.cpp:116
+msgid "Task {1} '{2}' is neither pending nor waiting."
 msgstr ""
 
 #: ../src/commands/CmdDelete.cpp:152
@@ -1436,7 +2042,16 @@ msgstr ""
 msgid "Taskmod::getUuid(): Task object not initialized."
 msgstr ""
 
-#: ../src/commands/CmdEdit.cpp:828
+#: ../src/commands/CmdProjects.cpp:115
+msgid "Tasks"
+msgstr ""
+
+#: ../src/commands/CmdStats.cpp:220
+msgid "Tasks tagged"
+msgstr ""
+
+#: ../src/commands/CmdEdit.cpp:828 ../src/commands/CmdEdit.cpp:830
+#: ../src/commands/CmdEdit.cpp:829
 msgid "Taskwarrior couldn't handle your edits.  Would you like to try again?"
 msgstr ""
 
@@ -1462,6 +2077,10 @@ msgstr ""
 msgid ""
 "Taskwarrior no longer supports file format 2, originally used between 1 "
 "January 2008 and 12 April 2009."
+msgstr ""
+
+#: ../src/commands/CmdSync.cpp:255
+msgid "Taskwarrior was built without GnuTLS support.  Sync is not available."
 msgstr ""
 
 #: ../src/commands/CmdBurndown.cpp:420
@@ -1502,7 +2121,12 @@ msgid ""
 "The 'nonag' special tag will prevent nagging when this task is modified."
 msgstr ""
 
+#: ../src/commands/CmdEdit.cpp:168
+msgid "The 'task <id> edit' command allows you to modify all aspects of a task"
+msgstr ""
+
 #: ../src/commands/CmdCalendar.cpp:422 ../src/Date.cpp:454
+#: ../src/commands/CmdTimesheet.cpp:63
 msgid ""
 "The 'weekstart' configuration variable may only contain 'Sunday' or 'Monday'."
 msgstr ""
@@ -1531,6 +2155,10 @@ msgid ""
 "'3days'."
 msgstr ""
 
+#: ../src/TDB2.cpp:1306
+msgid "The last modification was made {1}"
+msgstr ""
+
 #: ../src/commands/CmdLogo.cpp:87
 msgid "The logo command requires that color support is enabled."
 msgstr ""
@@ -1549,11 +2177,15 @@ msgid ""
 "width of {2}."
 msgstr ""
 
+#: ../src/commands/CmdDenotate.cpp:83
+msgid "The specified task has no annotations that can be deleted."
+msgstr ""
+
 #: ../src/commands/CmdUndo.cpp:49
 msgid "The undo command does not allow further task modification."
 msgstr ""
 
-#: ../src/TDB2.cpp:1506
+#: ../src/TDB2.cpp:1506 ../src/TDB2.cpp:1513
 msgid ""
 "The undo command is not reversible.  Are you sure you want to revert to the "
 "previous state?"
@@ -1579,6 +2211,7 @@ msgid "The uri '{1}' is not in the expected format."
 msgstr ""
 
 #: ../src/commands/CmdEdit.cpp:705 ../src/commands/Command.cpp:602
+#: ../src/commands/CmdEdit.cpp:707 ../src/commands/CmdEdit.cpp:706
 msgid "The value '{1}' is not a valid numeric value."
 msgstr ""
 
@@ -1594,7 +2227,7 @@ msgstr ""
 msgid "There are no operands for the '{1}' operator."
 msgstr ""
 
-#: ../src/TDB2.cpp:1268
+#: ../src/TDB2.cpp:1268 ../src/TDB2.cpp:1273
 msgid "There are no recorded transactions to undo."
 msgstr ""
 
@@ -1608,6 +2241,10 @@ msgstr ""
 
 #: ../src/TDB2.cpp:647
 msgid "There was a problem reading the timestamp from the undo.data file."
+msgstr ""
+
+#: ../src/commands/CmdShow.cpp:330 ../src/commands/CmdShow.cpp:343
+msgid "These are highlighted in {1} above."
 msgstr ""
 
 #: ../src/commands/Command.cpp:673
@@ -1644,6 +2281,18 @@ msgid ""
 "of this same task?"
 msgstr ""
 
+#: ../src/commands/CmdInfo.cpp:167
+msgid "This task blocked by"
+msgstr ""
+
+#: ../src/commands/CmdInfo.cpp:184
+msgid "This task is blocking"
+msgstr ""
+
+#: ../src/commands/CmdStats.cpp:182
+msgid "Total"
+msgstr ""
+
 #: ../src/commands/CmdInfo.cpp:435
 msgid "Total active time"
 msgstr ""
@@ -1652,12 +2301,44 @@ msgstr ""
 msgid "Try running '{1}'."
 msgstr ""
 
-#: ../src/TDB2.cpp:1593
+#: ../src/commands/CmdUDAs.cpp:85
+msgid "Type"
+msgstr ""
+
+#: ../src/commands/CmdEdit.cpp:722 ../src/commands/CmdEdit.cpp:721
+msgid "UDA {1} deleted."
+msgstr ""
+
+#: ../src/commands/CmdEdit.cpp:693 ../src/commands/CmdEdit.cpp:692
+msgid "UDA {1} modified."
+msgstr ""
+
+#: ../src/commands/CmdInfo.cpp:281
+msgid "UUID"
+msgstr ""
+
+#: ../src/feedback.cpp:411 ../src/feedback.cpp:418
+msgid "Unblocked {1} '{2}'."
+msgstr ""
+
+#: ../src/TDB2.cpp:1593 ../src/TDB2.cpp:1600
 msgid "Undo complete."
 msgstr ""
 
+#: ../src/commands/CmdStats.cpp:210
+msgid "Undo transactions"
+msgstr ""
+
+#: ../src/TDB2.cpp:1418
+msgid "Undo will restore this state"
+msgstr ""
+
+#: ../src/commands/CmdStats.cpp:190
+msgid "Unique tags"
+msgstr ""
+
 #: ../src/Context.cpp:199 ../src/Context.cpp:300 ../src/main.cpp:89
-#: ../src/shell/main.cpp:200
+#: ../src/shell/main.cpp:200 ../src/shell/main.cpp:208
 msgid "Unknown error."
 msgstr ""
 
@@ -1705,26 +2386,49 @@ msgid "Unsupported operator '{1}'."
 msgstr ""
 
 #: ../src/commands/CmdEdit.cpp:513 ../src/commands/CmdEdit.cpp:519
+#: ../src/commands/CmdEdit.cpp:515 ../src/commands/CmdEdit.cpp:521
+#: ../src/commands/CmdEdit.cpp:514 ../src/commands/CmdEdit.cpp:520
 msgid "Until date modified."
 msgstr ""
 
-#: ../src/commands/CmdEdit.cpp:527
+#: ../src/commands/CmdEdit.cpp:527 ../src/commands/CmdEdit.cpp:529
+#: ../src/commands/CmdEdit.cpp:528
 msgid "Until date removed."
+msgstr ""
+
+#: ../src/commands/CmdInfo.cpp:303
+msgid "Urgency"
+msgstr ""
+
+#: ../src/commands/CmdUDAs.cpp:89 ../src/commands/CmdUDAs.cpp:149
+msgid "Usage Count"
 msgstr ""
 
 #: ../src/commands/CmdHelp.cpp:59
 msgid "Usage:"
 msgstr "Uso:"
 
+#: ../src/shell/main.cpp:64
+msgid ""
+"Usage: tasksh [<commands-file>]    Execute task commands inside <commands-"
+"file> if given,\n"
+"                                   or otherwise, start interactive task "
+"shell.\n"
+"       tasksh --version            Print task version.\n"
+"       tasksh --help               Print this help.\n"
+msgstr ""
+
 #: ../src/commands/CmdColor.cpp:123
 msgid "Use this command to see how colors are displayed by your terminal."
 msgstr ""
 
-#: ../src/commands/CmdEdit.cpp:289
+#: ../src/commands/CmdEdit.cpp:289 ../src/commands/CmdEdit.cpp:291
+#: ../src/commands/CmdEdit.cpp:290
 msgid "User Defined Attribute Orphans"
 msgstr ""
 
-#: ../src/commands/CmdEdit.cpp:263
+#: ../src/commands/CmdEdit.cpp:263 ../src/commands/CmdEdit.cpp:265
+#: ../src/commands/CmdEdit.cpp:264
 msgid "User Defined Attributes"
 msgstr ""
 
@@ -1746,12 +2450,23 @@ msgstr ""
 msgid "Value"
 msgstr ""
 
+#: ../src/commands/CmdDiagnostics.cpp:103
+msgid "Version"
+msgstr ""
+
 #: ../src/commands/CmdEdit.cpp:574 ../src/commands/CmdEdit.cpp:581
+#: ../src/commands/CmdEdit.cpp:576 ../src/commands/CmdEdit.cpp:583
+#: ../src/commands/CmdEdit.cpp:575 ../src/commands/CmdEdit.cpp:582
 msgid "Wait date modified."
 msgstr ""
 
-#: ../src/commands/CmdEdit.cpp:590
+#: ../src/commands/CmdEdit.cpp:590 ../src/commands/CmdEdit.cpp:592
+#: ../src/commands/CmdEdit.cpp:591
 msgid "Wait date removed."
+msgstr ""
+
+#: ../src/commands/CmdStats.cpp:166
+msgid "Waiting"
 msgstr ""
 
 #: ../src/Task.cpp:1454
@@ -1797,6 +2512,11 @@ msgstr ""
 msgid "Would you like to push the merged changes to '{1}'?"
 msgstr ""
 
+#: ../src/commands/CmdHistory.cpp:99 ../src/commands/CmdHistory.cpp:253
+#: ../src/commands/CmdHistory.cpp:406 ../src/commands/CmdHistory.cpp:599
+msgid "Year"
+msgstr ""
+
 #: ../src/util.cpp:99 ../src/util.cpp:123 ../src/util.cpp:138
 #: ../src/util.cpp:164
 msgid "Yes"
@@ -1826,6 +2546,10 @@ msgstr ""
 msgid "You cannot remove the recurrence from a recurring task."
 msgstr ""
 
+#: ../src/commands/CmdModify.cpp:82
+msgid "You cannot specify a recurring task without a due date."
+msgstr ""
+
 #: ../src/A3.cpp:508
 msgid "You must specify a command or a task to modify."
 msgstr ""
@@ -1846,16 +2570,25 @@ msgid ""
 "for entry_time, start_time or end_time in:"
 msgstr ""
 
+#: ../src/commands/CmdShow.cpp:337
+msgid "Your .taskrc file contains these unrecognized variables:"
+msgstr ""
+
 #: ../src/legacy.cpp:162
 msgid "Your .taskrc file contains variables that are deprecated:"
 msgstr ""
 
-#: ../src/commands/CmdEdit.cpp:752
+#: ../src/commands/CmdEdit.cpp:752 ../src/commands/CmdEdit.cpp:754
+#: ../src/commands/CmdEdit.cpp:753
 msgid "Your data.location directory is not writable."
 msgstr ""
 
 #: ../src/commands/CmdColor.cpp:135
 msgid "Your sample:"
+msgstr ""
+
+#: ../src/Context.cpp:548
+msgid "[Shadow file '{1}' updated.]"
 msgstr ""
 
 #: ../src/util.cpp:103 ../src/util.cpp:126 ../src/util.cpp:142
@@ -1865,6 +2598,51 @@ msgstr ""
 
 #: ../src/dependency.cpp:165
 msgid "and is blocking:"
+msgstr ""
+
+#: ../src/Date.cpp:512
+msgid "apr"
+msgstr ""
+
+#: ../src/Date.cpp:393 ../src/Date.cpp:512
+msgid "april"
+msgstr ""
+
+#: ../src/Date.cpp:516
+msgid "aug"
+msgstr ""
+
+#: ../src/Date.cpp:397 ../src/Date.cpp:516
+msgid "august"
+msgstr ""
+
+#: ../src/commands/CmdEdit.cpp:177
+msgid "back to the editor to try again."
+msgstr ""
+
+#: ../src/Date.cpp:520
+msgid "dec"
+msgstr ""
+
+#: ../src/Date.cpp:401 ../src/Date.cpp:520
+msgid "december"
+msgstr ""
+
+#: ../src/Date.cpp:510
+msgid "feb"
+msgstr ""
+
+#: ../src/Date.cpp:391 ../src/Date.cpp:510
+msgid "february"
+msgstr ""
+
+#: ../src/Date.cpp:482
+msgid "fri"
+msgstr ""
+
+#: ../src/Date.cpp:49 ../src/Date.cpp:419 ../src/Date.cpp:436
+#: ../src/Date.cpp:482
+msgid "friday"
 msgstr ""
 
 #: ../src/columns/ColProject.cpp:52
@@ -1879,13 +2657,94 @@ msgstr ""
 msgid "home.garden"
 msgstr ""
 
+#: ../src/Date.cpp:509
+msgid "jan"
+msgstr ""
+
+#: ../src/Date.cpp:390 ../src/Date.cpp:509
+msgid "january"
+msgstr ""
+
+#: ../src/Date.cpp:515
+msgid "jul"
+msgstr ""
+
+#: ../src/Date.cpp:396 ../src/Date.cpp:515
+msgid "july"
+msgstr ""
+
+#: ../src/Date.cpp:514
+msgid "jun"
+msgstr ""
+
+#: ../src/Date.cpp:395 ../src/Date.cpp:514
+msgid "june"
+msgstr ""
+
+#: ../src/commands/CmdEdit.cpp:180
+msgid "just quit the editor without making any changes.  Taskwarrior will"
+msgstr ""
+
+#: ../src/Date.cpp:511
+msgid "mar"
+msgstr ""
+
+#: ../src/Date.cpp:392 ../src/Date.cpp:511
+msgid "march"
+msgstr ""
+
+#: ../src/Date.cpp:394 ../src/Date.cpp:513
+msgid "may"
+msgstr ""
+
+#: ../src/commands/CmdEdit.cpp:173
+msgid "modifications, taskwarrior will do nothing."
+msgstr ""
+
 #: ../src/commands/CmdSync.cpp:148
 msgid "modify {1} '{2}'"
+msgstr ""
+
+#: ../src/Date.cpp:478
+msgid "mon"
+msgstr ""
+
+#: ../src/Date.cpp:45 ../src/Date.cpp:415 ../src/Date.cpp:432
+#: ../src/Date.cpp:478
+msgid "monday"
+msgstr ""
+
+#: ../src/Taskmod.cpp:187
+msgid "new "
 msgstr ""
 
 #: ../src/util.cpp:72 ../src/util.cpp:83 ../src/util.cpp:101
 #: ../src/util.cpp:140
 msgid "no"
+msgstr ""
+
+#: ../src/commands/CmdEdit.cpp:181
+msgid "notice this and stop the editing."
+msgstr ""
+
+#: ../src/Date.cpp:519
+msgid "nov"
+msgstr ""
+
+#: ../src/Date.cpp:400 ../src/Date.cpp:519
+msgid "november"
+msgstr ""
+
+#: ../src/Date.cpp:518
+msgid "oct"
+msgstr ""
+
+#: ../src/Date.cpp:399 ../src/Date.cpp:518
+msgid "october"
+msgstr ""
+
+#: ../src/Taskmod.cpp:184
+msgid "old "
 msgstr ""
 
 #: ../src/util.cpp:143 ../src/util.cpp:168
@@ -1896,6 +2755,23 @@ msgstr ""
 msgid "rsync failed, see output above."
 msgstr ""
 
+#: ../src/Date.cpp:483
+msgid "sat"
+msgstr ""
+
+#: ../src/Date.cpp:50 ../src/Date.cpp:420 ../src/Date.cpp:437
+#: ../src/Date.cpp:483
+msgid "saturday"
+msgstr ""
+
+#: ../src/Date.cpp:517
+msgid "sep"
+msgstr ""
+
+#: ../src/Date.cpp:398 ../src/Date.cpp:517
+msgid "september"
+msgstr ""
+
 #: ../src/TransportShell.cpp:65 ../src/TransportShell.cpp:97
 msgid "shell command failed, see output above."
 msgstr ""
@@ -1904,8 +2780,38 @@ msgstr ""
 msgid "ssh failed, see output above."
 msgstr ""
 
+#: ../src/Date.cpp:477
+msgid "sun"
+msgstr ""
+
+#: ../src/Date.cpp:44 ../src/Date.cpp:414 ../src/Date.cpp:431
+#: ../src/Date.cpp:477
+msgid "sunday"
+msgstr ""
+
 #: ../src/commands/CmdUrgency.cpp:69 ../src/commands/CmdUrgency.cpp:76
 msgid "task {1} urgency {2}"
+msgstr ""
+
+#: ../src/commands/CmdEdit.cpp:171
+msgid "taskwarrior will read this file, determine what changed, and apply"
+msgstr ""
+
+#: ../src/commands/CmdEdit.cpp:172
+msgid "those changes.  If you exit your editor without saving or making"
+msgstr ""
+
+#: ../src/Date.cpp:481
+msgid "thu"
+msgstr ""
+
+#: ../src/Date.cpp:48 ../src/Date.cpp:418 ../src/Date.cpp:435
+#: ../src/Date.cpp:481
+msgid "thursday"
+msgstr ""
+
+#: ../src/Taskmod.cpp:180
+msgid "time "
 msgstr ""
 
 #: ../src/commands/CmdCustom.cpp:174
@@ -1913,6 +2819,15 @@ msgid "truncated to {1} line"
 msgid_plural "truncated to {1} lines"
 msgstr[0] ""
 msgstr[1] ""
+
+#: ../src/Date.cpp:479
+msgid "tue"
+msgstr ""
+
+#: ../src/Date.cpp:46 ../src/Date.cpp:416 ../src/Date.cpp:433
+#: ../src/Date.cpp:479
+msgid "tuesday"
+msgstr ""
 
 #: ../src/columns/Column.cpp:190
 msgid "uda.{1}.type not found. The UDA '{1}' must have a type specified."
@@ -1922,17 +2837,81 @@ msgstr ""
 msgid "unknown"
 msgstr "desconocido"
 
+#: ../src/commands/CmdEdit.cpp:169
+msgid ""
+"using a text editor.  Below is a representation of all the task details."
+msgstr ""
+
+#: ../src/Date.cpp:480
+msgid "wed"
+msgstr ""
+
+#: ../src/Date.cpp:47 ../src/Date.cpp:417 ../src/Date.cpp:434
+#: ../src/Date.cpp:480
+msgid "wednesday"
+msgstr ""
+
 #: ../src/util.cpp:71 ../src/util.cpp:89 ../src/util.cpp:100
 #: ../src/util.cpp:124 ../src/util.cpp:139 ../src/util.cpp:165
 msgid "yes"
+msgstr ""
+
+#: ../src/commands/CmdUDAs.cpp:163
+msgid "{1} Orphan UDA"
+msgstr ""
+
+#: ../src/commands/CmdUDAs.cpp:164
+msgid "{1} Orphan UDAs"
+msgstr ""
+
+#: ../src/commands/CmdUDAs.cpp:121
+msgid "{1} UDA defined"
+msgstr ""
+
+#: ../src/commands/CmdUDAs.cpp:122
+msgid "{1} UDAs defined"
+msgstr ""
+
+#: ../src/feedback.cpp:275
+msgid "{1} changed from '{2}' to '{3}'."
+msgstr ""
+
+#: ../src/commands/CmdStats.cpp:276
+msgid "{1} characters"
+msgstr ""
+
+#: ../src/feedback.cpp:209
+#, fuzzy
+msgid "{1} deleted (duration: {2})."
+msgstr "Es alias de '{1}'"
+
+#: ../src/feedback.cpp:209 ../src/feedback.cpp:215
+msgid "{1} deleted."
+msgstr ""
+
+#: ../src/commands/CmdProjects.cpp:157 ../src/commands/CmdSummary.cpp:199
+msgid "{1} project"
+msgstr ""
+
+#: ../src/commands/CmdProjects.cpp:158 ../src/commands/CmdSummary.cpp:197
+msgid "{1} projects"
 msgstr ""
 
 #: ../src/commands/CmdReports.cpp:110
 msgid "{1} reports"
 msgstr ""
 
+#: ../src/feedback.cpp:242
+#, fuzzy
+msgid "{1} set to '{2}'."
+msgstr "Es alias de '{1}'"
+
 #: ../src/commands/CmdCustom.cpp:170
 msgid "{1} shown"
+msgstr ""
+
+#: ../src/commands/CmdTags.cpp:121
+msgid "{1} tags"
 msgstr ""
 
 #: ../src/commands/CmdCustom.cpp:167
@@ -1940,6 +2919,18 @@ msgid "{1} task"
 msgid_plural "{1} tasks"
 msgstr[0] ""
 msgstr[1] ""
+
+#: ../src/feedback.cpp:152
+msgid "{1} will be changed from '{2}' to '{3}'."
+msgstr ""
+
+#: ../src/feedback.cpp:101
+msgid "{1} will be deleted."
+msgstr ""
+
+#: ../src/feedback.cpp:119
+msgid "{1} will be set to '{2}'."
+msgstr ""
 
 #: ../src/commands/CmdVersion.cpp:71
 msgid "{1} {2} built for "

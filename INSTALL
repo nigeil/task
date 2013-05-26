@@ -84,14 +84,19 @@ get absolute installation directories:
 Localizations
 -------------
 
-To make use of a translation, specify a language number, as found in cmake.h:
+To make use of a translation, set your LANGUAGE environment variable.
 
-  $ cmake -DLANGUAGE=2 .
+  $ task help | grep ' version '
+         task          version               Shows the taskwarrior version number
 
-Currently the defined languages are:
+  $ LANGUAGE=es task help | grep ' version '
+         task          version               Muestra el número de versión de
 
-  en-US    1
-  es-ES    2
+  $ LANGUAGE=fr task help | grep ' version '
+         task          version               Affiche le numéro de version de
+
+  $ LANGUAGE=it task help | grep ' version '
+         task          version               Mostra il numero di versione di
 
 
 Uninstallation

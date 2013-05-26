@@ -128,19 +128,6 @@ if (GETTEXT_FOUND)
   set (TASK_LIBRARIES ${TASK_LIBRARIES} intl)
 endif (GETTEXT_FOUND)
 
-# Set the package language.
-if (LANGUAGE)
-  set (PACKAGE_LANGUAGE ${LANGUAGE})
-else (LANGUAGE)
-  set (PACKAGE_LANGUAGE 1)
-endif (LANGUAGE)
-
-set (LANGUAGE_EN_US 1)
-set (LANGUAGE_ES_ES 2)
-set (LANGUAGE_DE_DE 3)
-set (LANGUAGE_FR_FR 4)
-set (LANGUAGE_IT_IT 5)
-
 message ("-- Configuring cmake.h")
 configure_file (
   ${CMAKE_SOURCE_DIR}/cmake.h.in
