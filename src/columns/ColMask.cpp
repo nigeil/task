@@ -39,7 +39,7 @@ ColumnMask::ColumnMask ()
   _name       = "mask";
   _type       = "string";
   _style      = "default";
-  _label      = _("Mask");
+  _label      = sgettext("column|Mask");
   _modifiable = false;
 
   _styles.push_back ("default");

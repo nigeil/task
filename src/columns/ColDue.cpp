@@ -39,8 +39,7 @@ extern Context context;
 ColumnDue::ColumnDue ()
 {
   _name      = "due";
-  // TRANSLATORS: Task due.
-  _label     = _("Due");
+  _label     = sgettext("column|Due");
 
   _styles.push_back ("countdown");
 
@@ -67,9 +66,9 @@ void ColumnDue::setStyle (const std::string& value)
 {
   _style = value;
 
-  if (_style == "countdown" && _label == _("Due"))
+  if (_style == "countdown" && _label == sgettext("column|Due"))
     // TRANSLATORS: Column label for the countdown column.
-    _label = _("Count");
+    _label = sgettext("column|Count");
 }
 
 ////////////////////////////////////////////////////////////////////////////////

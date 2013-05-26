@@ -39,7 +39,7 @@ ColumnPriority::ColumnPriority ()
   _type  = "string";
   _style = "short";
   // TRANSLATORS: Short for "priority".
-  _label = _("Pri");
+  _label = sgettext("column|Pri");
 
   _styles.push_back ("short");
   _styles.push_back ("long");
@@ -74,8 +74,8 @@ void ColumnPriority::setStyle (const std::string& value)
 {
   _style = value;
 
-  if (_style == "long" && _label == _("Pri"))
-    _label = _("Priority");
+  if (_style == "long" && _label == sgettext("column|Pri"))
+    _label = sgettext("column|Priority");
 }
 
 ////////////////////////////////////////////////////////////////////////////////

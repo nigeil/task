@@ -39,7 +39,7 @@ ColumnUUID::ColumnUUID ()
   _name       = "uuid";
   _type       = "string";
   _style      = "long";
-  _label      = _("UUID");
+  _label      = sgettext("column|UUID");
   _modifiable = false;
 
   _styles.push_back ("long");

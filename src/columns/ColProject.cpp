@@ -40,7 +40,7 @@ ColumnProject::ColumnProject ()
   _name  = "project";
   _type  = "string";
   _style = "full";
-  _label = _("Project");
+  _label = sgettext("column|Project");
 
   _styles.push_back ("full");
   _styles.push_back ("parent");

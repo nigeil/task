@@ -40,7 +40,7 @@ ColumnTags::ColumnTags ()
   _name  = "tags";
   _type  = "string";
   _style = "list";
-  _label = _("Tags");
+  _label = sgettext("column|Tags");
 
   _styles.push_back ("list");
   _styles.push_back ("indicator");
@@ -73,12 +73,12 @@ void ColumnTags::setStyle (const std::string& value)
   _style = value;
 
   if (_style == "indicator" &&
-      _label == _("Tags"))
+      _label == sgettext("column|Tags"))
     _label = _label.substr (0, context.config.get ("tag.indicator").length ());
 
   else if (_style == "count" &&
-            _label == _("Tags"))
-    _label = _("Tag");
+            _label == sgettext("column|Tags"))
+    _label = sgettext("column|Tag");
 }
 
 ////////////////////////////////////////////////////////////////////////////////

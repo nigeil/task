@@ -39,7 +39,7 @@ ColumnParent::ColumnParent ()
   _name       = "parent";
   _type       = "string";
   _style      = "long";
-  _label      = _("Parent task");
+  _label      = sgettext("column|Parent task");
   _modifiable = false;
 
   _styles.push_back ("long");

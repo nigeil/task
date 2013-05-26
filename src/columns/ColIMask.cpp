@@ -39,7 +39,7 @@ ColumnIMask::ColumnIMask ()
   _name       = "imask";
   _type       = "number";
   _style      = "number";
-  _label      = _("Mask Index");
+  _label      = sgettext("column|Mask Index");
   _modifiable = false;
 
   _styles.push_back ("number");

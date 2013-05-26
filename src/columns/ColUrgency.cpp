@@ -38,7 +38,7 @@ ColumnUrgency::ColumnUrgency ()
   _name  = "urgency";
   _type  = "number";
   _style = "real";
-  _label = _("Urgency");
+  _label = sgettext("column|Urgency");
 
   _styles.push_back ("real");
   _styles.push_back ("integer");

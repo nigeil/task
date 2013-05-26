@@ -32,8 +32,7 @@
 ColumnEnd::ColumnEnd ()
 {
   _name  = "end";
-  // TRANSLATORS: Task completed.
-  _label = _("Completed");
+  _label = sgettext("column|Completed");
 }
 
 ////////////////////////////////////////////////////////////////////////////////

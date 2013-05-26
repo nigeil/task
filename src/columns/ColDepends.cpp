@@ -40,8 +40,7 @@ ColumnDepends::ColumnDepends ()
   _name  = "depends";
   _type  = "string";
   _style = "list";
-  // TRANSLATORS: Column label.
-  _label = _("Depends");
+  _label = sgettext("column|Depends");
 
   _styles.push_back ("list");
   _styles.push_back ("count");
@@ -72,12 +71,12 @@ void ColumnDepends::setStyle (const std::string& value)
 {
   _style = value;
 
-  if (_style == "indicator" && _label == _("Depends"))
+  if (_style == "indicator" && _label == sgettext("column|Depends"))
     _label = _label.substr (0, context.config.get ("dependency.indicator").length ());
-  else if (_style == "count"     && _label == _("Depends"))
-    // TRANSLATORS: Column label for the number of dependencies.
+  else if (_style == "count" && _label == sgettext("column|Depends"))
+    // TRANSLATORS: Number of dependencies.
     // The shorter the better, since it contains only few digits.
-    _label = _("Dep");
+    _label = sgettext("column|Dep");
 }
 
 ////////////////////////////////////////////////////////////////////////////////

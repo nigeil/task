@@ -32,8 +32,7 @@
 ColumnWait::ColumnWait ()
 {
   _name      = "wait";
-  // TRANSLATORS: Column label.
-  _label     = _("Wait");
+  _label     = sgettext("column|Wait");
 }
 
 ////////////////////////////////////////////////////////////////////////////////

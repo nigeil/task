@@ -32,7 +32,7 @@
 ColumnUntil::ColumnUntil ()
 {
   _name      = "until";
-  _label     = _("Until");
+  _label     = sgettext("column|Until");
 }
 
 ////////////////////////////////////////////////////////////////////////////////

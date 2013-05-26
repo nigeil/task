@@ -44,7 +44,7 @@ ColumnRecur::ColumnRecur ()
 
   _style = "duration";
   // TRANSLATORS: Short for "reccurence frequency"
-  _label = _("Recur");
+  _label = sgettext("column|Recur");
 
   _styles.push_back ("duration");
   _styles.push_back ("indicator");
@@ -71,7 +71,7 @@ void ColumnRecur::setStyle (const std::string& value)
 {
   _style = value;
 
-  if (_style == "indicator" && _label == _("Recur"))
+  if (_style == "indicator" && _label == sgettext("column|Recur"))
     _label = _label.substr (0, context.config.get ("recurrence.indicator").length ());
 }
 

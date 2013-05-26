@@ -32,8 +32,7 @@
 ColumnModified::ColumnModified ()
 {
   _name  = "modified";
-  // TRANSLATORS: Task modified.
-  _label = _("Modified");
+  _label = sgettext("column|Modified");
 }
 
 ////////////////////////////////////////////////////////////////////////////////

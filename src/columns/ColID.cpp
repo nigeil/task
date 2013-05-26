@@ -39,7 +39,7 @@ ColumnID::ColumnID ()
   _name       = "id";
   _type       = "number";
   _style      = "number";
-  _label      = _("ID");
+  _label      = sgettext("column|ID");
   _modifiable = false;
 
   _styles.push_back ("number");

@@ -36,8 +36,7 @@ extern Context context;
 ColumnStart::ColumnStart ()
 {
   _name  = "start";
-  // TRANSLATORS: Task started.
-  _label = _("Started");
+  _label = sgettext("column|Started");
 
   _styles.push_back ("active");
 
@@ -62,9 +61,9 @@ void ColumnStart::setStyle (const std::string& value)
 {
   _style = value;
 
-  if (_style == "active" && _label == _("Started"))
+  if (_style == "active" && _label == sgettext("column|Started"))
     // TRANSLATORS: Active.
-    _label = _("A");
+    _label = sgettext("column|A");
 }
 
 ////////////////////////////////////////////////////////////////////////////////

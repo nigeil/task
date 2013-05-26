@@ -42,7 +42,7 @@ ColumnDescription::ColumnDescription ()
   _name  = "description";
   _type  = "string";
   _style = "combined";
-  _label = _("Description");
+  _label = sgettext("column|Description");
 
   _styles.push_back ("combined");
   _styles.push_back ("desc");

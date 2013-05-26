@@ -40,7 +40,7 @@ ColumnScheduled::ColumnScheduled ()
 {
   _name      = "scheduled";
   // TRANSLATORS: Task scheduled.
-  _label     = _("Scheduled");
+  _label     = sgettext("column|Scheduled");
 
   _styles.push_back ("countdown");
 
@@ -67,8 +67,8 @@ void ColumnScheduled::setStyle (const std::string& value)
 {
   _style = value;
 
-  if (_style == "countdown" && _label == _("Due"))
-    _label = _("Count");
+  if (_style == "countdown" && _label == sgettext("column|Due"))
+    _label = sgettext("column|Count");
 }
 
 ////////////////////////////////////////////////////////////////////////////////
