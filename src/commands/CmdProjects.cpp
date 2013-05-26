@@ -164,7 +164,7 @@ int CmdProjects::execute (std::string& output)
   }
   else
   {
-    out << STRING_CMD_PROJECTS_NO << "\n";
+    out << _("No projects.") << "\n";
     rc = 1;
   }
 

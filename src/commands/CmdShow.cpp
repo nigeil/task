@@ -318,12 +318,12 @@ int CmdShow::execute (std::string& output)
 
   out << "\n"
       << view.render ()
-      << (view.rows () == 0 ? STRING_CMD_SHOW_NONE : "")
+      << (view.rows () == 0 ? _("No matching configuration variables.") : "")
       << (view.rows () == 0 ? "\n\n" : "\n");
 
   if (issue_warning)
   {
-    out << STRING_CMD_SHOW_DIFFER;
+    out << _("Some of your .taskrc variables differ from the default values.");
 
     if (context.color ())
       out << "  "
@@ -358,7 +358,7 @@ int CmdShow::execute (std::string& output)
   if (calendardetails != "full"   &&
       calendardetails != "sparse" &&
       calendardetails != "none")
-    out << format (STRING_CMD_SHOW_CONFIG_ERROR, "calendar.details", calendardetails)
+    out << format (_("Configuration error: {1} contains an unrecognized value '{2}'."), "calendar.details", calendardetails)
         << "\n";
 
   // Check for bad values in rc.calendar.holidays.
@@ -366,7 +366,7 @@ int CmdShow::execute (std::string& output)
   if (calendarholidays != "full"   &&
       calendarholidays != "sparse" &&
       calendarholidays != "none")
-    out << format (STRING_CMD_SHOW_CONFIG_ERROR, "calendar.holidays", calendarholidays)
+    out << format (_("Configuration error: {1} contains an unrecognized value '{2}'."), "calendar.holidays", calendarholidays)
         << "\n";
 
   // Check for bad values in rc.default.priority.
@@ -375,7 +375,7 @@ int CmdShow::execute (std::string& output)
       defaultPriority != "M" &&
       defaultPriority != "L" &&
       defaultPriority != "")
-    out << format (STRING_CMD_SHOW_CONFIG_ERROR, "default.priority", defaultPriority)
+    out << format (_("Configuration error: {1} contains an unrecognized value '{2}'."), "default.priority", defaultPriority)
         << "\n";
 
   // Verify installation.  This is mentioned in the documentation as the way

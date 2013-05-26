@@ -76,7 +76,7 @@ int CmdDone::execute (std::string& output)
         task->getStatus () == Task::waiting)
     {
       // Complete the specified task.
-      std::string question = format (STRING_CMD_DONE_CONFIRM,
+      std::string question = format (_("Complete task {1} '{2}'?"),
                                      task->id,
                                      task->get ("description"));
 
@@ -95,7 +95,7 @@ int CmdDone::execute (std::string& output)
         updateRecurrenceMask (*task);
         context.tdb2.modify (*task);
         ++count;
-        feedback_affected (STRING_CMD_DONE_TASK, *task);
+        feedback_affected (_("Completed task {1} '{2}'."), *task);
         feedback_unblocked (*task);
         if (!nagged)
           nagged = nag (*task);

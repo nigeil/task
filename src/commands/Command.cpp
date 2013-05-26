@@ -189,7 +189,7 @@ void Command::factory (std::map <std::string, Command*>& all)
   {
     // Make sure a custom report does not clash with a built-in command.
     if (all.find (*report) != all.end ())
-      throw format (STRING_CMD_CONFLICT, *report);
+      throw format (_("Custom report '{1}' conflicts with built-in task command."), *report);
 
     c = new CmdCustom (
               *report,
@@ -599,7 +599,7 @@ void Command::modify_task (
                 n.depleted ())
               task.set (name, result);
             else
-              throw format (STRING_UDA_NUMERIC, result);
+              throw format (_("The value '{1}' is not a valid numeric value."), result);
           }
 
           // By default, just add/remove it.
@@ -608,7 +608,7 @@ void Command::modify_task (
             if (column->validate (value))
               task.set (name, value);
             else
-              throw format (STRING_INVALID_MOD, name, value);
+              throw format (_("The '{1}' attribute does not allow a value of '{2}'."), name, value);
           }
 
           // Warn about deprecated/obsolete attribute usage.
@@ -616,7 +616,7 @@ void Command::modify_task (
         }
       }
       else
-        throw format (STRING_CMD_ADD_BAD_ATTRIBUTE, name);
+        throw format (_("Unrecognized attribute '{1}'."), name);
     }
 
     // Tags need special handling because they are essentially a vector stored
@@ -670,11 +670,11 @@ void Command::safety ()
     {
       // If user is willing to be asked, this can be avoided.
       if (context.config.getBoolean ("confirmation") &&
-          confirm (STRING_TASK_SAFETY_VALVE))
+          confirm (_("This command has no filter, and will modify all tasks.  Are you sure?")))
         return;
 
       // No.
-      throw std::string (STRING_TASK_SAFETY_FAIL);
+      throw std::string (_("Command prevented from running."));
     }
   }
 }

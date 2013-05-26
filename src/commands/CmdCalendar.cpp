@@ -356,8 +356,8 @@ int CmdCalendar::execute (std::string& output)
 
       ViewText holTable;
       holTable.width (context.getWidth ());
-      holTable.add (Column::factory ("string", _("Date")));
-      holTable.add (Column::factory ("string", _("Holiday")));
+      holTable.add (Column::factory ("string", sgettext("column|Date")));
+      holTable.add (Column::factory ("string", sgettext("column|Holiday")));
 
       std::vector <std::string>::iterator it;
       std::map <time_t, std::vector<std::string> > hm; // we need to store multiple holidays per day
@@ -418,7 +418,8 @@ std::string CmdCalendar::renderMonths (
   // What day of the week does the user consider the first?
   int weekStart = Date::dayOfWeek (context.config.get ("weekstart"));
   if (weekStart != 0 && weekStart != 1)
-    throw std::string (STRING_CMD_CAL_SUN_MON);
+    // TRANSLATORS: The quoted keywords are not to be translated.
+    throw std::string (_("The 'weekstart' configuration variable may only contain 'Sunday' or 'Monday'."));
 
   // Build table for the number of months to be displayed.
   ViewText view;

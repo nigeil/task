@@ -788,11 +788,11 @@ ARE_THESE_REALLY_HARMFUL:
   bool changes = false; // No changes made.
 
   // Launch the editor.
-  std::cout << format (STRING_EDIT_LAUNCHING, editor) << "\n";
+  std::cout << format (_("Launching '{1}' now..."), editor) << "\n";
   if (-1 == system (editor.c_str ()))
-    std::cout << STRING_EDIT_NO_EDITS << "\n";
+    std::cout << _("No editing performed.") << "\n";
   else
-    std::cout << STRING_EDIT_COMPLETE << "\n";
+    std::cout << _("Editing complete.") << "\n";
 
   // Slurp file.
   std::string after;
@@ -802,7 +802,7 @@ ARE_THESE_REALLY_HARMFUL:
   // if changes were made.
   if (before_orig != after)
   {
-    std::cout << STRING_EDIT_CHANGES << "\n";
+    std::cout << _("Edits were detected.") << "\n";
     std::string problem = "";
     bool oops = false;
 

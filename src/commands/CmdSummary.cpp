@@ -201,7 +201,7 @@ int CmdSummary::execute (std::string& output)
     out << "\n";
   }
   else {
-    out << STRING_CMD_PROJECTS_NO << "\n";
+    out << _("No projects.") << "\n";
     rc = 1;
   }
 

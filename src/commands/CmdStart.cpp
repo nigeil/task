@@ -75,7 +75,7 @@ int CmdStart::execute (std::string& output)
       Task before (*task);
 
       // Start the specified task.
-      std::string question = format (STRING_CMD_START_CONFIRM,
+      std::string question = format (_("Start task {1} '{2}'?"),
                                      task->id,
                                      task->get ("description"));
 
@@ -90,7 +90,7 @@ int CmdStart::execute (std::string& output)
         updateRecurrenceMask (*task);
         context.tdb2.modify (*task);
         ++count;
-        feedback_affected (STRING_CMD_START_TASK, *task);
+        feedback_affected (_("Starting task {1} '{2}'."), *task);
         if (!nagged)
           nagged = nag (*task);
         dependencyChainOnStart (*task);
@@ -107,7 +107,7 @@ int CmdStart::execute (std::string& output)
     }
     else
     {
-      std::cout << format (STRING_CMD_START_ALREADY,
+      std::cout << format (_("Task {1} '{2}' already started."),
                            task->id,
                            task->get ("description"))
                 << "\n";
@@ -122,7 +122,7 @@ int CmdStart::execute (std::string& output)
       context.footnote (i->second);
 
   context.tdb2.commit ();
-  feedback_affected (count == 1 ? STRING_CMD_START_1 : STRING_CMD_START_N, count);
+  feedback_affected (ngettext("Started {1} task.", "Started {1} tasks.", count), count);
   return rc;
 }
 

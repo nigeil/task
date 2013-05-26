@@ -56,14 +56,14 @@ int CmdPrepend::execute (std::string& output)
   filter (filtered);
   if (filtered.size () == 0)
   {
-    context.footnote (STRING_FEEDBACK_NO_TASKS_SP);
+    context.footnote (_("No tasks specified."));
     return 1;
   }
 
   // Apply the command line modifications to the new task.
   A3 modifications = context.a3.extract_modifications ();
   if (!modifications.size ())
-    throw std::string (STRING_CMD_MODIFY_NEED_TEXT);
+    throw std::string (_("Additional text must be provided."));
 
   // Accumulated project change notifications.
   std::map <std::string, std::string> projectChanges;
@@ -74,7 +74,7 @@ int CmdPrepend::execute (std::string& output)
     Task before (*task);
 
     // Prepend to the specified task.
-    std::string question = format (STRING_CMD_PREPEND_CONFIRM,
+    std::string question = format (_("Prepend to task {1} '{2}'?"),
                                    task->id,
                                    task->get ("description"));
 
@@ -84,7 +84,7 @@ int CmdPrepend::execute (std::string& output)
     {
       context.tdb2.modify (*task);
       ++count;
-      feedback_affected (STRING_CMD_PREPEND_TASK, *task);
+      feedback_affected (_("Prepending to task {1} '{2}'."), *task);
       if (context.verbose ("project"))
         projectChanges[task->get ("project")] = onProjectChange (*task, false);
 
@@ -101,7 +101,7 @@ int CmdPrepend::execute (std::string& output)
             modify_task_description_prepend (*sibling, modifications);
             context.tdb2.modify (*sibling);
             ++count;
-            feedback_affected (STRING_CMD_PREPEND_TASK_R, *sibling);
+            feedback_affected (_("Prepending to recurring task {1} '{2}'."), *sibling);
           }
 
           // Prepend to the parent

@@ -103,24 +103,24 @@ int CmdDuplicate::execute (std::string& output)
     modify_task_annotate (dup, modifications);
 
     if (permission (dup,
-                    format (STRING_CMD_DUPLICATE_CONFIRM,
+                    format (_("Duplicate task {1} '{2}'?"),
                             task->id,
                             task->get ("description")),
                     filtered.size ()))
     {
       context.tdb2.add (dup);
       ++count;
-      feedback_affected (STRING_CMD_DUPLICATE_TASK, *task);
+      feedback_affected (_("Duplicated task {1} '{2}'."), *task);
 
       if (context.verbose ("new-id"))
-        std::cout << format (STRING_CMD_ADD_FEEDBACK, context.tdb2.next_id ()) + "\n";
+        std::cout << format (_("Created task {1}."), context.tdb2.next_id ()) + "\n";
 
       if (context.verbose ("project"))
         projectChanges[task->get ("project")] = onProjectChange (*task);
     }
     else
     {
-      std::cout << STRING_CMD_DUPLICATE_NO << "\n";
+      std::cout << _("Task not duplicated.") << "\n";
       rc = 1;
       if (_permission_quit)
         break;

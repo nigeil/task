@@ -74,8 +74,8 @@ int CmdColor::execute (std::string& output)
 
       ViewText view;
       view.width (context.getWidth ());
-      view.add (Column::factory ("string", _("Color")));
-      view.add (Column::factory ("string", _("Definition")));
+      view.add (Column::factory ("string", sgettext("column|Color")));
+      view.add (Column::factory ("string", sgettext("column|Definition")));
 
       std::vector <std::string>::iterator item;
       for (item = all.begin (); item != all.end (); ++item)
@@ -120,20 +120,20 @@ int CmdColor::execute (std::string& output)
       Color sample (swatch);
 
       out << "\n"
-          << STRING_CMD_COLOR_EXPLANATION                                          << "\n"
+          << _("Use this command to see how colors are displayed by your terminal.") << "\n"
           << "\n\n"
-          << STRING_CMD_COLOR_16                                                   << "\n"
-          << "  " << one.colorize ("task color black on bright yellow")            << "\n"
-          << "  " << two.colorize ("task color underline cyan on bright blue")     << "\n"
+          << _("16-color usage (supports underline, bold text, bright background):") << "\n"
+          << "  " << one.colorize ("task color black on bright yellow")              << "\n"
+          << "  " << two.colorize ("task color underline cyan on bright blue")       << "\n"
           << "\n"
-          << STRING_CMD_COLOR_256                                                  << "\n"
-          << "  " << three.colorize ("task color color214 on color202")            << "\n"
-          << "  " << four.colorize ("task color rgb150 on rgb020")                 << "\n"
-          << "  " << five.colorize ("task color underline grey10 on grey3")        << "\n"
-          << "  " << six.colorize ("task color red on color173")                   << "\n"
+          << _("256-color usage (supports underline):")                              << "\n"
+          << "  " << three.colorize ("task color color214 on color202")              << "\n"
+          << "  " << four.colorize ("task color rgb150 on rgb020")                   << "\n"
+          << "  " << five.colorize ("task color underline grey10 on grey3")          << "\n"
+          << "  " << six.colorize ("task color red on color173")                     << "\n"
           << "\n"
-          << STRING_CMD_COLOR_YOURS                                                << "\n\n"
-          << "  " << sample.colorize ("task color " + swatch)                      << "\n\n";
+          << _("Your sample:")                                                       << "\n\n"
+          << "  " << sample.colorize ("task color " + swatch)                        << "\n\n";
     }
 
     // Show all supported colors.  Possibly show some unsupported ones too.

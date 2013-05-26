@@ -74,7 +74,8 @@ int CmdAnnotate::execute (std::string& output)
     Task before (*task);
 
     // Annotate the specified task.
-    std::string question = format (STRING_CMD_ANNO_CONFIRM,
+    // TRANSLATORS: {1} is the ID, {2} is the description.
+    std::string question = format (_("Annotate task {1} '{2}'?"),
                                    task->id,
                                    task->get ("description"));
 
@@ -84,7 +85,8 @@ int CmdAnnotate::execute (std::string& output)
     {
       context.tdb2.modify (*task);
       ++count;
-      feedback_affected (STRING_CMD_ANNO_TASK, *task);
+      // TRANSLATORS: {1} is the ID, {2} is the description.
+      feedback_affected (_("Annotating task {1} '{2}'."), *task);
       if (context.verbose ("project"))
         projectChanges[task->get ("project")] = onProjectChange (*task, false);
 
@@ -101,7 +103,8 @@ int CmdAnnotate::execute (std::string& output)
             modify_task_annotate (*sibling, modifications);
             context.tdb2.modify (*sibling);
             ++count;
-            feedback_affected (STRING_CMD_ANNO_TASK_R, *sibling);
+            // TRANSLATORS: {1} is the ID, {2} is the description.
+            feedback_affected (_("Annotating recurring task {1} '{2}'."), *sibling);
           }
 
           // Annotate the parent
@@ -128,7 +131,7 @@ int CmdAnnotate::execute (std::string& output)
       context.footnote (i->second);
 
   context.tdb2.commit ();
-  feedback_affected (count == 1 ? STRING_CMD_ANNO_1 : STRING_CMD_ANNO_N, count);
+  feedback_affected (ngettext("Annotated {1} task.", "Annotated {1} tasks.", count), count);
   return rc;
 }
 

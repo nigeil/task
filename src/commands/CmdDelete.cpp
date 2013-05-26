@@ -57,7 +57,7 @@ int CmdDelete::execute (std::string& output)
   filter (filtered);
   if (filtered.size () == 0)
   {
-    context.footnote (STRING_FEEDBACK_NO_TASKS_SP);
+    context.footnote (_("No tasks specified."));
     return 1;
   }
 
@@ -79,11 +79,12 @@ int CmdDelete::execute (std::string& output)
       // Delete the specified task.
       std::string question;
       if (task->id)
-        question = format (STRING_CMD_DELETE_CONFIRM,
+        // TRANSLATORS: {1} is the ID, {2} is the description.
+        question = format (_("Permanently delete task {1} '{2}'?"),
                            task->id,
                            task->get ("description"));
       else
-        question = format (STRING_CMD_DELETE_CONFIRM,
+        question = format (_("Permanently delete task {1} '{2}'?"),
                            task->get ("uuid"),
                            task->get ("description"));
 
@@ -97,7 +98,8 @@ int CmdDelete::execute (std::string& output)
         updateRecurrenceMask (*task);
         ++count;
         context.tdb2.modify (*task);
-        feedback_affected (STRING_CMD_DELETE_TASK, *task);
+        // TRANSLATORS: {1} is the ID, {2} is the description.
+        feedback_affected (_("Deleting task {1} '{2}'."), *task);
         feedback_unblocked (*task);
         dependencyChainOnComplete (*task);
         if (context.verbose ("project"))
@@ -108,7 +110,7 @@ int CmdDelete::execute (std::string& output)
         {
           std::vector <Task> siblings = context.tdb2.siblings (*task);
           if (siblings.size () &&
-              confirm (STRING_CMD_DELETE_CONFIRM_R))
+              confirm (_("This is a recurring task.  Do you want to delete all pending recurrences of this same task?")))
           {
             std::vector <Task>::iterator sibling;
             for (sibling = siblings.begin (); sibling != siblings.end (); ++sibling)
@@ -120,7 +122,7 @@ int CmdDelete::execute (std::string& output)
 
               updateRecurrenceMask (*sibling);
               context.tdb2.modify (*sibling);
-              feedback_affected (STRING_CMD_DELETE_TASK_R, *sibling);
+              feedback_affected (_("Deleting recurring task {1} '{2}'."), *sibling);
               feedback_unblocked (*sibling);
               ++count;
             }
@@ -138,7 +140,7 @@ int CmdDelete::execute (std::string& output)
       }
       else
       {
-        std::cout << STRING_CMD_DELETE_NO << "\n";
+        std::cout << _("Task not deleted.") << "\n";
         rc = 1;
         if (_permission_quit)
           break;
@@ -146,7 +148,8 @@ int CmdDelete::execute (std::string& output)
     }
     else
     {
-      std::cout << format (STRING_CMD_DELETE_NOT_DEL,
+      // TRANSLATORS: {1} is the ID, {2} is the description.
+      std::cout << format (_("Task {1} '{2}' is not deletable."),
                            task->id,
                            task->get ("description"))
           << "\n";
@@ -161,7 +164,7 @@ int CmdDelete::execute (std::string& output)
       context.footnote (i->second);
 
   context.tdb2.commit ();
-  feedback_affected (count == 1 ? STRING_CMD_DELETE_1 : STRING_CMD_DELETE_N, count);
+  feedback_affected (ngettext("Deleted {1} task.", "Deleted {1} tasks.", count), count);
   return rc;
 }
 

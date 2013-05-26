@@ -164,23 +164,21 @@ int CmdCustom::execute (std::string& output)
     // Print the number of rendered tasks
     if (context.verbose ("affected"))
     {
-      out << (filtered.size () == 1
-                ? STRING_CMD_CUSTOM_COUNT
-                : format (STRING_CMD_CUSTOM_COUNTN, filtered.size ()));
+      out << format (ngettext("{1} task", "{1} tasks", filtered.size ()), filtered.size ());
 
       if (maxrows && maxrows < (int)filtered.size ())
-        out << ", " << format (STRING_CMD_CUSTOM_SHOWN, maxrows);
+        out << ", " << format (_("{1} shown"), maxrows);
 
       if (maxlines && maxlines < (int)filtered.size ())
         out << ", "
-            << format (STRING_CMD_CUSTOM_TRUNCATED, maxlines - table_header);
+            << format (ngettext("truncated to {1} line", "truncated to {1} lines", maxlines - table_header), maxlines - table_header);
 
       out << "\n";
     }
   }
   else
   {
-    context.footnote (STRING_FEEDBACK_NO_MATCH);
+    context.footnote (_("No matches."));
     rc = 1;
   }
 

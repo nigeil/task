@@ -56,14 +56,14 @@ int CmdModify::execute (std::string& output)
   filter (filtered);
   if (filtered.size () == 0)
   {
-    context.footnote (STRING_FEEDBACK_NO_TASKS_SP);
+    context.footnote (_("No tasks specified."));
     return 1;
   }
 
   // Apply the command line modifications to the new task.
   A3 modifications = context.a3.extract_modifications ();
   if (!modifications.size ())
-    throw std::string (STRING_CMD_MODIFY_NEED_TEXT);
+    throw std::string (_("Additional text must be provided."));
 
   // Accumulated project change notifications.
   std::map <std::string, std::string> projectChanges;
@@ -85,21 +85,21 @@ int CmdModify::execute (std::string& output)
           before.has ("due")   &&
           (!task->has ("due")  ||
            task->get ("due") == ""))
-        throw std::string (STRING_CMD_MODIFY_REM_DUE);
+        throw std::string (_("You cannot remove the due date from a recurring task."));
 
       if (before.has ("recur")  &&
           (!task->has ("recur") ||
            task->get ("recur") == ""))
-        throw std::string (STRING_CMD_MODIFY_REC_ALWAYS);
+        throw std::string (_("You cannot remove the recurrence from a recurring task."));
 
       // Delete the specified task.
       std::string question;
       if (task->id != 0)
-        question = format (STRING_CMD_MODIFY_CONFIRM,
+        question = format (_("Modify task {1} '{2}'?"),
                            task->id,
                            task->get ("description"));
       else
-        question = format (STRING_CMD_MODIFY_CONFIRM,
+        question = format (_("Modify task {1} '{2}'?"),
                            task->get ("uuid"),
                            task->get ("description"));
 
@@ -108,7 +108,7 @@ int CmdModify::execute (std::string& output)
         updateRecurrenceMask (*task);
         dependencyChainOnModify (before, *task);
         ++count;
-        feedback_affected (STRING_CMD_MODIFY_TASK, *task);
+        feedback_affected (_("Modifying task {1} '{2}'."), *task);
         feedback_unblocked (*task);
         context.tdb2.modify (*task);
         if (context.verbose ("project"))

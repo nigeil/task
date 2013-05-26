@@ -145,7 +145,7 @@ int CmdSync::execute (std::string& output)
           {
             out << "  "
                 << colorChanged.colorize (
-                     format (STRING_CMD_SYNC_MOD,
+                     format (_("modify {1} '{2}'"),
                              uuid,
                              from_server.get ("description")))
                 << "\n";
@@ -155,7 +155,7 @@ int CmdSync::execute (std::string& output)
           {
             out << "  "
                 << colorAdded.colorize (
-                     format (STRING_CMD_SYNC_ADD,
+                     format (_("   add {1} '{2}'"),
                              uuid,
                              from_server.get ("description")))
                 << "\n";

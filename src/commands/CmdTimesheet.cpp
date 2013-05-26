@@ -42,7 +42,7 @@ CmdTimesheet::CmdTimesheet ()
 {
   _keyword     = "timesheet";
   _usage       = "task          timesheet [weeks]";
-  _description = STRING_CMD_TIMESHEET_USAGE;
+  _description = _("Weekly summary of completed and started tasks");
   _read_only   = true;
   _displays_id = false;
 }

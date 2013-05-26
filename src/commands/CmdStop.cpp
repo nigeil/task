@@ -73,7 +73,7 @@ int CmdStop::execute (std::string& output)
       Task before (*task);
 
       // Stop the specified task.
-      std::string question = format (STRING_CMD_STOP_CONFIRM,
+      std::string question = format (_("Stop task {1} '{2}'?"),
                                      task->id,
                                      task->get ("description"));
 
@@ -88,14 +88,14 @@ int CmdStop::execute (std::string& output)
         updateRecurrenceMask (*task);
         context.tdb2.modify (*task);
         ++count;
-        feedback_affected (STRING_CMD_STOP_TASK, *task);
+        feedback_affected (_("Stopping task {1} '{2}'."), *task);
         dependencyChainOnStart (*task);
         if (context.verbose ("project"))
           projectChanges[task->get ("project")] = onProjectChange (*task, false);
       }
       else
       {
-        std::cout << STRING_CMD_STOP_NO << "\n";
+        std::cout << _("Task not stopped.") << "\n";
         rc = 1;
         if (_permission_quit)
           break;
@@ -103,7 +103,7 @@ int CmdStop::execute (std::string& output)
     }
     else
     {
-      std::cout << format (STRING_CMD_STOP_ALREADY,
+      std::cout << format (_("Task {1} '{2}' not started."),
                            task->id,
                            task->get ("description"))
                 << "\n";
@@ -118,7 +118,7 @@ int CmdStop::execute (std::string& output)
       context.footnote (i->second);
 
   context.tdb2.commit ();
-  feedback_affected (count == 1 ? STRING_CMD_STOP_1 : STRING_CMD_STOP_N, count);
+  feedback_affected (ngettext("Stopped {1} task.", "Stopped {1} tasks.", count), count);
   return rc;
 }
 

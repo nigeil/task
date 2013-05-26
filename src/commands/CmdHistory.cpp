@@ -521,12 +521,12 @@ int CmdGHistoryMonthly::execute (std::string& output)
           << optionalBlankLine ()
           << "\n";
     else
-      out << STRING_CMD_HISTORY_LEGEND_A
+      out << _("Legend: + added, X completed, - deleted")
           << "\n";
   }
   else
   {
-    context.footnote (STRING_FEEDBACK_NO_TASKS);
+    context.footnote (_("No tasks."));
     rc = 1;
   }
 
@@ -711,12 +711,12 @@ int CmdGHistoryAnnual::execute (std::string& output)
           << optionalBlankLine ()
           << "\n";
     else
-      out << STRING_CMD_HISTORY_LEGEND_A
+      out << _("Legend: + added, X completed, - deleted")
           << "\n";
   }
   else
   {
-    context.footnote (STRING_FEEDBACK_NO_TASKS);
+    context.footnote (_("No tasks."));
     rc = 1;
   }
 

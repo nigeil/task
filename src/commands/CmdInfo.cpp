@@ -432,7 +432,7 @@ int CmdInfo::execute (std::string& output)
       if (total_time > 0)
       {
         row = journal.addRow ();
-        journal.set (row, 0, STRING_CMD_INFO_TOTAL_ACTIVE);
+        journal.set (row, 0, _("Total active time"));
         journal.set (row, 1, Duration (total_time).formatPrecise (),
                      (context.color () ? Color ("bold") : Color ()));
       }

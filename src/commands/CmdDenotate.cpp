@@ -57,14 +57,14 @@ int CmdDenotate::execute (std::string& output)
   filter (filtered);
   if (filtered.size () == 0)
   {
-    context.footnote (STRING_FEEDBACK_NO_TASKS_SP);
+    context.footnote (_("No tasks specified."));
     return 1;
   }
 
   // Apply the command line modifications to the completed task.
   A3 words = context.a3.extract_modifications ();
   if (!words.size ())
-    throw std::string (STRING_CMD_DENO_WORDS);
+    throw std::string (_("An annotation pattern must be provided."));
 
   // Accumulated project change notifications.
   std::map <std::string, std::string> projectChanges;
@@ -113,7 +113,7 @@ int CmdDenotate::execute (std::string& output)
 
     if (taskDiff (before, *task))
     {
-      std::string question = format (STRING_CMD_DENO_CONFIRM,
+      std::string question = format (_("Denotate task {1} '{2}'?"),
                                      task->id,
                                      task->get ("description"));
 
