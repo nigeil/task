@@ -325,7 +325,8 @@ void TF2::load_tasks ()
 
   catch (const std::string& e)
   {
-    throw e + format (STRING_TDB2_PARSE_ERROR, _file._data, line_number);
+    // TRANSLATORS: Error in file {1} at line {2}.
+    throw e + format (_(" in {1} at line {2}"), _file._data, line_number);
   }
 
   context.timer_load.stop ();
@@ -697,11 +698,11 @@ void TDB2::merge (const std::string& mergeFile)
   // load merge file (undo file of right/remote branch)
   std::vector <std::string> r;
   if (! File::read (mergeFile, r))
-    throw format (STRING_TDB2_UNREADABLE, mergeFile);
+    throw format (_("Could not read '{1}'."), mergeFile);
 
   // file has to contain at least one entry
   if (r.size () < 3)
-    throw std::string (STRING_TDB2_NO_CHANGES);
+    throw std::string (_("There are no changes to merge."));
 
   if (! undo._file.exists ())
     undo._file.create ();
@@ -709,7 +710,7 @@ void TDB2::merge (const std::string& mergeFile)
   // load undo file (left/local branch)
   std::vector <std::string> l;
   if (! File::read (undo._file._data, l))
-    throw format (STRING_TDB2_UNREADABLE, undo._file._data);
+    throw format (_("Could not read '{1}'."), undo._file._data);
 
   std::string rline, lline;
   std::vector <std::string>::iterator rit, lit;
@@ -1074,10 +1075,10 @@ void TDB2::merge (const std::string& mergeFile)
     std::vector <std::string> completed_lines;
 
     if (! File::read (pending._file._data, pending_lines))
-      throw format (STRING_TDB2_UNREADABLE, pending._file._data);
+      throw format (_("Could not read '{1}'."), pending._file._data);
 
     if (! File::read (completed._file._data, completed_lines))
-      throw format (STRING_TDB2_UNREADABLE, completed._file._data);
+      throw format (_("Could not read '{1}'."), completed._file._data);
 
     // iterate over taskmod list
     std::list<Taskmod>::iterator it;
@@ -1228,11 +1229,11 @@ void TDB2::merge (const std::string& mergeFile)
 
     // write pending file
     if (! File::write (pending._file._data, pending_lines))
-      throw format (STRING_TDB2_UNWRITABLE, pending._file._data);
+      throw format (_("Could not write '{1}'."), pending._file._data);
 
     // write completed file
     if (! File::write (completed._file._data, completed_lines))
-      throw format (STRING_TDB2_UNWRITABLE, completed._file._data);
+      throw format (_("Could not write '{1}'."), completed._file._data);
   }
 
   if (!mods.empty() || !lmods.empty() || !mods_history.empty()) {
@@ -1250,7 +1251,7 @@ void TDB2::merge (const std::string& mergeFile)
 
     // write undo file
     if (! File::write (undo._file._data, undo_lines, false))
-      throw format (STRING_TDB2_UNWRITABLE, undo._file._data);
+      throw format (_("Could not write '{1}'."), undo._file._data);
   }
 
   // delete objects
@@ -1585,11 +1586,11 @@ void TDB2::revert ()
         c.erase (task);
         File::write (completed._file._data, c);
         File::write (undo._file._data, u);
-        std::cout << STRING_TDB2_REVERTED << "\n";
+        std::cout << _("Modified task reverted.") << "\n";
         context.debug ("TDB::undo - task removed");
       }
 
-      std::cout << STRING_TDB2_UNDO_COMPLETE << "\n";
+      std::cout << _("Undo complete.") << "\n";
       return;
     }
   }
@@ -1598,7 +1599,7 @@ void TDB2::revert ()
   // Perhaps the task was in completed.data, which was still in file format 3?
   std::cout << format (STRING_TDB2_MISSING_TASK, uuid.substr (6, 36))
             << "\n"
-            << STRING_TDB2_UNDO_IMPOSSIBLE
+            << _("No undo possible.")
             << "\n";
 }
 

@@ -99,10 +99,10 @@ int Transport::execute()
   switch (result)
   {
   case 127:
-    throw format (STRING_TRANSPORT_NORUN, _executable);
+    throw format (_("Could not run '{1}'.  Is it installed, and available in $PATH?"), _executable);
   case -1:
     err = errno;
-    throw format (STRING_TRANSPORT_NOFORK, _executable, ::strerror(err));
+    throw format (_("Could not run '{1}': {2}.  Are you out of system resources?"), _executable, ::strerror(err));
   default:
     return result;
   }

@@ -63,7 +63,7 @@ void legacyColumnMap (std::string& name)
   std::map <std::string, std::string>::iterator found = legacyMap.find (name);
   if (found != legacyMap.end ())
   {
-    context.footnote (format (STRING_CMD_CUSTOM_OLD_FIELD, name, found->second));
+    context.footnote (format (_("Deprecated report field '{1}' used.  Please modify this to '{2}'."), name, found->second));
     name = found->second;
   }
 }
@@ -93,7 +93,7 @@ void legacySortColumnMap (std::string& name)
   std::map <std::string, std::string>::iterator found = legacyMap.find (name);
   if (found != legacyMap.end ())
   {
-    context.footnote (format (STRING_CMD_CUSTOM_OLD_SORT, name, found->second));
+    context.footnote (format (_("Deprecated sort field '{1}' used.  Please modify this to '{2}'."), name, found->second));
     name = found->second;
   }
 }
@@ -116,7 +116,7 @@ std::string legacyCheckForDeprecatedColor ()
   std::stringstream out;
   if (deprecated.size ())
   {
-    out << STRING_CONFIG_DEPRECATED_US
+    out << _("Your .taskrc file contains color settings that use deprecated underscores.  Please check:")
         << "\n";
 
     std::vector <std::string>::iterator it2;
@@ -159,7 +159,7 @@ std::string legacyCheckForDeprecatedVariables ()
   std::stringstream out;
   if (deprecated.size ())
   {
-    out << STRING_CONFIG_DEPRECATED_VAR
+    out << _("Your .taskrc file contains variables that are deprecated:")
         << "\n";
 
     std::vector <std::string>::iterator it2;
@@ -194,7 +194,7 @@ std::string legacyCheckForDeprecatedColumns ()
 
   if (deprecated.size ())
   {
-    out << STRING_CONFIG_DEPRECATED_COL
+    out << _("Your .taskrc file contains reports with deprecated columns.  Please check for entry_time, start_time or end_time in:")
         << "\n";
 
     std::vector <std::string>::iterator it2;

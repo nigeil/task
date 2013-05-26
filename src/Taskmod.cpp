@@ -166,7 +166,7 @@ bool Taskmod::isValid ()
 std::string Taskmod::getUuid ()
 {
   if (!_bAfterSet)
-    throw std::string (STRING_TASKMOD_BAD_INIT);
+    throw std::string (_("Taskmod::getUuid(): Task object not initialized."));
 
   return _after.get ("uuid");
 }

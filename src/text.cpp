@@ -553,7 +553,8 @@ void guess (
   {
     std::sort (matches.begin (), matches.end ());
 
-    std::string error = format (STRING_TEXT_AMBIGUOUS, type, candidate);
+    // TRANSLATORS: {1} is a type, {2} is a string.
+    std::string error = format (_("Ambiguous {1} '{2}' - could be either of "), type, candidate);
     for (size_t i = 0; i < matches.size (); ++i)
     {
       if (i)

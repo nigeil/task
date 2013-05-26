@@ -101,7 +101,7 @@ int Context::initialize (int argc, const char** argv)
     if (override)
     {
       rc_file = File (override);
-      header (format (STRING_CONTEXT_RC_OVERRIDE, rc_file._data));
+      header (format (_("TASKRC override: {1}"), rc_file._data));
     }
 
     // Dump any existing values and load rc file.
@@ -120,7 +120,7 @@ int Context::initialize (int argc, const char** argv)
     {
       data_dir = Directory (override);
       config.set ("data.location", data_dir._data);
-      header (format (STRING_CONTEXT_DATA_OVERRIDE, data_dir._data));
+      header (format (_("TASKDATA override: {1}"), data_dir._data));
     }
 
 /* TODO Enable this when the time is right, say for 2.1

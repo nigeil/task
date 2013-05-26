@@ -575,10 +575,10 @@ void Task::parseJSON (const std::string& line)
             json::string* what = (json::string*)annotation->_data["description"];
 
             if (! when)
-              throw format (STRING_TASK_NO_ENTRY, line);
+              throw format (_("Annotation is missing an entry date: {1}"), line);
 
             if (! what)
-              throw format (STRING_TASK_NO_DESC, line);
+              throw format (_("Annotation is missing a description: {1}"), line);
 
             std::string name = "annotation_" + Date (when->_data).toEpochString ();
 
@@ -1248,7 +1248,7 @@ void Task::substitute (
         done = true;
 
       if (++counter > APPROACHING_INFINITY)
-        throw format (STRING_INFINITE_LOOP, APPROACHING_INFINITY);
+        throw format (_("Terminated substitution because more than {1} changes were made - infinite loop protection."), APPROACHING_INFINITY);
     }
 
     if (!done)
@@ -1272,7 +1272,7 @@ void Task::substitute (
             done = true;
 
           if (++counter > APPROACHING_INFINITY)
-            throw format (STRING_INFINITE_LOOP, APPROACHING_INFINITY);
+            throw format (_("Terminated substitution because more than {1} changes were made - infinite loop protection."), APPROACHING_INFINITY);
         }
       }
     }

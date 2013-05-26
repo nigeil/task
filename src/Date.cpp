@@ -451,7 +451,7 @@ int Date::weekOfYear (int weekStart) const
   else if (weekStart == 1)
     strftime(weekStr, sizeof(weekStr), "%V", t);
   else
-    throw std::string (STRING_DATE_BAD_WEEKSTART);
+    throw std::string (_("The 'weekstart' configuration variable may only contain 'Sunday' or 'Monday'."));
 
   int weekNumber = atoi (weekStr);
 

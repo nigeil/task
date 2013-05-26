@@ -333,7 +333,7 @@ void A3::rc_override (
       else
         home = ".";
 
-      context.header (format (STRING_A3_ALTERNATE_RC, rc._data));
+      context.header (format (_("Using alternate .taskrc file {1}"), rc._data));
 
       // Keep looping, because if there are multiple rc:file arguments, we
       // want the last one to dominate.
@@ -358,7 +358,7 @@ void A3::get_data_location (std::string& data)
           (arg->_raw[16] == ':' || arg->_raw[16] == '='))
       {
         data = arg->_raw.substr (17);
-        context.header (format (STRING_A3_ALTERNATE_DATA, data));
+        context.header (format (_("Using alternate data.location {1}"), data));
       }
     }
 
@@ -454,10 +454,10 @@ void A3::apply_overrides ()
         n.getUntilEOS (value);  // May be blank.
 
         context.config.set (name, value);
-        context.footnote (format (STRING_A3_OVERRIDE_RC, name, value));
+        context.footnote (format (_("Configuration override rc.{1}:{2}"), name, value));
       }
       else
-        context.footnote (format (STRING_A3_OVERRIDE_PROBLEM, arg->_raw));
+        context.footnote (format (_("Problem with override: {1}"), arg->_raw));
     }
   }
 }

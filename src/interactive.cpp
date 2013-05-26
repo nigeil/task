@@ -59,7 +59,7 @@ int Context::getWidth ()
         terminal_height = buff[0];
         terminal_width = buff[1];
 
-        debug (format (STRING_INTERACTIVE_WIDTH, terminal_width));
+        debug (format ("Context::getWidth: determined width of {1} characters", terminal_width));
       }
     }
 
@@ -96,7 +96,7 @@ int Context::getHeight ()
         terminal_height = buff[0];
         terminal_width = buff[1];
 
-        debug (format (STRING_INTERACTIVE_HEIGHT, terminal_height));
+        debug (format ("Context::getHeight: determined height of {1} characters", terminal_height));
       }
     }
 

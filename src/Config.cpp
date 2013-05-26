@@ -509,13 +509,13 @@ void Config::parse (const std::string& input, int nest /* = 1 */)
             if (included.readable ())
               this->load (included, nest + 1);
             else
-              throw format (STRING_CONFIG_READ_INCLUDE, included._data);
+              throw format (_("Could not read include file '{1}'."), included._data);
           }
           else
-            throw format (STRING_CONFIG_INCLUDE_PATH, included._data);
+            throw format (_("Can only include files with absolute paths, not '{1}'"), included._data);
         }
         else
-          throw format (STRING_CONFIG_BAD_ENTRY, line);
+          throw format (_("Malformed entry '{1}' in config file."), line);
       }
     }
   }
