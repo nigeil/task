@@ -185,10 +185,10 @@ std::string formatBytes (size_t bytes)
 {
   char formatted[24];
 
-       if (bytes >=  995000000) sprintf (formatted, "%.1f %s", (bytes / 1000000000.0), _("unit|GiB"));
-  else if (bytes >=     995000) sprintf (formatted, "%.1f %s", (bytes /    1000000.0), _("unit|MiB"));
-  else if (bytes >=        995) sprintf (formatted, "%.1f %s", (bytes /       1000.0), _("unit|KiB"));
-  else                          sprintf (formatted, "%d %s",   (int)bytes,             _("unit|B"));
+       if (bytes >=  995000000) sprintf (formatted, "%.1f %s", (bytes / 1000000000.0), sgettext("unit|GiB"));
+  else if (bytes >=     995000) sprintf (formatted, "%.1f %s", (bytes /    1000000.0), sgettext("unit|MiB"));
+  else if (bytes >=        995) sprintf (formatted, "%.1f %s", (bytes /       1000.0), sgettext("unit|KiB"));
+  else                          sprintf (formatted, "%d %s",   (int)bytes,             sgettext("unit|B"));
 
   return commify (formatted);
 }
