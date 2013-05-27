@@ -1,6 +1,8 @@
 xgettext \
     -k_ \
+    -ksgettext \
     -c++ \
+    -cTRANSLATORS \
     -j \
     --package-name taskwarrior \
     --package-version 2.3.0 \
