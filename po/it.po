@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: task 2.3.0\n"
 "Report-Msgid-Bugs-To: Taskwarrior team <support@taskwarrior.org>\n"
-"POT-Creation-Date: 2013-05-27 11:57+0200\n"
+"POT-Creation-Date: 2013-05-27 13:20+0200\n"
 "PO-Revision-Date: 2013-05-25 12:33+0200\n"
 "Last-Translator: Tullio Facchinetti <tullio.facchinetti@gmail.com>\n"
 "Language-Team: Italian\n"
@@ -109,9 +109,13 @@ msgstr "(nessuno)"
 msgid "({1} of {2} tasks remaining)."
 msgstr "({1} di {2} task rimanenti)."
 
-#: ../src/commands/CmdProjects.cpp:161
+#: ../src/commands/CmdProjects.cpp:161 ../src/commands/CmdTags.cpp:119
+#: ../src/commands/CmdProjects.cpp:158
+#, fuzzy
 msgid "({1} task)"
-msgstr "({1} task)"
+msgid_plural "({1} tasks)"
+msgstr[0] "({1} task)"
+msgstr[1] "({1} task)"
 
 #: ../src/commands/CmdProjects.cpp:162 ../src/commands/CmdTags.cpp:126
 msgid "({1} tasks)"
@@ -249,8 +253,8 @@ msgstr "Aggiungere una annotazione al task {1} '{2}'?"
 #: ../src/commands/CmdAnnotate.cpp:134
 msgid "Annotated {1} task."
 msgid_plural "Annotated {1} tasks."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Aggiunta al task {1}."
+msgstr[1] "Aggiunte ai task {1}."
 
 #. TRANSLATORS: {1} is the ID, {2} is the description.
 #: ../src/commands/CmdAnnotate.cpp:107
@@ -267,9 +271,8 @@ msgid "Annotation '{1}' deleted."
 msgstr "Annotazione '{1}' cancellata."
 
 #: ../src/feedback.cpp:271
-#, fuzzy
 msgid "Annotation changed to '{1}'."
-msgstr ""
+msgstr "Annotazione modificata in '{1}'."
 
 #: ../src/Task.cpp:581
 msgid "Annotation is missing a description: {1}"
@@ -292,6 +295,7 @@ msgid ""
 "Annotations look like this: <date> -- <text> and there can be any number of "
 "them."
 msgstr ""
+"Le annotazioni sono del tipo: <date> -- <text> e possono essere in numero arbitrario."
 
 #. TRANSLATORS: {1} is the ID, {2} is the description.
 #: ../src/commands/CmdAppend.cpp:78
@@ -301,8 +305,8 @@ msgstr "Aggiungere alla fine della descrizione del task {1} '{2}'?"
 #: ../src/commands/CmdAppend.cpp:134
 msgid "Appended {1} task."
 msgid_plural "Appended {1} tasks."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Aggiunta al task {1}."
+msgstr[1] "Aggiunte ai task {1}."
 
 #. TRANSLATORS: {1} is the ID, {2} is the description.
 #: ../src/commands/CmdAppend.cpp:107
@@ -500,8 +504,11 @@ msgid "Completed task {1} '{2}'."
 msgstr "Task completato {1} '{2}'."
 
 #: ../src/commands/CmdDone.cpp:131
+#, fuzzy
 msgid "Completed {1} task."
-msgstr "Completato {1} task."
+msgid_plural "Completed {1} tasks."
+msgstr[0] "Completato {1} task."
+msgstr[1] "Completati {1} task."
 
 #: ../src/commands/CmdDone.cpp:131
 msgid "Completed {1} tasks."
@@ -536,7 +543,8 @@ msgstr "Errore di configurazione: data.location non specificato in .taskrc."
 #: ../src/commands/CmdShow.cpp:361 ../src/commands/CmdShow.cpp:369
 #: ../src/commands/CmdShow.cpp:378
 msgid "Configuration error: {1} contains an unrecognized value '{2}'."
-msgstr "Errore di configurazione: {1} contiene un valore non riconosciuto '{2}'."
+msgstr ""
+"Errore di configurazione: {1} contiene un valore non riconosciuto '{2}'."
 
 #: ../src/Config.cpp:451 ../src/Config.cpp:449
 msgid ""
@@ -709,8 +717,11 @@ msgid "Denotate task {1} '{2}'?"
 msgstr "Denotare il task {1} '{2}'?"
 
 #: ../src/commands/CmdDenotate.cpp:150
+#, fuzzy
 msgid "Denotated {1} task."
-msgstr "Annotazione rimossa da task {1}."
+msgid_plural "Denotated {1} tasks."
+msgstr[0] "Annotazione rimossa da task {1}."
+msgstr[1] "Annotazione rimossa da task {1}."
 
 #: ../src/commands/CmdDenotate.cpp:150
 msgid "Denotated {1} tasks."
@@ -1023,8 +1034,11 @@ msgid "Duplicated task {1} '{2}'."
 msgstr "Duplicated task {1} '{2}'."
 
 #: ../src/commands/CmdDuplicate.cpp:137
+#, fuzzy
 msgid "Duplicated {1} task."
-msgstr "Task {1} duplicato."
+msgid_plural "Duplicated {1} tasks."
+msgstr[0] "Task {1} duplicato."
+msgstr[1] "Task {1} duplicato."
 
 #: ../src/commands/CmdDuplicate.cpp:137
 msgid "Duplicated {1} tasks."
@@ -1269,11 +1283,14 @@ msgstr "Linea troppo breve."
 
 #: ../src/commands/CmdEdit.cpp:175
 msgid "Lines that begin with # represent data you cannot change, like ID."
-msgstr "Le linee che iniziano con # rappresentano dati che non possono essere modificati, come l'ID."
+msgstr ""
+"Le linee che iniziano con # rappresentano dati che non possono essere "
+"modificati, come l'ID."
 
 #: ../src/commands/CmdConfig.cpp:180
 msgid "Lists all supported configuration variables, for completion purposes"
-msgstr "Elenca le variabili di configurazione supportate, per autocompletamento"
+msgstr ""
+"Elenca le variabili di configurazione supportate, per autocompletamento"
 
 #: ../src/commands/CmdReports.cpp:43
 msgid "Lists all supported reports"
@@ -1360,8 +1377,11 @@ msgid "Modified task reverted."
 msgstr "Modifiche al task ripristinate."
 
 #: ../src/commands/CmdModify.cpp:181
+#, fuzzy
 msgid "Modified {1} task."
-msgstr "Task {1} modificato."
+msgid_plural "Modified {1} tasks."
+msgstr[0] "Task {1} modificato."
+msgstr[1] "Task {1} modificato."
 
 #: ../src/commands/CmdModify.cpp:181
 msgid "Modified {1} tasks."
@@ -1461,10 +1481,11 @@ msgid "No matching configuration variables."
 msgstr "Variabile di configurazione non corrispondente."
 
 #: ../src/commands/CmdProjects.cpp:167 ../src/commands/CmdSummary.cpp:204
+#: ../src/commands/CmdProjects.cpp:163
 msgid "No projects."
 msgstr "Nessun progetto."
 
-#: ../src/commands/CmdTags.cpp:132
+#: ../src/commands/CmdTags.cpp:132 ../src/commands/CmdTags.cpp:125
 msgid "No tags."
 msgstr "Nessun tag."
 
@@ -1563,8 +1584,11 @@ msgid "Prepend to task {1} '{2}'?"
 msgstr "Aggiungere all'inizio della descrizione del task {1} '{2}'?"
 
 #: ../src/commands/CmdPrepend.cpp:131
+#, fuzzy
 msgid "Prepended {1} task."
-msgstr "Aggiunta al task {1}."
+msgid_plural "Prepended {1} tasks."
+msgstr[0] "Aggiunta al task {1}."
+msgstr[1] "Aggiunta al task {1}."
 
 #: ../src/commands/CmdPrepend.cpp:131
 msgid "Prepended {1} tasks."
@@ -1721,7 +1745,8 @@ msgstr "Separare i tag con spazi; es.: tag1 tag2"
 
 #: ../src/commands/CmdEdit.cpp:179
 msgid "Should you find yourself in an endless loop, re-editing the same file,"
-msgstr "Se ci si trova in un ciclo senza fine, continuando a editare lo stesso file,"
+msgstr ""
+"Se ci si trova in un ciclo senza fine, continuando a editare lo stesso file,"
 
 #: ../src/commands/CmdCalendar.cpp:47
 msgid "Shows a calendar, with due tasks marked"
@@ -1783,11 +1808,11 @@ msgstr "Mostra tutti i nomi di progetto utilizzati"
 msgid "Shows all the defined UDA details"
 msgstr "Mostra tutti i dettagli degli UDA definiti"
 
-#: ../src/commands/CmdProjects.cpp:180
+#: ../src/commands/CmdProjects.cpp:180 ../src/commands/CmdProjects.cpp:176
 msgid "Shows only a list of all project names used"
 msgstr "Mostra solo i nomi di progetto utilizzati"
 
-#: ../src/commands/CmdTags.cpp:145
+#: ../src/commands/CmdTags.cpp:145 ../src/commands/CmdTags.cpp:138
 msgid "Shows only a list of all tags used, for autocompletion purposes"
 msgstr "Mostra solo una lista dei tag utilizzati, per autocompletamento"
 
@@ -1817,7 +1842,8 @@ msgstr "Mostra gli UUID e le descrizioni dei task corrispondenti"
 
 #: ../src/commands/CmdIDs.cpp:148
 msgid "Shows the UUIDs of matching tasks, as a comma-separated list"
-msgstr "Mostra gli UUID dei task corrispondenti, come lista separata da virgole"
+msgstr ""
+"Mostra gli UUID dei task corrispondenti, come lista separata da virgole"
 
 #: ../src/commands/CmdIDs.cpp:180
 msgid "Shows the UUIDs of matching tasks, as a list"
@@ -1866,8 +1892,8 @@ msgstr "Avviati ({1} task)"
 #: ../src/commands/CmdStart.cpp:125
 msgid "Started {1} task."
 msgid_plural "Started {1} tasks."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Task {1} avviato."
+msgstr[1] "Task {1} avviati."
 
 #: ../src/commands/CmdStart.cpp:93
 msgid "Starting task {1} '{2}'."
@@ -1880,8 +1906,8 @@ msgstr "Fermare task {1} '{2}'?"
 #: ../src/commands/CmdStop.cpp:121
 msgid "Stopped {1} task."
 msgid_plural "Stopped {1} tasks."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Task {1} fermato."
+msgstr[1] "Task {1} fermati."
 
 #: ../src/commands/CmdStop.cpp:91
 msgid "Stopping task {1} '{2}'."
@@ -1907,11 +1933,13 @@ msgstr ""
 
 #: ../src/commands/CmdSync.cpp:270
 msgid "Sync failed.  Malformed configuration setting '{1}'"
-msgstr "Sincronizzazione fallita.  Impostazione di configurazione '{1}' malformata"
+msgstr ""
+"Sincronizzazione fallita.  Impostazione di configurazione '{1}' malformata"
 
 #: ../src/commands/CmdSync.cpp:209
 msgid "Sync failed.  The Task Server returned error: {1} {2}"
-msgstr "Sincronizzazione fallita.  Il Task Server ha ritornato l'errore: {1} {2}"
+msgstr ""
+"Sincronizzazione fallita.  Il Task Server ha ritornato l'errore: {1} {2}"
 
 #: ../src/commands/CmdSync.cpp:189
 msgid "Sync successful."
@@ -1927,7 +1955,9 @@ msgstr "Sincronizzazione effettuata.  {1} modifiche scaricate."
 
 #: ../src/commands/CmdSync.cpp:195
 msgid "Sync successful.  {1} changes uploaded, {2} changes downloaded."
-msgstr "Sincronizzazione effettuata.  {1} modifiche caricate, {2} modifiche scaricate."
+msgstr ""
+"Sincronizzazione effettuata.  {1} modifiche caricate, {2} modifiche "
+"scaricate."
 
 #: ../src/commands/CmdSync.cpp:193
 msgid "Sync successful.  {1} changes uploaded."
@@ -2117,6 +2147,8 @@ msgid ""
 "Terminated substitution because more than {1} changes were made - infinite "
 "loop protection."
 msgstr ""
+"Sostituzione terminata poiché più di {1} modifiche sono state fatte - protezione "
+"da ciclo infinito"
 
 #: ../src/commands/CmdDiagnostics.cpp:316
 msgid "Tests"
@@ -2126,12 +2158,14 @@ msgstr "Test"
 msgid ""
 "The ' -- ' separator between the date and text field should not be removed."
 msgstr ""
+"Il separatore ' -- ' tra la data e il campo di teso non dovrebbe essere rimosso."
 
 #: ../src/feedback.cpp:372
 msgid ""
 "The 'next' special tag will boost the urgency of this task so it appears on "
 "the 'next' report."
 msgstr ""
+"Il tag speciale 'next' aumenterà l'urgenza di questo task in modo che appaia nel report 'next'."
 
 #: ../src/feedback.cpp:371
 msgid "The 'nocal' special tag will keep this task off the 'calendar' report."
@@ -2139,7 +2173,8 @@ msgstr "Il tag speciale 'nocal' manterrà il task fuori dal report 'calendar'."
 
 #: ../src/feedback.cpp:369
 msgid "The 'nocolor' special tag will disable color rules for this task."
-msgstr "Il tag speciale 'nocolor' disabilita le regole dei colori per questo task."
+msgstr ""
+"Il tag speciale 'nocolor' disabilita le regole dei colori per questo task."
 
 #: ../src/feedback.cpp:370
 msgid ""
@@ -2148,7 +2183,8 @@ msgstr ""
 
 #: ../src/commands/CmdEdit.cpp:168
 msgid "The 'task <id> edit' command allows you to modify all aspects of a task"
-msgstr "Il comando 'task <id> edit' permette di modificare ogni aspetto di un task"
+msgstr ""
+"Il comando 'task <id> edit' permette di modificare ogni aspetto di un task"
 
 #. TRANSLATORS: The quoted keywords are not to be translated.
 #: ../src/commands/CmdCalendar.cpp:422 ../src/Date.cpp:454
@@ -2156,6 +2192,7 @@ msgstr "Il comando 'task <id> edit' permette di modificare ogni aspetto di un ta
 msgid ""
 "The 'weekstart' configuration variable may only contain 'Sunday' or 'Monday'."
 msgstr ""
+"La variabile di configurazione 'weekstart' può solo contenere i valori 'Sunday' or 'Monday'."
 
 #: ../src/commands/Command.cpp:611
 msgid "The '{1}' attribute does not allow a value of '{2}'."
@@ -2170,6 +2207,7 @@ msgstr "La colonna '{1}' non è un campo di ordinamento valido."
 msgid ""
 "The UDA named '{1}' is the same as a core attribute, and is not permitted."
 msgstr ""
+"L'UDA '{1}' ha lo stesso nome di un attributo di sistema, e ciò non è permesso."
 
 #: ../src/Color.cpp:158 ../src/Color.cpp:180 ../src/Color.cpp:188
 #: ../src/Color.cpp:211 ../src/Color.cpp:229
@@ -2181,6 +2219,7 @@ msgid ""
 "The duration '{1}' was not recognized as valid, with correct units like "
 "'3days'."
 msgstr ""
+"La durata '{1}' non è valida, con nità corrette come '3days'."
 
 #: ../src/TDB2.cpp:1306
 msgid "The last modification was made {1}"
@@ -2217,6 +2256,7 @@ msgid ""
 "The undo command is not reversible.  Are you sure you want to revert to the "
 "previous state?"
 msgstr ""
+"Il comando undo non è reversibile. Sicuro di voler ripristinare lo stato precedente?"
 
 #: ../src/Transport.cpp:141 ../src/TransportCurl.cpp:59
 #: ../src/TransportRSYNC.cpp:59 ../src/TransportRSYNC.cpp:104
@@ -2283,18 +2323,22 @@ msgid ""
 "This is a recurring task.  Do you want to annotate all pending recurrences "
 "of this same task?"
 msgstr ""
+"Questo è un task periodico. Aggiungere una annotazione a tutti i task associati?"
 
 #: ../src/commands/CmdAppend.cpp:98
 msgid ""
 "This is a recurring task.  Do you want to append to all pending recurrences "
 "of this same task?"
 msgstr ""
+"Questo è un task periodico. Aggiungere il testo alla fine della descrizione di tutti "
+"i task associati?"
 
 #: ../src/commands/CmdDelete.cpp:113
 msgid ""
 "This is a recurring task.  Do you want to delete all pending recurrences of "
 "this same task?"
 msgstr ""
+"Questo è un task periodico. Cancellare tutti i task pendenti associati a queso task?"
 
 #: ../src/commands/CmdModify.cpp:122 ../src/commands/CmdModify.cpp:146
 msgid ""
@@ -2307,6 +2351,8 @@ msgid ""
 "This is a recurring task.  Do you want to prepend to all pending recurrences "
 "of this same task?"
 msgstr ""
+"Questo è un task periodico. Aggiungere il testo all'inizio della descrizione di tutti "
+"i task associati?"
 
 #: ../src/commands/CmdInfo.cpp:167
 msgid "This task blocked by"
@@ -2447,7 +2493,9 @@ msgstr ""
 
 #: ../src/commands/CmdColor.cpp:123
 msgid "Use this command to see how colors are displayed by your terminal."
-msgstr "Usare questo comando per vedere come i colori sono visualizzati sul terminale in uso."
+msgstr ""
+"Usare questo comando per vedere come i colori sono visualizzati sul "
+"terminale in uso."
 
 #: ../src/commands/CmdEdit.cpp:289 ../src/commands/CmdEdit.cpp:291
 #: ../src/commands/CmdEdit.cpp:290
@@ -2650,133 +2698,133 @@ msgstr "nuovamente l'editor per un secondo tentativo."
 #. TRANSLATORS: Active.
 #: ../src/columns/ColStart.cpp:66
 msgid "column|A"
-msgstr ""
+msgstr "A"
 
 #: ../src/columns/ColEntry.cpp:35 ../src/columns/ColEntry.cpp:57
 msgid "column|Added"
-msgstr ""
+msgstr "Aggiunto"
 
 #: ../src/columns/ColEntry.cpp:58
 msgid "column|Age"
-msgstr ""
+msgstr "Età"
 
 #: ../src/commands/CmdColor.cpp:77
 msgid "column|Color"
-msgstr ""
+msgstr "Colore"
 
 #: ../src/columns/ColEnd.cpp:35
 msgid "column|Completed"
-msgstr ""
+msgstr "Completato"
 
 #. TRANSLATORS: Column label for the countdown column.
 #: ../src/columns/ColScheduled.cpp:71 ../src/columns/ColDue.cpp:71
 msgid "column|Count"
-msgstr ""
+msgstr "Conteggio"
 
 #: ../src/commands/CmdCalendar.cpp:359
 msgid "column|Date"
-msgstr ""
+msgstr "Data"
 
 #: ../src/commands/CmdColor.cpp:78
 msgid "column|Definition"
-msgstr ""
+msgstr "Definizione"
 
 #. TRANSLATORS: Number of dependencies.
 #. The shorter the better, since it contains only few digits.
 #: ../src/columns/ColDepends.cpp:79
 msgid "column|Dep"
-msgstr ""
+msgstr "Dip"
 
 #: ../src/columns/ColDepends.cpp:43 ../src/columns/ColDepends.cpp:74
 #: ../src/columns/ColDepends.cpp:76
 msgid "column|Depends"
-msgstr ""
+msgstr "Dipendenze"
 
 #: ../src/columns/ColDescription.cpp:45 ../src/commands/CmdInfo.cpp:131
 msgid "column|Description"
-msgstr ""
+msgstr "Descrizione"
 
 #: ../src/columns/ColScheduled.cpp:70 ../src/columns/ColDue.cpp:42
 #: ../src/columns/ColDue.cpp:69 ../src/commands/CmdInfo.cpp:230
 msgid "column|Due"
-msgstr ""
+msgstr "Scadenza"
 
 #: ../src/commands/CmdInfo.cpp:262
 msgid "column|End"
-msgstr ""
+msgstr "Fine"
 
 #: ../src/commands/CmdCalendar.cpp:360
 msgid "column|Holiday"
-msgstr ""
+msgstr "Festività"
 
 #: ../src/columns/ColID.cpp:42 ../src/commands/CmdInfo.cpp:109
 msgid "column|ID"
-msgstr ""
+msgstr "ID"
 
 #: ../src/columns/ColMask.cpp:42 ../src/commands/CmdInfo.cpp:209
 msgid "column|Mask"
-msgstr ""
+msgstr "Maschera"
 
 #: ../src/columns/ColIMask.cpp:42 ../src/commands/CmdInfo.cpp:222
 msgid "column|Mask Index"
-msgstr ""
+msgstr "Indice Maschera"
 
 #: ../src/columns/ColModified.cpp:35
 msgid "column|Modified"
-msgstr ""
+msgstr "Modificato"
 
 #: ../src/commands/CmdInfo.cpp:94
 msgid "column|Name"
-msgstr ""
+msgstr "Nome"
 
 #: ../src/columns/ColParent.cpp:42 ../src/commands/CmdInfo.cpp:217
 msgid "column|Parent task"
-msgstr ""
+msgstr "Task genitore"
 
 #. TRANSLATORS: Short for "priority".
 #: ../src/columns/ColPriority.cpp:42 ../src/columns/ColPriority.cpp:77
 msgid "column|Pri"
-msgstr ""
+msgstr "Pri"
 
 #: ../src/columns/ColPriority.cpp:78 ../src/commands/CmdInfo.cpp:151
 msgid "column|Priority"
-msgstr ""
+msgstr "Priorità"
 
 #: ../src/columns/ColProject.cpp:43 ../src/commands/CmdInfo.cpp:143
 msgid "column|Project"
-msgstr ""
+msgstr "Progetto"
 
 #. TRANSLATORS: Short for "reccurence frequency"
 #: ../src/columns/ColRecur.cpp:47 ../src/columns/ColRecur.cpp:74
 msgid "column|Recur"
-msgstr ""
+msgstr "Period"
 
 #: ../src/commands/CmdInfo.cpp:193
 msgid "column|Recurrence"
-msgstr ""
+msgstr "Periodico"
 
 #. TRANSLATORS: Task scheduled.
 #: ../src/columns/ColScheduled.cpp:43
 msgid "column|Scheduled"
-msgstr ""
+msgstr "Fissato"
 
 #. TRANSLATORS: Short for "status".
 #: ../src/columns/ColStatus.cpp:71
 msgid "column|St"
-msgstr ""
+msgstr "St"
 
 #: ../src/commands/CmdInfo.cpp:254
 msgid "column|Start"
-msgstr ""
+msgstr "Inizio"
 
 #: ../src/columns/ColStart.cpp:39 ../src/columns/ColStart.cpp:64
 msgid "column|Started"
-msgstr ""
+msgstr "Iniziati"
 
 #: ../src/columns/ColStatus.cpp:42 ../src/columns/ColStatus.cpp:69
 #: ../src/commands/CmdInfo.cpp:136
 msgid "column|Status"
-msgstr ""
+msgstr "Stato"
 
 #: ../src/columns/ColTags.cpp:81
 msgid "column|Tag"
@@ -2789,27 +2837,27 @@ msgstr ""
 
 #: ../src/columns/ColUUID.cpp:42
 msgid "column|UUID"
-msgstr ""
+msgstr "UUID"
 
 #: ../src/columns/ColUntil.cpp:35 ../src/commands/CmdInfo.cpp:201
 msgid "column|Until"
-msgstr ""
+msgstr "Fino a"
 
 #: ../src/columns/ColUrgency.cpp:41
 msgid "column|Urgency"
-msgstr ""
+msgstr "Urgenza"
 
 #: ../src/commands/CmdInfo.cpp:95
 msgid "column|Value"
-msgstr ""
+msgstr "Valore"
 
 #: ../src/columns/ColWait.cpp:35
 msgid "column|Wait"
-msgstr ""
+msgstr "Attesa"
 
 #: ../src/commands/CmdInfo.cpp:238
 msgid "column|Waiting until"
-msgstr ""
+msgstr "Attesa fino"
 
 #: ../src/Date.cpp:520
 msgid "dec"
@@ -2877,7 +2925,8 @@ msgstr "giugno"
 
 #: ../src/commands/CmdEdit.cpp:180
 msgid "just quit the editor without making any changes.  Taskwarrior will"
-msgstr "si chiuda semplicemente l'editor senza effettuare modifiche. Taskwarrior"
+msgstr ""
+"si chiuda semplicemente l'editor senza effettuare modifiche. Taskwarrior"
 
 #: ../src/Date.cpp:511
 msgid "mar"
@@ -2990,7 +3039,8 @@ msgstr "task {1} urgenza {2}"
 
 #: ../src/commands/CmdEdit.cpp:171
 msgid "taskwarrior will read this file, determine what changed, and apply"
-msgstr "taskwarrior leggerà il file, determinando ciò che è cambiato, e applicherà"
+msgstr ""
+"taskwarrior leggerà il file, determinando ciò che è cambiato, e applicherà"
 
 #. TRANSLATORS: Task completed.
 #: ../src/columns/ColStatus.cpp:123
@@ -2999,7 +3049,7 @@ msgstr ""
 
 #: ../src/columns/ColStatus.cpp:90 ../src/columns/ColStatus.cpp:114
 msgid "task|Completed"
-msgstr ""
+msgstr "Completati"
 
 #. TRANSLATORS: Task deleted.
 #: ../src/columns/ColStatus.cpp:124
@@ -3008,7 +3058,7 @@ msgstr ""
 
 #: ../src/columns/ColStatus.cpp:86 ../src/columns/ColStatus.cpp:115
 msgid "task|Deleted"
-msgstr ""
+msgstr "Cancellati"
 
 #. TRANSLATORS: Task pending.
 #: ../src/columns/ColStatus.cpp:48 ../src/columns/ColStatus.cpp:122
@@ -3036,7 +3086,7 @@ msgstr ""
 
 #: ../src/columns/ColStatus.cpp:88 ../src/columns/ColStatus.cpp:116
 msgid "task|Waiting"
-msgstr ""
+msgstr "Attesa"
 
 #: ../src/commands/CmdEdit.cpp:172
 msgid "those changes.  If you exit your editor without saving or making"
@@ -3058,8 +3108,8 @@ msgstr "tempo "
 #: ../src/commands/CmdCustom.cpp:174
 msgid "truncated to {1} line"
 msgid_plural "truncated to {1} lines"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "troncato alla linea {1}"
+msgstr[1] "troncato alla linea {1}"
 
 #: ../src/Date.cpp:479
 msgid "tue"
@@ -3099,6 +3149,8 @@ msgstr "sconosciuto"
 msgid ""
 "using a text editor.  Below is a representation of all the task details."
 msgstr ""
+"utilizzando un editor di testo. Segue la rappresentazione dei dettagli di "
+"un task."
 
 #: ../src/Date.cpp:480
 msgid "wed"
@@ -3139,7 +3191,6 @@ msgid "{1} characters"
 msgstr "{1} caratteri"
 
 #: ../src/feedback.cpp:209
-#, fuzzy
 msgid "{1} deleted (duration: {2})."
 msgstr ""
 
@@ -3148,8 +3199,12 @@ msgid "{1} deleted."
 msgstr "{1} cancellato."
 
 #: ../src/commands/CmdProjects.cpp:157 ../src/commands/CmdSummary.cpp:199
+#: ../src/commands/CmdProjects.cpp:156
+#, fuzzy
 msgid "{1} project"
-msgstr "{1} progetto"
+msgid_plural "{1} projects"
+msgstr[0] "{1} progetto"
+msgstr[1] "{1} progetti"
 
 #: ../src/commands/CmdProjects.cpp:158 ../src/commands/CmdSummary.cpp:197
 msgid "{1} projects"
@@ -3160,13 +3215,19 @@ msgid "{1} reports"
 msgstr "{1} report"
 
 #: ../src/feedback.cpp:242
-#, fuzzy
 msgid "{1} set to '{2}'."
-msgstr ""
+msgstr "{1} impostata a '{2}'."
 
 #: ../src/commands/CmdCustom.cpp:170
 msgid "{1} shown"
 msgstr "{1} mostrato"
+
+#: ../src/commands/CmdTags.cpp:118
+#, fuzzy
+msgid "{1} tag"
+msgid_plural "{1} tags"
+msgstr[0] "{1} tag"
+msgstr[1] "{1} tag"
 
 #: ../src/commands/CmdTags.cpp:121
 msgid "{1} tags"
