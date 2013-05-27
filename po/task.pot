@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: taskwarrior 2.3.0\n"
 "Report-Msgid-Bugs-To: Taskwarrior team <support@taskwarrior.org>\n"
-"POT-Creation-Date: 2013-05-27 11:57+0200\n"
+"POT-Creation-Date: 2013-05-27 13:20+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1172,10 +1172,11 @@ msgid "(none)"
 msgstr ""
 
 #: ../src/commands/CmdProjects.cpp:167 ../src/commands/CmdSummary.cpp:204
+#: ../src/commands/CmdProjects.cpp:163
 msgid "No projects."
 msgstr ""
 
-#: ../src/commands/CmdProjects.cpp:180
+#: ../src/commands/CmdProjects.cpp:180 ../src/commands/CmdProjects.cpp:176
 msgid "Shows only a list of all project names used"
 msgstr ""
 
@@ -1383,11 +1384,11 @@ msgstr ""
 msgid "Shows a list of all tags used"
 msgstr ""
 
-#: ../src/commands/CmdTags.cpp:132
+#: ../src/commands/CmdTags.cpp:132 ../src/commands/CmdTags.cpp:125
 msgid "No tags."
 msgstr ""
 
-#: ../src/commands/CmdTags.cpp:145
+#: ../src/commands/CmdTags.cpp:145 ../src/commands/CmdTags.cpp:138
 msgid "Shows only a list of all tags used, for autocompletion purposes"
 msgstr ""
 
@@ -1926,7 +1927,9 @@ msgstr ""
 
 #: ../src/commands/CmdDenotate.cpp:150
 msgid "Denotated {1} task."
-msgstr ""
+msgid_plural "Denotated {1} tasks."
+msgstr[0] ""
+msgstr[1] ""
 
 #: ../src/commands/CmdDenotate.cpp:150
 msgid "Denotated {1} tasks."
@@ -1979,7 +1982,9 @@ msgstr ""
 
 #: ../src/commands/CmdDone.cpp:131
 msgid "Completed {1} task."
-msgstr ""
+msgid_plural "Completed {1} tasks."
+msgstr[0] ""
+msgstr[1] ""
 
 #: ../src/commands/CmdDone.cpp:131
 msgid "Completed {1} tasks."
@@ -1987,7 +1992,9 @@ msgstr ""
 
 #: ../src/commands/CmdDuplicate.cpp:137
 msgid "Duplicated {1} task."
-msgstr ""
+msgid_plural "Duplicated {1} tasks."
+msgstr[0] ""
+msgstr[1] ""
 
 #: ../src/commands/CmdDuplicate.cpp:137
 msgid "Duplicated {1} tasks."
@@ -2172,7 +2179,9 @@ msgstr ""
 
 #: ../src/commands/CmdModify.cpp:181
 msgid "Modified {1} task."
-msgstr ""
+msgid_plural "Modified {1} tasks."
+msgstr[0] ""
+msgstr[1] ""
 
 #: ../src/commands/CmdModify.cpp:181
 msgid "Modified {1} tasks."
@@ -2180,7 +2189,9 @@ msgstr ""
 
 #: ../src/commands/CmdPrepend.cpp:131
 msgid "Prepended {1} task."
-msgstr ""
+msgid_plural "Prepended {1} tasks."
+msgstr[0] ""
+msgstr[1] ""
 
 #: ../src/commands/CmdPrepend.cpp:131
 msgid "Prepended {1} tasks."
@@ -2212,16 +2223,22 @@ msgid "Pri:H"
 msgstr ""
 
 #: ../src/commands/CmdProjects.cpp:157 ../src/commands/CmdSummary.cpp:199
+#: ../src/commands/CmdProjects.cpp:156
 msgid "{1} project"
-msgstr ""
+msgid_plural "{1} projects"
+msgstr[0] ""
+msgstr[1] ""
 
 #: ../src/commands/CmdProjects.cpp:158 ../src/commands/CmdSummary.cpp:197
 msgid "{1} projects"
 msgstr ""
 
-#: ../src/commands/CmdProjects.cpp:161
+#: ../src/commands/CmdProjects.cpp:161 ../src/commands/CmdTags.cpp:119
+#: ../src/commands/CmdProjects.cpp:158
 msgid "({1} task)"
-msgstr ""
+msgid_plural "({1} tasks)"
+msgstr[0] ""
+msgstr[1] ""
 
 #: ../src/commands/CmdProjects.cpp:162 ../src/commands/CmdTags.cpp:126
 msgid "({1} tasks)"
@@ -3084,3 +3101,9 @@ msgstr ""
 #: ../src/commands/CmdColor.cpp:78
 msgid "column|Definition"
 msgstr ""
+
+#: ../src/commands/CmdTags.cpp:118
+msgid "{1} tag"
+msgid_plural "{1} tags"
+msgstr[0] ""
+msgstr[1] ""

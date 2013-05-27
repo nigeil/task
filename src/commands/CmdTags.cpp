@@ -116,15 +116,8 @@ int CmdTags::execute (std::string& output)
         << view.render ()
         << optionalBlankLine ();
 
-    if (unique.size () == 1)
-      context.footnote (_("1 tag"));
-    else
-      context.footnote (format (_("{1} tags"), unique.size ()));
-
-    if (quantity == 1)
-      context.footnote (_("(1 task)"));
-    else
-      context.footnote (format (_("({1} tasks)"), quantity));
+    context.footnote (format (ngettext("{1} tag", "{1} tags", unique.size ()), unique.size ()));
+    context.footnote (format (ngettext("({1} task)", "({1} tasks)", quantity), quantity));
 
     out << "\n";
   }

@@ -148,7 +148,7 @@ int CmdDenotate::execute (std::string& output)
       context.footnote (i->second);
 
   context.tdb2.commit ();
-  feedback_affected (count == 1 ? _("Denotated {1} task.") : _("Denotated {1} tasks."), count);
+  feedback_affected (ngettext("Denotated {1} task.", "Denotated {1} tasks.", count), count);
   return rc;
 }
 

@@ -179,7 +179,7 @@ int CmdModify::execute (std::string& output)
       context.footnote (i->second);
 
   context.tdb2.commit ();
-  feedback_affected (count == 1 ? _("Modified {1} task.") : _("Modified {1} tasks."), count);
+  feedback_affected (ngettext("Modified {1} task.", "Modified {1} tasks.", count), count);
   return rc;
 }
 

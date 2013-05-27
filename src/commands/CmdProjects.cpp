@@ -154,13 +154,9 @@ int CmdProjects::execute (std::string& output)
     out << optionalBlankLine ()
         << view.render ()
         << optionalBlankLine ()
-        << (number_projects == 1
-              ? format (_("{1} project"),  number_projects)
-              : format (_("{1} projects"), number_projects))
+        << format (ngettext("{1} project", "{1} projects", number_projects), number_projects)
         << " "
-        << (quantity == 1
-              ? format (_("({1} task)"),  quantity)
-              : format (_("({1} tasks)"), quantity))
+        << format (ngettext("({1} task)", "({1} tasks)", quantity), quantity)
         << "\n";
   }
   else
