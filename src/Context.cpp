@@ -585,7 +585,7 @@ void Context::createDefaultConfig ()
   if (! rc_file.exists ())
   {
     if (config.getBoolean ("confirmation") &&
-        !confirm (format (_("A configuration file could not be found in {1}nnWould you like a sample {2} created, so taskwarrior can proceed?"), home_dir, rc_file._data)))
+        !confirm (format (_("A configuration file could not be found in {1}. Would you like a sample {2} created, so taskwarrior can proceed?"), home_dir, rc_file._data)))
       throw std::string (_("Cannot proceed without rc file."));
 
     config.createDefaultRC (rc_file, data_dir._original);

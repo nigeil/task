@@ -159,7 +159,7 @@ msgstr ""
 
 #: ../src/Context.cpp:588
 msgid ""
-"A configuration file could not be found in {1}nnWould you like a sample {2} "
+"A configuration file could not be found in {1}. Would you like a sample {2} "
 "created, so taskwarrior can proceed?"
 msgstr ""
 

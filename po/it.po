@@ -160,13 +160,17 @@ msgstr "sconosciuto"
 
 #: ../src/commands/CmdEdit.cpp:216
 msgid "A \"blank slot\" for adding an annotation follows for your convenience."
-msgstr "Una linea preimpostata per aggiungere una annotazione è stata aggiunta per comodità."
+msgstr ""
+"Una linea preimpostata per aggiungere una annotazione è stata aggiunta per "
+"comodità."
 
 #: ../src/Context.cpp:588
 msgid ""
-"A configuration file could not be found in {1}nnWould you like a sample {2} "
+"A configuration file could not be found in {1}. Would you like a sample {2} "
 "created, so taskwarrior can proceed?"
 msgstr ""
+"Un file di configurazione non può essere trovato in {1}\n\nSi desidera la "
+"creazione di un file di esempio {2}, in modo che taskwarrior possa procedere?"
 
 #: ../src/Task.cpp:1422
 msgid "A recurring task must also have a 'due' date."

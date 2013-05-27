@@ -172,9 +172,11 @@ msgstr ""
 
 #: ../src/Context.cpp:588
 msgid ""
-"A configuration file could not be found in {1}nnWould you like a sample {2} "
+"A configuration file could not be found in {1}. Would you like a sample {2} "
 "created, so taskwarrior can proceed?"
 msgstr ""
+"No se pudo encontrar un archivo de configuración en {1}\n\n¿Desearía que se "
+"creara un {2} de ejemplo, para que taskwarrior pueda continuar?"
 
 #: ../src/Task.cpp:1422
 msgid "A recurring task must also have a 'due' date."
