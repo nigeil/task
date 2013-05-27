@@ -25,6 +25,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <cmake.h>
 #include <Context.h>
 #include <Column.h>
 #include <ColDepends.h>
@@ -108,7 +109,7 @@ Column* Column::factory (const std::string& name, const std::string& report)
     c = Column::uda (column_name);
 
   else
-    throw format (STRING_COLUMN_BAD_NAME, column_name);
+    throw format (_("Unrecognized column name '{1}'."), column_name);
 
   c->setReport (report);
   c->setStyle (column_style);
@@ -167,7 +168,8 @@ void Column::uda (std::map <std::string, Column*>& all)
   for (uda = udas.begin (); uda != udas.end (); ++uda)
   {
     if (all.find (uda->first) != all.end ())
-      throw format (STRING_UDA_COLLISION, uda->first);
+      // TRANSLATORS: UDA means User Defined Attribute.
+      throw format (_("The UDA named '{1}' is the same as a core attribute, and is not permitted."), uda->first);
 
     Column* c = Column::uda (uda->first);
     all[c->_name] = c;
@@ -183,12 +185,13 @@ Column* Column::uda (const std::string& name)
   std::string key = "uda." + name + ".type";
   c->_type = context.config.get (key);
   if (c->_type == "")
-    throw format (STRING_UDA_TYPE_MISSING, name);
+    // TRANSLATORS: UDA means User Defined Attribute.
+    throw format (_("uda.{1}.type not found. The UDA '{1}' must have a type specified."), name);
   if (c->_type != "string"   &&
       c->_type != "date"     &&
       c->_type != "duration" &&
       c->_type != "numeric")
-    throw std::string (STRING_UDA_TYPE);
+    throw std::string (_("User defined attributes may only be of type 'string', 'date', 'duration' or 'numeric'."));
 
   key = "uda." + name + ".label";
   if (context.config.get (key) != "")

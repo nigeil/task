@@ -25,6 +25,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <cmake.h>
 #include <iostream>
 #include <sstream>
 #include <Context.h>
@@ -43,7 +44,7 @@ CmdImport::CmdImport ()
 {
   _keyword     = "import";
   _usage       = "task          import <file> [<file> ...]";
-  _description = STRING_CMD_IMPORT_USAGE;
+  _description = _("Imports JSON files");
   _read_only   = false;
   _displays_id = false;
 }
@@ -57,13 +58,13 @@ int CmdImport::execute (std::string& output)
 	// Use the description as a file name.
   std::vector <std::string> words = context.a3.extract_words ();
   if (! words.size ())
-    throw std::string (STRING_CMD_IMPORT_NOFILE);
+    throw std::string (_("You must specify a file to import."));
 
   std::vector <std::string>::iterator word;
   for (word = words.begin (); word != words.end (); ++word)
   {
     std::string file = *word;
-    std::cout << format (STRING_CMD_IMPORT_FILE, file) << "\n";
+    std::cout << format (_("Importing '{1}'"), file) << "\n";
 
     std::string tmpfile = "";
     Uri uri (file);
@@ -112,7 +113,7 @@ int CmdImport::execute (std::string& output)
 
   context.tdb2.commit ();
 
-  context.footnote (format (STRING_CMD_IMPORT_SUMMARY, count));
+  context.footnote (format (_("Imported {1} tasks."), count));
   return rc;
 }
 

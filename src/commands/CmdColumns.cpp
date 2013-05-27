@@ -25,6 +25,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <cmake.h>
 #include <algorithm>
 #include <Context.h>
 #include <ViewText.h>
@@ -41,7 +42,7 @@ CmdColumns::CmdColumns ()
 {
   _keyword     = "columns";
   _usage       = "task          columns [substring]";
-  _description = STRING_CMD_COLUMNS_USAGE;
+  _description = _("All supported columns and formatting styles");
   _read_only   = true;
   _displays_id = false;
 }
@@ -53,7 +54,7 @@ int CmdColumns::execute (std::string& output)
   // have already been handled.
   std::vector <std::string> words = context.a3.extract_words ();
   if (words.size () > 1)
-    throw std::string (STRING_CMD_COLUMNS_ARGS);
+    throw std::string (_("You can only specify one search string."));
 
   // Include all columns in the table.
   std::vector <std::string> names;
@@ -66,9 +67,9 @@ int CmdColumns::execute (std::string& output)
   // Render a list of column names, formats and examples.
   ViewText formats;
   formats.width (context.getWidth ());
-  formats.add (Column::factory ("string", STRING_COLUMN_LABEL_COLUMN));
-  formats.add (Column::factory ("string", STRING_COLUMN_LABEL_STYLES));
-  formats.add (Column::factory ("string", STRING_COLUMN_LABEL_EXAMPLES));
+  formats.add (Column::factory ("string", _("Columns")));
+  formats.add (Column::factory ("string", _("Supported Formats")));
+  formats.add (Column::factory ("string", _("Example")));
 
   Color alternate (context.config.get ("color.alternate"));
   formats.colorOdd (alternate);
@@ -96,7 +97,7 @@ int CmdColumns::execute (std::string& output)
   output = optionalBlankLine ()
          + formats.render ()
          + "\n"
-         + STRING_CMD_COLUMNS_NOTE
+         + _("* Means default format, and therefore optional.  For example, 'due' and 'due.formatted' are equivalent.")
          + "\n";
 
   return 0;
@@ -107,7 +108,7 @@ CmdCompletionColumns::CmdCompletionColumns ()
 {
   _keyword     = "_columns";
   _usage       = "task          _columns";
-  _description = STRING_CMD_COLUMNS_USAGE2;
+  _description = _("Displays only a list of supported columns");
   _read_only   = true;
   _displays_id = false;
 }

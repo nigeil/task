@@ -25,6 +25,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <cmake.h>
 #include <fstream>
 #include <sstream>
 #include <Context.h>
@@ -43,7 +44,7 @@ CmdMerge::CmdMerge ()
 {
   _keyword     = "merge";
   _usage       = "task          merge <URL>";
-  _description = STRING_CMD_MERGE_USAGE;
+  _description = _("Merges the remote files with the local files");
   _read_only   = false;
   _displays_id = false;
 }
@@ -96,7 +97,7 @@ int CmdMerge::execute (std::string& output)
         context.tdb2.merge (file);
     }
     catch (const std::string& e) {
-        if (e == STRING_TDB2_UP_TO_DATE)
+        if (e == _("Database is up-to-date, no merge required."))
         {
             output += e + "\n";
             return 0;
@@ -105,12 +106,12 @@ int CmdMerge::execute (std::string& output)
             throw e;
     }
 
-    output += std::string (STRING_CMD_MERGE_COMPLETE) + "\n";
+    output += std::string (_("Merge complete.")) + "\n";
 
     if (tmpfile != "")
       remove (tmpfile.c_str ());
 
-    if (((sAutopush == "ask") && (confirm (format (STRING_CMD_MERGE_CONFIRM, uri.ToString ()))))
+    if (((sAutopush == "ask") && (confirm (format (_("Would you like to push the merged changes to '{1}'?"), uri.ToString ()))))
        || (bAutopush))
     {
       // Derive autopush uri from merge.default.uri? otherwise: change prompt above
@@ -135,7 +136,7 @@ int CmdMerge::execute (std::string& output)
     }
   }
   else
-    throw std::string (STRING_CMD_MERGE_NO_URI);
+    throw std::string (_("No uri was specified for the merge.  Either specify the uri of a remote .task directory, or create a 'merge.default.uri' entry in your .taskrc file."));
 
   return 0;
 }

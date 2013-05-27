@@ -25,6 +25,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <cmake.h>
 #include <sstream>
 #include <stdlib.h>
 #include <Context.h>
@@ -40,7 +41,7 @@ CmdUrgency::CmdUrgency ()
 {
   _keyword     = "_urgency";
   _usage       = "task <filter> _urgency";
-  _description = STRING_CMD_URGENCY_USAGE;
+  _description = _("Displays the urgency measure of a task");
   _read_only   = true;
   _displays_id = false;
 }
@@ -54,7 +55,7 @@ int CmdUrgency::execute (std::string& output)
 
   if (filtered.size () == 0)
   {
-    context.footnote (STRING_FEEDBACK_NO_TASKS_SP);
+    context.footnote (_("No tasks specified."));
     return 1;
   }
 
@@ -65,14 +66,15 @@ int CmdUrgency::execute (std::string& output)
   {
     if (task->id)
     {
-      out << format (STRING_CMD_URGENCY_RESULT,
+      // TRANSLATORS: {1} is the ID, {2} is the urgency.
+      out << format (_("task {1} urgency {2}"),
                      task->id, task->urgency ())
           << "\n";
     }
     else
     {
       std::string uuid = task->get ("uuid");
-      out << format (STRING_CMD_URGENCY_RESULT,
+      out << format (_("task {1} urgency {2}"),
                      uuid, task->urgency ())
           << "\n";
     }

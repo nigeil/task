@@ -25,6 +25,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <cmake.h>
 #include <iostream>
 #include <sstream>
 #include <stdlib.h>
@@ -46,7 +47,7 @@ CmdEdit::CmdEdit ()
 {
   _keyword     = "edit";
   _usage       = "task <filter> edit";
-  _description = STRING_CMD_EDIT_USAGE;
+  _description = _("Launches an editor to modify a task directly");
   _read_only   = false;
   _displays_id = false;
 }
@@ -164,24 +165,25 @@ std::string CmdEdit::formatTask (Task task, const std::string& dateformat)
                  context.config.getBoolean ("edit.verbose"); // Deprecated 2.0
 
   if (verbose)
-    before << "# " << STRING_EDIT_HEADER_1 << "\n"
-           << "# " << STRING_EDIT_HEADER_2 << "\n"
-           << "# " << STRING_EDIT_HEADER_3 << "\n"
-           << "# " << STRING_EDIT_HEADER_4 << "\n"
-           << "# " << STRING_EDIT_HEADER_5 << "\n"
-           << "# " << STRING_EDIT_HEADER_6 << "\n"
-           << "#\n"
-           << "# " << STRING_EDIT_HEADER_7 << "\n"
-           << "# " << STRING_EDIT_HEADER_8 << "\n"
-           << "# " << STRING_EDIT_HEADER_9 << "\n"
-           << "#\n"
-           << "# " << STRING_EDIT_HEADER_10 << "\n"
-           << "# " << STRING_EDIT_HEADER_11 << "\n"
-           << "# " << STRING_EDIT_HEADER_12 << "\n"
-           << "#\n";
+    before <<  _("# The 'task <id> edit' command allows you to modify all aspects of a task\n" \
+                 "# using a text editor.  Below is a representation of all the task details.\n" \
+                 "# Modify what you wish, and when you save and quit your editor,\n" \
+                 "# taskwarrior will read this file, determine what changed, and apply\n" \
+                 "# those changes.  If you exit your editor without saving or making\n" \
+                 "# modifications, taskwarrior will do nothing.\n" \
+                 "#\n" \
+                 "# Lines that begin with # represent data you cannot change, like ID.\n" \
+                 "# If you get too creative with your editing, taskwarrior will send you\n" \
+                 "# back to the editor to try again.\n" \
+                 "#\n" \
+                 "# Should you find yourself in an endless loop, re-editing the same file,\n" \
+                 "# just quit the editor without making any changes.  Taskwarrior will\n" \
+                 "# notice this and stop the editing.\n" \
+                 "#\n");
 
-  before << "# " << STRING_EDIT_TABLE_HEADER_1 << "\n"
-         << "# " << STRING_EDIT_TABLE_HEADER_2 << "\n"
+  // TRANSLATORS: Preserve the fixed-width of the first column.
+  before << _("# Name               Editable details\n" \
+              "# -----------------  ----------------------------------------------------\n")
          << "# ID:                " << task.id                                          << "\n"
          << "# UUID:              " << task.get ("uuid")                                << "\n"
          << "# Status:            " << ucFirst (Task::statusToText (task.getStatus ())) << "\n"
@@ -196,7 +198,7 @@ std::string CmdEdit::formatTask (Task task, const std::string& dateformat)
   join (allTags, " ", tags);
 
   if (verbose)
-    before << "# " << STRING_EDIT_TAG_SEP << "\n";
+    before << "# " << _("Separate the tags with spaces, like this: tag1 tag2") << "\n";
 
   before << "  Tags:              " << allTags                                          << "\n"
          << "  Description:       " << task.get ("description")                         << "\n"
@@ -211,9 +213,9 @@ std::string CmdEdit::formatTask (Task task, const std::string& dateformat)
          << "  Parent:            " << task.get ("parent")                              << "\n";
 
   if (verbose)
-    before << "# " << STRING_EDIT_HEADER_13 << "\n"
-           << "# " << STRING_EDIT_HEADER_14 << "\n"
-           << "# " << STRING_EDIT_HEADER_15 << "\n";
+    before << _("# Annotations look like this: <date> -- <text> and there can be any number of them.\n" \
+                "# The ' -- ' separator between the date and text field should not be removed.\n" \
+                "# A \"blank slot\" for adding an annotation follows for your convenience.\n");
 
   std::map <std::string, std::string> annotations;
   task.getAnnotations (annotations);
@@ -247,7 +249,7 @@ std::string CmdEdit::formatTask (Task task, const std::string& dateformat)
   }
 
   if (verbose)
-    before << "# " << STRING_EDIT_DEP_SEP << "\n";
+    before << "# " << _("Dependencies should be a comma-separated list of task IDs/UUIDs or ID ranges, with no spaces.") << "\n";
 
   before << "  Dependencies:      " << allDeps.str () << "\n";
 
@@ -260,7 +262,7 @@ std::string CmdEdit::formatTask (Task task, const std::string& dateformat)
 
   if (udas.size ())
   {
-    before << "# " << STRING_EDIT_UDA_SEP << "\n";
+    before << "# " << _("User Defined Attributes") << "\n";
     std::sort (udas.begin (), udas.end ());
     std::vector <std::string>::iterator uda;
     for (uda = udas.begin (); uda != udas.end (); ++uda)
@@ -286,7 +288,7 @@ std::string CmdEdit::formatTask (Task task, const std::string& dateformat)
 
   if (orphans.size ())
   {
-    before << "# " << STRING_EDIT_UDA_ORPHAN_SEP << "\n";
+    before << "# " << _("User Defined Attribute Orphans") << "\n";
     std::sort (orphans.begin (), orphans.end ());
     std::vector <std::string>::iterator orphan;
     for (orphan = orphans.begin (); orphan != orphans.end (); ++orphan)
@@ -300,7 +302,7 @@ std::string CmdEdit::formatTask (Task task, const std::string& dateformat)
     }
   }
 
-  before << "# " << STRING_EDIT_END << "\n";
+  before << "# " << _("End") << "\n";
   return before.str ();
 }
 
@@ -313,12 +315,12 @@ void CmdEdit::parseTask (Task& task, const std::string& after, const std::string
   {
     if (value != "")
     {
-      context.footnote (STRING_EDIT_PROJECT_MOD);
+      context.footnote (_("Project modified."));
       task.set ("project", value);
     }
     else
     {
-      context.footnote (STRING_EDIT_PROJECT_DEL);
+      context.footnote (_("Project deleted."));
       task.remove ("project");
     }
   }
@@ -331,13 +333,13 @@ void CmdEdit::parseTask (Task& task, const std::string& after, const std::string
     {
       if (context.columns["priority"]->validate (value))
       {
-        context.footnote (STRING_EDIT_PRIORITY_MOD);
+        context.footnote (_("Priority modified."));
         task.set ("priority", value);
       }
     }
     else
     {
-      context.footnote (STRING_EDIT_PRIORITY_DEL);
+      context.footnote (_("Priority deleted."));
       task.remove ("priority");
     }
   }
@@ -355,11 +357,11 @@ void CmdEdit::parseTask (Task& task, const std::string& after, const std::string
   {
     if (value != "")
     {
-      context.footnote (STRING_EDIT_DESC_MOD);
+      context.footnote (_("Description modified."));
       task.set ("description", value);
     }
     else
-      throw std::string (STRING_EDIT_DESC_REMOVE_ERR);
+      throw std::string (_("Cannot remove description."));
   }
 
   // entry
@@ -370,12 +372,12 @@ void CmdEdit::parseTask (Task& task, const std::string& after, const std::string
 
     if (formatted != value)
     {
-      context.footnote (STRING_EDIT_ENTRY_MOD);
+      context.footnote (_("Creation date modified."));
       task.set ("entry", Date(value, dateformat).toEpochString ());
     }
   }
   else
-    throw std::string (STRING_EDIT_ENTRY_REMOVE_ERR);
+    throw std::string (_("Cannot remove creation date."));
 
   // start
   value = findValue (after, "\n  Started:");
@@ -387,13 +389,13 @@ void CmdEdit::parseTask (Task& task, const std::string& after, const std::string
 
       if (formatted != value)
       {
-        context.footnote (STRING_EDIT_START_MOD);
+        context.footnote (_("Start date modified."));
         task.set ("start", Date(value, dateformat).toEpochString ());
       }
     }
     else
     {
-      context.footnote (STRING_EDIT_START_MOD);
+      context.footnote (_("Start date modified."));
       task.set ("start", Date(value, dateformat).toEpochString ());
     }
   }
@@ -401,7 +403,7 @@ void CmdEdit::parseTask (Task& task, const std::string& after, const std::string
   {
     if (task.get ("start") != "")
     {
-      context.footnote (STRING_EDIT_START_DEL);
+      context.footnote (_("Start date removed."));
       task.remove ("start");
     }
   }
@@ -416,18 +418,18 @@ void CmdEdit::parseTask (Task& task, const std::string& after, const std::string
 
       if (formatted != value)
       {
-        context.footnote (STRING_EDIT_END_MOD);
+        context.footnote (_("End date modified."));
         task.set ("end", Date(value, dateformat).toEpochString ());
       }
     }
     else if (task.getStatus () != Task::deleted)
-      throw std::string (STRING_EDIT_END_SET_ERR);
+      throw std::string (_("Cannot set a done date on a pending task."));
   }
   else
   {
     if (task.get ("end") != "")
     {
-      context.footnote (STRING_EDIT_END_DEL);
+      context.footnote (_("End date removed."));
       task.setStatus (Task::pending);
       task.remove ("end");
     }
@@ -443,13 +445,13 @@ void CmdEdit::parseTask (Task& task, const std::string& after, const std::string
 
       if (formatted != value)
       {
-        context.footnote (STRING_EDIT_SCHED_MOD);
+        context.footnote (_("Scheduled date modified."));
         task.set ("scheduled", Date(value, dateformat).toEpochString ());
       }
     }
     else
     {
-      context.footnote (STRING_EDIT_SCHED_MOD);
+      context.footnote (_("Scheduled date modified."));
       task.set ("scheduled", Date(value, dateformat).toEpochString ());
     }
   }
@@ -457,7 +459,7 @@ void CmdEdit::parseTask (Task& task, const std::string& after, const std::string
   {
     if (task.get ("scheduled") != "")
     {
-      context.footnote (STRING_EDIT_SCHED_DEL);
+      context.footnote (_("Scheduled date removed."));
       task.setStatus (Task::pending);
       task.remove ("scheduled");
     }
@@ -473,13 +475,13 @@ void CmdEdit::parseTask (Task& task, const std::string& after, const std::string
 
       if (formatted != value)
       {
-        context.footnote (STRING_EDIT_DUE_MOD);
+        context.footnote (_("Due date modified."));
         task.set ("due", Date(value, dateformat).toEpochString ());
       }
     }
     else
     {
-      context.footnote (STRING_EDIT_DUE_MOD);
+      context.footnote (_("Due date modified."));
       task.set ("due", Date(value, dateformat).toEpochString ());
     }
   }
@@ -490,11 +492,11 @@ void CmdEdit::parseTask (Task& task, const std::string& after, const std::string
       if (task.getStatus () == Task::recurring ||
           task.get ("parent") != "")
       {
-        context.footnote (STRING_EDIT_DUE_DEL_ERR);
+        context.footnote (_("Cannot remove a due date from a recurring task."));
       }
       else
       {
-        context.footnote (STRING_EDIT_DUE_DEL);
+        context.footnote (_("Due date removed."));
         task.remove ("due");
       }
     }
@@ -510,13 +512,13 @@ void CmdEdit::parseTask (Task& task, const std::string& after, const std::string
 
       if (formatted != value)
       {
-        context.footnote (STRING_EDIT_UNTIL_MOD);
+        context.footnote (_("Until date modified."));
         task.set ("until", Date(value, dateformat).toEpochString ());
       }
     }
     else
     {
-      context.footnote (STRING_EDIT_UNTIL_MOD);
+      context.footnote (_("Until date modified."));
       task.set ("until", Date(value, dateformat).toEpochString ());
     }
   }
@@ -524,7 +526,7 @@ void CmdEdit::parseTask (Task& task, const std::string& after, const std::string
   {
     if (task.get ("until") != "")
     {
-      context.footnote (STRING_EDIT_UNTIL_DEL);
+      context.footnote (_("Until date removed."));
       task.remove ("until");
     }
   }
@@ -538,21 +540,21 @@ void CmdEdit::parseTask (Task& task, const std::string& after, const std::string
       Duration d;
       if (d.valid (value))
       {
-        context.footnote (STRING_EDIT_RECUR_MOD);
+        context.footnote (_("Recurrence modified."));
         if (task.get ("due") != "")
         {
           task.set ("recur", value);
           task.setStatus (Task::recurring);
         }
         else
-          throw std::string (STRING_EDIT_RECUR_DUE_ERR);
+          throw std::string (_("A recurring task must have a due date."));
       }
       else
-        throw std::string (STRING_EDIT_RECUR_ERR);
+        throw std::string (_("Not a valid recurrence duration."));
     }
     else
     {
-      context.footnote (STRING_EDIT_RECUR_DEL);
+      context.footnote (_("Recurrence removed."));
       task.setStatus (Task::pending);
       task.remove ("recur");
       task.remove ("until");
@@ -571,14 +573,14 @@ void CmdEdit::parseTask (Task& task, const std::string& after, const std::string
 
       if (formatted != value)
       {
-        context.footnote (STRING_EDIT_WAIT_MOD);
+        context.footnote (_("Wait date modified."));
         task.set ("wait", Date(value, dateformat).toEpochString ());
         task.setStatus (Task::waiting);
       }
     }
     else
     {
-      context.footnote (STRING_EDIT_WAIT_MOD);
+      context.footnote (_("Wait date modified."));
       task.set ("wait", Date(value, dateformat).toEpochString ());
       task.setStatus (Task::waiting);
     }
@@ -587,7 +589,7 @@ void CmdEdit::parseTask (Task& task, const std::string& after, const std::string
   {
     if (task.get ("wait") != "")
     {
-      context.footnote (STRING_EDIT_WAIT_DEL);
+      context.footnote (_("Wait date removed."));
       task.remove ("wait");
       task.setStatus (Task::pending);
     }
@@ -599,12 +601,12 @@ void CmdEdit::parseTask (Task& task, const std::string& after, const std::string
   {
     if (value != "")
     {
-      context.footnote (STRING_EDIT_PARENT_MOD);
+      context.footnote (_("Parent UUID modified."));
       task.set ("parent", value);
     }
     else
     {
-      context.footnote (STRING_EDIT_PARENT_DEL);
+      context.footnote (_("Parent UUID removed."));
       task.remove ("parent");
     }
   }
@@ -688,7 +690,7 @@ void CmdEdit::parseTask (Task& task, const std::string& after, const std::string
       {
         if (value != "")
         {
-          context.footnote (format (STRING_EDIT_UDA_MOD, col->first));
+          context.footnote (format (_("UDA {1} modified."), col->first));
 
           if (type == "string")
           {
@@ -702,7 +704,7 @@ void CmdEdit::parseTask (Task& task, const std::string& after, const std::string
                 n.depleted ())
               task.set (col->first, value);
             else
-              throw format (STRING_UDA_NUMERIC, value);
+              throw format (_("The value '{1}' is not a valid numeric value."), value);
           }
           else if (type == "date")
           {
@@ -717,7 +719,7 @@ void CmdEdit::parseTask (Task& task, const std::string& after, const std::string
         }
         else
         {
-          context.footnote (format (STRING_EDIT_UDA_DEL, col->first));
+          context.footnote (format (_("UDA {1} deleted."), col->first));
           task.remove (col->first);
         }
       }
@@ -749,7 +751,7 @@ bool CmdEdit::editFile (Task& task)
   // Check for file permissions.
   Directory location (context.config.get ("data.location"));
   if (! location.writable ())
-    throw std::string (STRING_EDIT_UNWRITABLE);
+    throw std::string (_("Your data.location directory is not writable."));
 
   // Create a temp file name in data.location.
   std::stringstream file;
@@ -788,11 +790,11 @@ ARE_THESE_REALLY_HARMFUL:
   bool changes = false; // No changes made.
 
   // Launch the editor.
-  std::cout << format (STRING_EDIT_LAUNCHING, editor) << "\n";
+  std::cout << format (_("Launching '{1}' now..."), editor) << "\n";
   if (-1 == system (editor.c_str ()))
-    std::cout << STRING_EDIT_NO_EDITS << "\n";
+    std::cout << _("No editing performed.") << "\n";
   else
-    std::cout << STRING_EDIT_COMPLETE << "\n";
+    std::cout << _("Editing complete.") << "\n";
 
   // Slurp file.
   std::string after;
@@ -802,7 +804,7 @@ ARE_THESE_REALLY_HARMFUL:
   // if changes were made.
   if (before_orig != after)
   {
-    std::cout << STRING_EDIT_CHANGES << "\n";
+    std::cout << _("Edits were detected.") << "\n";
     std::string problem = "";
     bool oops = false;
 
@@ -819,13 +821,13 @@ ARE_THESE_REALLY_HARMFUL:
 
     if (oops)
     {
-      std::cerr << STRING_ERROR_PREFIX << problem << "\n";
+      std::cerr << _("Error: ") << problem << "\n";
 
       // Preserve the edits.
       before = after;
       File::write (file.str (), before);
 
-      if (confirm (STRING_EDIT_UNPARSEABLE))
+      if (confirm (_("Taskwarrior couldn't handle your edits.  Would you like to try again?")))
         goto ARE_THESE_REALLY_HARMFUL;
     }
     else
@@ -833,7 +835,7 @@ ARE_THESE_REALLY_HARMFUL:
   }
   else
   {
-    std::cout << STRING_EDIT_NO_CHANGES << "\n";
+    std::cout << _("No edits were detected.") << "\n";
     changes = false;
   }
 

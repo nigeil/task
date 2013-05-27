@@ -25,6 +25,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <cmake.h>
 #include <stdlib.h>
 #include <Context.h>
 #include <ColDue.h>
@@ -39,7 +40,7 @@ extern Context context;
 ColumnDue::ColumnDue ()
 {
   _name      = "due";
-  _label     = STRING_COLUMN_LABEL_DUE;
+  _label     = sgettext("column|Due");
 
   _styles.push_back ("countdown");
 
@@ -66,8 +67,9 @@ void ColumnDue::setStyle (const std::string& value)
 {
   _style = value;
 
-  if (_style == "countdown" && _label == STRING_COLUMN_LABEL_DUE)
-    _label = STRING_COLUMN_LABEL_COUNT;
+  if (_style == "countdown" && _label == sgettext("column|Due"))
+    // TRANSLATORS: Column label for the countdown column.
+    _label = sgettext("column|Count");
 }
 
 ////////////////////////////////////////////////////////////////////////////////

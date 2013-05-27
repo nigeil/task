@@ -25,6 +25,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <cmake.h>
 #include <Context.h>
 #include <ColPriority.h>
 #include <text.h>
@@ -38,7 +39,8 @@ ColumnPriority::ColumnPriority ()
   _name  = "priority";
   _type  = "string";
   _style = "short";
-  _label = STRING_COLUMN_LABEL_PRI;
+  // TRANSLATORS: Short for "priority".
+  _label = sgettext("column|Pri");
 
   _styles.push_back ("short");
   _styles.push_back ("long");
@@ -73,8 +75,8 @@ void ColumnPriority::setStyle (const std::string& value)
 {
   _style = value;
 
-  if (_style == "long" && _label == STRING_COLUMN_LABEL_PRI)
-    _label = STRING_COLUMN_LABEL_PRIORITY;
+  if (_style == "long" && _label == sgettext("column|Pri"))
+    _label = sgettext("column|Priority");
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -96,7 +98,7 @@ void ColumnPriority::measure (Task& task, unsigned int& minimum, unsigned int& m
   }
   else if (_style != "default" &&
            _style != "short")
-    throw format (STRING_COLUMN_BAD_FORMAT, "priority", _style);
+    throw format (_("Unrecognized column format '{1}.{2}'"), "priority", _style);
 }
 
 ////////////////////////////////////////////////////////////////////////////////

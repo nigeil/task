@@ -25,6 +25,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <cmake.h>
 #include <algorithm>
 #include <iostream>
 #include <sstream>
@@ -149,7 +150,7 @@ void dependencyChainOnComplete (Task& task)
     // Nag about broken chain.
     if (context.config.getBoolean ("dependency.reminder"))
     {
-      std::cout << format (STRING_DEPEND_BLOCKED, task.id)
+      std::cout << format (_("Task {1} is blocked by:"), task.id)
                 << "\n";
 
       std::vector <Task>::iterator b;
@@ -162,7 +163,7 @@ void dependencyChainOnComplete (Task& task)
     {
       if (context.config.getBoolean ("dependency.reminder"))
       {
-        std::cout << STRING_DEPEND_BLOCKING
+        std::cout << _("and is blocking:")
                   << "\n";
 
         std::vector <Task>::iterator b;
@@ -171,7 +172,7 @@ void dependencyChainOnComplete (Task& task)
       }
 
       if (!context.config.getBoolean ("dependency.confirmation") ||
-          confirm (STRING_DEPEND_FIX_CHAIN))
+          confirm (_("Would you like the dependency chain fixed?")))
       {
         // Repair the chain - everything in blocked should now depend on
         // everything in blocking, instead of task.id.
@@ -208,7 +209,7 @@ void dependencyChainOnStart (Task& task)
     // broken chain.
     if (blocking.size ())
     {
-      std::cout << format (STRING_DEPEND_BLOCKED, task.id)
+      std::cout << format (_("Task {1} is blocked by:"), task.id)
                 << "\n";
 
       std::vector <Task>::iterator b;

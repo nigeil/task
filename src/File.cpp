@@ -25,6 +25,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <cmake.h>
 #include <fstream>
 #include <sys/types.h>
 #include <sys/file.h>
@@ -32,7 +33,6 @@
 #include <unistd.h>
 #include <File.h>
 #include <text.h>
-#include <cmake.h>
 #include <util.h>
 #include <i18n.h>
 
@@ -117,7 +117,7 @@ bool File::open ()
       bool already_exists = exists ();
       if (already_exists)
         if (!readable () || !writable ())
-          throw std::string (format (STRING_FILE_PERMS, _data));
+          throw std::string (format (_("Taskwarrior does not have the correct permissions for '{1}'."), _data));
 
       _fh = fopen (_data.c_str (), (already_exists ? "r+" : "w+"));
       if (_fh)

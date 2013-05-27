@@ -25,6 +25,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <cmake.h>
 #include <text.h>
 #include <i18n.h>
 #include <TransportSSH.h>
@@ -43,7 +44,7 @@ void TransportSSH::send(const std::string& source)
   std::vector<std::string>::const_iterator source_iter;
 
   if (_uri._host == "")
-    throw std::string (STRING_TRANSPORT_SSH_URI);
+    throw std::string (_("When using the 'ssh' protocol, the uri must contain a hostname."));
 
   // cmd line is: scp [-p port] [user@]host:path
   if (_uri._port != "")
@@ -58,7 +59,7 @@ void TransportSSH::send(const std::string& source)
     // Is there more than one source?
     // Then path has to end with a '/'
     if (sourcelist.size () > 1 && !_uri.is_directory ())
-      throw format (STRING_TRANSPORT_URI_NODIR, _uri);
+      throw format (_("The uri '{1}' does not appear to be a directory."), _uri);
 
     for (source_iter = sourcelist.begin (); source_iter != sourcelist.end (); ++source_iter) {
       _arguments.push_back (*source_iter);
@@ -79,19 +80,19 @@ void TransportSSH::send(const std::string& source)
   }
 
   if (execute ())
-    throw std::string (STRING_TRANSPORT_SSH_FAIL);
+    throw std::string (_("ssh failed, see output above."));
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 void TransportSSH::recv(std::string target)
 {
   if (_uri._host == "")
-    throw std::string (STRING_TRANSPORT_SSH_URI);
+    throw std::string (_("When using the 'ssh' protocol, the uri must contain a hostname."));
 
   // Is there more than one file to transfer?
   // Then target has to end with a '/'
   if (is_filelist(_uri._path) && !is_directory(target))
-    throw format (STRING_TRANSPORT_URI_NODIR, target);
+    throw format (_("The uri '{1}' does not appear to be a directory."), target);
 
   // cmd line is: scp [-p port] [user@]host:path
   if (_uri._port != "")
@@ -114,7 +115,7 @@ void TransportSSH::recv(std::string target)
   _arguments.push_back (target);
 
   if (execute ())
-    throw std::string (STRING_TRANSPORT_SSH_FAIL);
+    throw std::string (_("ssh failed, see output above."));
 }
 
 ////////////////////////////////////////////////////////////////////////////////

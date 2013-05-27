@@ -25,6 +25,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <cmake.h>
 #include <sstream>
 #include <vector>
 #include <stdlib.h>
@@ -41,7 +42,7 @@ CmdTags::CmdTags ()
 {
   _keyword     = "tags";
   _usage       = "task <filter> tags";
-  _description = STRING_CMD_TAGS_USAGE;
+  _description = _("Shows a list of all tags used");
   _read_only   = true;
   _displays_id = false;
 }
@@ -91,8 +92,8 @@ int CmdTags::execute (std::string& output)
     // Render a list of tags names from the map.
     ViewText view;
     view.width (context.getWidth ());
-    view.add (Column::factory ("string", STRING_COLUMN_LABEL_TAG));
-    view.add (Column::factory ("string.right", STRING_COLUMN_LABEL_COUNT));
+    view.add (Column::factory ("string", _("Tag")));
+    view.add (Column::factory ("string.right", _("Count")));
 
     Color bold ("bold");
     bool special = false;
@@ -115,21 +116,14 @@ int CmdTags::execute (std::string& output)
         << view.render ()
         << optionalBlankLine ();
 
-    if (unique.size () == 1)
-      context.footnote (STRING_CMD_TAGS_SINGLE);
-    else
-      context.footnote (format (STRING_CMD_TAGS_PLURAL, unique.size ()));
-
-    if (quantity == 1)
-      context.footnote (STRING_FEEDBACK_TASKS_SINGLE);
-    else
-      context.footnote (format (STRING_FEEDBACK_TASKS_PLURAL, quantity));
+    context.footnote (format (ngettext("{1} tag", "{1} tags", unique.size ()), unique.size ()));
+    context.footnote (format (ngettext("({1} task)", "({1} tasks)", quantity), quantity));
 
     out << "\n";
   }
   else
   {
-    context.footnote (STRING_CMD_TAGS_NO_TAGS);
+    context.footnote (_("No tags."));
     rc = 1;
   }
 
@@ -142,7 +136,7 @@ CmdCompletionTags::CmdCompletionTags ()
 {
   _keyword     = "_tags";
   _usage       = "task <filter> _tags";
-  _description = STRING_CMD_COMTAGS_USAGE;
+  _description = _("Shows only a list of all tags used, for autocompletion purposes");
   _read_only   = true;
   _displays_id = false;
 }

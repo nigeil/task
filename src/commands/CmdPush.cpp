@@ -25,6 +25,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <cmake.h>
 #include <fstream>
 #include <sstream>
 #include <Context.h>
@@ -41,7 +42,7 @@ CmdPush::CmdPush ()
 {
   _keyword     = "push";
   _usage       = "task          push <URL>";
-  _description = STRING_CMD_PUSH_USAGE;
+  _description = _("Pushes the local files to the URL");
   _read_only   = true;
   _displays_id = false;
 }
@@ -75,11 +76,11 @@ int CmdPush::execute (std::string& output)
       // Verify that files are not being copied from rc.data.location to the
       // same place.
       if (Directory (uri._path) == Directory (context.config.get ("data.location")))
-        throw std::string (STRING_CMD_PUSH_SAME);
+        throw std::string (_("Cannot push files when the source and destination are the same."));
 
       // copy files locally
       if (! Path (uri._data).is_directory ())
-        throw format (STRING_CMD_PUSH_NONLOCAL, uri._path);
+        throw format (_("The uri '{1}' is not a local directory."), uri._path);
 
       std::ifstream ifile1 ((location._data + "/undo.data").c_str(), std::ios_base::binary);
       std::ofstream ofile1 ((uri._path       + "/undo.data").c_str(), std::ios_base::binary);
@@ -94,10 +95,10 @@ int CmdPush::execute (std::string& output)
       ofile3 << ifile3.rdbuf();
 		}
 
-    output += format (STRING_CMD_PUSH_TRANSFERRED, uri.ToString ()) + "\n";
+    output += format (_("Local tasks transferred to {1}"), uri.ToString ()) + "\n";
   }
   else
-    throw std::string (STRING_CMD_PUSH_NO_URI);
+    throw std::string (_("No uri was specified for the push.  Either specify the uri of a remote .task directory, or create a 'push.default.uri' entry in your .taskrc file."));
 
   return 0;
 }

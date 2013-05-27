@@ -25,6 +25,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <cmake.h>
 #include <TransportCurl.h>
 #include <text.h>
 #include <i18n.h>
@@ -43,7 +44,7 @@ void TransportCurl::send(const std::string& source)
   std::vector<std::string>::const_iterator source_iter;
 
   if (_uri._host == "")
-    throw std::string (STRING_TRANSPORT_CURL_URI);
+    throw std::string (_("When using the 'curl' protocol, the uri must contain a hostname."));
 
   if (_uri._user != "")
   {
@@ -56,7 +57,7 @@ void TransportCurl::send(const std::string& source)
     // Is there more than one source?
     // Then path has to end with a '/'
     if (sourcelist.size () > 1 && !_uri.is_directory ())
-      throw format (STRING_TRANSPORT_URI_NODIR, _uri);
+      throw format (_("The uri '{1}' does not appear to be a directory."), _uri);
 
     for (source_iter = sourcelist.begin (); source_iter != sourcelist.end (); ++source_iter) {
       _arguments.push_back ("-T");
@@ -80,14 +81,14 @@ void TransportCurl::send(const std::string& source)
   }
 
   if (execute ())
-    throw std::string (STRING_TRANSPORT_CURL_FAIL);
+    throw std::string (_("Curl failed, see output above."));
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 void TransportCurl::recv(std::string target)
 {
   if (_uri._host == "")
-    throw std::string (STRING_TRANSPORT_CURL_URI);
+    throw std::string (_("When using the 'curl' protocol, the uri must contain a hostname."));
 
   if (_uri._user != "")
   {
@@ -128,7 +129,7 @@ void TransportCurl::recv(std::string target)
   _arguments.insert (_arguments.end (), targetargs.begin (), targetargs.end ());
 
   if (execute ())
-    throw std::string (STRING_TRANSPORT_CURL_FAIL);
+    throw std::string (_("Curl failed, see output above."));
 }
 
 ////////////////////////////////////////////////////////////////////////////////

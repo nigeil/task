@@ -25,6 +25,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <cmake.h>
 #include <stdlib.h>
 #include <Context.h>
 #include <i18n.h>
@@ -37,7 +38,7 @@ CmdExec::CmdExec ()
 {
   _keyword     = "execute";
   _usage       = "task          execute <external command>";
-  _description = STRING_CMD_EXEC_USAGE;
+  _description = _("Executes external commands and scripts");
   _read_only   = true;
   _displays_id = false;
 }

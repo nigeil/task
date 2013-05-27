@@ -25,6 +25,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <cmake.h>
 #include <ColWait.h>
 #include <i18n.h>
 
@@ -32,7 +33,7 @@
 ColumnWait::ColumnWait ()
 {
   _name      = "wait";
-  _label     = STRING_COLUMN_LABEL_WAIT;
+  _label     = sgettext("column|Wait");
 }
 
 ////////////////////////////////////////////////////////////////////////////////

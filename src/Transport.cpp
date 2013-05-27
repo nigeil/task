@@ -25,6 +25,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <cmake.h>
 #include <iostream>
 #include <stdlib.h>
 #include <util.h>
@@ -99,10 +100,10 @@ int Transport::execute()
   switch (result)
   {
   case 127:
-    throw format (STRING_TRANSPORT_NORUN, _executable);
+    throw format (_("Could not run '{1}'.  Is it installed, and available in $PATH?"), _executable);
   case -1:
     err = errno;
-    throw format (STRING_TRANSPORT_NOFORK, _executable, ::strerror(err));
+    throw format (_("Could not run '{1}': {2}.  Are you out of system resources?"), _executable, ::strerror(err));
   default:
     return result;
   }
@@ -135,10 +136,10 @@ void Transport::expand_braces(const std::string& path,
     pos = path.find("{");
 
     if (pos == std::string::npos)
-      throw std::string (STRING_TRANSPORT_CURL_WILDCD);
+      throw std::string (_("When using the 'curl' protocol, wildcards are not supported."));
 
     if (!is_directory(sourceortarget))
-      throw format (STRING_TRANSPORT_URI_NODIR, sourceortarget);
+      throw format (_("The uri '{1}' does not appear to be a directory."), sourceortarget);
 
     std::string toSplit;
     std::string suffix;

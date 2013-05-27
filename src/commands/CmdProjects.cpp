@@ -25,6 +25,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <cmake.h>
 #include <algorithm>
 #include <sstream>
 #include <Context.h>
@@ -42,7 +43,7 @@ CmdProjects::CmdProjects ()
 {
   _keyword     = "projects";
   _usage       = "task <filter> projects";
-  _description = STRING_CMD_PROJECTS_USAGE;
+  _description = _("Shows all project names used");
   _read_only   = true;
   _displays_id = false;
 }
@@ -111,12 +112,12 @@ int CmdProjects::execute (std::string& output)
     // Render a list of project names from the map.
     ViewText view;
     view.width (context.getWidth ());
-    view.add (Column::factory ("string",       STRING_COLUMN_LABEL_PROJECT));
-    view.add (Column::factory ("string.right", STRING_COLUMN_LABEL_TASKS));
-    view.add (Column::factory ("string.right", STRING_CMD_PROJECTS_PRI_N));
-    view.add (Column::factory ("string.right", STRING_CMD_PROJECTS_PRI_L));
-    view.add (Column::factory ("string.right", STRING_CMD_PROJECTS_PRI_M));
-    view.add (Column::factory ("string.right", STRING_CMD_PROJECTS_PRI_H));
+    view.add (Column::factory ("string",       _("Project")));
+    view.add (Column::factory ("string.right", _("Tasks")));
+    view.add (Column::factory ("string.right", _("Pri:None")));
+    view.add (Column::factory ("string.right", _("Pri:L")));
+    view.add (Column::factory ("string.right", _("Pri:M")));
+    view.add (Column::factory ("string.right", _("Pri:H")));
 
     std::vector <std::string> processed;
     std::map <std::string, int>::iterator project;
@@ -136,7 +137,7 @@ int CmdProjects::execute (std::string& output)
       }
       int row = view.addRow ();
       view.set (row, 0, (project->first == ""
-                          ? STRING_CMD_PROJECTS_NONE
+                          ? _("(none)")
                           : indentProject (project->first, "  ", '.')));
       view.set (row, 1, project->second);
       view.set (row, 2, none[project->first]);
@@ -153,18 +154,14 @@ int CmdProjects::execute (std::string& output)
     out << optionalBlankLine ()
         << view.render ()
         << optionalBlankLine ()
-        << (number_projects == 1
-              ? format (STRING_CMD_PROJECTS_SUMMARY,  number_projects)
-              : format (STRING_CMD_PROJECTS_SUMMARY2, number_projects))
+        << format (ngettext("{1} project", "{1} projects", number_projects), number_projects)
         << " "
-        << (quantity == 1
-              ? format (STRING_CMD_PROJECTS_TASK,  quantity)
-              : format (STRING_CMD_PROJECTS_TASKS, quantity))
+        << format (ngettext("({1} task)", "({1} tasks)", quantity), quantity)
         << "\n";
   }
   else
   {
-    out << STRING_CMD_PROJECTS_NO << "\n";
+    out << _("No projects.") << "\n";
     rc = 1;
   }
 
@@ -177,7 +174,7 @@ CmdCompletionProjects::CmdCompletionProjects ()
 {
   _keyword     = "_projects";
   _usage       = "task <filter> _projects";
-  _description = STRING_CMD_PROJECTS_USAGE_2;
+  _description = _("Shows only a list of all project names used");
   _read_only   = true;
   _displays_id = false;
 }

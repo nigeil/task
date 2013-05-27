@@ -69,27 +69,34 @@ lists them and their defaults plus the CMAKE_INSTALL_PREFIX:
   TASK_DOCDIR           share/doc/task
   TASK_MAN1DIR          share/man/man1
   TASK_MAN5DIR          share/man/man5
+  TASK_LOCALEDIR        share/locale
 
 The corresponding TASK_* variables will be combined with CMAKE_INSTALL_PREFIX to
 get absolute installation directories:
 
-  CMAKE_INSTALL_PREFIX/TASK_BINDIR   /usr/local/bin
-  CMAKE_INSTALL_PREFIX/TASK_DOCDIR   /usr/local/share/doc/task
-  CMAKE_INSTALL_PREFIX/TASK_MAN1DIR  /usr/local/share/man/man1
-  CMAKE_INSTALL_PREFIX/TASK_MAN5DIR  /usr/local/share/man/man5
+  CMAKE_INSTALL_PREFIX/TASK_BINDIR    /usr/local/bin
+  CMAKE_INSTALL_PREFIX/TASK_DOCDIR    /usr/local/share/doc/task
+  CMAKE_INSTALL_PREFIX/TASK_MAN1DIR   /usr/local/share/man/man1
+  CMAKE_INSTALL_PREFIX/TASK_MAN5DIR   /usr/local/share/man/man5
+  CMAKE_INSTALL_PREFIX/TASK_LOCALEDIR /usr/local/share/locale
 
 
 Localizations
 -------------
 
-To make use of a translation, specify a language number, as found in cmake.h:
+To make use of a translation, set your LANGUAGE environment variable.
 
-  $ cmake -DLANGUAGE=2 .
+  $ task help | grep ' version '
+         task          version               Shows the taskwarrior version number
 
-Currently the defined languages are:
+  $ LANGUAGE=es task help | grep ' version '
+         task          version               Muestra el número de versión de
 
-  en-US    1
-  es-ES    2
+  $ LANGUAGE=fr task help | grep ' version '
+         task          version               Affiche le numéro de version de
+
+  $ LANGUAGE=it task help | grep ' version '
+         task          version               Mostra il numero di versione di
 
 
 Uninstallation

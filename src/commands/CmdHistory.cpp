@@ -25,6 +25,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <cmake.h>
 #include <sstream>
 #include <Context.h>
 #include <ViewText.h>
@@ -40,7 +41,7 @@ CmdHistoryMonthly::CmdHistoryMonthly ()
 {
   _keyword     = "history.monthly";
   _usage       = "task <filter> history.monthly";
-  _description = STRING_CMD_HISTORY_USAGE_M;
+  _description = _("Shows a report of task history, by month");
   _read_only   = true;
   _displays_id = false;
 }
@@ -96,12 +97,12 @@ int CmdHistoryMonthly::execute (std::string& output)
   // Now build the view.
   ViewText view;
   view.width (context.getWidth ());
-  view.add (Column::factory ("string",       STRING_CMD_HISTORY_YEAR));
-  view.add (Column::factory ("string",       STRING_CMD_HISTORY_MONTH));
-  view.add (Column::factory ("string.right", STRING_CMD_HISTORY_ADDED));
-  view.add (Column::factory ("string.right", STRING_CMD_HISTORY_COMP));
-  view.add (Column::factory ("string.right", STRING_CMD_HISTORY_DEL));
-  view.add (Column::factory ("string.right", STRING_CMD_HISTORY_NET));
+  view.add (Column::factory ("string",       _("Year")));
+  view.add (Column::factory ("string",       _("Month")));
+  view.add (Column::factory ("string.right", _("Added")));
+  view.add (Column::factory ("string.right", _("Completed")));
+  view.add (Column::factory ("string.right", _("Deleted")));
+  view.add (Column::factory ("string.right", _("Net")));
 
   int totalAdded     = 0;
   int totalCompleted = 0;
@@ -168,7 +169,7 @@ int CmdHistoryMonthly::execute (std::string& output)
     if (context.color ())
       row_color = Color (Color::nocolor, Color::nocolor, false, true, false);
 
-    view.set (row, 1, STRING_CMD_HISTORY_AVERAGE, row_color);
+    view.set (row, 1, _("Average"), row_color);
     view.set (row, 2, totalAdded     / (view.rows () - 2), row_color);
     view.set (row, 3, totalCompleted / (view.rows () - 2), row_color);
     view.set (row, 4, totalDeleted   / (view.rows () - 2), row_color);
@@ -182,7 +183,7 @@ int CmdHistoryMonthly::execute (std::string& output)
         << "\n";
   else
   {
-    context.footnote (STRING_FEEDBACK_NO_TASKS);
+    context.footnote (_("No tasks."));
     rc = 1;
   }
 
@@ -195,7 +196,7 @@ CmdHistoryAnnual::CmdHistoryAnnual ()
 {
   _keyword     = "history.annual";
   _usage       = "task <filter> history.annual";
-  _description = STRING_CMD_HISTORY_USAGE_A;
+  _description = _("Shows a report of task history, by year");
   _read_only   = true;
   _displays_id = false;
 }
@@ -250,11 +251,11 @@ int CmdHistoryAnnual::execute (std::string& output)
   // Now build the view.
   ViewText view;
   view.width (context.getWidth ());
-  view.add (Column::factory ("string",       STRING_CMD_HISTORY_YEAR));
-  view.add (Column::factory ("string.right", STRING_CMD_HISTORY_ADDED));
-  view.add (Column::factory ("string.right", STRING_CMD_HISTORY_COMP));
-  view.add (Column::factory ("string.right", STRING_CMD_HISTORY_DEL));
-  view.add (Column::factory ("string.right", STRING_CMD_HISTORY_NET));
+  view.add (Column::factory ("string",       _("Year")));
+  view.add (Column::factory ("string.right", _("Added")));
+  view.add (Column::factory ("string.right", _("Completed")));
+  view.add (Column::factory ("string.right", _("Deleted")));
+  view.add (Column::factory ("string.right", _("Net")));
 
   int totalAdded     = 0;
   int totalCompleted = 0;
@@ -319,7 +320,7 @@ int CmdHistoryAnnual::execute (std::string& output)
     if (context.color ())
       row_color = Color (Color::nocolor, Color::nocolor, false, true, false);
 
-    view.set (row, 0, STRING_CMD_HISTORY_AVERAGE, row_color);
+    view.set (row, 0, _("Average"), row_color);
     view.set (row, 1, totalAdded     / (view.rows () - 2), row_color);
     view.set (row, 2, totalCompleted / (view.rows () - 2), row_color);
     view.set (row, 3, totalDeleted   / (view.rows () - 2), row_color);
@@ -333,7 +334,7 @@ int CmdHistoryAnnual::execute (std::string& output)
         << "\n";
   else
   {
-    context.footnote (STRING_FEEDBACK_NO_TASKS);
+    context.footnote (_("No tasks."));
     rc = 1;
   }
 
@@ -346,7 +347,7 @@ CmdGHistoryMonthly::CmdGHistoryMonthly ()
 {
   _keyword     = "ghistory.monthly";
   _usage       = "task <filter> ghistory.monthly";
-  _description = STRING_CMD_GHISTORY_USAGE_M;
+  _description = _("Shows a graphical report of task history, by month");
   _read_only   = true;
   _displays_id = false;
 }
@@ -403,9 +404,9 @@ int CmdGHistoryMonthly::execute (std::string& output)
   // Now build the view.
   ViewText view;
   view.width (context.getWidth ());
-  view.add (Column::factory ("string",            STRING_CMD_GHISTORY_YEAR));
-  view.add (Column::factory ("string",            STRING_CMD_GHISTORY_MONTH));
-  view.add (Column::factory ("string.left_fixed", STRING_CMD_GHISTORY_NUMBER));
+  view.add (Column::factory ("string",            _("Year")));
+  view.add (Column::factory ("string",            _("Month")));
+  view.add (Column::factory ("string.left_fixed", _("Number Added/Completed/Deleted")));
 
   Color color_add    (context.config.get ("color.history.add"));
   Color color_done   (context.config.get ("color.history.done"));
@@ -514,19 +515,19 @@ int CmdGHistoryMonthly::execute (std::string& output)
         << "\n";
 
     if (context.color ())
-      out << format (STRING_CMD_HISTORY_LEGEND,
-                     color_add.colorize (STRING_CMD_HISTORY_ADDED),
-                     color_done.colorize (STRING_CMD_HISTORY_COMP),
-                     color_delete.colorize (STRING_CMD_HISTORY_DEL))
+      out << format (_("Legend: {1}, {2}, {3}"),
+                     color_add.colorize (_("Added")),
+                     color_done.colorize (_("Completed")),
+                     color_delete.colorize (_("Deleted")))
           << optionalBlankLine ()
           << "\n";
     else
-      out << STRING_CMD_HISTORY_LEGEND_A
+      out << _("Legend: + added, X completed, - deleted")
           << "\n";
   }
   else
   {
-    context.footnote (STRING_FEEDBACK_NO_TASKS);
+    context.footnote (_("No tasks."));
     rc = 1;
   }
 
@@ -539,7 +540,7 @@ CmdGHistoryAnnual::CmdGHistoryAnnual ()
 {
   _keyword     = "ghistory.annual";
   _usage       = "task <filter> ghistory.annual";
-  _description = STRING_CMD_GHISTORY_USAGE_A;
+  _description = _("Shows a graphical report of task history, by year");
   _read_only   = true;
   _displays_id = false;
 }
@@ -596,8 +597,8 @@ int CmdGHistoryAnnual::execute (std::string& output)
   // Now build the view.
   ViewText view;
   view.width (context.getWidth ());
-  view.add (Column::factory ("string",            STRING_CMD_GHISTORY_YEAR));
-  view.add (Column::factory ("string.left_fixed", STRING_CMD_GHISTORY_NUMBER));
+  view.add (Column::factory ("string",            _("Year")));
+  view.add (Column::factory ("string.left_fixed", _("Number Added/Completed/Deleted")));
 
   Color color_add    (context.config.get ("color.history.add"));
   Color color_done   (context.config.get ("color.history.done"));
@@ -704,19 +705,19 @@ int CmdGHistoryAnnual::execute (std::string& output)
         << "\n";
 
     if (context.color ())
-      out << format (STRING_CMD_HISTORY_LEGEND,
-                     color_add.colorize (STRING_CMD_HISTORY_ADDED),
-                     color_done.colorize (STRING_CMD_HISTORY_COMP),
-                     color_delete.colorize (STRING_CMD_HISTORY_DEL))
+      out << format (_("Legend: {1}, {2}, {3}"),
+                     color_add.colorize (_("Added")),
+                     color_done.colorize (_("Completed")),
+                     color_delete.colorize (_("Deleted")))
           << optionalBlankLine ()
           << "\n";
     else
-      out << STRING_CMD_HISTORY_LEGEND_A
+      out << _("Legend: + added, X completed, - deleted")
           << "\n";
   }
   else
   {
-    context.footnote (STRING_FEEDBACK_NO_TASKS);
+    context.footnote (_("No tasks."));
     rc = 1;
   }
 

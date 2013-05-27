@@ -25,13 +25,13 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <cmake.h>
 #include <sstream>
 #include <Context.h>
 #include <Nibbler.h>
 #include <text.h>
 #include <i18n.h>
 #include <DOM.h>
-#include <cmake.h>
 
 extern Context context;
 
@@ -93,7 +93,7 @@ const std::string DOM::get (const std::string& name)
     else if (name == "context.args")    return context.a3.combine ();
     else if (name == "context.width")   return format (context.terminal_width);
     else if (name == "context.height")  return format (context.terminal_height);
-    else                                throw format (STRING_DOM_UNREC, name);
+    else                                throw format (_("DOM: Cannot get unrecognized name '{1}'."), name);
   }
 
   // TODO stats.<name>
@@ -129,11 +129,11 @@ const std::string DOM::get (const std::string& name)
 #elif defined (GNUHURD)
       return "GNU/Hurd";
 #else
-      return STRING_DOM_UNKNOWN;
+      return _("<unknown>");
 #endif
 
     else
-      throw format (STRING_DOM_UNREC, name);
+      throw format (_("DOM: Cannot get unrecognized name '{1}'."), name);
   }
 
   // Pass-through.
@@ -246,7 +246,7 @@ void DOM::set (const std::string& name, const std::string& value)
 
   // Unrecognized --> error.
   else
-    throw format (STRING_DOM_CANNOT_SET, name);
+    throw format (_("DOM: Cannot set '{1}'."), name);
 }
 
 ////////////////////////////////////////////////////////////////////////////////

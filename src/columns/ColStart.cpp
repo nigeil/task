@@ -25,6 +25,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <cmake.h>
 #include <Context.h>
 #include <ColStart.h>
 #include <text.h>
@@ -36,7 +37,7 @@ extern Context context;
 ColumnStart::ColumnStart ()
 {
   _name  = "start";
-  _label = STRING_COLUMN_LABEL_STARTED;
+  _label = sgettext("column|Started");
 
   _styles.push_back ("active");
 
@@ -61,8 +62,9 @@ void ColumnStart::setStyle (const std::string& value)
 {
   _style = value;
 
-  if (_style == "active" && _label == STRING_COLUMN_LABEL_STARTED)
-    _label = STRING_COLUMN_LABEL_ACTIVE;
+  if (_style == "active" && _label == sgettext("column|Started"))
+    // TRANSLATORS: Active.
+    _label = sgettext("column|A");
 }
 
 ////////////////////////////////////////////////////////////////////////////////

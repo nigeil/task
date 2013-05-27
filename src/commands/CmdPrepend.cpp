@@ -25,6 +25,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <cmake.h>
 #include <iostream>
 #include <Context.h>
 #include <util.h>
@@ -40,7 +41,7 @@ CmdPrepend::CmdPrepend ()
 {
   _keyword     = "prepend";
   _usage       = "task <filter> prepend <mods>";
-  _description = STRING_CMD_PREPEND_USAGE;
+  _description = _("Prepends text to an existing task description");
   _read_only   = false;
   _displays_id = false;
 }
@@ -56,14 +57,14 @@ int CmdPrepend::execute (std::string& output)
   filter (filtered);
   if (filtered.size () == 0)
   {
-    context.footnote (STRING_FEEDBACK_NO_TASKS_SP);
+    context.footnote (_("No tasks specified."));
     return 1;
   }
 
   // Apply the command line modifications to the new task.
   A3 modifications = context.a3.extract_modifications ();
   if (!modifications.size ())
-    throw std::string (STRING_CMD_MODIFY_NEED_TEXT);
+    throw std::string (_("Additional text must be provided."));
 
   // Accumulated project change notifications.
   std::map <std::string, std::string> projectChanges;
@@ -74,7 +75,7 @@ int CmdPrepend::execute (std::string& output)
     Task before (*task);
 
     // Prepend to the specified task.
-    std::string question = format (STRING_CMD_PREPEND_CONFIRM,
+    std::string question = format (_("Prepend to task {1} '{2}'?"),
                                    task->id,
                                    task->get ("description"));
 
@@ -84,7 +85,7 @@ int CmdPrepend::execute (std::string& output)
     {
       context.tdb2.modify (*task);
       ++count;
-      feedback_affected (STRING_CMD_PREPEND_TASK, *task);
+      feedback_affected (_("Prepending to task {1} '{2}'."), *task);
       if (context.verbose ("project"))
         projectChanges[task->get ("project")] = onProjectChange (*task, false);
 
@@ -93,7 +94,7 @@ int CmdPrepend::execute (std::string& output)
       {
         std::vector <Task> siblings = context.tdb2.siblings (*task);
         if (siblings.size () &&
-            confirm (STRING_CMD_PREPEND_CONFIRM_R))
+            confirm (_("This is a recurring task.  Do you want to prepend to all pending recurrences of this same task?")))
         {
           std::vector <Task>::iterator sibling;
           for (sibling = siblings.begin (); sibling != siblings.end (); ++sibling)
@@ -101,7 +102,7 @@ int CmdPrepend::execute (std::string& output)
             modify_task_description_prepend (*sibling, modifications);
             context.tdb2.modify (*sibling);
             ++count;
-            feedback_affected (STRING_CMD_PREPEND_TASK_R, *sibling);
+            feedback_affected (_("Prepending to recurring task {1} '{2}'."), *sibling);
           }
 
           // Prepend to the parent
@@ -114,7 +115,7 @@ int CmdPrepend::execute (std::string& output)
     }
     else
     {
-      std::cout << STRING_CMD_PREPEND_NO << "\n";
+      std::cout << _("Task not prepended.") << "\n";
       rc = 1;
       if (_permission_quit)
         break;
@@ -128,7 +129,7 @@ int CmdPrepend::execute (std::string& output)
       context.footnote (i->second);
 
   context.tdb2.commit ();
-  feedback_affected (count == 1 ? STRING_CMD_PREPEND_1 : STRING_CMD_PREPEND_N, count);
+  feedback_affected (ngettext("Prepended {1} task.", "Prepended {1} tasks.", count), count);
   return rc;
 }
 

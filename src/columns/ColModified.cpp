@@ -25,6 +25,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <cmake.h>
 #include <ColModified.h>
 #include <i18n.h>
 
@@ -32,7 +33,7 @@
 ColumnModified::ColumnModified ()
 {
   _name  = "modified";
-  _label = STRING_COLUMN_LABEL_MOD;
+  _label = sgettext("column|Modified");
 }
 
 ////////////////////////////////////////////////////////////////////////////////

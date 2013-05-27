@@ -25,6 +25,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <cmake.h>
 #include <iostream>
 #include <algorithm>
 #include <sstream>
@@ -38,7 +39,6 @@
 #include <text.h>
 #include <util.h>
 #include <i18n.h>
-#include <cmake.h>
 
 extern Context context;
 
@@ -98,7 +98,7 @@ std::string taskDifferences (const Task& before, const Task& after)
   std::vector <std::string>::iterator name;
   for (name = beforeOnly.begin (); name != beforeOnly.end (); ++name)
     out << "  - "
-        << format (STRING_FEEDBACK_DELETED, ucFirst (*name))
+        << format (_("{1} will be deleted."), ucFirst (*name))
         << "\n";
 
   for (name = afterOnly.begin (); name != afterOnly.end (); ++name)
@@ -111,12 +111,12 @@ std::string taskDifferences (const Task& before, const Task& after)
       join (to, ", ", deps_after);
 
       out << "  - "
-          << format (STRING_FEEDBACK_DEP_SET, to)
+          << format (_("Dependencies will be set to '{1}'."), to)
           << "\n";
     }
     else
       out << "  - "
-          << format (STRING_FEEDBACK_ATT_SET,
+          << format (_("{1} will be set to '{2}'."),
                      ucFirst (*name),
                      renderAttribute (*name, after.get (*name)))
           << "\n";
@@ -144,12 +144,12 @@ std::string taskDifferences (const Task& before, const Task& after)
         join (to, ", ", deps_after);
 
         out << "  - "
-            << format (STRING_FEEDBACK_DEP_MOD, from, to)
+            << format (_("Dependencies will be changed from '{1}' to '{2}'."), from, to)
             << "\n";
       }
       else
         out << "  - "
-            << format (STRING_FEEDBACK_ATT_MOD,
+            << format (_("{1} will be changed from '{2}' to '{3}'."),
                        ucFirst (*name),
                        renderAttribute (*name, before.get (*name)),
                        renderAttribute (*name, after.get (*name)))
@@ -160,7 +160,7 @@ std::string taskDifferences (const Task& before, const Task& after)
   // Shouldn't just say nothing.
   if (out.str ().length () == 0)
     out << "  - "
-        << STRING_FEEDBACK_NOP
+        << _("No changes will be made.")
         << "\n";
 
   return out.str ();
@@ -196,23 +196,23 @@ std::string taskInfoDifferences (const Task& before, const Task& after, const st
         std::string from;
         join (from, ", ", deps_before);
 
-        out << format (STRING_FEEDBACK_DEP_DEL, from)
+        out << format (_("Dependencies '{1}' deleted."), from)
             << "\n";
     }
     else if (name->substr (0, 11) == "annotation_")
     {
-      out << format (STRING_FEEDBACK_ANN_DEL, before.get (*name))
+      out << format (_("Annotation '{1}' deleted."), before.get (*name))
           << "\n";
     }
     else if (*name == "start")
     {
-      out << format (STRING_FEEDBACK_ATT_DEL_DUR, ucFirst (*name),
+      out << format (_("{1} deleted (duration: {2})."), ucFirst (*name),
                      Duration(current_timestamp - last_timestamp).formatPrecise())
           << "\n";
     }
     else
     {
-      out << format (STRING_FEEDBACK_ATT_DEL, ucFirst (*name))
+      out << format (_("{1} deleted."), ucFirst (*name))
           << "\n";
     }
   }
@@ -226,12 +226,12 @@ std::string taskInfoDifferences (const Task& before, const Task& after, const st
       std::string to;
       join (to, ", ", deps_after);
 
-      out << format (STRING_FEEDBACK_DEP_WAS_SET, to)
+      out << format (_("Dependencies set to '{1}'."), to)
           << "\n";
     }
     else if (name->substr (0, 11) == "annotation_")
     {
-      out << format (STRING_FEEDBACK_ANN_ADD, after.get (*name))
+      out << format (_("Annotation of '{1}' added."), after.get (*name))
           << "\n";
     }
     else
@@ -239,7 +239,7 @@ std::string taskInfoDifferences (const Task& before, const Task& after, const st
       if (*name == "start")
           last_timestamp = current_timestamp;
 
-      out << format (STRING_FEEDBACK_ATT_WAS_SET,
+      out << format (_("{1} set to '{2}'."),
                      ucFirst (*name),
                      renderAttribute (*name, after.get (*name), dateformat))
           << "\n";
@@ -263,16 +263,16 @@ std::string taskInfoDifferences (const Task& before, const Task& after, const st
         std::string to;
         join (to, ", ", deps_after);
 
-        out << format (STRING_FEEDBACK_DEP_WAS_MOD, from, to)
+        out << format (_("Dependencies changed from '{1}' to '{2}'."), from, to)
             << "\n";
       }
       else if (name->substr (0, 11) == "annotation_")
       {
-        out << format (STRING_FEEDBACK_ANN_WAS_MOD, after.get (*name))
+        out << format (_("Annotation changed to '{1}'."), after.get (*name))
             << "\n";
       }
       else
-        out << format (STRING_FEEDBACK_ATT_WAS_MOD,
+        out << format (_("{1} changed from '{2}' to '{3}'."),
                        ucFirst (*name),
                        renderAttribute (*name, before.get (*name), dateformat),
                        renderAttribute (*name, after.get (*name), dateformat))
@@ -281,7 +281,7 @@ std::string taskInfoDifferences (const Task& before, const Task& after, const st
 
   // Shouldn't just say nothing.
   if (out.str ().length () == 0)
-    out << STRING_FEEDBACK_WAS_NOP
+    out << _("No changes made.")
         << "\n";
 
   return out.str ();
@@ -366,10 +366,10 @@ void feedback_special_tags (const Task& task, const std::string& tag)
   {
     std::string msg;
     std::string explanation;
-         if (tag == "nocolor") msg = STRING_FEEDBACK_TAG_NOCOLOR;
-    else if (tag == "nonag")   msg = STRING_FEEDBACK_TAG_NONAG;
-    else if (tag == "nocal")   msg = STRING_FEEDBACK_TAG_NOCAL;
-    else if (tag == "next")    msg = STRING_FEEDBACK_TAG_NEXT;
+         if (tag == "nocolor") msg = _("The 'nocolor' special tag will disable color rules for this task.");
+    else if (tag == "nonag")   msg = _("The 'nonag' special tag will prevent nagging when this task is modified.");
+    else if (tag == "nocal")   msg = _("The 'nocal' special tag will keep this task off the 'calendar' report.");
+    else if (tag == "next")    msg = _("The 'next' special tag will boost the urgency of this task so it appears on the 'next' report.");
 
     if (msg.length ())
     {
@@ -408,14 +408,14 @@ void feedback_unblocked (const Task& task)
       if (blocking.size () == 0)
       {
         if (i->id)
-          std::cout << format (STRING_FEEDBACK_UNBLOCKED,
+          std::cout << format (_("Unblocked {1} '{2}'."),
                                i->id,
                                i->get ("description"))
                     << "\n";
         else
         {
           std::string uuid = i->get ("uuid");
-          std::cout << format (STRING_FEEDBACK_UNBLOCKED,
+          std::cout << format (_("Unblocked {1} '{2}'."),
                                i->get ("uuid"),
                                i->get ("description"))
                     << "\n";
@@ -453,7 +453,7 @@ std::string onProjectChange (Task& task, bool scope /* = true */)
   if (project != "")
   {
     if (scope)
-      msg << format (STRING_HELPER_PROJECT_CHANGE, project)
+      msg << format (_("The project '{1}' has changed."), project)
           << "  ";
 
     // Count pending and done tasks, for this project.
@@ -476,9 +476,9 @@ std::string onProjectChange (Task& task, bool scope /* = true */)
     else
       percentage = (count_done * 100 / (count_done + count_pending));
 
-    msg << format (STRING_HELPER_PROJECT_COMPL, project, percentage)
+    msg << format (_("Project '{1}' is {2}% complete"), project, percentage)
         << " "
-        << format (STRING_HELPER_PROJECT_REM, count_pending, count_pending + count_done);
+        << format (_("({1} of {2} tasks remaining)."), count_pending, count_pending + count_done);
   }
 
   return msg.str ();
@@ -505,7 +505,7 @@ std::string onExpiration (Task& task)
   std::stringstream msg;
 
   if (context.verbose ("affected"))
-    msg << format (STRING_FEEDBACK_EXPIRED, task.id, task.get ("description"));
+    msg << format (_("Task {1} '{2}' expired and was deleted."), task.id, task.get ("description"));
 
   return msg.str ();
 }

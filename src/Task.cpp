@@ -414,7 +414,7 @@ void Task::parse (const std::string& input)
         n.depleted ())
     {
       if (line.length () == 0)
-        throw std::string (STRING_RECORD_EMPTY);
+        throw std::string (_("Empty record in input."));
 
       Nibbler nl (line);
       std::string name;
@@ -443,12 +443,12 @@ void Task::parse (const std::string& input)
       std::string remainder;
       nl.getUntilEOS (remainder);
       if (remainder.length ())
-        throw std::string (STRING_RECORD_JUNK_AT_EOL);
+        throw std::string (_("Unrecognized characters at end of line."));
     }
     else if (input[0] == '{')
       parseJSON (input);
     else
-      throw std::string (STRING_RECORD_NOT_FF4);
+      throw std::string (_("Record not recognized as format 4."));
   }
 
   catch (const std::string&)
@@ -532,10 +532,10 @@ void Task::parseJSON (const std::string& line)
             json::string* what = (json::string*)annotation->_data["description"];
 
             if (! when)
-              throw format (STRING_TASK_NO_ENTRY, line);
+              throw format (_("Annotation is missing an entry date: {1}"), line);
 
             if (! what)
-              throw format (STRING_TASK_NO_DESC, line);
+              throw format (_("Annotation is missing a description: {1}"), line);
 
             std::string name = "annotation_" + Date (when->_data).toEpochString ();
 
@@ -572,10 +572,10 @@ void Task::parseLegacy (const std::string& line)
   switch (determineVersion (line))
   {
   // File format version 1, from 2006-11-27 - 2007-12-31, v0.x+ - v0.9.3
-  case 1: throw std::string (STRING_TASK_NO_FF1);
+  case 1: throw std::string (_("Taskwarrior no longer supports file format 1, originally used between 27 November 2006 and 31 December 2007."));
 
   // File format version 2, from 2008-1-1 - 2009-3-23, v0.9.3 - v1.5.0
-  case 2: throw std::string (STRING_TASK_NO_FF2);
+  case 2: throw std::string (_("Taskwarrior no longer supports file format 2, originally used between 1 January 2008 and 12 April 2009."));
 
   // File format version 3, from 2009-3-23 - 2009-05-16, v1.6.0 - v1.7.1
   case 3:
@@ -667,21 +667,21 @@ void Task::parseLegacy (const std::string& line)
               set ("description", line.substr (closeAnnoBracket + 2));
             }
             else
-              throw std::string (STRING_TASK_PARSE_ANNO_BRACK);
+              throw std::string (_("Missing annotation brackets."));
           }
           else
-            throw std::string (STRING_TASK_PARSE_ATT_BRACK);
+            throw std::string (_("Missing attribute brackets."));
         }
         else
-          throw std::string (STRING_TASK_PARSE_TAG_BRACK);
+          throw std::string (_("Missing tag brackets."));
       }
       else
-        throw std::string (STRING_TASK_PARSE_TOO_SHORT);
+        throw std::string (_("Line too short."));
     }
     break;
 
   default:
-    throw std::string (STRING_TASK_PARSE_UNREC_FF);
+    throw std::string (_("Unrecognized taskwarrior file format."));
     break;
   }
 
@@ -902,11 +902,11 @@ void Task::addDependency (int id)
   // Check that id is resolvable.
   std::string uuid = context.tdb2.pending.uuid (id);
   if (uuid == "")
-    throw format (STRING_TASK_DEPEND_MISS_CREA, id);
+    throw format (_("Could not create a dependency on task {1} - not found."), id);
 
   std::string depends = get ("depends");
   if (depends.find (uuid) != std::string::npos)
-    throw format (STRING_TASK_DEPEND_DUP, this->id, id);
+    throw format (_("Task {1} already depends on task {2}."), this->id, id);
 
   addDependency(uuid);
 }
@@ -915,12 +915,12 @@ void Task::addDependency (int id)
 void Task::addDependency (const std::string& uuid)
 {
   if (uuid == get ("uuid"))
-    throw std::string (STRING_TASK_DEPEND_ITSELF);
+    throw std::string (_("A task cannot be dependent on itself."));
 
   // Check that uuid is resolvable.
   int id = context.tdb2.pending.id (uuid);
   if (id == 0)
-    throw format (STRING_TASK_DEPEND_MISS_CREA, id);
+    throw format (_("Could not create a dependency on task {1} - not found."), id);
 
   // Store the dependency.
   std::string depends = get ("depends");
@@ -930,14 +930,14 @@ void Task::addDependency (const std::string& uuid)
     if (depends.find (uuid) == std::string::npos)
       set ("depends", depends + "," + uuid);
     else
-      throw format (STRING_TASK_DEPEND_DUP, this->get ("uuid"), uuid);
+      throw format (_("Task {1} already depends on task {2}."), this->get ("uuid"), uuid);
   }
   else
     set ("depends", uuid);
 
   // Prevent circular dependencies.
   if (dependencyIsCircular (*this))
-    throw std::string (STRING_TASK_DEPEND_CIRCULAR);
+    throw std::string (_("Circular dependency detected and disallowed."));
 
   recalc_urgency = true;
 }
@@ -959,7 +959,7 @@ void Task::removeDependency (const std::string& uuid)
     recalc_urgency = true;
   }
   else
-    throw format (STRING_TASK_DEPEND_MISS_DEL, uuid);
+    throw format (_("Could not delete a dependency on task {1} - not found."), uuid);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -970,7 +970,7 @@ void Task::removeDependency (int id)
   if (uuid != "" && depends.find (uuid) != std::string::npos)
     removeDependency (uuid);
   else
-    throw format (STRING_TASK_DEPEND_MISS_DEL, id);
+    throw format (_("Could not delete a dependency on task {1} - not found."), id);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -1203,7 +1203,7 @@ void Task::substitute (
         done = true;
 
       if (++counter > APPROACHING_INFINITY)
-        throw format (STRING_INFINITE_LOOP, APPROACHING_INFINITY);
+        throw format (_("Terminated substitution because more than {1} changes were made - infinite loop protection."), APPROACHING_INFINITY);
     }
 
     if (!done)
@@ -1227,7 +1227,7 @@ void Task::substitute (
             done = true;
 
           if (++counter > APPROACHING_INFINITY)
-            throw format (STRING_INFINITE_LOOP, APPROACHING_INFINITY);
+            throw format (_("Terminated substitution because more than {1} changes were made - infinite loop protection."), APPROACHING_INFINITY);
         }
       }
     }
@@ -1362,20 +1362,20 @@ void Task::validate (bool applyDefault /* = true */)
 
   // There is no fixing a missing description.
   if (!has ("description"))
-    throw std::string (STRING_TASK_VALID_DESC);
+    throw std::string (_("A task must have a description."));
   else if (get ("description") == "")
-    throw std::string (STRING_TASK_VALID_BLANK);
+    throw std::string (_("Cannot add a task that is blank."));
 
   // Cannot have a recur frequency with no due date - when would it recur?
   if (! has ("due") && has ("recur"))
-    throw std::string (STRING_TASK_VALID_REC_DUE);
+    throw std::string (_("A recurring task must also have a 'due' date."));
 
   // Recur durations must be valid.
   if (has ("recur"))
   {
     Duration d;
     if (! d.valid (get ("recur")))
-      throw std::string (format (STRING_TASK_VALID_RECUR, get ("recur")));
+      throw std::string (format (_("The recurrence value '{1}' is not valid."), get ("recur")));
   }
 
   // Priorities must be valid.
@@ -1385,7 +1385,7 @@ void Task::validate (bool applyDefault /* = true */)
     if (priority != "H" &&
         priority != "M" &&
         priority != "L")
-      throw format (STRING_TASK_VALID_PRIORITY, priority);
+      throw format (_("Priority values may be 'H', 'M' or 'L', not '{1}'."), priority);
   }
 }
 
@@ -1400,7 +1400,7 @@ void Task::validate_before (const std::string& left, const std::string& right)
     Date date_right (get_date (right));
 
     if (date_left > date_right)
-      context.footnote (format (STRING_TASK_VALID_BEFORE, left, right));
+      context.footnote (format (_("Warning: You have specified that the '{1}' date is after the '{2}' date."), left, right));
   }
 #endif
 }

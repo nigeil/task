@@ -25,6 +25,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <cmake.h>
 #include <text.h>
 #include <i18n.h>
 #include <utf8.h>
@@ -196,7 +197,7 @@ json::array* json::array::parse (Nibbler& nibbler)
         else
         {
           delete arr;
-          throw format (STRING_JSON_MISSING_VALUE, (int) n.cursor ());
+          throw format (_("Error: missing value after ',' at position {1}"), (int) n.cursor ());
         }
       }
     }
@@ -207,7 +208,7 @@ json::array* json::array::parse (Nibbler& nibbler)
       return arr;
     }
     else
-      throw format (STRING_JSON_MISSING_BRACKET, (int) n.cursor ());
+      throw format (_("Error: missing ']' at position {1}"), (int) n.cursor ());
 
     delete arr;
   }
@@ -281,7 +282,7 @@ json::object* json::object::parse (Nibbler& nibbler)
         else
         {
           delete obj;
-          throw format (STRING_JSON_MISSING_VALUE, (int) n.cursor ());
+          throw format (_("Error: missing value after ',' at position {1}"), (int) n.cursor ());
         }
       }
     }
@@ -292,7 +293,7 @@ json::object* json::object::parse (Nibbler& nibbler)
       return obj;
     }
     else
-      throw format (STRING_JSON_MISSING_BRACE, (int) n.cursor ());
+      throw format (_("Error: missing '}' at position {1}"), (int) n.cursor ());
 
     delete obj;
   }
@@ -320,10 +321,10 @@ bool json::object::parse_pair (
         return true;
       }
       else
-        throw format (STRING_JSON_MISSING_VALUE2, (int) n.cursor ());
+        throw format (_("Error: missing value at position {1}"), (int) n.cursor ());
     }
     else
-      throw format (STRING_JSON_MISSING_COLON, (int) n.cursor ());
+      throw format (_("Error: missing ':' at position {1}"), (int) n.cursor ());
   }
 
   return false;
@@ -366,14 +367,14 @@ json::value* json::parse (const std::string& input)
        if (n.next () == '{') root = json::object::parse (n);
   else if (n.next () == '[') root = json::array::parse (n);
   else
-    throw format (STRING_JSON_MISSING_OPEN, (int) n.cursor ());
+    throw format (_("Error: expected '{' or '[' at position {1}"), (int) n.cursor ());
 
   // Check for end condition.
   n.skipWS ();
   if (!n.depleted ())
   {
     delete root;
-    throw format (STRING_JSON_EXTRA_CHARACTERS, (int) n.cursor ());
+    throw format (_("Error: extra characters found at position {1}"), (int) n.cursor ());
   }
 
   return root;

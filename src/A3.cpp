@@ -25,6 +25,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <cmake.h>
 #include <sstream>
 #include <algorithm>
 #include <stdlib.h>
@@ -39,7 +40,6 @@
 #include <i18n.h>
 #include <main.h>
 #include <A3.h>
-#include <cmake.h>
 
 #ifdef FEATURE_STDIN
 #include <sys/select.h>
@@ -333,7 +333,7 @@ void A3::rc_override (
       else
         home = ".";
 
-      context.header (format (STRING_A3_ALTERNATE_RC, rc._data));
+      context.header (format (_("Using alternate .taskrc file {1}"), rc._data));
 
       // Keep looping, because if there are multiple rc:file arguments, we
       // want the last one to dominate.
@@ -358,7 +358,7 @@ void A3::get_data_location (std::string& data)
           (arg->_raw[16] == ':' || arg->_raw[16] == '='))
       {
         data = arg->_raw.substr (17);
-        context.header (format (STRING_A3_ALTERNATE_DATA, data));
+        context.header (format (_("Using alternate data.location {1}"), data));
       }
     }
 
@@ -454,10 +454,10 @@ void A3::apply_overrides ()
         n.getUntilEOS (value);  // May be blank.
 
         context.config.set (name, value);
-        context.footnote (format (STRING_A3_OVERRIDE_RC, name, value));
+        context.footnote (format (_("Configuration override rc.{1}:{2}"), name, value));
       }
       else
-        context.footnote (format (STRING_A3_OVERRIDE_PROBLEM, arg->_raw));
+        context.footnote (format (_("Problem with override: {1}"), arg->_raw));
     }
   }
 }
@@ -505,7 +505,7 @@ void A3::inject_defaults ()
         context.header ("[" + combine () + "]");
       }
       else
-        throw std::string (STRING_TRIVIAL_INPUT);
+        throw std::string (_("You must specify a command or a task to modify."));
     }
     else
     {
@@ -520,7 +520,7 @@ void A3::inject_defaults ()
       else
       {
         context.debug ("Sequence but no command found - assuming 'information' command.");
-        context.header (STRING_ASSUME_INFO);
+        context.header (_("No command specified - assuming 'information'."));
         capture_first ("information");
       }
     }
@@ -1068,7 +1068,7 @@ const A3 A3::expand (const A3& input) const
 #endif
       }
       else
-        throw format (STRING_A3_UNKNOWN_ATTMOD, mod);
+        throw format (_("Error: unrecognized attribute modifier '{1}'."), mod);
     }
 
     // [+-]value  -->  tags _hastag_/_notag_ value
@@ -1265,7 +1265,7 @@ const A3 A3::postfix (const A3& input) const
       if (op_stack.size ())
         op_stack.pop_back ();
       else
-        throw std::string (STRING_A3_MISMATCHED_PARENS);
+        throw std::string (_("Mismatched parentheses in expression"));
     }
     else if (which_operator (arg->_raw, type, precedence, associativity))
     {
@@ -1293,7 +1293,7 @@ const A3 A3::postfix (const A3& input) const
   {
     if (op_stack.back ()._raw == "(" ||
         op_stack.back ()._raw == ")")
-      throw std::string (STRING_A3_MISMATCHED_PARENS);
+      throw std::string (_("Mismatched parentheses in expression"));
 
     converted.push_back (op_stack.back ());
     op_stack.pop_back ();
@@ -1863,12 +1863,12 @@ bool A3::extract_pattern (const std::string& input, std::string& pattern)
       n.skip     ('/'))
   {
     if (!n.depleted ())
-      throw std::string (STRING_A3_PATTERN_GARBAGE);
+      throw std::string (_("Unrecognized character(s) at end of pattern."));
 
     return true;
   }
   else
-    throw std::string (STRING_A3_MALFORMED_PATTERN);
+    throw std::string (_("Malformed pattern."));
 
   return false;
 }
@@ -2016,10 +2016,10 @@ bool A3::extract_id (const std::string& input, std::vector <int>& sequence)
     {
       int end;
       if (!n.getUnsignedInt (end))
-        throw std::string (STRING_A3_ID_AFTER_HYPHEN);
+        throw std::string (_("Unrecognized ID after hyphen."));
 
       if (id > end)
-        throw std::string (STRING_A3_RANGE_INVERTED);
+        throw std::string (_("Inverted range 'high-low' instead of 'low-high'"));
 
       for (int n = id + 1; n <= end; ++n)
         sequence.push_back (n);
@@ -2035,21 +2035,21 @@ bool A3::extract_id (const std::string& input, std::vector <int>& sequence)
         {
           int end;
           if (!n.getUnsignedInt (end))
-            throw std::string (STRING_A3_ID_AFTER_HYPHEN);
+            throw std::string (_("Unrecognized ID after hyphen."));
 
           if (id > end)
-            throw std::string (STRING_A3_RANGE_INVERTED);
+            throw std::string (_("Inverted range 'high-low' instead of 'low-high'"));
 
           for (int n = id + 1; n <= end; ++n)
             sequence.push_back (n);
         }
       }
       else
-        throw std::string (STRING_A3_MALFORMED_ID);
+        throw std::string (_("Malformed ID."));
     }
   }
   else
-    throw std::string (STRING_A3_MALFORMED_ID);
+    throw std::string (_("Malformed ID."));
 
   return n.depleted ();
 }
@@ -2069,16 +2069,16 @@ bool A3::extract_uuid (
     while (n.skip (','))
     {
       if (!n.getPartialUUID (uuid))
-        throw std::string (STRING_A3_UUID_AFTER_COMMA);
+        throw std::string (_("Unrecognized UUID after comma."));
 
       sequence.push_back (uuid);
     }
   }
   else
-    throw std::string (STRING_A3_MALFORMED_UUID);
+    throw std::string (_("Malformed UUID."));
 
   if (!n.depleted ())
-    throw std::string (STRING_A3_PATTERN_GARBAGE);
+    throw std::string (_("Unrecognized character(s) at end of pattern."));
 
   return false;
 }

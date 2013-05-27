@@ -25,6 +25,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <cmake.h>
 #include <iostream>
 #include <Context.h>
 #include <main.h>
@@ -40,7 +41,7 @@ CmdModify::CmdModify ()
 {
   _keyword     = "modify";
   _usage       = "task <filter> modify <mods>";
-  _description = STRING_CMD_MODIFY_USAGE1;
+  _description = _("Modifies the existing task with provided arguments.");
   _read_only   = false;
   _displays_id = false;
 }
@@ -56,14 +57,14 @@ int CmdModify::execute (std::string& output)
   filter (filtered);
   if (filtered.size () == 0)
   {
-    context.footnote (STRING_FEEDBACK_NO_TASKS_SP);
+    context.footnote (_("No tasks specified."));
     return 1;
   }
 
   // Apply the command line modifications to the new task.
   A3 modifications = context.a3.extract_modifications ();
   if (!modifications.size ())
-    throw std::string (STRING_CMD_MODIFY_NEED_TEXT);
+    throw std::string (_("Additional text must be provided."));
 
   // Accumulated project change notifications.
   std::map <std::string, std::string> projectChanges;
@@ -79,27 +80,27 @@ int CmdModify::execute (std::string& output)
       if (task->has ("recur")  &&
           !task->has ("due")   &&
           !before.has ("due"))
-        throw std::string (STRING_CMD_MODIFY_NO_DUE);
+        throw std::string (_("You cannot specify a recurring task without a due date."));
 
       if (before.has ("recur") &&
           before.has ("due")   &&
           (!task->has ("due")  ||
            task->get ("due") == ""))
-        throw std::string (STRING_CMD_MODIFY_REM_DUE);
+        throw std::string (_("You cannot remove the due date from a recurring task."));
 
       if (before.has ("recur")  &&
           (!task->has ("recur") ||
            task->get ("recur") == ""))
-        throw std::string (STRING_CMD_MODIFY_REC_ALWAYS);
+        throw std::string (_("You cannot remove the recurrence from a recurring task."));
 
       // Delete the specified task.
       std::string question;
       if (task->id != 0)
-        question = format (STRING_CMD_MODIFY_CONFIRM,
+        question = format (_("Modify task {1} '{2}'?"),
                            task->id,
                            task->get ("description"));
       else
-        question = format (STRING_CMD_MODIFY_CONFIRM,
+        question = format (_("Modify task {1} '{2}'?"),
                            task->get ("uuid"),
                            task->get ("description"));
 
@@ -108,7 +109,7 @@ int CmdModify::execute (std::string& output)
         updateRecurrenceMask (*task);
         dependencyChainOnModify (before, *task);
         ++count;
-        feedback_affected (STRING_CMD_MODIFY_TASK, *task);
+        feedback_affected (_("Modifying task {1} '{2}'."), *task);
         feedback_unblocked (*task);
         context.tdb2.modify (*task);
         if (context.verbose ("project"))
@@ -119,7 +120,7 @@ int CmdModify::execute (std::string& output)
         {
           std::vector <Task> siblings = context.tdb2.siblings (*task);
           if (siblings.size () &&
-              confirm (STRING_CMD_MODIFY_RECUR))
+              confirm (_("This is a recurring task.  Do you want to modify all pending recurrences of this same task?")))
           {
             std::vector <Task>::iterator sibling;
             for (sibling = siblings.begin (); sibling != siblings.end (); ++sibling)
@@ -129,7 +130,7 @@ int CmdModify::execute (std::string& output)
               updateRecurrenceMask (*sibling);
               dependencyChainOnModify (alternate, *sibling);
               ++count;
-              feedback_affected (STRING_CMD_MODIFY_TASK_R, *sibling);
+              feedback_affected (_("Modifying recurring task {1} '{2}'."), *sibling);
               feedback_unblocked (*sibling);
               context.tdb2.modify (*sibling);
               if (context.verbose ("project"))
@@ -143,7 +144,7 @@ int CmdModify::execute (std::string& output)
         {
           std::vector <Task> children = context.tdb2.children (*task);
           if (children.size () &&
-              confirm (STRING_CMD_MODIFY_RECUR))
+              confirm (_("This is a recurring task.  Do you want to modify all pending recurrences of this same task?")))
           {
             std::vector <Task>::iterator child;
             for (child = children.begin (); child != children.end (); ++child)
@@ -156,14 +157,14 @@ int CmdModify::execute (std::string& output)
               if (context.verbose ("project"))
                 projectChanges[child->get ("project")] = onProjectChange (alternate, *child);
               ++count;
-              feedback_affected (STRING_CMD_MODIFY_TASK_R, *child);
+              feedback_affected (_("Modifying recurring task {1} '{2}'."), *child);
             }
           }
         }
       }
       else
       {
-        std::cout << STRING_CMD_MODIFY_NO << "\n";
+        std::cout << _("Task not modified.") << "\n";
         rc = 1;
         if (_permission_quit)
           break;
@@ -178,7 +179,7 @@ int CmdModify::execute (std::string& output)
       context.footnote (i->second);
 
   context.tdb2.commit ();
-  feedback_affected (count == 1 ? STRING_CMD_MODIFY_1 : STRING_CMD_MODIFY_N, count);
+  feedback_affected (ngettext("Modified {1} task.", "Modified {1} tasks.", count), count);
   return rc;
 }
 

@@ -25,6 +25,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <cmake.h>
 #include <stdlib.h>
 #include <math.h>
 #include <Context.h>
@@ -119,7 +120,7 @@ void ColumnDate::measure (Task& task, unsigned int& minimum, unsigned int& maxim
       minimum = maximum = Duration (now - date).formatCompact ().length ();
     }
     else
-      throw format (STRING_COLUMN_BAD_FORMAT, _name, _style);
+      throw format (_("Unrecognized column format '{1}.{2}'"), _name, _style);
   }
 }
 

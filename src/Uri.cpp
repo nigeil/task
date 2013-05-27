@@ -25,6 +25,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <cmake.h>
 #include <Context.h>
 #include <text.h>
 #include <i18n.h>
@@ -277,7 +278,7 @@ void Uri::parse ()
     }
     else
     {
-      throw std::string (format (STRING_URI_QUOTES, _data));
+      throw std::string (format (_("Could not parse uri '{1}', wrong usage of single quotes."), _data));
     }
   }
   else
@@ -298,7 +299,7 @@ void Uri::parse ()
   }
   else
   {
-    throw std::string (format (STRING_URI_BAD_FORMAT, _data));
+    throw std::string (format (_("The uri '{1}' is not in the expected format."), _data));
   }
 
   // path is absolute for ssh:// syntax

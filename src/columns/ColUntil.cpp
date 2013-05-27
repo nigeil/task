@@ -25,6 +25,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <cmake.h>
 #include <ColUntil.h>
 #include <i18n.h>
 
@@ -32,7 +33,7 @@
 ColumnUntil::ColumnUntil ()
 {
   _name      = "until";
-  _label     = STRING_COLUMN_LABEL_UNTIL;
+  _label     = sgettext("column|Until");
 }
 
 ////////////////////////////////////////////////////////////////////////////////

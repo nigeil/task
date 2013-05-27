@@ -25,6 +25,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <cmake.h>
 #include <iostream>
 #include <Context.h>
 #include <text.h>
@@ -40,7 +41,7 @@ CmdDenotate::CmdDenotate ()
 {
   _keyword     = "denotate";
   _usage       = "task <filter> denotate <pattern>";
-  _description = STRING_CMD_DENO_USAGE;
+  _description = _("Deletes an annotation");
   _read_only   = false;
   _displays_id = false;
 }
@@ -57,14 +58,14 @@ int CmdDenotate::execute (std::string& output)
   filter (filtered);
   if (filtered.size () == 0)
   {
-    context.footnote (STRING_FEEDBACK_NO_TASKS_SP);
+    context.footnote (_("No tasks specified."));
     return 1;
   }
 
   // Apply the command line modifications to the completed task.
   A3 words = context.a3.extract_modifications ();
   if (!words.size ())
-    throw std::string (STRING_CMD_DENO_WORDS);
+    throw std::string (_("An annotation pattern must be provided."));
 
   // Accumulated project change notifications.
   std::map <std::string, std::string> projectChanges;
@@ -80,7 +81,7 @@ int CmdDenotate::execute (std::string& output)
     task->getAnnotations (annotations);
 
     if (annotations.size () == 0)
-      throw std::string (STRING_CMD_DENO_NONE);
+      throw std::string (_("The specified task has no annotations that can be deleted."));
 
     std::map <std::string, std::string>::iterator i;
     std::string anno;
@@ -113,7 +114,7 @@ int CmdDenotate::execute (std::string& output)
 
     if (taskDiff (before, *task))
     {
-      std::string question = format (STRING_CMD_DENO_CONFIRM,
+      std::string question = format (_("Denotate task {1} '{2}'?"),
                                      task->id,
                                      task->get ("description"));
 
@@ -121,13 +122,13 @@ int CmdDenotate::execute (std::string& output)
       {
         ++count;
         context.tdb2.modify (*task);
-        feedback_affected (format (STRING_CMD_DENO_FOUND, anno));
+        feedback_affected (format (_("Found annotation '{1}' and deleted it."), anno));
         if (context.verbose ("project"))
           projectChanges[task->get ("project")] = onProjectChange (*task, false);
       }
       else
       {
-        std::cout << STRING_CMD_DENO_NO << "\n";
+        std::cout << _("Task not denotated.") << "\n";
         rc = 1;
         if (_permission_quit)
           break;
@@ -135,7 +136,7 @@ int CmdDenotate::execute (std::string& output)
     }
     else
     {
-      std::cout << format (STRING_CMD_DENO_NOMATCH, pattern) << "\n";
+      std::cout << format (_("Did not find any matching annotation to be deleted for '{1}'."), pattern) << "\n";
       rc = 1;
     }
   }
@@ -147,7 +148,7 @@ int CmdDenotate::execute (std::string& output)
       context.footnote (i->second);
 
   context.tdb2.commit ();
-  feedback_affected (count == 1 ? STRING_CMD_DENO_1 : STRING_CMD_DENO_N, count);
+  feedback_affected (ngettext("Denotated {1} task.", "Denotated {1} tasks.", count), count);
   return rc;
 }
 

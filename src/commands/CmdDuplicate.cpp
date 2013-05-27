@@ -25,6 +25,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <cmake.h>
 #include <iostream>
 #include <Context.h>
 #include <text.h>
@@ -40,7 +41,7 @@ CmdDuplicate::CmdDuplicate ()
 {
   _keyword     = "duplicate";
   _usage       = "task <filter> duplicate <mods>";
-  _description = STRING_CMD_DUPLICATE_USAGE;
+  _description = _("Duplicates the specified tasks");
   _read_only   = false;
   _displays_id = false;
 }
@@ -56,7 +57,7 @@ int CmdDuplicate::execute (std::string& output)
   filter (filtered);
   if (filtered.size () == 0)
   {
-    context.footnote (STRING_FEEDBACK_NO_TASKS_SP);
+    context.footnote (_("No tasks specified."));
     return 1;
   }
 
@@ -84,7 +85,7 @@ int CmdDuplicate::execute (std::string& output)
       dup.remove ("until");
       dup.remove ("imask");
 
-      std::cout << format (STRING_CMD_DUPLICATE_NON_REC, task->id)
+      std::cout << format (_("Note: task {1} was a recurring task.  The duplicated task is not."), task->id)
           << "\n";
     }
 
@@ -93,7 +94,7 @@ int CmdDuplicate::execute (std::string& output)
     {
       dup.remove ("mask");
 
-      std::cout << format (STRING_CMD_DUPLICATE_REC, task->id)
+      std::cout << format (_("Note: task {1} was a parent recurring task.  The duplicated task is too."), task->id)
           << "\n";
     }
 
@@ -103,24 +104,24 @@ int CmdDuplicate::execute (std::string& output)
     modify_task_annotate (dup, modifications);
 
     if (permission (dup,
-                    format (STRING_CMD_DUPLICATE_CONFIRM,
+                    format (_("Duplicate task {1} '{2}'?"),
                             task->id,
                             task->get ("description")),
                     filtered.size ()))
     {
       context.tdb2.add (dup);
       ++count;
-      feedback_affected (STRING_CMD_DUPLICATE_TASK, *task);
+      feedback_affected (_("Duplicated task {1} '{2}'."), *task);
 
       if (context.verbose ("new-id"))
-        std::cout << format (STRING_CMD_ADD_FEEDBACK, context.tdb2.next_id ()) + "\n";
+        std::cout << format (_("Created task {1}."), context.tdb2.next_id ()) + "\n";
 
       if (context.verbose ("project"))
         projectChanges[task->get ("project")] = onProjectChange (*task);
     }
     else
     {
-      std::cout << STRING_CMD_DUPLICATE_NO << "\n";
+      std::cout << _("Task not duplicated.") << "\n";
       rc = 1;
       if (_permission_quit)
         break;
@@ -134,7 +135,7 @@ int CmdDuplicate::execute (std::string& output)
       context.footnote (i->second);
 
   context.tdb2.commit ();
-  feedback_affected (count == 1 ? STRING_CMD_DUPLICATE_1 : STRING_CMD_DUPLICATE_N, count);
+  feedback_affected (ngettext("Duplicated {1} task.", "Duplicated {1} tasks.", count), count);
   return rc;
 }
 

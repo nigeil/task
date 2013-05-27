@@ -25,6 +25,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <cmake.h>
 #include <iostream>
 #include <cstring>
 #include <stdlib.h>
@@ -37,7 +38,6 @@
 
 #include <i18n.h>
 #include <Context.h>
-#include <cmake.h>
 
 Context context;
 
@@ -55,6 +55,12 @@ int main (int argc, const char** argv)
   struct timeval tv;
   gettimeofday (&tv, NULL);
   srand (tv.tv_usec);
+#endif
+
+#ifdef HAVE_GETTEXT
+  setlocale (LC_ALL, "");
+  bindtextdomain (PACKAGE, TASK_LOCALEDIR);
+  textdomain (PACKAGE);
 #endif
 
   int status = 0;
@@ -80,7 +86,7 @@ int main (int argc, const char** argv)
 
     catch (...)
     {
-      std::cerr << STRING_UNKNOWN_ERROR << "\n";
+      std::cerr << _("Unknown error.") << "\n";
       status = -2;
     }
   }

@@ -25,6 +25,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <cmake.h>
 #include <Context.h>
 #include <i18n.h>
 #include <CmdUndo.h>
@@ -36,7 +37,7 @@ CmdUndo::CmdUndo ()
 {
   _keyword     = "undo";
   _usage       = "task          undo";
-  _description = STRING_CMD_UNDO_USAGE;
+  _description = _("Reverts the most recent change to a task");
   _read_only   = false;
   _displays_id = false;
 }
@@ -46,7 +47,7 @@ int CmdUndo::execute (std::string& output)
 {
   // Detect attemps to modify the task.
   if (context.a3.extract_modifications ().size () > 0)
-    throw std::string (STRING_CMD_UNDO_MODS);
+    throw std::string (_("The undo command does not allow further task modification."));
 
   context.tdb2.revert ();
   context.tdb2.commit ();

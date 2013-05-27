@@ -25,6 +25,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <cmake.h>
 #include <iostream>
 #include <Context.h>
 #include <util.h>
@@ -40,7 +41,7 @@ CmdDone::CmdDone ()
 {
   _keyword     = "done";
   _usage       = "task <filter> done <mods>";
-  _description = STRING_CMD_DONE_USAGE;
+  _description = _("Marks the specified task as completed");
   _read_only   = false;
   _displays_id = false;
 }
@@ -56,7 +57,7 @@ int CmdDone::execute (std::string& output)
   filter (filtered);
   if (filtered.size () == 0)
   {
-    context.footnote (STRING_FEEDBACK_NO_TASKS_SP);
+    context.footnote (_("No tasks specified."));
     return 1;
   }
 
@@ -76,7 +77,7 @@ int CmdDone::execute (std::string& output)
         task->getStatus () == Task::waiting)
     {
       // Complete the specified task.
-      std::string question = format (STRING_CMD_DONE_CONFIRM,
+      std::string question = format (_("Complete task {1} '{2}'?"),
                                      task->id,
                                      task->get ("description"));
 
@@ -95,7 +96,7 @@ int CmdDone::execute (std::string& output)
         updateRecurrenceMask (*task);
         context.tdb2.modify (*task);
         ++count;
-        feedback_affected (STRING_CMD_DONE_TASK, *task);
+        feedback_affected (_("Completed task {1} '{2}'."), *task);
         feedback_unblocked (*task);
         if (!nagged)
           nagged = nag (*task);
@@ -105,7 +106,7 @@ int CmdDone::execute (std::string& output)
       }
       else
       {
-        std::cout << STRING_CMD_DONE_NO << "\n";
+        std::cout << _("Task not completed.") << "\n";
         rc = 1;
         if (_permission_quit)
           break;
@@ -113,7 +114,7 @@ int CmdDone::execute (std::string& output)
     }
     else
     {
-      std::cout << format (STRING_CMD_DONE_NOTPEND,
+      std::cout << format (_("Task {1} '{2}' is neither pending nor waiting."),
                            task->id,
                            task->get ("description"))
                 << "\n";
@@ -128,7 +129,7 @@ int CmdDone::execute (std::string& output)
       context.footnote (i->second);
 
   context.tdb2.commit ();
-  feedback_affected (count == 1 ? STRING_CMD_DONE_1 : STRING_CMD_DONE_N, count);
+  feedback_affected (ngettext("Completed {1} task.", "Completed {1} tasks.", count), count);
   return rc;
 }
 

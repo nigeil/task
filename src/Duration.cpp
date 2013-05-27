@@ -25,6 +25,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <cmake.h>
 #include <sstream>
 #include <string>
 #include <vector>
@@ -306,7 +307,7 @@ std::string Duration::formatPrecise () const
 std::string Duration::formatSeconds () const
 {
   char formatted[24];
-  sprintf (formatted, "%s%llusec", (_negative ? "-" : ""), (unsigned long long)_secs);
+  sprintf (formatted, "%s%llusec", (_negative ? "-" : ""), (unsigned long long) _secs);
   return std::string (formatted);
 }
 
@@ -504,7 +505,7 @@ void Duration::parse (const std::string& input)
   }
 
   if (_secs == 0)
-    throw ::format (STRING_DURATION_UNRECOGNIZED, input);
+    throw ::format (_("The duration '{1}' was not recognized as valid, with correct units like '3days'."), input);
 }
 
 ////////////////////////////////////////////////////////////////////////////////

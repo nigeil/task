@@ -25,6 +25,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <cmake.h>
 #include <Context.h>
 #include <text.h>
 #include <i18n.h>
@@ -39,7 +40,7 @@ CmdAdd::CmdAdd ()
 {
   _keyword     = "add";
   _usage       = "task          add <mods>";
-  _description = STRING_CMD_ADD_USAGE;
+  _description = _("Adds a new task");
   _read_only   = false;
   _displays_id = false;
 }
@@ -55,7 +56,7 @@ int CmdAdd::execute (std::string& output)
   context.tdb2.add (task);
 
   if (context.verbose ("new-id"))
-    output = format (STRING_CMD_ADD_FEEDBACK, context.tdb2.next_id ()) + "\n";
+    output = format (_("Created task {1}."), context.tdb2.next_id ()) + "\n";
 
   if (context.verbose ("project"))
     context.footnote (onProjectChange (task));

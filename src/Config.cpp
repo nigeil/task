@@ -25,6 +25,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <cmake.h>
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -40,7 +41,6 @@
 #include <Config.h>
 #include <text.h>
 #include <util.h>
-#include <cmake.h>
 #include <i18n.h>
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -110,9 +110,7 @@ std::string Config::_defaults =
   "dateformat.info=Y-M-D H:N:S                    # Preferred display date format for information\n"
   "dateformat.report=                             # Preferred display date format for reports\n"
   "dateformat.annotation=                         # Preferred display date format for annotations\n"
-  "weekstart="
-             STRING_DATE_SUNDAY_LONG
-                  "                               # Sunday or Monday only\n"
+  "weekstart=sunday                               # Sunday or Monday only\n"
   "displayweeknumber=yes                          # Show week numbers on calendar\n"
   "due=7                                          # Task is considered due in 7 days\n"
   "\n"
@@ -448,7 +446,7 @@ void Config::load (const std::string& file, int nest /* = 1 */)
   Timer timer ("Config::load (" + file + ")");
 
   if (nest > 10)
-    throw std::string (STRING_CONFIG_OVERNEST);
+    throw std::string (_("Configuration file nested to more than 10 levels deep - this has to be a mistake."));
 
   // First time in, load the default values.
   if (nest == 1)
@@ -509,13 +507,13 @@ void Config::parse (const std::string& input, int nest /* = 1 */)
             if (included.readable ())
               this->load (included, nest + 1);
             else
-              throw format (STRING_CONFIG_READ_INCLUDE, included._data);
+              throw format (_("Could not read include file '{1}'."), included._data);
           }
           else
-            throw format (STRING_CONFIG_INCLUDE_PATH, included._data);
+            throw format (_("Can only include files with absolute paths, not '{1}'"), included._data);
         }
         else
-          throw format (STRING_CONFIG_BAD_ENTRY, line);
+          throw format (_("Malformed entry '{1}' in config file."), line);
       }
     }
   }
@@ -552,7 +550,7 @@ void Config::createDefaultRC (const std::string& rc, const std::string& data)
 
   // Write out the new file.
   if (! File::write (rc, contents.str ()))
-    throw format (STRING_CONFIG_BAD_WRITE, rc);
+    throw format (_("Could not write to '{1}'."), rc);
 }
 
 ////////////////////////////////////////////////////////////////////////////////

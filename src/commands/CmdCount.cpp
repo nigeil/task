@@ -25,6 +25,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <cmake.h>
 #include <Context.h>
 #include <main.h>
 #include <text.h>
@@ -38,7 +39,7 @@ CmdCount::CmdCount ()
 {
   _keyword     = "count";
   _usage       = "task <filter> count";
-  _description = STRING_CMD_COUNT_USAGE;
+  _description = _("Counts matching tasks");
   _read_only   = true;
   _displays_id = false;
 }

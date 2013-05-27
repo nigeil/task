@@ -25,6 +25,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <cmake.h>
 #include <iostream>
 #include <stdlib.h>
 #include <Context.h>
@@ -105,7 +106,7 @@ void E9::eval (const Task& task, std::vector <Arg>& value_stack)
       if (arg->_raw == "!")
       {
         if (value_stack.size () < 1)
-          throw format (STRING_E9_NO_OPERANDS, "not");
+          throw format (_("There are no operands for the '{1}' operator."), "not");
 
         Arg right = value_stack.back ();
         value_stack.pop_back ();
@@ -127,7 +128,7 @@ void E9::eval (const Task& task, std::vector <Arg>& value_stack)
       else
       {
         if (value_stack.size () < 2)
-          throw format (STRING_E9_INSUFFICIENT_OP, arg->_raw);
+          throw format (_("There are not enough operands for the '{1}' operator."), arg->_raw);
 
         Arg right = value_stack.back ();
         value_stack.pop_back ();
@@ -153,7 +154,7 @@ void E9::eval (const Task& task, std::vector <Arg>& value_stack)
         else if (arg->_raw == "_hastag_") operator_hastag   (result,       right, false, task);
         else if (arg->_raw == "_notag_")  operator_hastag   (result,       right, true,  task);
         else
-          throw format (STRING_E9_UNSUPPORTED, arg->_raw);
+          throw format (_("Unsupported operator '{1}'."), arg->_raw);
       }
 
       // Store the result.
@@ -209,7 +210,7 @@ void E9::eval (const Task& task, std::vector <Arg>& value_stack)
 
   // Check for stack remnants.
   if (value_stack.size () != 1)
-    throw std::string (STRING_E9_MORE_OP);
+    throw std::string (_("Found extra operands."));
 }
 
 ////////////////////////////////////////////////////////////////////////////////

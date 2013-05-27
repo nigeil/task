@@ -25,6 +25,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <cmake.h>
 #include <fstream>
 #include <sstream>
 #include <Context.h>
@@ -41,7 +42,7 @@ CmdPull::CmdPull ()
 {
   _keyword     = "pull";
   _usage       = "task          pull <URL>";
-  _description = STRING_CMD_PULL_USAGE;
+  _description = _("Pulls remote files from the URL");
   _read_only   = true;
   _displays_id = false;
 }
@@ -62,7 +63,7 @@ int CmdPull::execute (std::string& output)
 		Directory location (context.config.get ("data.location"));
 
     if (! uri.append ("{pending,undo,completed}.data"))
-      throw format (STRING_CMD_PULL_NOT_DIR, uri._path);
+      throw format (_("The uri '{1}' is not a directory.  Did you forget a trailing '/'?"), uri._path);
 
 		Transport* transport;
 		if ((transport = Transport::getTransport (uri)) != NULL)
@@ -75,7 +76,7 @@ int CmdPull::execute (std::string& output)
       // Verify that files are not being copied from rc.data.location to the
       // same place.
       if (Directory (uri._path) == Directory (context.config.get ("data.location")))
-        throw std::string (STRING_CMD_PULL_SAME);
+        throw std::string (_("Cannot pull files when the source and destination are the same."));
 
       // copy files locally
 
@@ -105,14 +106,14 @@ int CmdPull::execute (std::string& output)
       }
       else
       {
-        throw format (STRING_CMD_PULL_MISSING, uri._path);
+        throw format (_("At least one of the database files in '{1}' is not present."), uri._path);
       }
 		}
 
-    output += format (STRING_CMD_PULL_TRANSFERRED, uri.ToString ()) + "\n";
+    output += format (_("Local tasks transferred from {1}"), uri.ToString ()) + "\n";
   }
   else
-    throw std::string (STRING_CMD_PULL_NO_URI);
+    throw std::string (_("No uri was specified for the pull.  Either specify the uri of a remote .task directory, or create a 'pull.default.uri' entry in your .taskrc file."));
 
   return 0;
 }

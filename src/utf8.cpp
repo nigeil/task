@@ -25,6 +25,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <cmake.h>
 #include <string>
 #include <text.h>
 #include <utf8.h>
@@ -67,7 +68,7 @@ unsigned int utf8_codepoint (const std::string& input)
                 XDIGIT (input[3]);
   }
   else
-    throw std::string (STRING_UTF8_INVALID_CP_REP);
+    throw std::string (_("Invalid codepoint representation."));
 
   return codepoint;
 }
@@ -150,7 +151,7 @@ std::string utf8_character (unsigned int codepoint)
     sequence[4] = 0;
   }
   else
-    throw std::string (STRING_UTF8_INVALID_CP);
+    throw std::string (_("Invalid Unicode codepoint."));
 
   sequence[4] = '\0';
   return std::string (sequence);

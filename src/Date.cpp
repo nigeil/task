@@ -25,6 +25,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <cmake.h>
 #include <iomanip>
 #include <sstream>
 #include <time.h>
@@ -41,13 +42,13 @@
 
 static const char* relatives[] =
 {
-  STRING_DATE_SUNDAY_LONG,
-  STRING_DATE_MONDAY_LONG,
-  STRING_DATE_TUESDAY_LONG,
-  STRING_DATE_WEDNESDAY_LONG,
-  STRING_DATE_THURSDAY_LONG,
-  STRING_DATE_FRIDAY_LONG,
-  STRING_DATE_SATURDAY_LONG,
+  _("sunday"),
+  _("monday"),
+  _("tuesday"),
+  _("wednesday"),
+  _("thursday"),
+  _("friday"),
+  _("saturday"),
   "today",
   "tomorrow",
   "yesterday",
@@ -146,7 +147,7 @@ Date::Date (const std::string& input, const std::string& format /* = "m/d/Y" */)
   if (isEpoch (input))
     return;
 
-  throw ::format (STRING_DATE_INVALID_FORMAT, input, format);
+  throw ::format (_("'{1}' is not a valid date in the '{2}' format."), input, format);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -387,18 +388,18 @@ std::string Date::monthName (int month)
 {
   static const char* months[12] =
   {
-    STRING_DATE_JANUARY_LONG,
-    STRING_DATE_FEBRUARY_LONG,
-    STRING_DATE_MARCH_LONG,
-    STRING_DATE_APRIL_LONG,
-    STRING_DATE_MAY_LONG,
-    STRING_DATE_JUNE_LONG,
-    STRING_DATE_JULY_LONG,
-    STRING_DATE_AUGUST_LONG,
-    STRING_DATE_SEPTEMBER_LONG,
-    STRING_DATE_OCTOBER_LONG,
-    STRING_DATE_NOVEMBER_LONG,
-    STRING_DATE_DECEMBER_LONG,
+    _("january"),
+    _("february"),
+    _("march"),
+    _("april"),
+    _("may"),
+    _("june"),
+    _("july"),
+    _("august"),
+    _("september"),
+    _("october"),
+    _("november"),
+    _("december"),
   };
 
   assert (month > 0);
@@ -411,13 +412,13 @@ void Date::dayName (int dow, std::string& name)
 {
   static const char* days[7] =
   {
-    STRING_DATE_SUNDAY_LONG,
-    STRING_DATE_MONDAY_LONG,
-    STRING_DATE_TUESDAY_LONG,
-    STRING_DATE_WEDNESDAY_LONG,
-    STRING_DATE_THURSDAY_LONG,
-    STRING_DATE_FRIDAY_LONG,
-    STRING_DATE_SATURDAY_LONG,
+    _("sunday"),
+    _("monday"),
+    _("tuesday"),
+    _("wednesday"),
+    _("thursday"),
+    _("friday"),
+    _("saturday"),
   };
 
   name = ucFirst (days[dow]);
@@ -428,13 +429,13 @@ std::string Date::dayName (int dow)
 {
   static const char* days[7] =
   {
-    STRING_DATE_SUNDAY_LONG,
-    STRING_DATE_MONDAY_LONG,
-    STRING_DATE_TUESDAY_LONG,
-    STRING_DATE_WEDNESDAY_LONG,
-    STRING_DATE_THURSDAY_LONG,
-    STRING_DATE_FRIDAY_LONG,
-    STRING_DATE_SATURDAY_LONG,
+    _("sunday"),
+    _("monday"),
+    _("tuesday"),
+    _("wednesday"),
+    _("thursday"),
+    _("friday"),
+    _("saturday"),
   };
 
   return ucFirst (days[dow]);
@@ -451,7 +452,7 @@ int Date::weekOfYear (int weekStart) const
   else if (weekStart == 1)
     strftime(weekStr, sizeof(weekStr), "%V", t);
   else
-    throw std::string (STRING_DATE_BAD_WEEKSTART);
+    throw std::string (_("The 'weekstart' configuration variable may only contain 'Sunday' or 'Monday'."));
 
   int weekNumber = atoi (weekStr);
 
@@ -473,13 +474,23 @@ int Date::dayOfWeek (const std::string& input)
 {
   std::string in = lowerCase (input);
 
-  if (in == STRING_DATE_SUNDAY_LONG    || in == STRING_DATE_SUNDAY_SHORT)    return 0;
-  if (in == STRING_DATE_MONDAY_LONG    || in == STRING_DATE_MONDAY_SHORT)    return 1;
-  if (in == STRING_DATE_TUESDAY_LONG   || in == STRING_DATE_TUESDAY_SHORT)   return 2;
-  if (in == STRING_DATE_WEDNESDAY_LONG || in == STRING_DATE_WEDNESDAY_SHORT) return 3;
-  if (in == STRING_DATE_THURSDAY_LONG  || in == STRING_DATE_THURSDAY_SHORT)  return 4;
-  if (in == STRING_DATE_FRIDAY_LONG    || in == STRING_DATE_FRIDAY_SHORT)    return 5;
-  if (in == STRING_DATE_SATURDAY_LONG  || in == STRING_DATE_SATURDAY_SHORT)  return 6;
+  // Localized names.
+  if (in == _("sunday")    || in == _("sun"))    return 0;
+  if (in == _("monday")    || in == _("mon"))    return 1;
+  if (in == _("tuesday")   || in == _("tue"))   return 2;
+  if (in == _("wednesday") || in == _("wed")) return 3;
+  if (in == _("thursday")  || in == _("thu"))  return 4;
+  if (in == _("friday")    || in == _("fri"))    return 5;
+  if (in == _("saturday")  || in == _("sat"))  return 6;
+
+  // Support English full names also.
+  if (in == "sunday")    return 0;
+  if (in == "monday")    return 1;
+  if (in == "tuesday")   return 2;
+  if (in == "wednesday") return 3;
+  if (in == "thursday")  return 4;
+  if (in == "friday")    return 5;
+  if (in == "saturday")  return 6;
 
   return -1;
 }
@@ -496,18 +507,18 @@ int Date::monthOfYear (const std::string& input)
 {
   std::string in = lowerCase (input);
 
-  if (in == STRING_DATE_JANUARY_LONG   || in == STRING_DATE_JANUARY_SHORT  )     return  1;
-  if (in == STRING_DATE_FEBRUARY_LONG  || in == STRING_DATE_FEBRUARY_SHORT )     return  2;
-  if (in == STRING_DATE_MARCH_LONG     || in == STRING_DATE_MARCH_SHORT    )     return  3;
-  if (in == STRING_DATE_APRIL_LONG     || in == STRING_DATE_APRIL_SHORT    )     return  4;
-  if (in == STRING_DATE_MAY_LONG       || in == STRING_DATE_MAY_SHORT      )     return  5;
-  if (in == STRING_DATE_JUNE_LONG      || in == STRING_DATE_JUNE_SHORT     )     return  6;
-  if (in == STRING_DATE_JULY_LONG      || in == STRING_DATE_JULY_SHORT     )     return  7;
-  if (in == STRING_DATE_AUGUST_LONG    || in == STRING_DATE_AUGUST_SHORT   )     return  8;
-  if (in == STRING_DATE_SEPTEMBER_LONG || in == STRING_DATE_SEPTEMBER_SHORT)     return  9;
-  if (in == STRING_DATE_OCTOBER_LONG   || in == STRING_DATE_OCTOBER_SHORT  )     return 10;
-  if (in == STRING_DATE_NOVEMBER_LONG  || in == STRING_DATE_NOVEMBER_SHORT )     return 11;
-  if (in == STRING_DATE_DECEMBER_LONG  || in == STRING_DATE_DECEMBER_SHORT )     return 12;
+  if (in == _("january")   || in == _("jan"))  return  1;
+  if (in == _("february")  || in == _("feb"))  return  2;
+  if (in == _("march")     || in == _("mar"))  return  3;
+  if (in == _("april")     || in == _("apr"))  return  4;
+  if (in == _("may")       || in == _("may"))  return  5;
+  if (in == _("june")      || in == _("jun"))  return  6;
+  if (in == _("july")      || in == _("jul"))  return  7;
+  if (in == _("august")    || in == _("aug"))  return  8;
+  if (in == _("september") || in == _("sep"))  return  9;
+  if (in == _("october")   || in == _("oct"))  return 10;
+  if (in == _("november")  || in == _("nov"))  return 11;
+  if (in == _("december")  || in == _("dec"))  return 12;
 
   return -1;
 }

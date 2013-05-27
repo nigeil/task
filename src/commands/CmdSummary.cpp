@@ -25,6 +25,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <cmake.h>
 #include <algorithm>
 #include <sstream>
 #include <stdlib.h>
@@ -44,7 +45,7 @@ CmdSummary::CmdSummary ()
 {
   _keyword     = "summary";
   _usage       = "task <filter> summary";
-  _description = STRING_CMD_SUMMARY_USAGE;
+  _description = _("Shows a report of task status by project");
   _read_only   = true;
   _displays_id = false;
 }
@@ -120,10 +121,10 @@ int CmdSummary::execute (std::string& output)
   // Create a table for output.
   ViewText view;
   view.width (context.getWidth ());
-  view.add (Column::factory ("string",            STRING_CMD_SUMMARY_PROJECT));
-  view.add (Column::factory ("string.right",      STRING_CMD_SUMMARY_REMAINING));
-  view.add (Column::factory ("string.right",      STRING_CMD_SUMMARY_AVG_AGE));
-  view.add (Column::factory ("string.right",      STRING_CMD_SUMMARY_COMPLETE));
+  view.add (Column::factory ("string",            _("Project")));
+  view.add (Column::factory ("string.right",      _("Remaining")));
+  view.add (Column::factory ("string.right",      _("Avg age")));
+  view.add (Column::factory ("string.right",      _("Complete")));
   view.add (Column::factory ("string.left_fixed", "0%                        100%"));
 
   Color bar_color (context.config.get ("color.summary.bar"));
@@ -154,7 +155,7 @@ int CmdSummary::execute (std::string& output)
 
       int row = view.addRow ();
       view.set (row, 0, (i->first == ""
-                          ? STRING_CMD_SUMMARY_NONE
+                          ? _("(none)")
                           : indentProject (i->first, "  ", '.')));
 
       view.set (row, 1, countPending[i->first]);
@@ -194,14 +195,14 @@ int CmdSummary::execute (std::string& output)
         << optionalBlankLine ();
 
     if (view.rows ())
-      out << format (STRING_CMD_PROJECTS_SUMMARY2, view.rows ());
+      out << format (_("{1} projects"), view.rows ());
     else
-      out << STRING_CMD_PROJECTS_SUMMARY;
+      out << _("{1} project");
 
     out << "\n";
   }
   else {
-    out << STRING_CMD_PROJECTS_NO << "\n";
+    out << _("No projects.") << "\n";
     rc = 1;
   }
 

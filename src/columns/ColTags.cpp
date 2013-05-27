@@ -25,6 +25,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <cmake.h>
 #include <algorithm>
 #include <Context.h>
 #include <ColTags.h>
@@ -40,13 +41,14 @@ ColumnTags::ColumnTags ()
   _name  = "tags";
   _type  = "string";
   _style = "list";
-  _label = STRING_COLUMN_LABEL_TAGS;
+  _label = sgettext("column|Tags");
 
   _styles.push_back ("list");
   _styles.push_back ("indicator");
   _styles.push_back ("count");
 
-  _examples.push_back (STRING_COLUMN_EXAMPLES_TAGS);
+  // TRANSLATORS: Sample tags.
+  _examples.push_back (_("home @chore next"));
   _examples.push_back (context.config.get ("tag.indicator"));
   _examples.push_back ("[2]");
 
@@ -72,12 +74,12 @@ void ColumnTags::setStyle (const std::string& value)
   _style = value;
 
   if (_style == "indicator" &&
-      _label == STRING_COLUMN_LABEL_TAGS)
+      _label == sgettext("column|Tags"))
     _label = _label.substr (0, context.config.get ("tag.indicator").length ());
 
   else if (_style == "count" &&
-            _label == STRING_COLUMN_LABEL_TAGS)
-    _label = STRING_COLUMN_LABEL_TAG;
+            _label == sgettext("column|Tags"))
+    _label = sgettext("column|Tag");
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -107,7 +109,7 @@ void ColumnTags::measure (Task& task, unsigned int& minimum, unsigned int& maxim
     }
   }
   else
-    throw format (STRING_COLUMN_BAD_FORMAT, _name, _style);
+    throw format (_("Unrecognized column format '{1}.{2}'"), _name, _style);
 }
 
 ////////////////////////////////////////////////////////////////////////////////

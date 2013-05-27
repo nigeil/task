@@ -25,6 +25,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <cmake.h>
 #include <sstream>
 #include <stdlib.h>
 #include <Context.h>
@@ -42,7 +43,7 @@ CmdInfo::CmdInfo ()
 {
   _keyword     = "information";
   _usage       = "task <filter> information";
-  _description = STRING_CMD_INFO_USAGE;
+  _description = _("Shows all data and metadata");
   _read_only   = true;
 
   // This is inaccurate, but it does prevent a GC.  While this doesn't make a
@@ -64,7 +65,7 @@ int CmdInfo::execute (std::string& output)
 
   if (! filtered.size ())
   {
-    context.footnote (STRING_FEEDBACK_NO_MATCH);
+    context.footnote (_("No matches."));
     rc = 1;
   }
 
@@ -91,8 +92,8 @@ int CmdInfo::execute (std::string& output)
   {
     ViewText view;
     view.width (context.getWidth ());
-    view.add (Column::factory ("string", STRING_COLUMN_LABEL_NAME));
-    view.add (Column::factory ("string", STRING_COLUMN_LABEL_VALUE));
+    view.add (Column::factory ("string", sgettext("column|Name")));
+    view.add (Column::factory ("string", sgettext("column|Value")));
 
     // If an alternating row color is specified, notify the table.
     if (context.color ())
@@ -106,7 +107,7 @@ int CmdInfo::execute (std::string& output)
 
     // id
     int row = view.addRow ();
-    view.set (row, 0, STRING_COLUMN_LABEL_ID);
+    view.set (row, 0, sgettext("column|ID"));
     view.set (row, 1, (task->id ? format (task->id) : "-"));
 
     std::string status = ucFirst (Task::statusToText (task->getStatus ()));
@@ -128,19 +129,19 @@ int CmdInfo::execute (std::string& output)
                    + ann->second;
 
     row = view.addRow ();
-    view.set (row, 0, STRING_COLUMN_LABEL_DESC);
+    view.set (row, 0, sgettext("column|Description"));
     view.set (row, 1, description, c);
 
     // status
     row = view.addRow ();
-    view.set (row, 0, STRING_COLUMN_LABEL_STATUS);
+    view.set (row, 0, sgettext("column|Status"));
     view.set (row, 1, status);
 
     // project
     if (task->has ("project"))
     {
       row = view.addRow ();
-      view.set (row, 0, STRING_COLUMN_LABEL_PROJECT);
+      view.set (row, 0, sgettext("column|Project"));
       view.set (row, 1, task->get ("project"));
     }
 
@@ -148,7 +149,7 @@ int CmdInfo::execute (std::string& output)
     if (task->has ("priority"))
     {
       row = view.addRow ();
-      view.set (row, 0, STRING_COLUMN_LABEL_PRIORITY);
+      view.set (row, 0, sgettext("column|Priority"));
       view.set (row, 1, task->get ("priority"));
     }
 
@@ -164,7 +165,7 @@ int CmdInfo::execute (std::string& output)
           message << it->id << " " << it->get ("description") << "\n";
 
         row = view.addRow ();
-        view.set (row, 0, STRING_CMD_INFO_BLOCKED);
+        view.set (row, 0, _("This task blocked by"));
         view.set (row, 1, message.str ());
       }
     }
@@ -181,7 +182,7 @@ int CmdInfo::execute (std::string& output)
           message << it->id << " " << it->get ("description") << "\n";
 
         row = view.addRow ();
-        view.set (row, 0, STRING_CMD_INFO_BLOCKING);
+        view.set (row, 0, _("This task is blocking"));
         view.set (row, 1, message.str ());
       }
     }
@@ -190,7 +191,7 @@ int CmdInfo::execute (std::string& output)
     if (task->has ("recur"))
     {
       row = view.addRow ();
-      view.set (row, 0, STRING_COLUMN_LABEL_RECUR_L);
+      view.set (row, 0, sgettext("column|Recurrence"));
       view.set (row, 1, task->get ("recur"));
     }
 
@@ -198,7 +199,7 @@ int CmdInfo::execute (std::string& output)
     if (task->has ("until"))
     {
       row = view.addRow ();
-      view.set (row, 0, STRING_CMD_INFO_UNTIL);
+      view.set (row, 0, sgettext("column|Until"));
       view.set (row, 1, Date (task->get_date ("until")).toString (dateformat));
     }
 
@@ -206,7 +207,7 @@ int CmdInfo::execute (std::string& output)
     if (task->getStatus () == Task::recurring)
     {
       row = view.addRow ();
-      view.set (row, 0, STRING_COLUMN_LABEL_MASK);
+      view.set (row, 0, sgettext("column|Mask"));
       view.set (row, 1, task->get ("mask"));
     }
 
@@ -214,12 +215,12 @@ int CmdInfo::execute (std::string& output)
     {
       // parent
       row = view.addRow ();
-      view.set (row, 0, STRING_COLUMN_LABEL_PARENT);
+      view.set (row, 0, sgettext("column|Parent task"));
       view.set (row, 1, task->get ("parent"));
 
       // imask
       row = view.addRow ();
-      view.set (row, 0, STRING_COLUMN_LABEL_MASK_IDX);
+      view.set (row, 0, sgettext("column|Mask Index"));
       view.set (row, 1, task->get ("imask"));
     }
 
@@ -227,7 +228,7 @@ int CmdInfo::execute (std::string& output)
     if (task->has ("due"))
     {
       row = view.addRow ();
-      view.set (row, 0, STRING_COLUMN_LABEL_DUE);
+      view.set (row, 0, sgettext("column|Due"));
       view.set (row, 1, Date (task->get_date ("due")).toString (dateformat));
     }
 
@@ -235,7 +236,7 @@ int CmdInfo::execute (std::string& output)
     if (task->has ("wait"))
     {
       row = view.addRow ();
-      view.set (row, 0, STRING_COLUMN_LABEL_WAITING);
+      view.set (row, 0, sgettext("column|Waiting until"));
       view.set (row, 1, Date (task->get_date ("wait")).toString (dateformat));
     }
 
@@ -243,7 +244,7 @@ int CmdInfo::execute (std::string& output)
     if (task->has ("scheduled"))
     {
       row = view.addRow ();
-      view.set (row, 0, STRING_COLUMN_LABEL_SCHED);
+      view.set (row, 0, _("Scheduled"));
       view.set (row, 1, Date (task->get_date ("scheduled")).toString (dateformat));
     }
 
@@ -251,7 +252,7 @@ int CmdInfo::execute (std::string& output)
     if (task->has ("start"))
     {
       row = view.addRow ();
-      view.set (row, 0, STRING_COLUMN_LABEL_START);
+      view.set (row, 0, sgettext("column|Start"));
       view.set (row, 1, Date (task->get_date ("start")).toString (dateformat));
     }
 
@@ -259,7 +260,7 @@ int CmdInfo::execute (std::string& output)
     if (task->has ("end"))
     {
       row = view.addRow ();
-      view.set (row, 0, STRING_COLUMN_LABEL_END);
+      view.set (row, 0, sgettext("column|End"));
       view.set (row, 1, Date (task->get_date ("end")).toString (dateformat));
     }
 
@@ -272,19 +273,19 @@ int CmdInfo::execute (std::string& output)
       join (allTags, " ", tags);
 
       row = view.addRow ();
-      view.set (row, 0, STRING_COLUMN_LABEL_TAGS);
+      view.set (row, 0, _("Tags"));
       view.set (row, 1, allTags);
     }
 
     // uuid
     row = view.addRow ();
-    view.set (row, 0, STRING_COLUMN_LABEL_UUID);
+    view.set (row, 0, _("UUID"));
     std::string uuid = task->get ("uuid");
     view.set (row, 1, uuid);
 
     // entry
     row = view.addRow ();
-    view.set (row, 0, STRING_COLUMN_LABEL_ENTERED);
+    view.set (row, 0, _("Entered"));
     Date dt (task->get_date ("entry"));
     std::string entry = dt.toString (dateformat);
 
@@ -300,14 +301,14 @@ int CmdInfo::execute (std::string& output)
 
     // Task::urgency
     row = view.addRow ();
-    view.set (row, 0, STRING_COLUMN_LABEL_URGENCY);
+    view.set (row, 0, _("Urgency"));
     view.set (row, 1, trimLeft (format (task->urgency (), 4, 4)));
 
     // modified
     if (task->has ("modified"))
     {
       row = view.addRow ();
-      view.set (row, 0, STRING_CMD_INFO_MODIFIED);
+      view.set (row, 0, _("Last modified"));
 
       Date mod (task->get_date ("modified"));
 
@@ -368,8 +369,8 @@ int CmdInfo::execute (std::string& output)
     }
 
     journal.width (context.getWidth ());
-    journal.add (Column::factory ("string", STRING_COLUMN_LABEL_DATE));
-    journal.add (Column::factory ("string", STRING_CMD_INFO_MODIFICATION));
+    journal.add (Column::factory ("string", _("Date")));
+    journal.add (Column::factory ("string", _("Modification")));
 
     if (context.config.getBoolean ("journal.info") &&
         undo.size () > 3)
@@ -432,7 +433,7 @@ int CmdInfo::execute (std::string& output)
       if (total_time > 0)
       {
         row = journal.addRow ();
-        journal.set (row, 0, STRING_CMD_INFO_TOTAL_ACTIVE);
+        journal.set (row, 0, _("Total active time"));
         journal.set (row, 1, Duration (total_time).formatPrecise (),
                      (context.color () ? Color ("bold") : Color ()));
       }

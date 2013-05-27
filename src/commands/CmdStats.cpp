@@ -25,6 +25,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <cmake.h>
 #include <sstream>
 #include <iomanip>
 #include <stdlib.h>
@@ -44,7 +45,7 @@ CmdStats::CmdStats ()
 {
   _keyword     = "stats";
   _usage       = "task <filter> stats";
-  _description = STRING_CMD_STATS_USAGE;
+  _description = _("Shows task database statistics");
   _read_only   = true;
   _displays_id = false;
 }
@@ -155,69 +156,69 @@ int CmdStats::execute (std::string& output)
   ViewText view;
   view.width (context.getWidth ());
   view.intraPadding (2);
-  view.add (Column::factory ("string", STRING_CMD_STATS_CATEGORY));
-  view.add (Column::factory ("string", STRING_CMD_STATS_DATA));
+  view.add (Column::factory ("string", _("Category")));
+  view.add (Column::factory ("string", _("Data")));
 
   int row = view.addRow ();
-  view.set (row, 0, STRING_COLUMN_LABEL_STAT_PE);
+  view.set (row, 0, _("Pending"));
   view.set (row, 1, pendingT);
 
   row = view.addRow ();
-  view.set (row, 0, STRING_COLUMN_LABEL_STAT_WA);
+  view.set (row, 0, _("Waiting"));
   view.set (row, 1, waitingT);
 
   row = view.addRow ();
-  view.set (row, 0, STRING_COLUMN_LABEL_STAT_RE);
+  view.set (row, 0, _("Recurring"));
   view.set (row, 1, recurringT);
 
   row = view.addRow ();
-  view.set (row, 0, STRING_COLUMN_LABEL_STAT_CO);
+  view.set (row, 0, _("Completed"));
   view.set (row, 1, completedT);
 
   row = view.addRow ();
-  view.set (row, 0, STRING_COLUMN_LABEL_STAT_DE);
+  view.set (row, 0, _("Deleted"));
   view.set (row, 1, deletedT);
 
   row = view.addRow ();
-  view.set (row, 0, STRING_CMD_STATS_TOTAL);
+  view.set (row, 0, _("Total"));
   view.set (row, 1, totalT);
 
   row = view.addRow ();
-  view.set (row, 0, STRING_CMD_STATS_ANNOTATIONS);
+  view.set (row, 0, _("Annotations"));
   view.set (row, 1, annotationsT);
 
   row = view.addRow ();
-  view.set (row, 0, STRING_CMD_STATS_UNIQUE_TAGS);
+  view.set (row, 0, _("Unique tags"));
   view.set (row, 1, (int)allTags.size ());
 
   row = view.addRow ();
-  view.set (row, 0, STRING_CMD_STATS_PROJECTS);
+  view.set (row, 0, _("Projects"));
   view.set (row, 1, (int)allProjects.size ());
 
   row = view.addRow ();
-  view.set (row, 0, STRING_CMD_STATS_BLOCKED);
+  view.set (row, 0, _("Blocked tasks"));
   view.set (row, 1, blockedT);
 
   row = view.addRow ();
-  view.set (row, 0, STRING_CMD_STATS_BLOCKING);
+  view.set (row, 0, _("Blocking tasks"));
   view.set (row, 1, blockingT);
 
   row = view.addRow ();
-  view.set (row, 0, STRING_CMD_STATS_DATA_SIZE);
+  view.set (row, 0, _("Data size"));
   view.set (row, 1, formatBytes (dataSize));
 
   row = view.addRow ();
-  view.set (row, 0, STRING_CMD_STATS_UNDO_TXNS);
+  view.set (row, 0, _("Undo transactions"));
   view.set (row, 1, undoCount);
 
   row = view.addRow ();
-  view.set (row, 0, STRING_CMD_STATS_BACKLOG);
+  view.set (row, 0, _("Sync backlog transactions"));
   view.set (row, 1, backlogCount);
 
   if (totalT)
   {
     row = view.addRow ();
-    view.set (row, 0, STRING_CMD_STATS_TAGGED);
+    view.set (row, 0, _("Tasks tagged"));
 
     std::stringstream value;
     value << std::setprecision (3) << (100.0 * taggedT / totalT) << "%";
@@ -228,59 +229,59 @@ int CmdStats::execute (std::string& output)
   {
     Date e (earliest);
     row = view.addRow ();
-    view.set (row, 0, STRING_CMD_STATS_OLDEST);
+    view.set (row, 0, _("Oldest task"));
     view.set (row, 1, e.toString (dateformat));
 
     Date l (latest);
     row = view.addRow ();
-    view.set (row, 0, STRING_CMD_STATS_NEWEST);
+    view.set (row, 0, _("Newest task"));
     view.set (row, 1, l.toString (dateformat));
 
     row = view.addRow ();
-    view.set (row, 0, STRING_CMD_STATS_USED_FOR);
+    view.set (row, 0, _("Task used for"));
     view.set (row, 1, Duration (latest - earliest).format ());
   }
 
   if (totalT)
   {
     row = view.addRow ();
-    view.set (row, 0, STRING_CMD_STATS_ADD_EVERY);
+    view.set (row, 0, _("Task added every"));
     view.set (row, 1, Duration (((latest - earliest) / totalT)).format ());
   }
 
   if (completedT)
   {
     row = view.addRow ();
-    view.set (row, 0, STRING_CMD_STATS_COMP_EVERY);
+    view.set (row, 0, _("Task completed every"));
     view.set (row, 1, Duration ((latest - earliest) / completedT).format ());
   }
 
   if (deletedT)
   {
     row = view.addRow ();
-    view.set (row, 0, STRING_CMD_STATS_DEL_EVERY);
+    view.set (row, 0, _("Task deleted every"));
     view.set (row, 1, Duration ((latest - earliest) / deletedT).format ());
   }
 
   if (pendingT || completedT)
   {
     row = view.addRow ();
-    view.set (row, 0, STRING_CMD_STATS_AVG_PEND);
+    view.set (row, 0, _("Average time pending"));
     view.set (row, 1, Duration ((int) ((daysPending / (pendingT + completedT)) * 86400)).format ());
   }
 
   if (totalT)
   {
     row = view.addRow ();
-    view.set (row, 0, STRING_CMD_STATS_DESC_LEN);
-    view.set (row, 1, format (STRING_CMD_STATS_CHARS, (int) (descLength / totalT)));
+    view.set (row, 0, _("Average desc length"));
+    view.set (row, 1, format (_("{1} characters"), (int) (descLength / totalT)));
   }
 
 /*
   // TODO Re-enable this when 2.3 has taskd support.  Until then, it makes no
   //      sense to include this.
   row = view.addRow ();
-  view.set (row, 0, STRING_CMD_STATS_LAST_SYNC);
+  view.set (row, 0, _("Last server synchronization"));
   view.set (row, 1, "-");
 */
 

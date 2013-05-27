@@ -43,7 +43,7 @@ CmdSync::CmdSync ()
 {
   _keyword     = "synchronize";
   _usage       = "task          synchronize";
-  _description = STRING_CMD_SYNC_USAGE;
+  _description = _("Synchronizes data with the Task Server");
   _read_only   = false;
   _displays_id = false;
 }
@@ -62,21 +62,21 @@ int CmdSync::execute (std::string& output)
   std::string connection = context.config.get ("taskd.server");
   if (connection == "" ||
       connection.rfind (':') == std::string::npos)
-    throw std::string (STRING_CMD_SYNC_NO_SERVER);
+    throw std::string (_("Task Server is not configured."));
 
   // Obtain credentials.
   std::string credentials_string = context.config.get ("taskd.credentials");
   if (credentials_string == "")
-    throw std::string (STRING_CMD_SYNC_BAD_CRED);
+    throw std::string (_("Task Server credentials malformed."));
 
   std::vector <std::string> credentials;
   split (credentials, credentials_string, "/");
   if (credentials.size () != 3)
-    throw std::string (STRING_CMD_SYNC_BAD_CRED);
+    throw std::string (_("Task Server credentials malformed."));
 
   std::string certificate = context.config.get ("taskd.certificate");
   if (certificate == "")
-    throw std::string (STRING_CMD_SYNC_BAD_CERT);
+    throw std::string (_("Task Server certificate missing."));
 
   // Read backlog.data.
   std::string payload = "";
@@ -107,7 +107,7 @@ int CmdSync::execute (std::string& output)
 
   request.setPayload (payload);
 
-  out << format (STRING_CMD_SYNC_PROGRESS, connection)
+  out << format (_("Syncing with {1}"), connection)
       << "\n";
 
   Msg response;
@@ -145,7 +145,7 @@ int CmdSync::execute (std::string& output)
           {
             out << "  "
                 << colorChanged.colorize (
-                     format (STRING_CMD_SYNC_MOD,
+                     format (_("modify {1} '{2}'"),
                              uuid,
                              from_server.get ("description")))
                 << "\n";
@@ -155,7 +155,7 @@ int CmdSync::execute (std::string& output)
           {
             out << "  "
                 << colorAdded.colorize (
-                     format (STRING_CMD_SYNC_ADD,
+                     format (_("   add {1} '{2}'"),
                              uuid,
                              from_server.get ("description")))
                 << "\n";
@@ -186,27 +186,27 @@ int CmdSync::execute (std::string& output)
 
         // Present a clear status message.
         if (upload_count == 0 && download_count == 0)
-          context.footnote (STRING_CMD_SYNC_SUCCESS0);
+          context.footnote (_("Sync successful."));
         else if (upload_count == 0 && download_count > 0)
-          context.footnote (format (STRING_CMD_SYNC_SUCCESS2, download_count));
+          context.footnote (format (_("Sync successful.  {1} changes downloaded."), download_count));
         else if (upload_count > 0 && download_count == 0)
-          context.footnote (format (STRING_CMD_SYNC_SUCCESS1, upload_count));
+          context.footnote (format (_("Sync successful.  {1} changes uploaded."), upload_count));
         else if (upload_count > 0 && download_count > 0)
-          context.footnote (format (STRING_CMD_SYNC_SUCCESS3, upload_count, download_count));
+          context.footnote (format (_("Sync successful.  {1} changes uploaded, {2} changes downloaded."), upload_count, download_count));
       }
     }
     else if (code == "201")
     {
-      context.footnote (STRING_CMD_SYNC_SUCCESS_NOP);
+      context.footnote (_("Sync successful.  No changes."));
     }
     else if (code == "430")
     {
-      context.error (STRING_CMD_SYNC_FAIL_ACCOUNT);
+      context.error (_("Sync failed.  Either your credentials are incorrect, or your Task Server account is not enabled."));
       status = 2;
     }
     else
     {
-      context.error (format (STRING_CMD_SYNC_FAIL_ERROR,
+      context.error (format (_("Sync failed.  The Task Server returned error: {1} {2}"),
                              code,
                              response.get ("status")));
       status = 2;
@@ -232,7 +232,7 @@ int CmdSync::execute (std::string& output)
   //   - No signal/cable
   else
   {
-    context.error (STRING_CMD_SYNC_FAIL_CONNECT);
+    context.error (_("Sync failed.  Could not connect to the Task Server."));
     status = 1;
   }
 
@@ -252,7 +252,7 @@ int CmdSync::execute (std::string& output)
 
 #else
   // Without GnuTLS found at compile time, there is no working sync command.
-  throw std::string (STRING_CMD_SYNC_NO_TLS);
+  throw std::string (_("Taskwarrior was built without GnuTLS support.  Sync is not available."));
 #endif
   return status;
 }
@@ -267,7 +267,7 @@ bool CmdSync::send (
 #ifdef HAVE_LIBGNUTLS
   std::string::size_type colon = to.rfind (':');
   if (colon == std::string::npos)
-    throw format (STRING_CMD_SYNC_BAD_SERVER, to);
+    throw format (_("Sync failed.  Malformed configuration setting '{1}'"), to);
 
   std::string server = to.substr (0, colon);
   std::string port = to.substr (colon + 1);
