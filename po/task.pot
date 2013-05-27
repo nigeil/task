@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: taskwarrior 2.3.0\n"
 "Report-Msgid-Bugs-To: Taskwarrior team <support@taskwarrior.org>\n"
-"POT-Creation-Date: 2013-05-26 15:48-0400\n"
+"POT-Creation-Date: 2013-05-27 11:57+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -240,38 +240,47 @@ msgstr ""
 msgid "Unrecognized column format '{1}.{2}'"
 msgstr ""
 
+#. TRANSLATORS: Sample description.
 #: ../src/columns/ColDescription.cpp:59
 msgid "Move your clothes down on to the lower peg"
 msgstr ""
 
+#. TRANSLATORS: Sample annotation #1.
 #: ../src/columns/ColDescription.cpp:61
 msgid "Immediately before your lunch"
 msgstr ""
 
+#. TRANSLATORS: Sample annotation #2.
 #: ../src/columns/ColDescription.cpp:63
 msgid "If you are playing in the match this afternoon"
 msgstr ""
 
+#. TRANSLATORS: Sample annotation #3.
 #: ../src/columns/ColDescription.cpp:65
 msgid "Before you write your letter home"
 msgstr ""
 
+#. TRANSLATORS: Sample annotation #4.
 #: ../src/columns/ColDescription.cpp:67
 msgid "If you're not getting your hair cut"
 msgstr ""
 
+#. TRANSLATORS: Sample project.
 #: ../src/columns/ColProject.cpp:50
 msgid "home.garden"
 msgstr ""
 
+#. TRANSLATORS: Sample parent project.
 #: ../src/columns/ColProject.cpp:52
 msgid "home"
 msgstr ""
 
+#. TRANSLATORS: Sample indented project.
 #: ../src/columns/ColProject.cpp:54
 msgid "  home.garden"
 msgstr ""
 
+#. TRANSLATORS: Sample tags.
 #: ../src/columns/ColTags.cpp:50
 msgid "home @chore next"
 msgstr ""
@@ -280,11 +289,13 @@ msgstr ""
 msgid "Unrecognized column name '{1}'."
 msgstr ""
 
+#. TRANSLATORS: UDA means User Defined Attribute.
 #: ../src/columns/Column.cpp:173
 msgid ""
 "The UDA named '{1}' is the same as a core attribute, and is not permitted."
 msgstr ""
 
+#. TRANSLATORS: UDA means User Defined Attribute.
 #: ../src/columns/Column.cpp:190
 msgid "uda.{1}.type not found. The UDA '{1}' must have a type specified."
 msgstr ""
@@ -325,10 +336,12 @@ msgstr ""
 msgid "Additional text must be provided."
 msgstr ""
 
+#. TRANSLATORS: {1} is the ID, {2} is the description.
 #: ../src/commands/CmdAnnotate.cpp:78
 msgid "Annotate task {1} '{2}'?"
 msgstr ""
 
+#. TRANSLATORS: {1} is the ID, {2} is the description.
 #: ../src/commands/CmdAnnotate.cpp:89
 msgid "Annotating task {1} '{2}'."
 msgstr ""
@@ -339,6 +352,7 @@ msgid ""
 "of this same task?"
 msgstr ""
 
+#. TRANSLATORS: {1} is the ID, {2} is the description.
 #: ../src/commands/CmdAnnotate.cpp:107
 msgid "Annotating recurring task {1} '{2}'."
 msgstr ""
@@ -357,10 +371,12 @@ msgstr[1] ""
 msgid "Appends text to an existing task description"
 msgstr ""
 
+#. TRANSLATORS: {1} is the ID, {2} is the description.
 #: ../src/commands/CmdAppend.cpp:78
 msgid "Append to task {1} '{2}'?"
 msgstr ""
 
+#. TRANSLATORS: {1} is the ID, {2} is the description.
 #: ../src/commands/CmdAppend.cpp:89
 msgid "Appending to task {1} '{2}'."
 msgstr ""
@@ -371,6 +387,7 @@ msgid ""
 "of this same task?"
 msgstr ""
 
+#. TRANSLATORS: {1} is the ID, {2} is the description.
 #: ../src/commands/CmdAppend.cpp:107
 msgid "Appending to recurring task {1} '{2}'."
 msgstr ""
@@ -438,6 +455,7 @@ msgstr ""
 msgid "Could not recognize argument '{1}'."
 msgstr ""
 
+#. TRANSLATORS: The quoted keywords are not to be translated.
 #: ../src/commands/CmdCalendar.cpp:422 ../src/Date.cpp:454
 #: ../src/commands/CmdTimesheet.cpp:63
 msgid ""
@@ -597,10 +615,12 @@ msgstr[1] ""
 msgid "Deletes the specified task"
 msgstr ""
 
+#. TRANSLATORS: {1} is the ID, {2} is the description.
 #: ../src/commands/CmdDelete.cpp:83 ../src/commands/CmdDelete.cpp:87
 msgid "Permanently delete task {1} '{2}'?"
 msgstr ""
 
+#. TRANSLATORS: {1} is the ID, {2} is the description.
 #: ../src/commands/CmdDelete.cpp:102
 msgid "Deleting task {1} '{2}'."
 msgstr ""
@@ -619,6 +639,7 @@ msgstr ""
 msgid "Task not deleted."
 msgstr ""
 
+#. TRANSLATORS: {1} is the ID, {2} is the description.
 #: ../src/commands/CmdDelete.cpp:152
 msgid "Task {1} '{2}' is not deletable."
 msgstr ""
@@ -1386,6 +1407,7 @@ msgstr ""
 msgid "Displays the urgency measure of a task"
 msgstr ""
 
+#. TRANSLATORS: {1} is the ID, {2} is the urgency.
 #: ../src/commands/CmdUrgency.cpp:69 ../src/commands/CmdUrgency.cpp:76
 msgid "task {1} urgency {2}"
 msgstr ""
@@ -1706,6 +1728,7 @@ msgstr ""
 msgid "Taskmod::getUuid(): Task object not initialized."
 msgstr ""
 
+#. TRANSLATORS: Error in file {1} at line {2}.
 #: ../src/TDB2.cpp:329
 msgid " in {1} at line {2}"
 msgstr ""
@@ -1768,6 +1791,7 @@ msgstr ""
 msgid "No undo possible."
 msgstr ""
 
+#. TRANSLATORS: {1} is a type, {2} is a string.
 #: ../src/text.cpp:557
 msgid "Ambiguous {1} '{2}' - could be either of "
 msgstr ""
@@ -2219,6 +2243,7 @@ msgstr ""
 msgid "Data"
 msgstr ""
 
+#. TRANSLATORS: Keep these status descriptions to 7 or fewer characters.
 #: ../src/commands/CmdStats.cpp:162 ../src/commands/CmdBurndown.cpp:466
 msgid "Pending"
 msgstr ""
@@ -2551,10 +2576,12 @@ msgstr ""
 msgid "Task {1} '{2}' expired and was deleted."
 msgstr ""
 
+#. TRANSLATORS: Keep these status descriptions to 7 or fewer characters.
 #: ../src/commands/CmdBurndown.cpp:462
 msgid "Done"
 msgstr ""
 
+#. TRANSLATORS: Keep these status descriptions to 7 or fewer characters.
 #: ../src/commands/CmdBurndown.cpp:464
 msgid "Started"
 msgstr ""
@@ -2578,6 +2605,7 @@ msgid ""
 "#\n"
 msgstr ""
 
+#. TRANSLATORS: Preserve the fixed-width of the first column.
 #: ../src/commands/CmdEdit.cpp:184
 msgid ""
 "# Name               Editable details\n"
@@ -2780,18 +2808,22 @@ msgstr ""
 msgid "new "
 msgstr ""
 
+#. TRANSLATORS: Please use arbitrary, but fixed width before {1}.
 #: ../src/TDB2.cpp:951 ../src/TDB2.cpp:1155
 msgid "Found remote change to        {1}  \"{2}\""
 msgstr ""
 
+#. TRANSLATORS: Please use arbitrary, but fixed width before {1}.
 #: ../src/TDB2.cpp:968
 msgid "Retaining local changes to    {1}  \"{2}\""
 msgstr ""
 
+#. TRANSLATORS: Please use arbitrary, but fixed width before {1}.
 #: ../src/TDB2.cpp:1191
 msgid "Missing                       {1}  \"{2}\""
 msgstr ""
 
+#. TRANSLATORS: Please use arbitrary, but fixed width before {1}.
 #: ../src/TDB2.cpp:1218
 msgid "Merging new remote task       {1}  \"{2}\""
 msgstr ""
@@ -2800,6 +2832,7 @@ msgstr ""
 msgid "The last modification was made {1}"
 msgstr ""
 
+#. TRANSLATORS: Pad to same width as '+++ current state '.
 #: ../src/TDB2.cpp:1417
 msgid "--- previous state"
 msgstr ""
@@ -2808,6 +2841,7 @@ msgstr ""
 msgid "Undo will restore this state"
 msgstr ""
 
+#. TRANSLATORS: Pad to same width as '--- previous state'.
 #: ../src/TDB2.cpp:1422
 msgid "+++ current state "
 msgstr ""
@@ -2820,6 +2854,233 @@ msgstr ""
 msgid "Cannot locate UUID in task to undo."
 msgstr ""
 
+#. TRANSLATORS: Please use arbitrary, but fixed width before {1}.
 #: ../src/TDB2.cpp:1608
 msgid "Task with UUID {1} not found in data."
+msgstr ""
+
+#: ../src/util.cpp:188
+msgid "unit|GiB"
+msgstr ""
+
+#: ../src/util.cpp:189
+msgid "unit|MiB"
+msgstr ""
+
+#: ../src/util.cpp:190
+msgid "unit|KiB"
+msgstr ""
+
+#: ../src/util.cpp:191
+msgid "unit|B"
+msgstr ""
+
+#: ../src/columns/ColIMask.cpp:42 ../src/commands/CmdInfo.cpp:222
+msgid "column|Mask Index"
+msgstr ""
+
+#. TRANSLATORS: Short for "reccurence frequency"
+#: ../src/columns/ColRecur.cpp:47 ../src/columns/ColRecur.cpp:74
+msgid "column|Recur"
+msgstr ""
+
+#. TRANSLATORS: Task scheduled.
+#: ../src/columns/ColScheduled.cpp:43
+msgid "column|Scheduled"
+msgstr ""
+
+#: ../src/columns/ColScheduled.cpp:70 ../src/columns/ColDue.cpp:42
+#: ../src/columns/ColDue.cpp:69 ../src/commands/CmdInfo.cpp:230
+msgid "column|Due"
+msgstr ""
+
+#. TRANSLATORS: Column label for the countdown column.
+#: ../src/columns/ColScheduled.cpp:71 ../src/columns/ColDue.cpp:71
+msgid "column|Count"
+msgstr ""
+
+#: ../src/columns/ColEntry.cpp:35 ../src/columns/ColEntry.cpp:57
+msgid "column|Added"
+msgstr ""
+
+#: ../src/columns/ColEntry.cpp:58
+msgid "column|Age"
+msgstr ""
+
+#: ../src/columns/ColParent.cpp:42 ../src/commands/CmdInfo.cpp:217
+msgid "column|Parent task"
+msgstr ""
+
+#: ../src/columns/ColDescription.cpp:45 ../src/commands/CmdInfo.cpp:131
+msgid "column|Description"
+msgstr ""
+
+#: ../src/columns/ColUntil.cpp:35 ../src/commands/CmdInfo.cpp:201
+msgid "column|Until"
+msgstr ""
+
+#: ../src/columns/ColID.cpp:42 ../src/commands/CmdInfo.cpp:109
+msgid "column|ID"
+msgstr ""
+
+#. TRANSLATORS: Short for "priority".
+#: ../src/columns/ColPriority.cpp:42 ../src/columns/ColPriority.cpp:77
+msgid "column|Pri"
+msgstr ""
+
+#: ../src/columns/ColPriority.cpp:78 ../src/commands/CmdInfo.cpp:151
+msgid "column|Priority"
+msgstr ""
+
+#: ../src/columns/ColTags.cpp:43 ../src/columns/ColTags.cpp:76
+#: ../src/columns/ColTags.cpp:80
+msgid "column|Tags"
+msgstr ""
+
+#: ../src/columns/ColTags.cpp:81
+msgid "column|Tag"
+msgstr ""
+
+#: ../src/columns/ColUUID.cpp:42
+msgid "column|UUID"
+msgstr ""
+
+#: ../src/columns/ColStart.cpp:39 ../src/columns/ColStart.cpp:64
+msgid "column|Started"
+msgstr ""
+
+#. TRANSLATORS: Active.
+#: ../src/columns/ColStart.cpp:66
+msgid "column|A"
+msgstr ""
+
+#: ../src/columns/ColWait.cpp:35
+msgid "column|Wait"
+msgstr ""
+
+#: ../src/columns/ColStatus.cpp:42 ../src/columns/ColStatus.cpp:69
+#: ../src/commands/CmdInfo.cpp:136
+msgid "column|Status"
+msgstr ""
+
+#: ../src/columns/ColStatus.cpp:47 ../src/columns/ColStatus.cpp:84
+#: ../src/columns/ColStatus.cpp:113
+msgid "task|Pending"
+msgstr ""
+
+#. TRANSLATORS: Task pending.
+#: ../src/columns/ColStatus.cpp:48 ../src/columns/ColStatus.cpp:122
+msgid "task|P"
+msgstr ""
+
+#. TRANSLATORS: Short for "status".
+#: ../src/columns/ColStatus.cpp:71
+msgid "column|St"
+msgstr ""
+
+#: ../src/columns/ColStatus.cpp:86 ../src/columns/ColStatus.cpp:115
+msgid "task|Deleted"
+msgstr ""
+
+#: ../src/columns/ColStatus.cpp:88 ../src/columns/ColStatus.cpp:116
+msgid "task|Waiting"
+msgstr ""
+
+#: ../src/columns/ColStatus.cpp:90 ../src/columns/ColStatus.cpp:114
+msgid "task|Completed"
+msgstr ""
+
+#: ../src/columns/ColStatus.cpp:92 ../src/columns/ColStatus.cpp:117
+msgid "task|Recurring"
+msgstr ""
+
+#. TRANSLATORS: Task completed.
+#: ../src/columns/ColStatus.cpp:123
+msgid "task|C"
+msgstr ""
+
+#. TRANSLATORS: Task deleted.
+#: ../src/columns/ColStatus.cpp:124
+msgid "task|D"
+msgstr ""
+
+#. TRANSLATORS: Task waiting.
+#: ../src/columns/ColStatus.cpp:125
+msgid "task|W"
+msgstr ""
+
+#. TRANSLATORS: Task recurring.
+#: ../src/columns/ColStatus.cpp:126
+msgid "task|R"
+msgstr ""
+
+#: ../src/columns/ColEnd.cpp:35
+msgid "column|Completed"
+msgstr ""
+
+#: ../src/columns/ColDepends.cpp:43 ../src/columns/ColDepends.cpp:74
+#: ../src/columns/ColDepends.cpp:76
+msgid "column|Depends"
+msgstr ""
+
+#. TRANSLATORS: Number of dependencies.
+#. The shorter the better, since it contains only few digits.
+#: ../src/columns/ColDepends.cpp:79
+msgid "column|Dep"
+msgstr ""
+
+#: ../src/columns/ColProject.cpp:43 ../src/commands/CmdInfo.cpp:143
+msgid "column|Project"
+msgstr ""
+
+#: ../src/columns/ColUrgency.cpp:41
+msgid "column|Urgency"
+msgstr ""
+
+#: ../src/columns/ColModified.cpp:35
+msgid "column|Modified"
+msgstr ""
+
+#: ../src/columns/ColMask.cpp:42 ../src/commands/CmdInfo.cpp:209
+msgid "column|Mask"
+msgstr ""
+
+#: ../src/commands/CmdCalendar.cpp:359
+msgid "column|Date"
+msgstr ""
+
+#: ../src/commands/CmdCalendar.cpp:360
+msgid "column|Holiday"
+msgstr ""
+
+#: ../src/commands/CmdInfo.cpp:94
+msgid "column|Name"
+msgstr ""
+
+#: ../src/commands/CmdInfo.cpp:95
+msgid "column|Value"
+msgstr ""
+
+#: ../src/commands/CmdInfo.cpp:193
+msgid "column|Recurrence"
+msgstr ""
+
+#: ../src/commands/CmdInfo.cpp:238
+msgid "column|Waiting until"
+msgstr ""
+
+#: ../src/commands/CmdInfo.cpp:254
+msgid "column|Start"
+msgstr ""
+
+#: ../src/commands/CmdInfo.cpp:262
+msgid "column|End"
+msgstr ""
+
+#: ../src/commands/CmdColor.cpp:77
+msgid "column|Color"
+msgstr ""
+
+#: ../src/commands/CmdColor.cpp:78
+msgid "column|Definition"
 msgstr ""
