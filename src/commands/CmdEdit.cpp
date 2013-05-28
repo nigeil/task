@@ -165,21 +165,24 @@ std::string CmdEdit::formatTask (Task task, const std::string& dateformat)
                  context.config.getBoolean ("edit.verbose"); // Deprecated 2.0
 
   if (verbose)
-    before <<  _("# The 'task <id> edit' command allows you to modify all aspects of a task\n" \
-                 "# using a text editor.  Below is a representation of all the task details.\n" \
-                 "# Modify what you wish, and when you save and quit your editor,\n" \
-                 "# taskwarrior will read this file, determine what changed, and apply\n" \
-                 "# those changes.  If you exit your editor without saving or making\n" \
-                 "# modifications, taskwarrior will do nothing.\n" \
-                 "#\n" \
-                 "# Lines that begin with # represent data you cannot change, like ID.\n" \
-                 "# If you get too creative with your editing, taskwarrior will send you\n" \
-                 "# back to the editor to try again.\n" \
-                 "#\n" \
-                 "# Should you find yourself in an endless loop, re-editing the same file,\n" \
-                 "# just quit the editor without making any changes.  Taskwarrior will\n" \
-                 "# notice this and stop the editing.\n" \
-                 "#\n");
+              // TRANSLATORS: Lines should not exceed 80 characters.
+    before << _("# The 'task <id> edit' command allows you to modify all aspects of a task\n"
+                "# using a text editor.  Below is a representation of all the task details.\n"
+                "# Modify what you wish, and when you save and quit your editor,\n"
+                "# taskwarrior will read this file, determine what changed, and apply\n"
+                "# those changes.  If you exit your editor without saving or making\n"
+                "# modifications, taskwarrior will do nothing.")
+           << "\n#\n"
+              // TRANSLATORS: Lines should not exceed 80 characters.
+           << _("# Lines that begin with # represent data you cannot change, like ID.\n"
+                "# If you get too creative with your editing, taskwarrior will send you\n"
+                "# back to the editor to try again.")
+           << "\n#\n"
+              // TRANSLATORS: Lines should not exceed 80 characters.
+           << _("# Should you find yourself in an endless loop, re-editing the same file,\n"
+                "# just quit the editor without making any changes.  Taskwarrior will\n"
+                "# notice this and stop the editing.")
+           << "\n#\n";
 
   // TRANSLATORS: Preserve the fixed-width of the first column.
   before << _("# Name               Editable details\n" \
